@@ -12,6 +12,7 @@ export const [themeClass, vars] = createTheme({
     lg: "24px",
     xl: "32px",
     cover: "250px",
+    coverExpanded: "300px",
   },
   border: {
     xs: "solid 1px #f0f1f2",
