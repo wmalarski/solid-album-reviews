@@ -6,12 +6,19 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "======== TYPES ========": "",
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=.env"
   },
   "license": "MIT",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
+    "@graphql-codegen/cli": "2.6.2",
+    "@graphql-codegen/typescript": "2.5.1",
+    "@graphql-codegen/typescript-document-nodes": "2.2.13",
+    "@graphql-codegen/typescript-generic-sdk": "^2.3.12",
+    "@graphql-codegen/typescript-operations": "2.4.2",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
     "@vanilla-extract/vite-plugin": "^3.2.1",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
@@ -25,12 +32,14 @@
     "eslint-plugin-storybook": "^0.5.12",
     "eslint-plugin-testing-library": "^5.5.1",
     "prettier": "^2.7.1",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.9",
+    "typescript": "^4.7.3",
+    "vite": "^2.9.12",
     "vite-plugin-solid": "^2.2.6",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "dependencies": {
-    "solid-js": "^1.4.2"
+    "graphql": "^16.5.0",
+    "graphql-tag": "^2.12.6",
+    "solid-js": "^1.4.4"
   }
 }

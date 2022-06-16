@@ -1,0 +1,15 @@
+fragment RandomAlbumWithArtist on random_albums {
+  id
+  sid
+  title
+  year
+  artistByArtist {
+    ...Artist
+  }
+}
+
+query RandomAlbums($limit: Int) {
+  randomAlbums: random_albums(limit: $limit) {
+    ...RandomAlbumWithArtist
+  }
+}
