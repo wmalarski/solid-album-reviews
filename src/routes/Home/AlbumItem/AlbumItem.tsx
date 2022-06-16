@@ -1,9 +1,17 @@
+import { AlbumCover } from "@components/AlbumCover/AlbumCover";
+import type { RandomAlbumWithArtistFragment } from "@services/types";
+import { formatAlbum } from "@utils/formatters";
 import type { Component } from "solid-js";
 
 type Props = {
-  title: string;
+  album: RandomAlbumWithArtistFragment;
 };
 
 export const AlbumItem: Component<Props> = (props) => {
-  return <span>{props.title}</span>;
+  return (
+    <div>
+      <AlbumCover label={formatAlbum(props.album)} mBid={props.album.sid} />
+      <span>{props.album.title}</span>
+    </div>
+  );
 };
