@@ -1,11 +1,12 @@
-import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import { Header } from "@components/Header/Header";
+import type { Component } from "solid-js";
+import styles from "./App.module.css";
+import logo from "./logo.svg";
 
 const App: Component = () => {
   return (
     <div class={styles.App}>
+      <Header />
       <header class={styles.header}>
         <img src={logo} class={styles.logo} alt="logo" />
         <p>

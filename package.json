@@ -10,9 +10,24 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-node": "^0.3.6",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-solid": "^0.7.0",
+    "eslint-plugin-storybook": "^0.5.12",
+    "eslint-plugin-testing-library": "^5.5.1",
+    "prettier": "^2.7.1",
     "typescript": "^4.6.4",
     "vite": "^2.9.9",
-    "vite-plugin-solid": "^2.2.6"
+    "vite-plugin-solid": "^2.2.6",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "dependencies": {
     "solid-js": "^1.4.2"
