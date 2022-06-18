@@ -1,5 +1,6 @@
 import { fetch } from "cross-fetch";
 import { DocumentNode } from "graphql";
+import { session } from "./SessionProvider";
 import { getSdk, Requester } from "./types";
 
 export type FetcherError = {
@@ -16,49 +17,29 @@ export type FetcherPayload<Data> = {
   errors?: FetcherError[];
 };
 
-// const getGraphqlApiConfig = (): GraphqlApiConfig => {
-//   invariant(
-//     process.env.GRAPHQL_API_ENDPOINT,
-//     `GRAPHQL_API_ENDPOINT has bad data!`
-//   );
-
-//   invariant(
-//     process.env.GRAPHQL_API_ADMIN_SECRET,
-//     `GRAPHQL_API_ADMIN_SECRET has bad data!`
-//   );
-
-//   return {
-//     apiEndpoint: import.meta.env.VITE_GRAPHQL_API_ENDPOINT,
-//     adminSecret: import.meta.env.GRAPHQL_API_ADMIN_SECRET,
-//   };
-// };
-
 const apiEndpoint: string = import.meta.env.VITE_GRAPHQL_API_ENDPOINT;
-
-export const fetcher = <Variables>(
-  documentNode: DocumentNode,
-  variables?: Variables
-): Promise<Response> => {
-  // const { adminSecret } = getGraphqlApiConfig();
-
-  const query = documentNode.loc?.source.body;
-
-  return fetch(apiEndpoint, {
-    body: JSON.stringify({ query, variables }),
-    method: "POST",
-    headers: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      "content-type": "application/json",
-      // "x-hasura-admin-secret": adminSecret,
-    },
-  });
-};
 
 export const jsonFetcher: Requester = async <Data, Variables>(
   documentNode: DocumentNode,
   variables?: Variables
 ): Promise<FetcherPayload<Data>> => {
-  const result = await fetcher(documentNode, variables);
+  const query = documentNode.loc?.source.body;
+
+  const sessionState = session();
+  const accessToken =
+    sessionState.status === "auth"
+      ? { Authorization: `Bearer ${sessionState.accessToken}` }
+      : null;
+
+  const result = await fetch(apiEndpoint, {
+    body: JSON.stringify({ query, variables }),
+    method: "POST",
+    headers: {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      "content-type": "application/json",
+      ...accessToken,
+    },
+  });
 
   const json = await result.json();
 
