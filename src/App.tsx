@@ -1,18 +1,17 @@
-import { Header } from "@components/Header/Header";
-import Home from "@routes/Home/Home";
-import { AuthProvider } from "@services/AuthProvider";
+import { AppRouter } from "@routes/AppRouter";
+import { SessionProvider } from "@services/SessionProvider";
 import { ThemeProvider } from "@styles/ThemeProvider";
+import { Router } from "solid-app-router";
 import type { Component } from "solid-js";
 
 const App: Component = () => {
   return (
     <ThemeProvider>
-      <AuthProvider>
-        <div>
-          <Header />
-          <Home />
-        </div>
-      </AuthProvider>
+      <Router>
+        <SessionProvider>
+          <AppRouter />
+        </SessionProvider>
+      </Router>
     </ThemeProvider>
   );
 };

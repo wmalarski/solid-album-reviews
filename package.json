@@ -39,9 +39,11 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.22.1",
+    "@solid-primitives/i18n": "^1.1.0",
     "@vanilla-extract/css-utils": "^0.1.2",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",
+    "solid-app-router": "^0.3.3",
     "solid-js": "^1.4.4"
   }
 }

@@ -1,4 +1,4 @@
-import { auth0Client } from "@services/auth";
+import { signOut } from "@services/SessionProvider";
 import type { Component } from "solid-js";
 import * as classes from "./Header.css";
 
@@ -8,10 +8,11 @@ export const Header: Component = () => {
       <a href="/">Album Reviews</a>
       <button
         onClick={() => {
-          auth0Client.loginWithRedirect();
+          // auth0Client.loginWithRedirect();
+          signOut();
         }}
       >
-        Login
+        Sign Out
       </button>
     </header>
   );

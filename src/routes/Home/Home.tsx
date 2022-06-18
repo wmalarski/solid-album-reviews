@@ -1,6 +1,7 @@
+import { Header } from "@components/Header/Header";
 import { Component } from "solid-js";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
-import * as styles from "./Home.css";
+import * as classes from "./Home.css";
 
 // const fetcher = () => {
 //   return graphqlSdk.RandomAlbums({
@@ -12,10 +13,8 @@ const Home: Component = () => {
   // const [albums, { refetch }] = createResource(fetcher);
 
   return (
-    <div class={styles.container}>
-      {/* <For each={albums()?.data?.randomAlbums}>
-        {(album) => <AlbumItem album={album} />}
-      </For> */}
+    <div class={classes.container}>
+      <Header />
       <AlbumItem
         album={{
           artistByArtist: {
