@@ -1,0 +1,25 @@
+import { useI18n } from "@solid-primitives/i18n";
+import { Component } from "solid-js";
+import * as classes from "./{{ basename path }}.css";
+
+type Props = {
+  data?: string;
+}
+
+{{#if isDefaultExport}}
+const {{ basename path }}: Component<Props> = (props) => {
+{{else}}
+export const {{ basename path }}: Component<Props> = (props) => {
+{{/if}}
+  const [t] = useI18n();
+
+  return (
+    <span class={classes.container}>
+      {t("{{ basename path }}.text")}
+    </span>
+  );
+};
+{{#if isDefaultExport}}
+
+export default {{ basename path }};
+{{/if}}

@@ -1,6 +1,6 @@
 import { signOut } from "@services/SessionProvider";
 import { useI18n } from "@solid-primitives/i18n";
-import { paths } from "@utils/routing/paths";
+import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
 import type { Component } from "solid-js";
 import * as classes from "./Header.css";

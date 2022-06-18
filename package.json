@@ -7,8 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
+    "=== LINTERS ===": "",
+    "lint": "eslint src --fix --ext .tsx,.ts",
+    "prettier": "prettier 'src/**/*.(ts|tsx)' --write",
+    "tsc": "tsc --noEmit",
+    "code-check": "yarn lint --max-warnings=0 && yarn tsc",
+    "=== TESTS ===": "",
+    "coverage": "vitest run --coverage",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
     "======== TYPES ========": "",
-    "codegen": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=.env"
+    "codegen": "graphql-codegen --require dotenv/config --config codegen.yml dotenv_config_path=.env",
+    "plop": "plop"
   },
   "license": "MIT",
   "devDependencies": {
@@ -31,6 +41,7 @@
     "eslint-plugin-solid": "^0.7.0",
     "eslint-plugin-storybook": "^0.5.12",
     "eslint-plugin-testing-library": "^5.5.1",
+    "plop": "^3.1.1",
     "prettier": "^2.7.1",
     "typescript": "^4.7.3",
     "vite": "^2.9.12",
