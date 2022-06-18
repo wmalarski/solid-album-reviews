@@ -1,9 +1,12 @@
+import { useI18n } from "@solid-primitives/i18n";
 import { Component } from "solid-js";
 
 const NotFound: Component = () => {
+  const [t] = useI18n();
+
   return (
     <div>
-      <span>NotFound</span>
+      <span>{t("error.notFound")}</span>
     </div>
   );
 };
