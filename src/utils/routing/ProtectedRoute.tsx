@@ -11,7 +11,7 @@ export const ProtectedRoute: Component<Props> = (props): JSX.Element => {
   return (
     <>
       <Show when={session().status === "anon"}>
-        <Navigate href={paths.login} />
+        <Navigate href={paths.auth} />
       </Show>
       {props.children}
     </>

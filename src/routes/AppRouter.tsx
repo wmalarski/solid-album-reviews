@@ -1,9 +1,10 @@
 import { ProtectedRoute } from "@utils/routing/ProtectedRoute";
 import { PublicRoute } from "@utils/routing/PublicRoute";
-import { Route, Routes } from "solid-app-router";
+import { Outlet, Route, Routes } from "solid-app-router";
 import { Component } from "solid-js";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
+import LoginCallback from "./LoginCallback/LoginCallback";
 import NotFound from "./NotFound/NotFound";
 import Root from "./Root/Root";
 
@@ -12,13 +13,16 @@ export const AppRouter: Component = () => {
     <Routes>
       <Route path="/" element={<Root />}>
         <Route
-          path="/login"
+          path="/auth"
           element={
             <PublicRoute>
-              <Login />
+              <Outlet />
             </PublicRoute>
           }
-        />
+        >
+          <Route path="/" element={<Login />} />
+          <Route path="/callback" element={<LoginCallback />} />
+        </Route>
         <Route
           path="/"
           element={
