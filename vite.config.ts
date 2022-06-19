@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { defineConfig } from "vite";
 import solidPlugin from "vite-plugin-solid";
@@ -8,5 +11,20 @@ export default defineConfig({
   build: {
     target: "esnext",
     polyfillDynamicImport: false,
+  },
+  resolve: {
+    conditions: ["development", "browser"],
+  },
+  test: {
+    environment: "jsdom",
+    transformMode: {
+      web: [/.[jt]sx?/],
+    },
+    deps: {
+      inline: [/solid-js/],
+    },
+    threads: false,
+    isolate: false,
+    setupFiles: "./src/tests/setup.ts",
   },
 });
