@@ -1,0 +1,31 @@
+import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
+import { ComponentProps } from "solid-js";
+import { render, screen } from "solid-testing-library";
+import { describe, expect, test } from "vitest";
+{{#if isDefaultExport}}
+import {{ basename path }} from "./{{ basename path }}";
+{{else}}
+import { {{ basename path }} } from "./{{ basename path }}";
+{{/if}}
+
+type Props = ComponentProps<typeof {{ basename path }}>;
+
+const renderComponent = ({
+  wrapperProps,
+  ...props
+}: PropsWithTestWrapper<Props> = {}) => {
+  const defaultProps: Props = {};
+  return render(() => (
+    <TestWrapper {...wrapperProps}>
+      <{{ basename path }} {...defaultProps} {...props} />
+    </TestWrapper>
+  ));
+};
+
+describe("<{{ basename path }} />", () => {
+  test("renders", async () => {
+    const { unmount } = renderComponent();
+    await expect(screen.findByAltText("{{ basename path }}")).resolves.toBeDefined();
+    unmount();
+  });
+});
