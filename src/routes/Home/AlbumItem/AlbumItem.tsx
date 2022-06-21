@@ -8,8 +8,26 @@ type Props = {
   album: RandomAlbumWithArtistFragment;
 };
 
+// const fetchCovers = async (id: string) => {
+//   const response = await fetch(`https://coverartarchive.org/release/${id}`);
+//   return response.json();
+// };
+
 export const AlbumItem: Component<Props> = (props) => {
   const [isHovering, setIsHovering] = createSignal(false);
+
+  // const [data] = createResource(() => props.album.sid, fetchCovers);
+
+  // const thumbnails = () => {
+  //   if (!data) {
+  //     return [];
+  //   }
+  //   return data().images.map((image) => image.thumbnails.small);
+  // };
+
+  // createEffect(() => {
+  //   console.log("data", thumbnails());
+  // });
 
   const label = createMemo(() => {
     return formatAlbum(props.album);
