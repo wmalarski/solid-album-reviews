@@ -1,4 +1,4 @@
-import { signOut } from "@services/SessionProvider";
+import { nhost } from "@services/nhost";
 import { useI18n } from "@solid-primitives/i18n";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
@@ -9,7 +9,7 @@ export const Header: Component = () => {
   const [t] = useI18n();
 
   const handleSignOut = () => {
-    signOut();
+    nhost.auth.signOut();
   };
 
   return (

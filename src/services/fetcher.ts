@@ -1,6 +1,5 @@
 import { fetch } from "cross-fetch";
 import { DocumentNode } from "graphql";
-import { session } from "./SessionProvider";
 import { getSdk, Requester } from "./types";
 
 export type FetcherError = {
@@ -25,11 +24,11 @@ export const jsonFetcher: Requester = async <Data, Variables>(
 ): Promise<FetcherPayload<Data>> => {
   const query = documentNode.loc?.source.body;
 
-  const sessionState = session();
-  const accessToken =
-    sessionState.status === "auth"
-      ? { Authorization: `Bearer ${sessionState.accessToken}` }
-      : null;
+  // const sessionState = session();
+  // const accessToken =
+  //   sessionState.status === "auth"
+  //     ? { Authorization: `Bearer ${sessionState.accessToken}` }
+  //     : null;
 
   const result = await fetch(apiEndpoint, {
     body: JSON.stringify({ query, variables }),
@@ -37,7 +36,7 @@ export const jsonFetcher: Requester = async <Data, Variables>(
     headers: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       "content-type": "application/json",
-      ...accessToken,
+      // ...accessToken,
     },
   });
 

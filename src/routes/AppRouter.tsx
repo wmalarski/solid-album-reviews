@@ -2,7 +2,6 @@ import { Route, Routes } from "solid-app-router";
 import { Component } from "solid-js";
 import Auth from "./Auth/Auth";
 import Home from "./Home/Home";
-import LoginCallback from "./LoginCallback/LoginCallback";
 import NotFound from "./NotFound/NotFound";
 import Protected from "./Protected/Protected";
 import Public from "./Public/Public";
@@ -19,7 +18,6 @@ export const AppRouter: Component = () => {
             <Route path="/signIn" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
           </Route>
-          <Route path="/callback" element={<LoginCallback />} />
         </Route>
         <Route path="/" element={<Protected />}>
           <Route path="/" element={<Home />} />

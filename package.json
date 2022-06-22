@@ -56,7 +56,6 @@
     "vitest": "^0.15.1"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.22.1",
     "@nhost/nhost-js": "^1.4.0",
     "@solid-primitives/i18n": "^1.1.0",
     "@vanilla-extract/css-utils": "^0.1.2",
