@@ -6,8 +6,19 @@ const dict = {
       title: "Album Reviews",
       signOut: "Sign Out",
     },
-    login: {
+    SignUp: {
+      header: "Sign Up",
+      email: "Email",
+      password: "Password",
+      button: "Sign Up",
       signIn: "Sign In",
+    },
+    SignIn: {
+      header: "Sign In",
+      email: "Email",
+      password: "Password",
+      button: "Sign In",
+      signUp: "Sign Up",
     },
     error: {
       notFound: "Not Found",
