@@ -1,5 +1,6 @@
 import { Form, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
+import { ErrorPayload } from "@nhost/core";
 import { useI18n } from "@solid-primitives/i18n";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
@@ -12,6 +13,7 @@ export type SignUpFormArgs = {
 };
 
 type Props = {
+  error: ErrorPayload | null;
   onSubmit: (args: SignUpFormArgs) => void;
 };
 
@@ -43,6 +45,7 @@ export const SignUpForm: Component<Props> = (props) => {
         onChange={(e) => setPassword(e.currentTarget.value)}
       />
       <button type="submit">{t("SignUp.button")}</button>
+      {props.error && <span>{props.error.message}</span>}
       <Link href={paths.signIn}>{t("SignUp.signIn")}</Link>
     </Form>
   );

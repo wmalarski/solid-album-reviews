@@ -12,6 +12,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     onSubmit: () => void 0,
+    error: null,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>
