@@ -1,6 +1,5 @@
 export const paths = {
   root: "/",
-  auth: "/auth",
+  signIn: "/auth",
   signUp: "/auth/signUp",
-  signIn: "/auth/signIn",
 };

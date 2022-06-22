@@ -7,7 +7,7 @@ const Protected: Component = () => {
   return (
     <Show
       when={nhostSession().status === "auth"}
-      fallback={<Navigate href={paths.auth} />}
+      fallback={<Navigate href={paths.signIn} />}
     >
       <Outlet />
     </Show>

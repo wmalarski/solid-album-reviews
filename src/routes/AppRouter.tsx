@@ -15,7 +15,7 @@ export const AppRouter: Component = () => {
       <Route path="/" element={<Root />}>
         <Route path="/auth" element={<Public />}>
           <Route path="/" element={<Auth />}>
-            <Route path="/signIn" element={<SignIn />} />
+            <Route path="/" element={<SignIn />} />
             <Route path="/signUp" element={<SignUp />} />
           </Route>
         </Route>
