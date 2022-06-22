@@ -1,20 +1,16 @@
 import { Form, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import { ErrorPayload } from "@nhost/core";
+import { SignInParams } from "@nhost/hasura-auth-js";
 import { useI18n } from "@solid-primitives/i18n";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./SignInForm.css";
 
-export type SignInFormArgs = {
-  email: string;
-  password: string;
-};
-
 type Props = {
   error: ErrorPayload | null;
-  onSubmit: (args: SignInFormArgs) => void;
+  onSubmit: (args: SignInParams) => void;
 };
 
 export const SignInForm: Component<Props> = (props) => {

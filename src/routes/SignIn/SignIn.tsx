@@ -1,12 +1,13 @@
 import { ErrorPayload } from "@nhost/core";
+import { SignInParams } from "@nhost/hasura-auth-js";
 import { nhost } from "@services/nhost";
 import { Component, createSignal } from "solid-js";
-import { SignInForm, SignInFormArgs } from "./SignInForm/SignInForm";
+import { SignInForm } from "./SignInForm/SignInForm";
 
 const SignIn: Component = () => {
   const [error, setError] = createSignal<ErrorPayload | null>(null);
 
-  const handleSubmit = async (args: SignInFormArgs) => {
+  const handleSubmit = async (args: SignInParams) => {
     try {
       const response = await nhost.auth.signIn(args);
       setError(response.error);
