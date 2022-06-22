@@ -1,4 +1,5 @@
 import { AppRouter } from "@routes/AppRouter";
+import { NhostProvider } from "@services/nhost";
 import { I18nContext } from "@solid-primitives/i18n";
 import { ThemeProvider } from "@styles/ThemeProvider";
 import { i18next } from "@utils/i18next";
@@ -9,9 +10,11 @@ const App: Component = () => {
   return (
     <I18nContext.Provider value={i18next}>
       <ThemeProvider>
-        <Router>
-          <AppRouter />
-        </Router>
+        <NhostProvider>
+          <Router>
+            <AppRouter />
+          </Router>
+        </NhostProvider>
       </ThemeProvider>
     </I18nContext.Provider>
   );
