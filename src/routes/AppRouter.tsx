@@ -1,5 +1,6 @@
 import { Route, Routes } from "solid-app-router";
 import { Component } from "solid-js";
+import Album from "./Album/Album";
 import Auth from "./Auth/Auth";
 import Home from "./Home/Home";
 import NotFound from "./NotFound/NotFound";
@@ -21,6 +22,7 @@ export const AppRouter: Component = () => {
         </Route>
         <Route path="/" element={<Protected />}>
           <Route path="/" element={<Home />} />
+          <Route path="/album/:albumId" element={<Album />} />
         </Route>
       </Route>
       <Route path="*" element={<NotFound />} />

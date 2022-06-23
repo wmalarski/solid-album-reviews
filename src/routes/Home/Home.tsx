@@ -1,4 +1,3 @@
-import { Header } from "@components/Header/Header";
 import { graphqlSdk } from "@services/fetcher";
 import { Component, createResource, For } from "solid-js";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
@@ -11,12 +10,11 @@ const loader = () => {
 };
 
 const Home: Component = () => {
-  const [albums] = createResource(loader);
+  const [randomAlbums] = createResource(loader);
 
   return (
     <div class={classes.container}>
-      <Header />
-      <For each={albums()?.data?.randomAlbums}>
+      <For each={randomAlbums()?.data?.randomAlbums}>
         {(album) => <AlbumItem album={album} />}
       </For>
     </div>

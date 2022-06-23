@@ -8,7 +8,7 @@ type Props = {
   sid: string;
 };
 
-const AlbumCoversCarousel: Component<Props> = (props) => {
+export const AlbumCoversCarousel: Component<Props> = (props) => {
   const [index, setIndex] = createSignal(0);
 
   const [thumbnails] = createResource(() => props.sid, fetchCovers);
@@ -52,5 +52,3 @@ const AlbumCoversCarousel: Component<Props> = (props) => {
     </div>
   );
 };
-
-export default AlbumCoversCarousel;

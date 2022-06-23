@@ -5827,12 +5827,23 @@ export type VisitVarianceOrderBy = {
 
 export type RandomAlbumWithArtistFragment = { id?: number | null, sid?: string | null, title?: string | null, year?: number | null, artistByArtist?: { id: number, sid?: string | null, name: string } | null };
 
+export type AlbumFragment = { id: number, sid: string, title: string, year: number };
+
+export type AlbumWithArtistFragment = { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } };
+
 export type RandomAlbumsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
 }>;
 
 
 export type RandomAlbumsQuery = { randomAlbums: Array<{ id?: number | null, sid?: string | null, title?: string | null, year?: number | null, artistByArtist?: { id: number, sid?: string | null, name: string } | null }> };
+
+export type SelectAlbumQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type SelectAlbumQuery = { albumByPk?: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } | null };
 
 export type ArtistFragment = { id: number, sid?: string | null, name: string };
 
@@ -5854,6 +5865,23 @@ export const RandomAlbumWithArtist = gql`
   }
 }
     ${Artist}`;
+export const Album = gql`
+    fragment Album on album {
+  id
+  sid
+  title
+  year
+}
+    `;
+export const AlbumWithArtist = gql`
+    fragment AlbumWithArtist on album {
+  ...Album
+  artistByArtist {
+    ...Artist
+  }
+}
+    ${Album}
+${Artist}`;
 export const RandomAlbums = gql`
     query RandomAlbums($limit: Int) {
   randomAlbums: random_albums(limit: $limit) {
@@ -5861,6 +5889,13 @@ export const RandomAlbums = gql`
   }
 }
     ${RandomAlbumWithArtist}`;
+export const SelectAlbum = gql`
+    query SelectAlbum($id: Int!) {
+  albumByPk: album_by_pk(id: $id) {
+    ...AlbumWithArtist
+  }
+}
+    ${AlbumWithArtist}`;
 export const ArtistFragmentDoc = gql`
     fragment Artist on artist {
   id
@@ -5879,6 +5914,23 @@ export const RandomAlbumWithArtistFragmentDoc = gql`
   }
 }
     ${ArtistFragmentDoc}`;
+export const AlbumFragmentDoc = gql`
+    fragment Album on album {
+  id
+  sid
+  title
+  year
+}
+    `;
+export const AlbumWithArtistFragmentDoc = gql`
+    fragment AlbumWithArtist on album {
+  ...Album
+  artistByArtist {
+    ...Artist
+  }
+}
+    ${AlbumFragmentDoc}
+${ArtistFragmentDoc}`;
 export const RandomAlbumsDocument = gql`
     query RandomAlbums($limit: Int) {
   randomAlbums: random_albums(limit: $limit) {
@@ -5886,11 +5938,21 @@ export const RandomAlbumsDocument = gql`
   }
 }
     ${RandomAlbumWithArtistFragmentDoc}`;
+export const SelectAlbumDocument = gql`
+    query SelectAlbum($id: Int!) {
+  albumByPk: album_by_pk(id: $id) {
+    ...AlbumWithArtist
+  }
+}
+    ${AlbumWithArtistFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
     RandomAlbums(variables?: RandomAlbumsQueryVariables, options?: C): Promise<{ data?: RandomAlbumsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<RandomAlbumsQuery, RandomAlbumsQueryVariables>(RandomAlbumsDocument, variables, options);
+    },
+    SelectAlbum(variables: SelectAlbumQueryVariables, options?: C): Promise<{ data?: SelectAlbumQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectAlbumQuery, SelectAlbumQueryVariables>(SelectAlbumDocument, variables, options);
     }
   };
 }

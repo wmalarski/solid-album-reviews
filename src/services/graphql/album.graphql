@@ -8,8 +8,28 @@ fragment RandomAlbumWithArtist on random_albums {
   }
 }
 
+fragment Album on album {
+  id
+  sid
+  title
+  year
+}
+
+fragment AlbumWithArtist on album {
+  ...Album
+  artistByArtist {
+    ...Artist
+  }
+}
+
 query RandomAlbums($limit: Int) {
   randomAlbums: random_albums(limit: $limit) {
     ...RandomAlbumWithArtist
+  }
+}
+
+query SelectAlbum($id: Int!) {
+  albumByPk: album_by_pk(id: $id) {
+    ...AlbumWithArtist
   }
 }
