@@ -6,7 +6,7 @@ import * as classes from "./Home.css";
 
 const loader = () => {
   return graphqlSdk.RandomAlbums({
-    limit: 20,
+    limit: 5,
   });
 };
 

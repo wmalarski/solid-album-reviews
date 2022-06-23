@@ -1,4 +1,4 @@
-import { frontCoverUrl } from "@services/coverArt";
+import AlbumCoversCarousel from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import type { RandomAlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { Component, createMemo, createSignal, Show } from "solid-js";
@@ -8,26 +8,8 @@ type Props = {
   album: RandomAlbumWithArtistFragment;
 };
 
-// const fetchCovers = async (id: string) => {
-//   const response = await fetch(`https://coverartarchive.org/release/${id}`);
-//   return response.json();
-// };
-
 export const AlbumItem: Component<Props> = (props) => {
   const [isHovering, setIsHovering] = createSignal(false);
-
-  // const [data] = createResource(() => props.album.sid, fetchCovers);
-
-  // const thumbnails = () => {
-  //   if (!data) {
-  //     return [];
-  //   }
-  //   return data().images.map((image) => image.thumbnails.small);
-  // };
-
-  // createEffect(() => {
-  //   console.log("data", thumbnails());
-  // });
 
   const label = createMemo(() => {
     return formatAlbum(props.album);
@@ -55,14 +37,10 @@ export const AlbumItem: Component<Props> = (props) => {
               [classes.wrapperVariants[isHovering() ? "hover" : "no"]]: true,
             }}
           >
-            <img
-              classList={{
-                [classes.image]: true,
-                [classes.imageVariant[isHovering() ? "hover" : "no"]]: true,
-              }}
-              alt={label()}
-              aria-label={label()}
-              src={frontCoverUrl({ mBid })}
+            <AlbumCoversCarousel
+              isHovering={isHovering()}
+              label={label()}
+              sid={mBid}
             />
             <Show when={isHovering()}>
               <div class={classes.actions}>
