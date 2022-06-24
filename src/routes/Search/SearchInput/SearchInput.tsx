@@ -8,15 +8,14 @@ type Props = {
 
 export const SearchInput: Component<Props> = (props) => {
   const [input, setInput] = createSignal("");
+
   const debouncedSetQuery = debounce((arg: string) => {
     props.onSearchChange(arg);
-    console.log("debouncedSetQuery", arg);
   }, 250);
 
   const handleInputChange = (value: string) => {
     setInput(value);
     debouncedSetQuery(value);
-    console.log("handleInputChange", { value });
   };
 
   return (

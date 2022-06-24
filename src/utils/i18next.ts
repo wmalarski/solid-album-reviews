@@ -27,6 +27,10 @@ const dict = {
     loading: {
       text: "Loading...",
     },
+    Pagination: {
+      previous: "Previous",
+      next: "Next",
+    },
     home: {},
   },
 };
