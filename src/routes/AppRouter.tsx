@@ -7,6 +7,7 @@ import NotFound from "./NotFound/NotFound";
 import Protected from "./Protected/Protected";
 import Public from "./Public/Public";
 import Root from "./Root/Root";
+import Search from "./Search/Search";
 import SignIn from "./SignIn/SignIn";
 import SignUp from "./SignUp/SignUp";
 
@@ -22,6 +23,7 @@ export const AppRouter: Component = () => {
         </Route>
         <Route path="/" element={<Protected />}>
           <Route path="/" element={<Home />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/album/:albumId" element={<Album />} />
         </Route>
       </Route>

@@ -5845,6 +5845,15 @@ export type SelectAlbumQueryVariables = Exact<{
 
 export type SelectAlbumQuery = { albumByPk?: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } | null };
 
+export type SelectAlbumsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AlbumBoolExp>;
+}>;
+
+
+export type SelectAlbumsQuery = { album: Array<{ id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } }>, albumAggregate: { aggregate?: { count: number } | null } };
+
 export type ArtistFragment = { id: number, sid?: string | null, name: string };
 
 export const Artist = gql`
@@ -5893,6 +5902,18 @@ export const SelectAlbum = gql`
     query SelectAlbum($id: Int!) {
   albumByPk: album_by_pk(id: $id) {
     ...AlbumWithArtist
+  }
+}
+    ${AlbumWithArtist}`;
+export const SelectAlbums = gql`
+    query SelectAlbums($limit: Int, $offset: Int, $where: album_bool_exp) {
+  album(limit: $limit, offset: $offset, where: $where) {
+    ...AlbumWithArtist
+  }
+  albumAggregate: album_aggregate(where: $where) {
+    aggregate {
+      count
+    }
   }
 }
     ${AlbumWithArtist}`;
@@ -5945,6 +5966,18 @@ export const SelectAlbumDocument = gql`
   }
 }
     ${AlbumWithArtistFragmentDoc}`;
+export const SelectAlbumsDocument = gql`
+    query SelectAlbums($limit: Int, $offset: Int, $where: album_bool_exp) {
+  album(limit: $limit, offset: $offset, where: $where) {
+    ...AlbumWithArtist
+  }
+  albumAggregate: album_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${AlbumWithArtistFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
@@ -5953,6 +5986,9 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     SelectAlbum(variables: SelectAlbumQueryVariables, options?: C): Promise<{ data?: SelectAlbumQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectAlbumQuery, SelectAlbumQueryVariables>(SelectAlbumDocument, variables, options);
+    },
+    SelectAlbums(variables?: SelectAlbumsQueryVariables, options?: C): Promise<{ data?: SelectAlbumsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectAlbumsQuery, SelectAlbumsQueryVariables>(SelectAlbumsDocument, variables, options);
     }
   };
 }

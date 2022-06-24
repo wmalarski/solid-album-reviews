@@ -58,6 +58,7 @@
   "dependencies": {
     "@nhost/nhost-js": "^1.4.0",
     "@solid-primitives/i18n": "^1.1.0",
+    "@solid-primitives/scheduled": "^1.0.0",
     "@vanilla-extract/css-utils": "^0.1.2",
     "graphql": "^16.5.0",
     "graphql-tag": "^2.12.6",

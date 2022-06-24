@@ -33,3 +33,14 @@ query SelectAlbum($id: Int!) {
     ...AlbumWithArtist
   }
 }
+
+query SelectAlbums($limit: Int, $offset: Int, $where: album_bool_exp) {
+  album(limit: $limit, offset: $offset, where: $where) {
+    ...AlbumWithArtist
+  }
+  albumAggregate: album_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}

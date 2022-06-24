@@ -1,30 +1,29 @@
-import { mockAlbumWithArtistFragment } from "@tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
 import { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
 import { describe, expect, test } from "vitest";
-import { AlbumDetails } from "./AlbumDetails";
+import { SearchInput } from "./SearchInput";
 
-type Props = ComponentProps<typeof AlbumDetails>;
+type Props = ComponentProps<typeof SearchInput>;
 
 const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    album: mockAlbumWithArtistFragment(),
+    onSearchChange: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>
-      <AlbumDetails {...defaultProps} {...props} />
+      <SearchInput {...defaultProps} {...props} />
     </TestWrapper>
   ));
 };
 
-describe("<AlbumDetails />", () => {
+describe("<SearchInput />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("AlbumDetails")).resolves.toBeDefined();
+    await expect(screen.findByAltText("SearchInput")).resolves.toBeDefined();
     unmount();
   });
 });

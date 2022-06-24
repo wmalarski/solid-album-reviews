@@ -1069,6 +1069,11 @@
   resolved "https://registry.yarnpkg.com/@solid-primitives/i18n/-/i18n-1.1.0.tgz#9fda959868eae5c78a55a510712e48529c118e6b"
   integrity sha512-aqJttEb8rmsQTU5VqfBfaeHFMIqKu1eXHVEahtW4DGKYBz/CDis5V25psQEyspuVTmPs7RpX99Whe9jV7ib4pg==
 
+"@solid-primitives/scheduled@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@solid-primitives/scheduled/-/scheduled-1.0.0.tgz#40e8e408206bc7d97ce058b8bab7e0892bb24492"
+  integrity sha512-FfzYoAkFCRGBuCuXF8G7fU4J4SK9PhKbwxZvzqk+VVBcowPS1eGlLAtlqW/29paSKlUSxuLuhZxq1sPzwmuvoQ==
+
 "@storybook/csf@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@storybook/csf/-/csf-0.0.1.tgz#95901507dc02f0bc6f9ac8ee1983e2fc5bb98ce6"
