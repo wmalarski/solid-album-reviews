@@ -1,6 +1,12 @@
 import { graphqlSdk } from "@services/fetcher";
 
-import { Component, createResource, createSignal, Show } from "solid-js";
+import {
+  Component,
+  createEffect,
+  createResource,
+  createSignal,
+  Show,
+} from "solid-js";
 import * as classes from "./Search.css";
 import { SearchInput } from "./SearchInput/SearchInput";
 import { SearchResults } from "./SearchResults/SearchResults";
@@ -11,13 +17,14 @@ type LoaderArgs = {
 };
 
 const loader = ({ offset, query }: LoaderArgs) => {
+  const pattern = `%${query}%`;
   return graphqlSdk.SelectAlbums({
     limit: 20,
     offset,
     where: {
       _or: [
-        { title: { _ilike: query } },
-        { artistByArtist: { name: { _ilike: query } } },
+        { title: { _ilike: pattern } },
+        { artistByArtist: { name: { _ilike: pattern } } },
       ],
     },
   });
@@ -30,6 +37,14 @@ const Search: Component = () => {
     () => ({ offset: 0, query: query() }),
     loader
   );
+
+  createEffect(() => {
+    console.log("effect1", { query: query() });
+  });
+
+  createEffect(() => {
+    console.log("effect2", { selectAlbums: selectAlbums() });
+  });
 
   return (
     <div class={classes.container}>

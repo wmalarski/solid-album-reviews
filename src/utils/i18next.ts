@@ -4,6 +4,7 @@ const dict = {
   en: {
     header: {
       title: "Album Reviews",
+      search: "Search",
       signOut: "Sign Out",
     },
     SignUp: {
