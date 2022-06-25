@@ -4,6 +4,8 @@ export const [themeClass, vars] = createTheme({
   color: {
     background: "#ffffff",
     gray: "#f0f1f2",
+    blackA5: "rgba(0, 0, 0, 0.5)",
+    black: "#000",
   },
   space: {
     xs: "4px",
@@ -18,5 +20,8 @@ export const [themeClass, vars] = createTheme({
   },
   border: {
     xs: "solid 1px #f0f1f2",
+  },
+  zIndex: {
+    dialog: "100",
   },
 });

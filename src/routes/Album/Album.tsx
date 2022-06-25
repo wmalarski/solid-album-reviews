@@ -3,6 +3,7 @@ import { paths } from "@utils/paths";
 import { Navigate, useParams } from "solid-app-router";
 import { Component, createResource, Show } from "solid-js";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
+import { ReviewDialog } from "./ReviewDialog/ReviewDialog";
 
 type AlbumParams = {
   albumId: string;
@@ -27,6 +28,7 @@ const Album: Component = () => {
       <Show when={selectAlbum()?.data?.albumByPk}>
         {(album) => <AlbumDetails album={album} />}
       </Show>
+      <ReviewDialog />
     </Show>
   );
 };
