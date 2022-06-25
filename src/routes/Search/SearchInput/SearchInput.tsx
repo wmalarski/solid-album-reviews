@@ -3,14 +3,14 @@ import { Component, createSignal } from "solid-js";
 import * as classes from "./SearchInput.css";
 
 type Props = {
-  onSearchChange: (query: string) => void;
+  onQueryChange: (query: string) => void;
 };
 
 export const SearchInput: Component<Props> = (props) => {
   const [input, setInput] = createSignal("");
 
   const debouncedSetQuery = debounce((arg: string) => {
-    props.onSearchChange(arg);
+    props.onQueryChange(arg);
   }, 250);
 
   const handleInputChange = (value: string) => {

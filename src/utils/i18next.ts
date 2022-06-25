@@ -6,6 +6,7 @@ const dict = {
       title: "Album Reviews",
       search: "Search",
       signOut: "Sign Out",
+      reviews: "Reviews",
     },
     SignUp: {
       header: "Sign Up",

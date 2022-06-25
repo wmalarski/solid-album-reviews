@@ -16,6 +16,7 @@ export const Header: Component = () => {
     <header class={classes.container}>
       <Link href={paths.root}>{t("header.title")}</Link>
       <Link href={paths.search}>{t("header.search")}</Link>
+      <Link href={paths.reviews}>{t("header.reviews")}</Link>
       <button onClick={handleSignOut}>{t("header.signOut")}</button>
     </header>
   );

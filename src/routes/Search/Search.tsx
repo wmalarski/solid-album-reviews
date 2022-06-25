@@ -7,12 +7,12 @@ import { SearchResults } from "./SearchResults/SearchResults";
 
 type LoaderArgs = {
   page: number;
-  query?: string;
+  query: string;
 };
 
-const pageLimit = 20;
+const pageLimit = 10;
 
-const loader = ({ page = 0, query = "" }: LoaderArgs) => {
+const loader = ({ page, query }: LoaderArgs) => {
   const pattern = `%${query}%`;
   return graphqlSdk.SelectAlbums({
     offset: page * pageLimit,
@@ -42,7 +42,7 @@ const Search: Component = () => {
 
   return (
     <div class={classes.container}>
-      <SearchInput onSearchChange={setQuery} />
+      <SearchInput onQueryChange={setQuery} />
       <Show when={selectAlbums()?.data?.album}>
         {(albums) => <SearchResults albums={albums} />}
       </Show>

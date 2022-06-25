@@ -5856,6 +5856,28 @@ export type SelectAlbumsQuery = { album: Array<{ id: number, sid: string, title:
 
 export type ArtistFragment = { id: number, sid?: string | null, name: string };
 
+export type ReviewFragment = { id: number, rate: any, text: string, createdAt: any };
+
+export type ReviewWithAlbumAndArtistFragment = { id: number, rate: any, text: string, createdAt: any, albumByAlbum: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } };
+
+export type SelectReviewsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ReviewBoolExp>;
+}>;
+
+
+export type SelectReviewsQuery = { review: Array<{ id: number, rate: any, text: string, createdAt: any }>, reviewAggregate: { aggregate?: { count: number } | null } };
+
+export type SelectReviewsWithAlbumAndArtistQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ReviewBoolExp>;
+}>;
+
+
+export type SelectReviewsWithAlbumAndArtistQuery = { review: Array<{ id: number, rate: any, text: string, createdAt: any, albumByAlbum: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } }>, reviewAggregate: { aggregate?: { count: number } | null } };
+
 export const Artist = gql`
     fragment Artist on artist {
   id
@@ -5874,6 +5896,14 @@ export const RandomAlbumWithArtist = gql`
   }
 }
     ${Artist}`;
+export const Review = gql`
+    fragment Review on review {
+  id
+  rate
+  text
+  createdAt
+}
+    `;
 export const Album = gql`
     fragment Album on album {
   id
@@ -5891,6 +5921,15 @@ export const AlbumWithArtist = gql`
 }
     ${Album}
 ${Artist}`;
+export const ReviewWithAlbumAndArtist = gql`
+    fragment ReviewWithAlbumAndArtist on review {
+  ...Review
+  albumByAlbum {
+    ...AlbumWithArtist
+  }
+}
+    ${Review}
+${AlbumWithArtist}`;
 export const RandomAlbums = gql`
     query RandomAlbums($limit: Int) {
   randomAlbums: random_albums(limit: $limit) {
@@ -5917,6 +5956,40 @@ export const SelectAlbums = gql`
   }
 }
     ${AlbumWithArtist}`;
+export const SelectReviews = gql`
+    query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: {createdAt: desc}
+  ) {
+    ...Review
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${Review}`;
+export const SelectReviewsWithAlbumAndArtist = gql`
+    query SelectReviewsWithAlbumAndArtist($limit: Int, $offset: Int, $where: review_bool_exp) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: {createdAt: desc}
+  ) {
+    ...ReviewWithAlbumAndArtist
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${ReviewWithAlbumAndArtist}`;
 export const ArtistFragmentDoc = gql`
     fragment Artist on artist {
   id
@@ -5935,6 +6008,14 @@ export const RandomAlbumWithArtistFragmentDoc = gql`
   }
 }
     ${ArtistFragmentDoc}`;
+export const ReviewFragmentDoc = gql`
+    fragment Review on review {
+  id
+  rate
+  text
+  createdAt
+}
+    `;
 export const AlbumFragmentDoc = gql`
     fragment Album on album {
   id
@@ -5952,6 +6033,15 @@ export const AlbumWithArtistFragmentDoc = gql`
 }
     ${AlbumFragmentDoc}
 ${ArtistFragmentDoc}`;
+export const ReviewWithAlbumAndArtistFragmentDoc = gql`
+    fragment ReviewWithAlbumAndArtist on review {
+  ...Review
+  albumByAlbum {
+    ...AlbumWithArtist
+  }
+}
+    ${ReviewFragmentDoc}
+${AlbumWithArtistFragmentDoc}`;
 export const RandomAlbumsDocument = gql`
     query RandomAlbums($limit: Int) {
   randomAlbums: random_albums(limit: $limit) {
@@ -5978,6 +6068,40 @@ export const SelectAlbumsDocument = gql`
   }
 }
     ${AlbumWithArtistFragmentDoc}`;
+export const SelectReviewsDocument = gql`
+    query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: {createdAt: desc}
+  ) {
+    ...Review
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${ReviewFragmentDoc}`;
+export const SelectReviewsWithAlbumAndArtistDocument = gql`
+    query SelectReviewsWithAlbumAndArtist($limit: Int, $offset: Int, $where: review_bool_exp) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: {createdAt: desc}
+  ) {
+    ...ReviewWithAlbumAndArtist
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${ReviewWithAlbumAndArtistFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
@@ -5989,6 +6113,12 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     SelectAlbums(variables?: SelectAlbumsQueryVariables, options?: C): Promise<{ data?: SelectAlbumsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectAlbumsQuery, SelectAlbumsQueryVariables>(SelectAlbumsDocument, variables, options);
+    },
+    SelectReviews(variables?: SelectReviewsQueryVariables, options?: C): Promise<{ data?: SelectReviewsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectReviewsQuery, SelectReviewsQueryVariables>(SelectReviewsDocument, variables, options);
+    },
+    SelectReviewsWithAlbumAndArtist(variables?: SelectReviewsWithAlbumAndArtistQueryVariables, options?: C): Promise<{ data?: SelectReviewsWithAlbumAndArtistQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectReviewsWithAlbumAndArtistQuery, SelectReviewsWithAlbumAndArtistQueryVariables>(SelectReviewsWithAlbumAndArtistDocument, variables, options);
     }
   };
 }

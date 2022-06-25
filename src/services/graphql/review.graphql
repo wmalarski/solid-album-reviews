@@ -1,0 +1,49 @@
+fragment Review on review {
+  id
+  rate
+  text
+  createdAt
+}
+
+fragment ReviewWithAlbumAndArtist on review {
+  ...Review
+  albumByAlbum {
+    ...AlbumWithArtist
+  }
+}
+
+query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: { createdAt: desc }
+  ) {
+    ...Review
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query SelectReviewsWithAlbumAndArtist(
+  $limit: Int
+  $offset: Int
+  $where: review_bool_exp
+) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: { createdAt: desc }
+  ) {
+    ...ReviewWithAlbumAndArtist
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
