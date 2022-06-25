@@ -1,9 +1,9 @@
 import { Pagination } from "@components/Pagination/Pagination";
 import { graphqlSdk } from "@services/fetcher";
-import { Component, createResource, createSignal, Show } from "solid-js";
+import { Component, createResource, createSignal, For } from "solid-js";
+import { ResultItem } from "./ResultItem/ResultItem";
 import * as classes from "./Search.css";
 import { SearchInput } from "./SearchInput/SearchInput";
-import { SearchResults } from "./SearchResults/SearchResults";
 
 type LoaderArgs = {
   page: number;
@@ -43,9 +43,9 @@ const Search: Component = () => {
   return (
     <div class={classes.container}>
       <SearchInput onQueryChange={setQuery} />
-      <Show when={selectAlbums()?.data?.album}>
-        {(albums) => <SearchResults albums={albums} />}
-      </Show>
+      <For each={selectAlbums()?.data?.album}>
+        {(album) => <ResultItem album={album} />}
+      </For>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>
   );
