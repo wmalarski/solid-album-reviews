@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 
 export const container = style({
   display: "grid",
-  gridTemplateColumns: `repeat(auto-fit, ${vars.space.cover})`,
+  gridTemplateColumns: `repeat(auto-fit, ${vars.space.smallCover})`,
   justifyContent: "center",
   margin: "0 auto",
 });

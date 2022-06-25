@@ -1,5 +1,6 @@
 import { AlbumWithArtistFragment } from "@services/types";
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
+import { ResultItem } from "./ResultItem/ResultItem";
 import * as classes from "./SearchResults.css";
 
 type Props = {
@@ -8,6 +9,8 @@ type Props = {
 
 export const SearchResults: Component<Props> = (props) => {
   return (
-    <pre class={classes.container}>{JSON.stringify(props.albums, null, 2)}</pre>
+    <div class={classes.container}>
+      <For each={props.albums}>{(album) => <ResultItem album={album} />}</For>
+    </div>
   );
 };

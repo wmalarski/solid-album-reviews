@@ -3,7 +3,7 @@ import { style, styleVariants } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
 
 const shift = calc.divide(
-  calc.subtract(vars.space.cover, vars.space.coverExpanded),
+  calc.subtract(vars.space.smallCover, vars.space.smallCoverHover),
   2
 );
 
@@ -31,19 +31,19 @@ export const image = style({
 
 export const imageVariant = styleVariants({
   hover: {
-    width: vars.space.coverExpanded,
-    height: vars.space.coverExpanded,
+    width: vars.space.smallCoverHover,
+    height: vars.space.smallCoverHover,
   },
   no: {
-    width: vars.space.cover,
-    height: vars.space.cover,
+    width: vars.space.smallCover,
+    height: vars.space.smallCover,
   },
 });
 
 export const container = style({
   position: "relative",
-  width: vars.space.cover,
-  height: vars.space.cover,
+  width: vars.space.smallCover,
+  height: vars.space.smallCover,
 });
 
 export const actions = style({

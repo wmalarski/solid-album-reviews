@@ -11,8 +11,10 @@ export const [themeClass, vars] = createTheme({
     md: "16px",
     lg: "24px",
     xl: "32px",
-    cover: "250px",
-    coverExpanded: "300px",
+    smallCover: "250px",
+    smallCoverHover: "300px",
+    largeCover: "500px",
+    largeCoverHover: "550px",
   },
   border: {
     xs: "solid 1px #f0f1f2",

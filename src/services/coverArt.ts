@@ -1,19 +1,19 @@
-type FrontCoverUrlArgs = {
-  mBid: string;
-};
+export type CoverKind = "small" | "large";
 
-export const frontCoverUrl = ({ mBid }: FrontCoverUrlArgs): string => {
-  return `https://coverartarchive.org/release/${mBid}/front-250`;
+type FetchCoversArgs = {
+  mBid: string;
+  kind: CoverKind;
 };
 
 type ImageData = {
-  thumbnails: {
-    small: string;
-  };
+  thumbnails: Record<CoverKind, string>;
 };
 
-export const fetchCovers = async (id: string): Promise<string[]> => {
-  const response = await fetch(`https://coverartarchive.org/release/${id}`);
+export const fetchCovers = async ({
+  mBid,
+  kind,
+}: FetchCoversArgs): Promise<string[]> => {
+  const response = await fetch(`https://coverartarchive.org/release/${mBid}`);
 
   if (response.status !== 200) {
     return [];
@@ -22,7 +22,7 @@ export const fetchCovers = async (id: string): Promise<string[]> => {
   const json = await response.json();
 
   const thumbnails = json.images.map(
-    (image: ImageData) => image.thumbnails.small
+    (image: ImageData) => image.thumbnails[kind]
   );
 
   return thumbnails;

@@ -2,6 +2,10 @@ import { vars } from "@styles/theme.css";
 import { style, styleVariants } from "@vanilla-extract/css";
 
 export const container = style({
+  display: "flex",
+});
+
+export const wrapper = style({
   position: "relative",
 });
 
@@ -10,13 +14,21 @@ export const image = style({
 });
 
 export const imageVariant = styleVariants({
-  hover: {
-    width: vars.space.coverExpanded,
-    height: vars.space.coverExpanded,
+  smallHover: {
+    width: vars.space.smallCoverHover,
+    height: vars.space.smallCoverHover,
   },
-  no: {
-    width: vars.space.cover,
-    height: vars.space.cover,
+  smallNormal: {
+    width: vars.space.smallCover,
+    height: vars.space.smallCover,
+  },
+  largeHover: {
+    width: vars.space.largeCoverHover,
+    height: vars.space.largeCoverHover,
+  },
+  largeNormal: {
+    width: vars.space.largeCover,
+    height: vars.space.largeCover,
   },
 });
 

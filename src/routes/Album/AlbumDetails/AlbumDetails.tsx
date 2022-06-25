@@ -15,6 +15,7 @@ export const AlbumDetails: Component<Props> = (props) => {
         isHovering={true}
         label={formatAlbum(props.album)}
         sid={props.album.sid}
+        kind="large"
       />
       <pre class={classes.container}>
         {JSON.stringify(props.album, null, 2)}
