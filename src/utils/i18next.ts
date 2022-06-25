@@ -32,6 +32,15 @@ const dict = {
       previous: "Previous",
       next: "Next",
     },
+    ReviewDialog: {
+      trigger: "Review",
+      title: "Review album",
+    },
+    ReviewForm: {
+      textLabel: "Text",
+      rateLabel: "Rate",
+      submit: "Submit",
+    },
     home: {},
   },
 };

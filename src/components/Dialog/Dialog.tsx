@@ -37,11 +37,6 @@ export const Dialog: Component<Props> = (props) => {
           {...modalProps}
           ref={ref}
           class={classes.content}
-          style={{
-            background: "white",
-            color: "black",
-            padding: "30px",
-          }}
         >
           <h3 {...titleProps} class={classes.title}>
             {props.title}

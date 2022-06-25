@@ -1,15 +1,18 @@
 import { Dialog } from "@components/Dialog/Dialog";
+import { ReviewForm } from "@modules/ReviewForm/ReviewForm";
 import { createButton } from "@solid-aria/button";
 import {
   createOverlayTriggerState,
   OverlayContainer,
 } from "@solid-aria/overlays";
+import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { Component, Show } from "solid-js";
 
 export const ReviewDialog: Component = () => {
+  const [t] = useI18n();
+
   let openButtonRef: HTMLButtonElement | undefined;
-  let closeButtonRef: HTMLButtonElement | undefined;
 
   const state = createOverlayTriggerState({});
 
@@ -18,41 +21,24 @@ export const ReviewDialog: Component = () => {
     () => openButtonRef
   );
 
-  const { buttonProps: closeButtonProps } = createButton(
-    { onPress: () => state.close() },
-    () => closeButtonRef
-  );
+  const handleSubmit = () => {
+    state.close();
+  };
 
   return (
     <>
       <button {...openButtonProps} ref={openButtonRef}>
-        Open Dialog
+        {t("ReviewDialog.trigger")}
       </button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
           <Dialog
-            title="Enter your name"
+            isDismissable
             isOpen
             onClose={state.close}
-            isDismissable
+            title={t("ReviewDialog.title")}
           >
-            <form style={{ display: "flex", "flex-direction": "column" }}>
-              <label for="first-name">
-                First Name:
-                <input id="first-name" />
-              </label>
-              <label for="last-name">
-                Last Name:
-                <input id="last-name" />
-              </label>
-              <button
-                {...closeButtonProps}
-                ref={closeButtonRef}
-                style={{ "margin-top": "10px" }}
-              >
-                Submit
-              </button>
-            </form>
+            <ReviewForm onClose={state.close} onSubmit={handleSubmit} />
           </Dialog>
         </OverlayContainer>
       </Show>
