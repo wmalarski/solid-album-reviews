@@ -14,6 +14,7 @@ const renderComponent = ({
     isHovering: false,
     label: "label",
     sid: "sid",
+    kind: "small",
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

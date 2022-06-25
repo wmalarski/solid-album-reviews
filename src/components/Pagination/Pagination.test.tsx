@@ -10,7 +10,11 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    current: 0,
+    maxPage: 10,
+    onChange: () => void 0,
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <Pagination {...defaultProps} {...props} />

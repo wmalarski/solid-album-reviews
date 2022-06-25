@@ -10,7 +10,12 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    onQueryChange: () => void 0,
+    onRangeChange: () => void 0,
+    query: "",
+    range: { lower: 0, upper: 1 },
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <ReviewsFilters {...defaultProps} {...props} />
