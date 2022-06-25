@@ -1,8 +1,9 @@
 import { Pagination } from "@components/Pagination/Pagination";
 import { graphqlSdk } from "@services/fetcher";
-import { Component, createResource, createSignal } from "solid-js";
+import { Component, createResource, createSignal, Show } from "solid-js";
 import * as classes from "./Reviews.css";
 import { ReviewsFilters } from "./ReviewsFilters/ReviewsFilters";
+import { ReviewsList } from "./ReviewsList/ReviewsList";
 
 type LoaderArgs = {
   page: number;
@@ -61,7 +62,9 @@ const Reviews: Component = () => {
         onRangeChange={setRange}
         onQueryChange={setQuery}
       />
-      <pre>{JSON.stringify(selectReviews(), null, 2)}</pre>
+      <Show when={selectReviews()?.data?.review}>
+        {(reviews) => <ReviewsList reviews={reviews} />}
+      </Show>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>
   );
