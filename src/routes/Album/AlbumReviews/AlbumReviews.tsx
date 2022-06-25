@@ -1,6 +1,8 @@
+import { Pagination } from "@components/Pagination/Pagination";
 import { graphqlSdk } from "@services/fetcher";
-import { Component, createResource, createSignal } from "solid-js";
+import { Component, createResource, createSignal, For } from "solid-js";
 import * as classes from "./AlbumReviews.css";
+import { AlbumReviewsItem } from "./AlbumReviewsItem/AlbumReviewsItem";
 
 type LoaderArgs = {
   page: number;
@@ -39,9 +41,17 @@ export const AlbumReviews: Component<Props> = (props) => {
     loader
   );
 
+  const maxPage = () => {
+    const count = selectReviews()?.data?.reviewAggregate.aggregate?.count || 0;
+    return Math.ceil(count / pageLimit);
+  };
+
   return (
-    <span class={classes.container}>
-      <pre>{JSON.stringify(selectReviews(), null, 2)}</pre>
-    </span>
+    <div class={classes.container}>
+      <For each={selectReviews()?.data?.review}>
+        {(review) => <AlbumReviewsItem review={review} />}
+      </For>
+      <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
+    </div>
   );
 };

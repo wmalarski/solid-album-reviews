@@ -20,6 +20,17 @@ export const mockAlbumWithArtistFragment = (
   };
 };
 
+// export const mockReviewWithAlbumFragment = (update: Partial<ReviewWithAlbumFragment> = {}): ReviewWithAlbumFragment => {
+//   return {
+//     albumByAlbum: mockAlbumWithArtistFragment(),
+//     createdAt: new Date().toDateString(),
+//     id: mockId(),
+//     rate: 5.5,
+//     text: "",
+//     ...update,
+//   }
+// }
+
 export const mockReviewWithAlbumAndArtistFragment = (
   update: Partial<ReviewWithAlbumAndArtistFragment> = {}
 ): ReviewWithAlbumAndArtistFragment => {

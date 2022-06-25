@@ -14,9 +14,9 @@ export const {{ basename path }}: Component<Props> = (props) => {
   const [t] = useI18n();
 
   return (
-    <span class={classes.container}>
+    <div class={classes.container}>
       {t("{{ basename path }}.text")}
-    </span>
+    </div>
   );
 };
 {{#if isDefaultExport}}
