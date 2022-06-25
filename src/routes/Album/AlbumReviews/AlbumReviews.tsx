@@ -12,16 +12,14 @@ type LoaderArgs = {
 const pageLimit = 20;
 
 const loader = ({ page, albumId }: LoaderArgs) => {
-  return graphqlSdk.SelectReviewsWithAlbum({
+  return graphqlSdk.SelectAlbumsWithReviews({
     offset: page * pageLimit,
     limit: pageLimit,
     where: {
-      albumByAlbum: {
-        artistByArtist: {
-          albums: {
-            id: {
-              _eq: albumId,
-            },
+      artistByArtist: {
+        albums: {
+          id: {
+            _eq: albumId,
           },
         },
       },
@@ -42,14 +40,14 @@ export const AlbumReviews: Component<Props> = (props) => {
   );
 
   const maxPage = () => {
-    const count = selectReviews()?.data?.reviewAggregate.aggregate?.count || 0;
+    const count = selectReviews()?.data?.albumAggregate.aggregate?.count || 0;
     return Math.ceil(count / pageLimit);
   };
 
   return (
     <div class={classes.container}>
-      <For each={selectReviews()?.data?.review}>
-        {(review) => <AlbumReviewsItem review={review} />}
+      <For each={selectReviews()?.data?.album}>
+        {(album) => <AlbumReviewsItem album={album} />}
       </For>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>

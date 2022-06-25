@@ -5831,6 +5831,8 @@ export type AlbumFragment = { id: number, sid: string, title: string, year: numb
 
 export type AlbumWithArtistFragment = { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } };
 
+export type AlbumWithReviewsFragment = { id: number, sid: string, title: string, year: number, reviews: Array<{ id: number, rate: any, text: string, createdAt: any }> };
+
 export type RandomAlbumsQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
 }>;
@@ -5845,14 +5847,23 @@ export type SelectAlbumQueryVariables = Exact<{
 
 export type SelectAlbumQuery = { albumByPk?: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } | null };
 
-export type SelectAlbumsQueryVariables = Exact<{
+export type SelectAlbumsWithArtistQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<AlbumBoolExp>;
 }>;
 
 
-export type SelectAlbumsQuery = { album: Array<{ id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } }>, albumAggregate: { aggregate?: { count: number } | null } };
+export type SelectAlbumsWithArtistQuery = { album: Array<{ id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } }>, albumAggregate: { aggregate?: { count: number } | null } };
+
+export type SelectAlbumsWithReviewsQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<AlbumBoolExp>;
+}>;
+
+
+export type SelectAlbumsWithReviewsQuery = { album: Array<{ id: number, sid: string, title: string, year: number, reviews: Array<{ id: number, rate: any, text: string, createdAt: any }> }>, albumAggregate: { aggregate?: { count: number } | null } };
 
 export type ArtistFragment = { id: number, sid?: string | null, name: string };
 
@@ -5880,15 +5891,6 @@ export type SelectReviewsWithAlbumAndArtistQueryVariables = Exact<{
 
 export type SelectReviewsWithAlbumAndArtistQuery = { review: Array<{ id: number, rate: any, text: string, createdAt: any, albumByAlbum: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } }>, reviewAggregate: { aggregate?: { count: number } | null } };
 
-export type SelectReviewsWithAlbumQueryVariables = Exact<{
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<ReviewBoolExp>;
-}>;
-
-
-export type SelectReviewsWithAlbumQuery = { review: Array<{ id: number, rate: any, text: string, createdAt: any, albumByAlbum: { id: number, sid: string, title: string, year: number } }>, reviewAggregate: { aggregate?: { count: number } | null } };
-
 export type InsertReviewMutationVariables = Exact<{
   review: ReviewInsertInput;
 }>;
@@ -5914,14 +5916,6 @@ export const RandomAlbumWithArtist = gql`
   }
 }
     ${Artist}`;
-export const Review = gql`
-    fragment Review on review {
-  id
-  rate
-  text
-  createdAt
-}
-    `;
 export const Album = gql`
     fragment Album on album {
   id
@@ -5930,6 +5924,23 @@ export const Album = gql`
   year
 }
     `;
+export const Review = gql`
+    fragment Review on review {
+  id
+  rate
+  text
+  createdAt
+}
+    `;
+export const AlbumWithReviews = gql`
+    fragment AlbumWithReviews on album {
+  ...Album
+  reviews {
+    ...Review
+  }
+}
+    ${Album}
+${Review}`;
 export const AlbumWithArtist = gql`
     fragment AlbumWithArtist on album {
   ...Album
@@ -5971,8 +5982,8 @@ export const SelectAlbum = gql`
   }
 }
     ${AlbumWithArtist}`;
-export const SelectAlbums = gql`
-    query SelectAlbums($limit: Int, $offset: Int, $where: album_bool_exp) {
+export const SelectAlbumsWithArtist = gql`
+    query SelectAlbumsWithArtist($limit: Int, $offset: Int, $where: album_bool_exp) {
   album(limit: $limit, offset: $offset, where: $where) {
     ...AlbumWithArtist
   }
@@ -5983,6 +5994,18 @@ export const SelectAlbums = gql`
   }
 }
     ${AlbumWithArtist}`;
+export const SelectAlbumsWithReviews = gql`
+    query SelectAlbumsWithReviews($limit: Int, $offset: Int, $where: album_bool_exp) {
+  album(limit: $limit, offset: $offset, where: $where) {
+    ...AlbumWithReviews
+  }
+  albumAggregate: album_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${AlbumWithReviews}`;
 export const SelectReviews = gql`
     query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
   review(
@@ -6017,23 +6040,6 @@ export const SelectReviewsWithAlbumAndArtist = gql`
   }
 }
     ${ReviewWithAlbumAndArtist}`;
-export const SelectReviewsWithAlbum = gql`
-    query SelectReviewsWithAlbum($limit: Int, $offset: Int, $where: review_bool_exp) {
-  review(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: {createdAt: desc}
-  ) {
-    ...ReviewWithAlbum
-  }
-  reviewAggregate: review_aggregate(where: $where) {
-    aggregate {
-      count
-    }
-  }
-}
-    ${ReviewWithAlbum}`;
 export const InsertReview = gql`
     mutation InsertReview($review: review_insert_input!) {
   insertReviewOne: insert_review_one(object: $review) {
@@ -6059,14 +6065,6 @@ export const RandomAlbumWithArtistFragmentDoc = gql`
   }
 }
     ${ArtistFragmentDoc}`;
-export const ReviewFragmentDoc = gql`
-    fragment Review on review {
-  id
-  rate
-  text
-  createdAt
-}
-    `;
 export const AlbumFragmentDoc = gql`
     fragment Album on album {
   id
@@ -6075,6 +6073,23 @@ export const AlbumFragmentDoc = gql`
   year
 }
     `;
+export const ReviewFragmentDoc = gql`
+    fragment Review on review {
+  id
+  rate
+  text
+  createdAt
+}
+    `;
+export const AlbumWithReviewsFragmentDoc = gql`
+    fragment AlbumWithReviews on album {
+  ...Album
+  reviews {
+    ...Review
+  }
+}
+    ${AlbumFragmentDoc}
+${ReviewFragmentDoc}`;
 export const AlbumWithArtistFragmentDoc = gql`
     fragment AlbumWithArtist on album {
   ...Album
@@ -6116,8 +6131,8 @@ export const SelectAlbumDocument = gql`
   }
 }
     ${AlbumWithArtistFragmentDoc}`;
-export const SelectAlbumsDocument = gql`
-    query SelectAlbums($limit: Int, $offset: Int, $where: album_bool_exp) {
+export const SelectAlbumsWithArtistDocument = gql`
+    query SelectAlbumsWithArtist($limit: Int, $offset: Int, $where: album_bool_exp) {
   album(limit: $limit, offset: $offset, where: $where) {
     ...AlbumWithArtist
   }
@@ -6128,6 +6143,18 @@ export const SelectAlbumsDocument = gql`
   }
 }
     ${AlbumWithArtistFragmentDoc}`;
+export const SelectAlbumsWithReviewsDocument = gql`
+    query SelectAlbumsWithReviews($limit: Int, $offset: Int, $where: album_bool_exp) {
+  album(limit: $limit, offset: $offset, where: $where) {
+    ...AlbumWithReviews
+  }
+  albumAggregate: album_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+    ${AlbumWithReviewsFragmentDoc}`;
 export const SelectReviewsDocument = gql`
     query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
   review(
@@ -6162,23 +6189,6 @@ export const SelectReviewsWithAlbumAndArtistDocument = gql`
   }
 }
     ${ReviewWithAlbumAndArtistFragmentDoc}`;
-export const SelectReviewsWithAlbumDocument = gql`
-    query SelectReviewsWithAlbum($limit: Int, $offset: Int, $where: review_bool_exp) {
-  review(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: {createdAt: desc}
-  ) {
-    ...ReviewWithAlbum
-  }
-  reviewAggregate: review_aggregate(where: $where) {
-    aggregate {
-      count
-    }
-  }
-}
-    ${ReviewWithAlbumFragmentDoc}`;
 export const InsertReviewDocument = gql`
     mutation InsertReview($review: review_insert_input!) {
   insertReviewOne: insert_review_one(object: $review) {
@@ -6195,17 +6205,17 @@ export function getSdk<C>(requester: Requester<C>) {
     SelectAlbum(variables: SelectAlbumQueryVariables, options?: C): Promise<{ data?: SelectAlbumQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectAlbumQuery, SelectAlbumQueryVariables>(SelectAlbumDocument, variables, options);
     },
-    SelectAlbums(variables?: SelectAlbumsQueryVariables, options?: C): Promise<{ data?: SelectAlbumsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
-      return requester<SelectAlbumsQuery, SelectAlbumsQueryVariables>(SelectAlbumsDocument, variables, options);
+    SelectAlbumsWithArtist(variables?: SelectAlbumsWithArtistQueryVariables, options?: C): Promise<{ data?: SelectAlbumsWithArtistQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectAlbumsWithArtistQuery, SelectAlbumsWithArtistQueryVariables>(SelectAlbumsWithArtistDocument, variables, options);
+    },
+    SelectAlbumsWithReviews(variables?: SelectAlbumsWithReviewsQueryVariables, options?: C): Promise<{ data?: SelectAlbumsWithReviewsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectAlbumsWithReviewsQuery, SelectAlbumsWithReviewsQueryVariables>(SelectAlbumsWithReviewsDocument, variables, options);
     },
     SelectReviews(variables?: SelectReviewsQueryVariables, options?: C): Promise<{ data?: SelectReviewsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectReviewsQuery, SelectReviewsQueryVariables>(SelectReviewsDocument, variables, options);
     },
     SelectReviewsWithAlbumAndArtist(variables?: SelectReviewsWithAlbumAndArtistQueryVariables, options?: C): Promise<{ data?: SelectReviewsWithAlbumAndArtistQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectReviewsWithAlbumAndArtistQuery, SelectReviewsWithAlbumAndArtistQueryVariables>(SelectReviewsWithAlbumAndArtistDocument, variables, options);
-    },
-    SelectReviewsWithAlbum(variables?: SelectReviewsWithAlbumQueryVariables, options?: C): Promise<{ data?: SelectReviewsWithAlbumQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
-      return requester<SelectReviewsWithAlbumQuery, SelectReviewsWithAlbumQueryVariables>(SelectReviewsWithAlbumDocument, variables, options);
     },
     InsertReview(variables: InsertReviewMutationVariables, options?: C): Promise<{ data?: InsertReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<InsertReviewMutation, InsertReviewMutationVariables>(InsertReviewDocument, variables, options);

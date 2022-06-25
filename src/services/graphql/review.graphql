@@ -55,26 +55,6 @@ query SelectReviewsWithAlbumAndArtist(
   }
 }
 
-query SelectReviewsWithAlbum(
-  $limit: Int
-  $offset: Int
-  $where: review_bool_exp
-) {
-  review(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: { createdAt: desc }
-  ) {
-    ...ReviewWithAlbum
-  }
-  reviewAggregate: review_aggregate(where: $where) {
-    aggregate {
-      count
-    }
-  }
-}
-
 mutation InsertReview($review: review_insert_input!) {
   insertReviewOne: insert_review_one(object: $review) {
     id

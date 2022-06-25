@@ -14,7 +14,7 @@ const pageLimit = 10;
 
 const loader = ({ page, query }: LoaderArgs) => {
   const pattern = `%${query}%`;
-  return graphqlSdk.SelectAlbums({
+  return graphqlSdk.SelectAlbumsWithArtist({
     offset: page * pageLimit,
     limit: pageLimit,
     where: {

@@ -1,5 +1,5 @@
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
-import { ReviewWithAlbumFragment } from "@services/types";
+import { AlbumWithReviewsFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
@@ -7,7 +7,7 @@ import { Component } from "solid-js";
 import * as classes from "./AlbumReviewsItem.css";
 
 type Props = {
-  review: ReviewWithAlbumFragment;
+  album: AlbumWithReviewsFragment;
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
@@ -15,15 +15,15 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
     <div class={classes.container}>
       <AlbumCoversCarousel
         isHovering={false}
-        label={formatAlbum(props.review.albumByAlbum)}
-        sid={props.review.albumByAlbum.sid}
+        label={formatAlbum(props.album)}
+        sid={props.album.sid}
         kind="small"
       />
       <div class={classes.right}>
-        <Link href={paths.album(props.review.albumByAlbum.id)}>
-          {formatAlbum(props.review.albumByAlbum)}
+        <Link href={paths.album(props.album.id)}>
+          {formatAlbum(props.album)}
         </Link>
-        <pre>{JSON.stringify(props.review, null, 2)}</pre>
+        <pre>{JSON.stringify(props.album, null, 2)}</pre>
       </div>
     </div>
   );

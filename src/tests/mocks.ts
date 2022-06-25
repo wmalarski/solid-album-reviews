@@ -1,5 +1,8 @@
 import {
+  AlbumFragment,
   AlbumWithArtistFragment,
+  AlbumWithReviewsFragment,
+  ReviewFragment,
   ReviewWithAlbumAndArtistFragment,
 } from "@services/types";
 
@@ -7,11 +10,22 @@ const mockId = () => {
   return Math.floor(Math.random() * 1e15);
 };
 
-export const mockAlbumWithArtistFragment = (
-  update: Partial<AlbumWithArtistFragment> = {}
-): AlbumWithArtistFragment => {
+export const mockReviewFragment = (
+  update: Partial<ReviewFragment> = {}
+): ReviewFragment => {
   return {
-    artistByArtist: { id: mockId(), name: "Artist" },
+    id: mockId(),
+    createdAt: new Date().toDateString(),
+    rate: 5.5,
+    text: "123",
+    ...update,
+  };
+};
+
+export const mockAlbumFragment = (
+  update: Partial<AlbumFragment> = {}
+): AlbumFragment => {
+  return {
     id: mockId(),
     sid: "123",
     title: "Title",
@@ -20,26 +34,32 @@ export const mockAlbumWithArtistFragment = (
   };
 };
 
-// export const mockReviewWithAlbumFragment = (update: Partial<ReviewWithAlbumFragment> = {}): ReviewWithAlbumFragment => {
-//   return {
-//     albumByAlbum: mockAlbumWithArtistFragment(),
-//     createdAt: new Date().toDateString(),
-//     id: mockId(),
-//     rate: 5.5,
-//     text: "",
-//     ...update,
-//   }
-// }
+export const mockAlbumWithArtistFragment = (
+  update: Partial<AlbumWithArtistFragment> = {}
+): AlbumWithArtistFragment => {
+  return {
+    artistByArtist: { id: mockId(), name: "Artist" },
+    ...mockAlbumFragment(),
+    ...update,
+  };
+};
+
+export const mockAlbumWithReviewsFragment = (
+  update: Partial<AlbumWithReviewsFragment> = {}
+): AlbumWithReviewsFragment => {
+  return {
+    ...mockAlbumFragment(),
+    reviews: [mockReviewFragment()],
+    ...update,
+  };
+};
 
 export const mockReviewWithAlbumAndArtistFragment = (
   update: Partial<ReviewWithAlbumAndArtistFragment> = {}
 ): ReviewWithAlbumAndArtistFragment => {
   return {
     albumByAlbum: mockAlbumWithArtistFragment(),
-    createdAt: new Date().toDateString(),
-    id: mockId(),
-    rate: 6.6,
-    text: "Text",
+    ...mockReviewFragment(),
     ...update,
   };
 };
