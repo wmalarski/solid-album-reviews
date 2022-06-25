@@ -12,6 +12,13 @@ fragment ReviewWithAlbumAndArtist on review {
   }
 }
 
+fragment ReviewWithAlbum on review {
+  ...Review
+  albumByAlbum {
+    ...Album
+  }
+}
+
 query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
   review(
     limit: $limit
@@ -40,6 +47,26 @@ query SelectReviewsWithAlbumAndArtist(
     order_by: { createdAt: desc }
   ) {
     ...ReviewWithAlbumAndArtist
+  }
+  reviewAggregate: review_aggregate(where: $where) {
+    aggregate {
+      count
+    }
+  }
+}
+
+query SelectReviewsWithAlbum(
+  $limit: Int
+  $offset: Int
+  $where: review_bool_exp
+) {
+  review(
+    limit: $limit
+    offset: $offset
+    where: $where
+    order_by: { createdAt: desc }
+  ) {
+    ...ReviewWithAlbum
   }
   reviewAggregate: review_aggregate(where: $where) {
     aggregate {

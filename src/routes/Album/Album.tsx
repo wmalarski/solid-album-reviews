@@ -3,6 +3,7 @@ import { paths } from "@utils/paths";
 import { Navigate, useParams } from "solid-app-router";
 import { Component, createResource, Show } from "solid-js";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
+import { AlbumReviews } from "./AlbumReviews/AlbumReviews";
 import { ReviewDialog } from "./ReviewDialog/ReviewDialog";
 
 type AlbumParams = {
@@ -31,6 +32,7 @@ const Album: Component = () => {
             {(album) => <AlbumDetails album={album} />}
           </Show>
           <ReviewDialog albumId={albumId} />
+          <AlbumReviews albumId={albumId} />
         </>
       )}
     </Show>
