@@ -1,15 +1,9 @@
 import { Pagination } from "@components/Pagination/Pagination";
 import { graphqlSdk } from "@services/fetcher";
-import { useSearchParams } from "solid-app-router";
-import { Component, createResource, Show } from "solid-js";
+import { Component, createResource, createSignal, Show } from "solid-js";
 import * as classes from "./Search.css";
 import { SearchInput } from "./SearchInput/SearchInput";
 import { SearchResults } from "./SearchResults/SearchResults";
-
-type SearchParams = {
-  query?: string;
-  page?: string;
-};
 
 type LoaderArgs = {
   page: number;
@@ -33,23 +27,13 @@ const loader = ({ page = 0, query = "" }: LoaderArgs) => {
 };
 
 const Search: Component = () => {
-  const [searchParams, setSearchParams] = useSearchParams<SearchParams>();
-  const pageParam = searchParams.page || "";
-  const page = /\d+/.test(pageParam) ? Number(pageParam) : 0;
+  const [page, setPage] = createSignal(0);
+  const [query, setQuery] = createSignal("");
 
   const [selectAlbums] = createResource(
-    () => ({ page, query: searchParams.query }),
+    () => ({ page: page(), query: query() }),
     loader
   );
-
-  const handleSearchChange = (query: string) => {
-    setSearchParams({ query });
-  };
-
-  const handlePageChange = (next: number) => {
-    console.log({ searchParams, next });
-    setSearchParams({ query: searchParams.query, page: next });
-  };
 
   const maxPage = () => {
     const count = selectAlbums()?.data?.albumAggregate.aggregate?.count || 0;
@@ -58,15 +42,11 @@ const Search: Component = () => {
 
   return (
     <div class={classes.container}>
-      <SearchInput onSearchChange={handleSearchChange} />
+      <SearchInput onSearchChange={setQuery} />
       <Show when={selectAlbums()?.data?.album}>
         {(albums) => <SearchResults albums={albums} />}
       </Show>
-      <Pagination
-        current={page}
-        maxPage={maxPage()}
-        onChange={handlePageChange}
-      />
+      <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>
   );
 };
