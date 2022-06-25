@@ -47,3 +47,9 @@ query SelectReviewsWithAlbumAndArtist(
     }
   }
 }
+
+mutation InsertReview($review: review_insert_input!) {
+  insertReviewOne: insert_review_one(object: $review) {
+    id
+  }
+}

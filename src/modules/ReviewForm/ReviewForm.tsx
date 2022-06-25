@@ -1,11 +1,12 @@
-import { createButton } from "@solid-aria/button";
+import { ReviewInsertInput } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./ReviewForm.css";
 
 type Props = {
+  albumId: number;
   onClose: () => void;
-  onSubmit: () => void;
+  onSubmit: (input: ReviewInsertInput) => void;
 };
 
 export const ReviewForm: Component<Props> = (props) => {
@@ -14,16 +15,9 @@ export const ReviewForm: Component<Props> = (props) => {
   const [text, setText] = createSignal("");
   const [rate, setRate] = createSignal(0);
 
-  let closeButtonRef: HTMLButtonElement | undefined;
-
-  const { buttonProps: closeButtonProps } = createButton(
-    { onPress: () => props.onClose() },
-    () => closeButtonRef
-  );
-
   const handleSubmit = (event: Event) => {
     event.preventDefault();
-    props.onSubmit();
+    props.onSubmit({ album: props.albumId, rate: rate(), text: text() });
   };
 
   return (
@@ -46,7 +40,7 @@ export const ReviewForm: Component<Props> = (props) => {
           onChange={(event) => setRate(Number(event.currentTarget.value))}
         />
       </label>
-      <button {...closeButtonProps} ref={closeButtonRef} class={classes.submit}>
+      <button type="submit" class={classes.submit}>
         {t("ReviewForm.submit")}
       </button>
     </form>

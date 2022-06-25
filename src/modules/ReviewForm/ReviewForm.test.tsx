@@ -13,6 +13,7 @@ const renderComponent = ({
   const defaultProps: Props = {
     onClose: () => void 0,
     onSubmit: () => void 0,
+    albumId: 1,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

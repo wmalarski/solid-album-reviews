@@ -5878,6 +5878,13 @@ export type SelectReviewsWithAlbumAndArtistQueryVariables = Exact<{
 
 export type SelectReviewsWithAlbumAndArtistQuery = { review: Array<{ id: number, rate: any, text: string, createdAt: any, albumByAlbum: { id: number, sid: string, title: string, year: number, artistByArtist: { id: number, sid?: string | null, name: string } } }>, reviewAggregate: { aggregate?: { count: number } | null } };
 
+export type InsertReviewMutationVariables = Exact<{
+  review: ReviewInsertInput;
+}>;
+
+
+export type InsertReviewMutation = { insertReviewOne?: { id: number } | null };
+
 export const Artist = gql`
     fragment Artist on artist {
   id
@@ -5990,6 +5997,13 @@ export const SelectReviewsWithAlbumAndArtist = gql`
   }
 }
     ${ReviewWithAlbumAndArtist}`;
+export const InsertReview = gql`
+    mutation InsertReview($review: review_insert_input!) {
+  insertReviewOne: insert_review_one(object: $review) {
+    id
+  }
+}
+    `;
 export const ArtistFragmentDoc = gql`
     fragment Artist on artist {
   id
@@ -6102,6 +6116,13 @@ export const SelectReviewsWithAlbumAndArtistDocument = gql`
   }
 }
     ${ReviewWithAlbumAndArtistFragmentDoc}`;
+export const InsertReviewDocument = gql`
+    mutation InsertReview($review: review_insert_input!) {
+  insertReviewOne: insert_review_one(object: $review) {
+    id
+  }
+}
+    `;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
@@ -6119,6 +6140,9 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     SelectReviewsWithAlbumAndArtist(variables?: SelectReviewsWithAlbumAndArtistQueryVariables, options?: C): Promise<{ data?: SelectReviewsWithAlbumAndArtistQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectReviewsWithAlbumAndArtistQuery, SelectReviewsWithAlbumAndArtistQueryVariables>(SelectReviewsWithAlbumAndArtistDocument, variables, options);
+    },
+    InsertReview(variables: InsertReviewMutationVariables, options?: C): Promise<{ data?: InsertReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<InsertReviewMutation, InsertReviewMutationVariables>(InsertReviewDocument, variables, options);
     }
   };
 }

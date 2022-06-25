@@ -25,10 +25,14 @@ const Album: Component = () => {
 
   return (
     <Show when={albumId} fallback={<Navigate href={paths.notFound} />}>
-      <Show when={selectAlbum()?.data?.albumByPk}>
-        {(album) => <AlbumDetails album={album} />}
-      </Show>
-      <ReviewDialog />
+      {(albumId) => (
+        <>
+          <Show when={selectAlbum()?.data?.albumByPk}>
+            {(album) => <AlbumDetails album={album} />}
+          </Show>
+          <ReviewDialog albumId={albumId} />
+        </>
+      )}
     </Show>
   );
 };

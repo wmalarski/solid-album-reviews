@@ -1,5 +1,7 @@
 import { Dialog } from "@components/Dialog/Dialog";
 import { ReviewForm } from "@modules/ReviewForm/ReviewForm";
+import { graphqlSdk } from "@services/fetcher";
+import { ReviewInsertInput } from "@services/types";
 import { createButton } from "@solid-aria/button";
 import {
   createOverlayTriggerState,
@@ -9,7 +11,11 @@ import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { Component, Show } from "solid-js";
 
-export const ReviewDialog: Component = () => {
+type Props = {
+  albumId: number;
+};
+
+export const ReviewDialog: Component<Props> = (props) => {
   const [t] = useI18n();
 
   let openButtonRef: HTMLButtonElement | undefined;
@@ -21,7 +27,8 @@ export const ReviewDialog: Component = () => {
     () => openButtonRef
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async (review: ReviewInsertInput) => {
+    await graphqlSdk.InsertReview({ review });
     state.close();
   };
 
@@ -38,7 +45,11 @@ export const ReviewDialog: Component = () => {
             onClose={state.close}
             title={t("ReviewDialog.title")}
           >
-            <ReviewForm onClose={state.close} onSubmit={handleSubmit} />
+            <ReviewForm
+              albumId={props.albumId}
+              onClose={state.close}
+              onSubmit={handleSubmit}
+            />
           </Dialog>
         </OverlayContainer>
       </Show>
