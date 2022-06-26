@@ -5898,6 +5898,13 @@ export type InsertReviewMutationVariables = Exact<{
 
 export type InsertReviewMutation = { insertReviewOne?: { id: number } | null };
 
+export type DeleteReviewMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type DeleteReviewMutation = { deleteReview?: { returning: Array<{ album: number }> } | null };
+
 export const Artist = gql`
     fragment Artist on artist {
   id
@@ -6044,6 +6051,15 @@ export const InsertReview = gql`
     mutation InsertReview($review: review_insert_input!) {
   insertReviewOne: insert_review_one(object: $review) {
     id
+  }
+}
+    `;
+export const DeleteReview = gql`
+    mutation DeleteReview($id: Int) {
+  deleteReview: delete_review(where: {id: {_eq: $id}}) {
+    returning {
+      album
+    }
   }
 }
     `;
@@ -6196,6 +6212,15 @@ export const InsertReviewDocument = gql`
   }
 }
     `;
+export const DeleteReviewDocument = gql`
+    mutation DeleteReview($id: Int) {
+  deleteReview: delete_review(where: {id: {_eq: $id}}) {
+    returning {
+      album
+    }
+  }
+}
+    `;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
@@ -6219,6 +6244,9 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     InsertReview(variables: InsertReviewMutationVariables, options?: C): Promise<{ data?: InsertReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<InsertReviewMutation, InsertReviewMutationVariables>(InsertReviewDocument, variables, options);
+    },
+    DeleteReview(variables?: DeleteReviewMutationVariables, options?: C): Promise<{ data?: DeleteReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<DeleteReviewMutation, DeleteReviewMutationVariables>(DeleteReviewDocument, variables, options);
     }
   };
 }

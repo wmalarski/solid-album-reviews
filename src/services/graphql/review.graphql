@@ -60,3 +60,11 @@ mutation InsertReview($review: review_insert_input!) {
     id
   }
 }
+
+mutation DeleteReview($id: Int) {
+  deleteReview: delete_review(where: { id: { _eq: $id } }) {
+    returning {
+      album
+    }
+  }
+}

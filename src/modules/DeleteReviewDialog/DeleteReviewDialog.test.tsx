@@ -2,28 +2,26 @@ import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
 import { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
 import { describe, expect, test } from "vitest";
-import { ReviewDialog } from "./ReviewDialog";
+import { DeleteReviewDialog } from "./DeleteReviewDialog";
 
-type Props = ComponentProps<typeof ReviewDialog>;
+type Props = ComponentProps<typeof DeleteReviewDialog>;
 
 const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {
-    albumId: 1,
-  };
+  const defaultProps: Props = {};
   return render(() => (
     <TestWrapper {...wrapperProps}>
-      <ReviewDialog {...defaultProps} {...props} />
+      <DeleteReviewDialog {...defaultProps} {...props} />
     </TestWrapper>
   ));
 };
 
-describe("<ReviewDialog />", () => {
+describe("<DeleteReviewDialog />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("ReviewDialog")).resolves.toBeDefined();
+    await expect(screen.findByAltText("DeleteReviewDialog")).resolves.toBeDefined();
     unmount();
   });
 });

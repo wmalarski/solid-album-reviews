@@ -1,4 +1,4 @@
-import { ReviewDialog } from "@modules/ReviewDialog/ReviewDialog";
+import { InsertReviewDialog } from "@modules/InsertReviewDialog/InsertReviewDialog";
 import { graphqlSdk } from "@services/fetcher";
 import { paths } from "@utils/paths";
 import { Navigate, useParams } from "solid-app-router";
@@ -31,7 +31,7 @@ const Album: Component = () => {
           <Show when={selectAlbum()?.data?.albumByPk}>
             {(album) => <AlbumDetails album={album} />}
           </Show>
-          <ReviewDialog albumId={albumId} />
+          <InsertReviewDialog albumId={albumId} />
           <AlbumReviews albumId={albumId} />
         </>
       )}

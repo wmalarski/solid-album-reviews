@@ -1,7 +1,5 @@
 import { Dialog } from "@components/Dialog/Dialog";
-import { ReviewForm } from "@modules/ReviewForm/ReviewForm";
 import { graphqlSdk } from "@services/fetcher";
-import { ReviewInsertInput } from "@services/types";
 import { createButton } from "@solid-aria/button";
 import {
   createOverlayTriggerState,
@@ -10,12 +8,13 @@ import {
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { Component, Show } from "solid-js";
+import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
 type Props = {
-  albumId: number;
+  reviewId: number;
 };
 
-export const ReviewDialog: Component<Props> = (props) => {
+export const DeleteReviewDialog: Component<Props> = (props) => {
   const [t] = useI18n();
 
   let openButtonRef: HTMLButtonElement | undefined;
@@ -27,15 +26,15 @@ export const ReviewDialog: Component<Props> = (props) => {
     () => openButtonRef
   );
 
-  const handleSubmit = async (review: ReviewInsertInput) => {
-    await graphqlSdk.InsertReview({ review });
+  const handleSubmit = async () => {
+    await graphqlSdk.DeleteReview({ id: props.reviewId });
     state.close();
   };
 
   return (
     <>
       <button {...openButtonProps} ref={openButtonRef}>
-        {t("ReviewDialog.trigger")}
+        {t("DeleteReviewDialog.trigger")}
       </button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
@@ -43,13 +42,9 @@ export const ReviewDialog: Component<Props> = (props) => {
             isDismissable
             isOpen
             onClose={state.close}
-            title={t("ReviewDialog.title")}
+            title={t("DeleteReviewDialog.title")}
           >
-            <ReviewForm
-              albumId={props.albumId}
-              onClose={state.close}
-              onSubmit={handleSubmit}
-            />
+            <DeleteReviewForm onCancel={state.close} onDelete={handleSubmit} />
           </Dialog>
         </OverlayContainer>
       </Show>

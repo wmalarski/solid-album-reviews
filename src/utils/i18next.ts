@@ -32,14 +32,22 @@ const dict = {
       previous: "Previous",
       next: "Next",
     },
-    ReviewDialog: {
+    InsertReviewDialog: {
       trigger: "Review",
       title: "Review album",
+    },
+    DeleteReviewDialog: {
+      trigger: "Delete",
+      title: "Delete album",
     },
     ReviewForm: {
       textLabel: "Text",
       rateLabel: "Rate",
       submit: "Submit",
+    },
+    DeleteReviewForm: {
+      cancel: "Cancel",
+      remove: "Remove",
     },
     home: {},
   },

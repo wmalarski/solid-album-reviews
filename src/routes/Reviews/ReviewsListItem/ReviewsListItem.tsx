@@ -1,4 +1,5 @@
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { DeleteReviewDialog } from "@modules/DeleteReviewDialog/DeleteReviewDialog";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
@@ -23,6 +24,7 @@ export const ReviewsListItem: Component<Props> = (props) => {
         <Link href={paths.album(props.review.albumByAlbum.id)}>
           {formatAlbum(props.review.albumByAlbum)}
         </Link>
+        <DeleteReviewDialog reviewId={props.review.id} />
         <pre>{JSON.stringify(props.review, null, 2)}</pre>
       </div>
     </div>
