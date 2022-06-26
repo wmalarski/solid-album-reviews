@@ -10,7 +10,9 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    albumId: 1,
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <DeleteAlbumDialog {...defaultProps} {...props} />
@@ -21,7 +23,9 @@ const renderComponent = ({
 describe("<DeleteAlbumDialog />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("DeleteAlbumDialog")).resolves.toBeDefined();
+    await expect(
+      screen.findByAltText("DeleteAlbumDialog")
+    ).resolves.toBeDefined();
     unmount();
   });
 });

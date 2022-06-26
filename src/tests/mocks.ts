@@ -2,6 +2,7 @@ import {
   AlbumFragment,
   AlbumWithArtistFragment,
   AlbumWithReviewsFragment,
+  ArtistFragment,
   ReviewFragment,
   ReviewWithAlbumAndArtistFragment,
 } from "@services/types";
