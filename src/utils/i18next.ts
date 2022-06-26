@@ -59,6 +59,15 @@ const dict = {
     YtRedirectButton: {
       text: "YouTube",
     },
+    UpdateAlbumForm: {
+      titleLabel: "Title",
+      yearLabel: "Year",
+      submit: "Submit",
+    },
+    UpdateAlbumDialog: {
+      title: "Update album",
+      trigger: "Update",
+    },
     home: {},
   },
 };

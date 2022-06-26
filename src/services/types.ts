@@ -5865,7 +5865,37 @@ export type SelectAlbumsWithReviewsQueryVariables = Exact<{
 
 export type SelectAlbumsWithReviewsQuery = { album: Array<{ id: number, sid: string, title: string, year: number, reviews: Array<{ id: number, rate: any, text: string, createdAt: any }> }>, albumAggregate: { aggregate?: { count: number } | null } };
 
+export type DeleteAlbumMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type DeleteAlbumMutation = { deleteAlbum?: { returning: Array<{ artist: number }> } | null };
+
+export type UpdateAlbumMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+  input?: InputMaybe<AlbumSetInput>;
+}>;
+
+
+export type UpdateAlbumMutation = { updateAlbum?: { returning: Array<{ id: number }> } | null };
+
 export type ArtistFragment = { id: number, sid?: string | null, name: string };
+
+export type DeleteArtistMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+}>;
+
+
+export type DeleteArtistMutation = { deleteArtist?: { returning: Array<{ id: number }> } | null };
+
+export type UpdateArtistMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+  input?: InputMaybe<ArtistSetInput>;
+}>;
+
+
+export type UpdateArtistMutation = { updateArtist?: { returning: Array<{ id: number }> } | null };
 
 export type ReviewFragment = { id: number, rate: any, text: string, createdAt: any };
 
@@ -6021,6 +6051,42 @@ export const SelectAlbumsWithReviews = gql`
   }
 }
     ${AlbumWithReviews}`;
+export const DeleteAlbum = gql`
+    mutation DeleteAlbum($id: Int) {
+  deleteAlbum: delete_album(where: {id: {_eq: $id}}) {
+    returning {
+      artist
+    }
+  }
+}
+    `;
+export const UpdateAlbum = gql`
+    mutation UpdateAlbum($id: Int, $input: album_set_input) {
+  updateAlbum: update_album(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const DeleteArtist = gql`
+    mutation DeleteArtist($id: Int) {
+  deleteArtist: delete_artist(where: {id: {_eq: $id}}) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const UpdateArtist = gql`
+    mutation UpdateArtist($id: Int, $input: artist_set_input) {
+  updateArtist: update_artist(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+    `;
 export const SelectReviews = gql`
     query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
   review(
@@ -6188,6 +6254,42 @@ export const SelectAlbumsWithReviewsDocument = gql`
   }
 }
     ${AlbumWithReviewsFragmentDoc}`;
+export const DeleteAlbumDocument = gql`
+    mutation DeleteAlbum($id: Int) {
+  deleteAlbum: delete_album(where: {id: {_eq: $id}}) {
+    returning {
+      artist
+    }
+  }
+}
+    `;
+export const UpdateAlbumDocument = gql`
+    mutation UpdateAlbum($id: Int, $input: album_set_input) {
+  updateAlbum: update_album(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const DeleteArtistDocument = gql`
+    mutation DeleteArtist($id: Int) {
+  deleteArtist: delete_artist(where: {id: {_eq: $id}}) {
+    returning {
+      id
+    }
+  }
+}
+    `;
+export const UpdateArtistDocument = gql`
+    mutation UpdateArtist($id: Int, $input: artist_set_input) {
+  updateArtist: update_artist(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+    `;
 export const SelectReviewsDocument = gql`
     query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
   review(
@@ -6261,6 +6363,18 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     SelectAlbumsWithReviews(variables?: SelectAlbumsWithReviewsQueryVariables, options?: C): Promise<{ data?: SelectAlbumsWithReviewsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectAlbumsWithReviewsQuery, SelectAlbumsWithReviewsQueryVariables>(SelectAlbumsWithReviewsDocument, variables, options);
+    },
+    DeleteAlbum(variables?: DeleteAlbumMutationVariables, options?: C): Promise<{ data?: DeleteAlbumMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<DeleteAlbumMutation, DeleteAlbumMutationVariables>(DeleteAlbumDocument, variables, options);
+    },
+    UpdateAlbum(variables?: UpdateAlbumMutationVariables, options?: C): Promise<{ data?: UpdateAlbumMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<UpdateAlbumMutation, UpdateAlbumMutationVariables>(UpdateAlbumDocument, variables, options);
+    },
+    DeleteArtist(variables?: DeleteArtistMutationVariables, options?: C): Promise<{ data?: DeleteArtistMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<DeleteArtistMutation, DeleteArtistMutationVariables>(DeleteArtistDocument, variables, options);
+    },
+    UpdateArtist(variables?: UpdateArtistMutationVariables, options?: C): Promise<{ data?: UpdateArtistMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<UpdateArtistMutation, UpdateArtistMutationVariables>(UpdateArtistDocument, variables, options);
     },
     SelectReviews(variables?: SelectReviewsQueryVariables, options?: C): Promise<{ data?: SelectReviewsQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<SelectReviewsQuery, SelectReviewsQueryVariables>(SelectReviewsDocument, variables, options);

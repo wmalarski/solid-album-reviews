@@ -3,3 +3,19 @@ fragment Artist on artist {
   sid
   name
 }
+
+mutation DeleteArtist($id: Int) {
+  deleteArtist: delete_artist(where: { id: { _eq: $id } }) {
+    returning {
+      id
+    }
+  }
+}
+
+mutation UpdateArtist($id: Int, $input: artist_set_input) {
+  updateArtist: update_artist(where: { id: { _eq: $id } }, _set: $input) {
+    returning {
+      id
+    }
+  }
+}

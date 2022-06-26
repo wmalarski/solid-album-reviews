@@ -70,3 +70,19 @@ query SelectAlbumsWithReviews(
     }
   }
 }
+
+mutation DeleteAlbum($id: Int) {
+  deleteAlbum: delete_album(where: { id: { _eq: $id } }) {
+    returning {
+      artist
+    }
+  }
+}
+
+mutation UpdateAlbum($id: Int, $input: album_set_input) {
+  updateAlbum: update_album(where: { id: { _eq: $id } }, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
