@@ -1,10 +1,10 @@
+import { ReviewDialog } from "@modules/ReviewDialog/ReviewDialog";
 import { graphqlSdk } from "@services/fetcher";
 import { paths } from "@utils/paths";
 import { Navigate, useParams } from "solid-app-router";
 import { Component, createResource, Show } from "solid-js";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
 import { AlbumReviews } from "./AlbumReviews/AlbumReviews";
-import { ReviewDialog } from "./ReviewDialog/ReviewDialog";
 
 type AlbumParams = {
   albumId: string;
