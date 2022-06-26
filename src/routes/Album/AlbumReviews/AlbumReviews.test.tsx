@@ -10,7 +10,9 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    albumId: 0,
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <AlbumReviews {...defaultProps} {...props} />

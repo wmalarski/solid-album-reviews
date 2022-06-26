@@ -10,7 +10,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    onCancel: () => void 0,
+    onDelete: () => void 0,
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <DeleteReviewForm {...defaultProps} {...props} />
@@ -21,7 +24,9 @@ const renderComponent = ({
 describe("<DeleteReviewForm />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("DeleteReviewForm")).resolves.toBeDefined();
+    await expect(
+      screen.findByAltText("DeleteReviewForm")
+    ).resolves.toBeDefined();
     unmount();
   });
 });

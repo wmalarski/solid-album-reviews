@@ -1,3 +1,4 @@
+import { mockReviewFragment } from "@tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
 import { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
@@ -10,7 +11,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    onSuccess: () => void 0,
+    review: mockReviewFragment(),
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <UpdateReviewDialog {...defaultProps} {...props} />
@@ -21,7 +25,9 @@ const renderComponent = ({
 describe("<UpdateReviewDialog />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("UpdateReviewDialog")).resolves.toBeDefined();
+    await expect(
+      screen.findByAltText("UpdateReviewDialog")
+    ).resolves.toBeDefined();
     unmount();
   });
 });

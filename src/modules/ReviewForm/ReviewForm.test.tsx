@@ -1,3 +1,4 @@
+import { mockReviewFragment } from "@tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
 import { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
@@ -13,7 +14,7 @@ const renderComponent = ({
   const defaultProps: Props = {
     onClose: () => void 0,
     onSubmit: () => void 0,
-    albumId: 1,
+    initialReview: mockReviewFragment(),
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>
