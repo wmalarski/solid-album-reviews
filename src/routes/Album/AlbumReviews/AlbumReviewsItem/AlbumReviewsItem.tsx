@@ -3,8 +3,9 @@ import { AlbumWithReviewsFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
 import * as classes from "./AlbumReviewsItem.css";
+import { ReviewItem } from "./ReviewItem/ReviewItem";
 
 type Props = {
   album: AlbumWithReviewsFragment;
@@ -23,7 +24,9 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         <Link href={paths.album(props.album.id)}>
           {formatAlbum(props.album)}
         </Link>
-        <pre>{JSON.stringify(props.album, null, 2)}</pre>
+        <For each={props.album.reviews}>
+          {(review) => <ReviewItem review={review} />}
+        </For>
       </div>
     </div>
   );

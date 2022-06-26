@@ -1,5 +1,6 @@
 export type FormatAlbumArgs = {
   title?: string | null | undefined;
+  year?: number | null | undefined;
   artistByArtist?:
     | {
         name?: string | null | undefined;
@@ -9,7 +10,7 @@ export type FormatAlbumArgs = {
 };
 
 export const formatAlbum = (album: FormatAlbumArgs): string => {
-  return `${album.title}${
-    album.artistByArtist ? ` - ${album.artistByArtist?.name}` : ""
-  }`;
+  const artist = album.artistByArtist ? ` - ${album.artistByArtist?.name}` : "";
+  const year = album.year ? `(${album.year})` : "";
+  return `${album.title}${artist}${year}`;
 };
