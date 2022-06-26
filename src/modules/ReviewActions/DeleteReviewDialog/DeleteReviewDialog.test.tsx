@@ -10,7 +10,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    onSuccess: () => void 0,
+    reviewId: 1,
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <DeleteReviewDialog {...defaultProps} {...props} />
@@ -21,7 +24,9 @@ const renderComponent = ({
 describe("<DeleteReviewDialog />", () => {
   test("renders", async () => {
     const { unmount } = renderComponent();
-    await expect(screen.findByAltText("DeleteReviewDialog")).resolves.toBeDefined();
+    await expect(
+      screen.findByAltText("DeleteReviewDialog")
+    ).resolves.toBeDefined();
     unmount();
   });
 });
