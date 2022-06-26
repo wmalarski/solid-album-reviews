@@ -1,4 +1,7 @@
-import { mockAlbumWithReviewsFragment } from "@tests/mocks";
+import {
+  mockAlbumWithArtistFragment,
+  mockAlbumWithReviewsFragment,
+} from "@tests/mocks";
 import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
 import { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
@@ -12,7 +15,10 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    album: mockAlbumWithReviewsFragment(),
+    album: {
+      ...mockAlbumWithReviewsFragment(),
+      ...mockAlbumWithArtistFragment(),
+    },
     onAlbumChange: () => void 0,
   };
   return render(() => (

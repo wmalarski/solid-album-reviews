@@ -1,6 +1,6 @@
 import { Pagination } from "@components/Pagination/Pagination";
 import { graphqlSdk } from "@services/fetcher";
-import { Component, createResource, createSignal, For } from "solid-js";
+import { Component, createResource, createSignal, For, Show } from "solid-js";
 import * as classes from "./AlbumReviews.css";
 import { AlbumReviewsItem } from "./AlbumReviewsItem/AlbumReviewsItem";
 
@@ -12,19 +12,22 @@ type LoaderArgs = {
 const pageLimit = 20;
 
 const loader = ({ page, albumId }: LoaderArgs) => {
-  return graphqlSdk.SelectAlbumsWithReviews({
-    offset: page * pageLimit,
-    limit: pageLimit,
-    where: {
-      artistByArtist: {
-        albums: {
-          id: {
-            _eq: albumId,
+  return Promise.all([
+    graphqlSdk.SelectAlbum({ id: albumId }),
+    graphqlSdk.SelectAlbumsWithReviews({
+      offset: page * pageLimit,
+      limit: pageLimit,
+      where: {
+        artistByArtist: {
+          albums: {
+            id: {
+              _eq: albumId,
+            },
           },
         },
       },
-    },
-  });
+    }),
+  ]);
 };
 
 type Props = {
@@ -34,13 +37,21 @@ type Props = {
 export const AlbumReviews: Component<Props> = (props) => {
   const [page, setPage] = createSignal(0);
 
-  const [selectReviews, { refetch }] = createResource(
+  const [resource, { refetch }] = createResource(
     () => ({ page: page(), albumId: props.albumId }),
     loader
   );
 
+  const selectAlbums = () => {
+    return resource()?.[1];
+  };
+
+  const selectArtist = () => {
+    return resource()?.[0].data?.albumByPk?.artistByArtist;
+  };
+
   const maxPage = () => {
-    const count = selectReviews()?.data?.albumAggregate.aggregate?.count || 0;
+    const count = selectAlbums()?.data?.albumAggregate.aggregate?.count || 0;
     return Math.ceil(count / pageLimit);
   };
 
@@ -50,11 +61,18 @@ export const AlbumReviews: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <For each={selectReviews()?.data?.album}>
-        {(album) => (
-          <AlbumReviewsItem album={album} onAlbumChange={handleAlbumChange} />
+      <Show when={selectArtist()}>
+        {(artist) => (
+          <For each={selectAlbums()?.data?.album}>
+            {(album) => (
+              <AlbumReviewsItem
+                album={{ ...album, artistByArtist: artist }}
+                onAlbumChange={handleAlbumChange}
+              />
+            )}
+          </For>
         )}
-      </For>
+      </Show>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>
   );

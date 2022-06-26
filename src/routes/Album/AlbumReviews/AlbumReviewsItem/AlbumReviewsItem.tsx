@@ -1,5 +1,9 @@
+import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
-import { AlbumWithReviewsFragment } from "@services/types";
+import {
+  AlbumWithArtistFragment,
+  AlbumWithReviewsFragment,
+} from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
@@ -8,7 +12,7 @@ import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
 
 type Props = {
-  album: AlbumWithReviewsFragment;
+  album: AlbumWithReviewsFragment & AlbumWithArtistFragment;
   onAlbumChange: () => void;
 };
 
@@ -25,7 +29,7 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         <Link href={paths.album(props.album.id)}>
           {formatAlbum(props.album)}
         </Link>
-        {/* <AlbumActions album={props.album} /> */}
+        <AlbumActions album={props.album} />
         <For each={props.album.reviews}>
           {(review) => (
             <ReviewItem

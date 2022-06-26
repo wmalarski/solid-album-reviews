@@ -34,11 +34,21 @@ export const mockAlbumFragment = (
   };
 };
 
+export const mockArtistFragment = (
+  update: Partial<ArtistFragment> = {}
+): ArtistFragment => {
+  return {
+    id: mockId(),
+    name: "Artist",
+    ...update,
+  };
+};
+
 export const mockAlbumWithArtistFragment = (
   update: Partial<AlbumWithArtistFragment> = {}
 ): AlbumWithArtistFragment => {
   return {
-    artistByArtist: { id: mockId(), name: "Artist" },
+    artistByArtist: mockArtistFragment(),
     ...mockAlbumFragment(),
     ...update,
   };
