@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
 import { createSprinkles, defineProperties } from "@vanilla-extract/sprinkles";
 
 const space = {

@@ -16,8 +16,8 @@ export const requireAlbumFragment = (
     return null;
   }
   return {
-    id: random.id,
     artistByArtist: random.artistByArtist,
+    id: random.id,
     sid: random.sid,
     title: random.title,
     year: random.year,

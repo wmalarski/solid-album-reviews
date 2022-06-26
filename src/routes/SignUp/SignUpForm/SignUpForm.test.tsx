@@ -11,8 +11,8 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    onSubmit: () => void 0,
     error: null,
+    onSubmit: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

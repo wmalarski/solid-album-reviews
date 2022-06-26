@@ -15,8 +15,8 @@ const loader = ({ page, albumId }: LoaderArgs) => {
   return Promise.all([
     graphqlSdk.SelectAlbum({ id: albumId }),
     graphqlSdk.SelectAlbumsWithReviews({
-      offset: page * pageLimit,
       limit: pageLimit,
+      offset: page * pageLimit,
       where: {
         artistByArtist: {
           albums: {
@@ -38,7 +38,7 @@ export const AlbumReviews: Component<Props> = (props) => {
   const [page, setPage] = createSignal(0);
 
   const [resource, { refetch }] = createResource(
-    () => ({ page: page(), albumId: props.albumId }),
+    () => ({ albumId: props.albumId, page: page() }),
     loader
   );
 

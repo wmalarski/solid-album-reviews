@@ -15,8 +15,8 @@ export const mockReviewFragment = (
   update: Partial<ReviewFragment> = {}
 ): ReviewFragment => {
   return {
-    id: mockId(),
     createdAt: new Date().toDateString(),
+    id: mockId(),
     rate: 5.5,
     text: "123",
     ...update,

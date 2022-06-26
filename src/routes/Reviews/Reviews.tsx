@@ -17,8 +17,8 @@ const pageLimit = 10;
 const loader = ({ page, query, lower, upper }: LoaderArgs) => {
   const pattern = `%${query}%`;
   return graphqlSdk.SelectReviewsWithAlbumAndArtist({
-    offset: page * pageLimit,
     limit: pageLimit,
+    offset: page * pageLimit,
     where: {
       _and: [
         { rate: { _gte: lower } },
@@ -41,9 +41,9 @@ const Reviews: Component = () => {
 
   const [selectReviews, { refetch }] = createResource(
     () => ({
+      lower: range().lower,
       page: page(),
       query: query(),
-      lower: range().lower,
       upper: range().upper,
     }),
     loader

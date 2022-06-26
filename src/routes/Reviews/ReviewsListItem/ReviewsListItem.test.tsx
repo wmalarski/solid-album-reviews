@@ -12,8 +12,8 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    review: mockReviewWithAlbumAndArtistFragment(),
     onReviewChange: () => void 0,
+    review: mockReviewWithAlbumAndArtistFragment(),
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

@@ -1,3 +1,4 @@
+/* eslint-disable sort-keys-fix/sort-keys-fix */
 import { createTheme } from "@vanilla-extract/css";
 
 export const [themeClass, vars] = createTheme({

@@ -2,52 +2,17 @@ import { createI18nContext } from "@solid-primitives/i18n";
 
 const dict = {
   en: {
-    header: {
-      title: "Album Reviews",
-      search: "Search",
-      signOut: "Sign Out",
-      reviews: "Reviews",
+    DeleteAlbumDialog: {
+      title: "Delete album",
+      trigger: "Delete",
     },
-    SignUp: {
-      header: "Sign Up",
-      email: "Email",
-      password: "Password",
-      button: "Sign Up",
-      signIn: "Sign In",
-    },
-    SignIn: {
-      header: "Sign In",
-      email: "Email",
-      password: "Password",
-      button: "Sign In",
-      signUp: "Sign Up",
-    },
-    error: {
-      notFound: "Not Found",
-    },
-    loading: {
-      text: "Loading...",
-    },
-    Pagination: {
-      previous: "Previous",
-      next: "Next",
-    },
-    InsertReviewDialog: {
-      trigger: "Review",
-      title: "Review album",
-    },
-    UpdateReviewDialog: {
-      trigger: "Update",
-      title: "Update review",
+    DeleteAlbumForm: {
+      cancel: "Cancel",
+      remove: "Remove",
     },
     DeleteReviewDialog: {
-      trigger: "Delete",
       title: "Delete album",
-    },
-    ReviewForm: {
-      textLabel: "Text",
-      rateLabel: "Rate",
-      submit: "Submit",
+      trigger: "Delete",
     },
     DeleteReviewForm: {
       cancel: "Cancel",
@@ -56,27 +21,62 @@ const dict = {
     GoogleRedirectButton: {
       text: "Google",
     },
-    YtRedirectButton: {
-      text: "YouTube",
+    InsertReviewDialog: {
+      title: "Review album",
+      trigger: "Review",
     },
-    UpdateAlbumForm: {
-      titleLabel: "Title",
-      yearLabel: "Year",
+    Pagination: {
+      next: "Next",
+      previous: "Previous",
+    },
+    ReviewForm: {
+      rateLabel: "Rate",
       submit: "Submit",
+      textLabel: "Text",
+    },
+    SignIn: {
+      button: "Sign In",
+      email: "Email",
+      header: "Sign In",
+      password: "Password",
+      signUp: "Sign Up",
+    },
+    SignUp: {
+      button: "Sign Up",
+      email: "Email",
+      header: "Sign Up",
+      password: "Password",
+      signIn: "Sign In",
     },
     UpdateAlbumDialog: {
       title: "Update album",
       trigger: "Update",
     },
-    DeleteAlbumForm: {
-      cancel: "Cancel",
-      remove: "Remove",
+    UpdateAlbumForm: {
+      submit: "Submit",
+      titleLabel: "Title",
+      yearLabel: "Year",
     },
-    DeleteAlbumDialog: {
-      trigger: "Delete",
-      title: "Delete album",
+    UpdateReviewDialog: {
+      title: "Update review",
+      trigger: "Update",
+    },
+    YtRedirectButton: {
+      text: "YouTube",
+    },
+    error: {
+      notFound: "Not Found",
+    },
+    header: {
+      reviews: "Reviews",
+      search: "Search",
+      signOut: "Sign Out",
+      title: "Album Reviews",
     },
     home: {},
+    loading: {
+      text: "Loading...",
+    },
   },
 };
 

@@ -13,7 +13,7 @@ export const AlbumCoversCarousel: Component<Props> = (props) => {
   const [index, setIndex] = createSignal(0);
 
   const [thumbnails] = createResource(
-    () => ({ mBid: props.sid, kind: props.kind }),
+    () => ({ kind: props.kind, mBid: props.sid }),
     fetchCovers
   );
 

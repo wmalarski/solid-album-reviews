@@ -15,13 +15,13 @@ export const wrapper = style({
 
 export const wrapperVariants = styleVariants({
   hover: {
-    top: shift,
     left: shift,
+    top: shift,
     zIndex: 10,
   },
   no: {
-    top: 0,
     left: 0,
+    top: 0,
   },
 });
 
@@ -31,19 +31,19 @@ export const image = style({
 
 export const imageVariant = styleVariants({
   hover: {
-    width: vars.space.smallCoverHover,
     height: vars.space.smallCoverHover,
+    width: vars.space.smallCoverHover,
   },
   no: {
-    width: vars.space.smallCover,
     height: vars.space.smallCover,
+    width: vars.space.smallCover,
   },
 });
 
 export const container = style({
+  height: vars.space.smallCover,
   position: "relative",
   width: vars.space.smallCover,
-  height: vars.space.smallCover,
 });
 
 export const actions = style({

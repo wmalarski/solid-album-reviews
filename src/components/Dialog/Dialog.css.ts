@@ -2,16 +2,16 @@ import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const container = style({
-  position: "fixed",
-  zIndex: vars.zIndex.dialog,
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
-  background: vars.color.blackA5,
-  display: "flex",
   alignItems: "center",
+  background: vars.color.blackA5,
+  bottom: 0,
+  display: "flex",
   justifyContent: "center",
+  left: 0,
+  position: "fixed",
+  right: 0,
+  top: 0,
+  zIndex: vars.zIndex.dialog,
 });
 
 export const content = style({

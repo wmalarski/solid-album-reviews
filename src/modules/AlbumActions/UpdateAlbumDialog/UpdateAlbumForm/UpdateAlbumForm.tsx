@@ -17,7 +17,7 @@ export const UpdateAlbumForm: Component<Props> = (props) => {
 
   const handleSubmit = (event: Event) => {
     event.preventDefault();
-    props.onSubmit({ year: year(), title: title() });
+    props.onSubmit({ title: title(), year: year() });
   };
 
   return (

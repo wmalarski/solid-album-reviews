@@ -14,35 +14,35 @@ export const image = style({
 });
 
 export const imageVariant = styleVariants({
-  smallHover: {
-    width: vars.space.smallCoverHover,
-    height: vars.space.smallCoverHover,
-  },
-  smallNormal: {
-    width: vars.space.smallCover,
-    height: vars.space.smallCover,
-  },
   largeHover: {
-    width: vars.space.largeCoverHover,
     height: vars.space.largeCoverHover,
+    width: vars.space.largeCoverHover,
   },
   largeNormal: {
-    width: vars.space.largeCover,
     height: vars.space.largeCover,
+    width: vars.space.largeCover,
+  },
+  smallHover: {
+    height: vars.space.smallCoverHover,
+    width: vars.space.smallCoverHover,
+  },
+  smallNormal: {
+    height: vars.space.smallCover,
+    width: vars.space.smallCover,
   },
 });
 
 const button = style({
-  all: "unset",
-  position: "absolute",
-  cursor: "pointer",
-  backgroundColor: vars.color.gray,
-  opacity: 0.5,
-  height: "100%",
-  width: vars.space.lg,
   ":hover": {
     opacity: 0.8,
   },
+  all: "unset",
+  backgroundColor: vars.color.gray,
+  cursor: "pointer",
+  height: "100%",
+  opacity: 0.5,
+  position: "absolute",
+  width: vars.space.lg,
 });
 
 export const previous = style([button, { left: 0 }]);

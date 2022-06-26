@@ -12,9 +12,9 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
+    initialReview: mockReviewFragment(),
     onClose: () => void 0,
     onSubmit: () => void 0,
-    initialReview: mockReviewFragment(),
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>
