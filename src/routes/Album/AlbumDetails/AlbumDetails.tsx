@@ -1,27 +1,35 @@
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
-import { AlbumWithArtistFragment } from "@services/types";
+import { graphqlSdk } from "@services/fetcher";
 import { formatAlbum } from "@utils/formatters";
-import { Component } from "solid-js";
+import { Component, createResource, Show } from "solid-js";
 import * as classes from "./AlbumDetails.css";
 
+const loader = (id: number) => {
+  return graphqlSdk.SelectAlbum({ id });
+};
+
 type Props = {
-  album: AlbumWithArtistFragment;
+  albumId: number;
 };
 
 export const AlbumDetails: Component<Props> = (props) => {
+  const [selectAlbum] = createResource(() => props.albumId, loader);
+
   return (
-    <div>
-      <AlbumCoversCarousel
-        isHovering={true}
-        label={formatAlbum(props.album)}
-        sid={props.album.sid}
-        kind="large"
-      />
-      <AlbumActions album={props.album} />
-      <pre class={classes.container}>
-        {JSON.stringify(props.album, null, 2)}
-      </pre>
-    </div>
+    <Show when={selectAlbum()?.data?.albumByPk}>
+      {(album) => (
+        <div>
+          <AlbumCoversCarousel
+            isHovering={true}
+            label={formatAlbum(album)}
+            sid={album.sid}
+            kind="large"
+          />
+          <AlbumActions album={album} />
+          <pre class={classes.container}>{JSON.stringify(album, null, 2)}</pre>
+        </div>
+      )}
+    </Show>
   );
 };
