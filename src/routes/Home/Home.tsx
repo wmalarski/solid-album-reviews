@@ -1,7 +1,8 @@
 import { graphqlSdk } from "@services/fetcher";
-import { Component, createResource, For } from "solid-js";
+import { Component, createResource, For, Show } from "solid-js";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
 import * as classes from "./Home.css";
+import { requireAlbumFragment } from "./Home.utils";
 
 const loader = () => {
   return graphqlSdk.RandomAlbums({
@@ -15,7 +16,11 @@ const Home: Component = () => {
   return (
     <div class={classes.container}>
       <For each={randomAlbums()?.data?.randomAlbums}>
-        {(album) => <AlbumItem album={album} />}
+        {(album) => (
+          <Show when={requireAlbumFragment(album)}>
+            {(album) => <AlbumItem album={album} />}
+          </Show>
+        )}
       </For>
     </div>
   );
