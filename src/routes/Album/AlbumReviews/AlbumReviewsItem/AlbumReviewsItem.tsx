@@ -25,8 +25,7 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         <Link href={paths.album(props.album.id)}>
           {formatAlbum(props.album)}
         </Link>
-        {/* <YtRedirectButton album={album} />
-        <GoogleRedirectButton album={props.album} /> */}
+        {/* <AlbumActions album={props.album} /> */}
         <For each={props.album.reviews}>
           {(review) => (
             <ReviewItem

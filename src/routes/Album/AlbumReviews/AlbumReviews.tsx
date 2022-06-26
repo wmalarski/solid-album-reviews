@@ -1,5 +1,4 @@
 import { Pagination } from "@components/Pagination/Pagination";
-import { InsertReviewDialog } from "@modules/InsertReviewDialog/InsertReviewDialog";
 import { graphqlSdk } from "@services/fetcher";
 import { Component, createResource, createSignal, For } from "solid-js";
 import * as classes from "./AlbumReviews.css";
@@ -51,10 +50,6 @@ export const AlbumReviews: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <InsertReviewDialog
-        albumId={props.albumId}
-        onSuccess={handleAlbumChange}
-      />
       <For each={selectReviews()?.data?.album}>
         {(album) => (
           <AlbumReviewsItem album={album} onAlbumChange={handleAlbumChange} />

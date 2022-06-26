@@ -12,7 +12,6 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     albumId: 1,
-    onSuccess: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

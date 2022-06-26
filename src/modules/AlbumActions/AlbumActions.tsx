@@ -1,3 +1,4 @@
+import { InsertReviewDialog } from "@modules/AlbumActions/InsertReviewDialog/InsertReviewDialog";
 import { GoogleRedirectButton } from "@modules/GoogleRedirectButton/GoogleRedirectButton";
 import { YtRedirectButton } from "@modules/YtRedirectButton/YtRedirectButton";
 import { AlbumWithArtistFragment } from "@services/types";
@@ -16,6 +17,7 @@ export const AlbumActions: Component<Props> = (props) => {
       <YtRedirectButton album={props.album} />
       <GoogleRedirectButton album={props.album} />
       <UpdateAlbumDialog album={props.album} />
+      <InsertReviewDialog albumId={props.album.id} />
       <DeleteAlbumDialog albumId={props.album.id} />
     </div>
   );
