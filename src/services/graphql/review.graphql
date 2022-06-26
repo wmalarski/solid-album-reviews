@@ -61,6 +61,14 @@ mutation InsertReview($review: review_insert_input!) {
   }
 }
 
+mutation UpdateReview($id: Int, $input: review_set_input) {
+  updateReview: update_review(where: { id: { _eq: $id } }, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+
 mutation DeleteReview($id: Int) {
   deleteReview: delete_review(where: { id: { _eq: $id } }) {
     returning {

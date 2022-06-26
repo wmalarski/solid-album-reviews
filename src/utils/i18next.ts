@@ -36,6 +36,10 @@ const dict = {
       trigger: "Review",
       title: "Review album",
     },
+    UpdateReviewDialog: {
+      trigger: "Update",
+      title: "Update review",
+    },
     DeleteReviewDialog: {
       trigger: "Delete",
       title: "Delete album",

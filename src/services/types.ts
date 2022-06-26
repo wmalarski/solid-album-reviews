@@ -5898,6 +5898,14 @@ export type InsertReviewMutationVariables = Exact<{
 
 export type InsertReviewMutation = { insertReviewOne?: { id: number } | null };
 
+export type UpdateReviewMutationVariables = Exact<{
+  id?: InputMaybe<Scalars['Int']>;
+  input?: InputMaybe<ReviewSetInput>;
+}>;
+
+
+export type UpdateReviewMutation = { updateReview?: { returning: Array<{ id: number }> } | null };
+
 export type DeleteReviewMutationVariables = Exact<{
   id?: InputMaybe<Scalars['Int']>;
 }>;
@@ -6051,6 +6059,15 @@ export const InsertReview = gql`
     mutation InsertReview($review: review_insert_input!) {
   insertReviewOne: insert_review_one(object: $review) {
     id
+  }
+}
+    `;
+export const UpdateReview = gql`
+    mutation UpdateReview($id: Int, $input: review_set_input) {
+  updateReview: update_review(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
   }
 }
     `;
@@ -6212,6 +6229,15 @@ export const InsertReviewDocument = gql`
   }
 }
     `;
+export const UpdateReviewDocument = gql`
+    mutation UpdateReview($id: Int, $input: review_set_input) {
+  updateReview: update_review(where: {id: {_eq: $id}}, _set: $input) {
+    returning {
+      id
+    }
+  }
+}
+    `;
 export const DeleteReviewDocument = gql`
     mutation DeleteReview($id: Int) {
   deleteReview: delete_review(where: {id: {_eq: $id}}) {
@@ -6244,6 +6270,9 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     InsertReview(variables: InsertReviewMutationVariables, options?: C): Promise<{ data?: InsertReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<InsertReviewMutation, InsertReviewMutationVariables>(InsertReviewDocument, variables, options);
+    },
+    UpdateReview(variables?: UpdateReviewMutationVariables, options?: C): Promise<{ data?: UpdateReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<UpdateReviewMutation, UpdateReviewMutationVariables>(UpdateReviewDocument, variables, options);
     },
     DeleteReview(variables?: DeleteReviewMutationVariables, options?: C): Promise<{ data?: DeleteReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<DeleteReviewMutation, DeleteReviewMutationVariables>(DeleteReviewDocument, variables, options);

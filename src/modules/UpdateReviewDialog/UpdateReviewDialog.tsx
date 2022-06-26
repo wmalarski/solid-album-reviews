@@ -1,7 +1,7 @@
 import { Dialog } from "@components/Dialog/Dialog";
 import { ReviewForm } from "@modules/ReviewForm/ReviewForm";
 import { graphqlSdk } from "@services/fetcher";
-import { ReviewInsertInput } from "@services/types";
+import { ReviewFragment, ReviewSetInput } from "@services/types";
 import { createButton } from "@solid-aria/button";
 import {
   createOverlayTriggerState,
@@ -12,11 +12,11 @@ import { getPortalContainer } from "@utils/getPortalContainer";
 import { Component, Show } from "solid-js";
 
 type Props = {
-  albumId: number;
+  review: ReviewFragment;
   onSuccess: () => void;
 };
 
-export const InsertReviewDialog: Component<Props> = (props) => {
+export const UpdateReviewDialog: Component<Props> = (props) => {
   const [t] = useI18n();
 
   let openButtonRef: HTMLButtonElement | undefined;
@@ -28,9 +28,8 @@ export const InsertReviewDialog: Component<Props> = (props) => {
     () => openButtonRef
   );
 
-  const handleSubmit = async (input: ReviewInsertInput) => {
-    const review = { ...input, album: props.albumId };
-    await graphqlSdk.InsertReview({ review });
+  const handleSubmit = async (input: ReviewSetInput) => {
+    await graphqlSdk.UpdateReview({ id: props.review.id, input });
     state.close();
     props.onSuccess();
   };
@@ -38,7 +37,7 @@ export const InsertReviewDialog: Component<Props> = (props) => {
   return (
     <>
       <button {...openButtonProps} ref={openButtonRef}>
-        {t("InsertReviewDialog.trigger")}
+        {t("UpdateReviewDialog.trigger")}
       </button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
@@ -46,9 +45,13 @@ export const InsertReviewDialog: Component<Props> = (props) => {
             isDismissable
             isOpen
             onClose={state.close}
-            title={t("InsertReviewDialog.title")}
+            title={t("UpdateReviewDialog.title")}
           >
-            <ReviewForm onClose={state.close} onSubmit={handleSubmit} />
+            <ReviewForm
+              initialReview={props.review}
+              onClose={state.close}
+              onSubmit={handleSubmit}
+            />
           </Dialog>
         </OverlayContainer>
       </Show>

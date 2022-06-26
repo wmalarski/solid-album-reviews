@@ -1,23 +1,27 @@
-import { ReviewInsertInput } from "@services/types";
+import {
+  ReviewFragment,
+  ReviewInsertInput,
+  ReviewSetInput,
+} from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./ReviewForm.css";
 
 type Props = {
-  albumId: number;
+  initialReview?: ReviewFragment;
   onClose: () => void;
-  onSubmit: (input: ReviewInsertInput) => void;
+  onSubmit: (input: ReviewInsertInput | ReviewSetInput) => void;
 };
 
 export const ReviewForm: Component<Props> = (props) => {
   const [t] = useI18n();
 
-  const [text, setText] = createSignal("");
-  const [rate, setRate] = createSignal(0);
+  const [text, setText] = createSignal(props.initialReview?.text || "");
+  const [rate, setRate] = createSignal(props.initialReview?.rate || 0);
 
   const handleSubmit = (event: Event) => {
     event.preventDefault();
-    props.onSubmit({ album: props.albumId, rate: rate(), text: text() });
+    props.onSubmit({ rate: rate(), text: text() });
   };
 
   return (

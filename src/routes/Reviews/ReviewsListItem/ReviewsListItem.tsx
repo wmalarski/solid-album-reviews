@@ -1,5 +1,6 @@
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import { DeleteReviewDialog } from "@modules/DeleteReviewDialog/DeleteReviewDialog";
+import { UpdateReviewDialog } from "@modules/UpdateReviewDialog/UpdateReviewDialog";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
@@ -13,6 +14,10 @@ type Props = {
 };
 
 export const ReviewsListItem: Component<Props> = (props) => {
+  const handleReviewChange = () => {
+    props.onReviewChange();
+  };
+
   return (
     <div class={classes.container}>
       <AlbumCoversCarousel
@@ -27,7 +32,11 @@ export const ReviewsListItem: Component<Props> = (props) => {
         </Link>
         <DeleteReviewDialog
           reviewId={props.review.id}
-          onSuccess={() => props.onReviewChange()}
+          onSuccess={handleReviewChange}
+        />
+        <UpdateReviewDialog
+          review={props.review}
+          onSuccess={handleReviewChange}
         />
         <pre>{JSON.stringify(props.review, null, 2)}</pre>
       </div>
