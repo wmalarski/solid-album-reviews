@@ -68,6 +68,14 @@ const dict = {
       title: "Update album",
       trigger: "Update",
     },
+    DeleteAlbumForm: {
+      cancel: "Cancel",
+      remove: "Remove",
+    },
+    DeleteAlbumDialog: {
+      trigger: "Delete",
+      title: "Delete album",
+    },
     home: {},
   },
 };
