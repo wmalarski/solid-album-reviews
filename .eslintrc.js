@@ -24,7 +24,7 @@ module.exports = {
     project: ["tsconfig.json"],
     sourceType: "module",
   },
-  plugins: ["solid"],
+  plugins: ["solid", "sort-keys-fix"],
   rules: {
     "no-await-in-loop": "error",
     "no-constant-binary-expression": "error",
@@ -40,6 +40,7 @@ module.exports = {
     "prefer-arrow-callback": "error",
     "prefer-const": "error",
     "require-await": "error",
+    "sort-keys-fix/sort-keys-fix": "warn",
     "@typescript-eslint/array-type": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
     "@typescript-eslint/explicit-module-boundary-types": "error",
