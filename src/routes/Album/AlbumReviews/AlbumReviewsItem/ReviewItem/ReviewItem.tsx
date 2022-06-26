@@ -5,13 +5,17 @@ import * as classes from "./ReviewItem.css";
 
 type Props = {
   review: ReviewFragment;
+  onReviewChange: () => void;
 };
 
 export const ReviewItem: Component<Props> = (props) => {
   return (
     <div class={classes.container}>
       <pre>{JSON.stringify(props.review, null, 2)}</pre>
-      <DeleteReviewDialog reviewId={props.review.id} />
+      <DeleteReviewDialog
+        reviewId={props.review.id}
+        onSuccess={() => props.onReviewChange()}
+      />
     </div>
   );
 };

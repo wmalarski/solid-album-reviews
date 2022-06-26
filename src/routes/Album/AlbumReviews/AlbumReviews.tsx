@@ -1,4 +1,5 @@
 import { Pagination } from "@components/Pagination/Pagination";
+import { InsertReviewDialog } from "@modules/InsertReviewDialog/InsertReviewDialog";
 import { graphqlSdk } from "@services/fetcher";
 import { Component, createResource, createSignal, For } from "solid-js";
 import * as classes from "./AlbumReviews.css";
@@ -34,7 +35,7 @@ type Props = {
 export const AlbumReviews: Component<Props> = (props) => {
   const [page, setPage] = createSignal(0);
 
-  const [selectReviews] = createResource(
+  const [selectReviews, { refetch }] = createResource(
     () => ({ page: page(), albumId: props.albumId }),
     loader
   );
@@ -44,10 +45,20 @@ export const AlbumReviews: Component<Props> = (props) => {
     return Math.ceil(count / pageLimit);
   };
 
+  const handleAlbumChange = () => {
+    refetch();
+  };
+
   return (
     <div class={classes.container}>
+      <InsertReviewDialog
+        albumId={props.albumId}
+        onSuccess={handleAlbumChange}
+      />
       <For each={selectReviews()?.data?.album}>
-        {(album) => <AlbumReviewsItem album={album} />}
+        {(album) => (
+          <AlbumReviewsItem album={album} onAlbumChange={handleAlbumChange} />
+        )}
       </For>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>

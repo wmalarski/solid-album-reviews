@@ -9,6 +9,7 @@ import { ReviewItem } from "./ReviewItem/ReviewItem";
 
 type Props = {
   album: AlbumWithReviewsFragment;
+  onAlbumChange: () => void;
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
@@ -25,7 +26,12 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
           {formatAlbum(props.album)}
         </Link>
         <For each={props.album.reviews}>
-          {(review) => <ReviewItem review={review} />}
+          {(review) => (
+            <ReviewItem
+              review={review}
+              onReviewChange={() => props.onAlbumChange()}
+            />
+          )}
         </For>
       </div>
     </div>

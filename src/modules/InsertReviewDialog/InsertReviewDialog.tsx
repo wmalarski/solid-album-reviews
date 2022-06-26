@@ -13,6 +13,7 @@ import { Component, Show } from "solid-js";
 
 type Props = {
   albumId: number;
+  onSuccess: () => void;
 };
 
 export const InsertReviewDialog: Component<Props> = (props) => {
@@ -30,6 +31,7 @@ export const InsertReviewDialog: Component<Props> = (props) => {
   const handleSubmit = async (review: ReviewInsertInput) => {
     await graphqlSdk.InsertReview({ review });
     state.close();
+    props.onSuccess();
   };
 
   return (

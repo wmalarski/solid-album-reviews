@@ -39,7 +39,7 @@ const Reviews: Component = () => {
   const [page, setPage] = createSignal(0);
   const [query, setQuery] = createSignal("");
 
-  const [selectReviews] = createResource(
+  const [selectReviews, { refetch }] = createResource(
     () => ({
       page: page(),
       query: query(),
@@ -54,6 +54,10 @@ const Reviews: Component = () => {
     return Math.ceil(count / pageLimit);
   };
 
+  const handleReviewChange = () => {
+    refetch();
+  };
+
   return (
     <div class={classes.container}>
       <ReviewsFilters
@@ -63,7 +67,12 @@ const Reviews: Component = () => {
         onQueryChange={setQuery}
       />
       <For each={selectReviews()?.data?.review}>
-        {(review) => <ReviewsListItem review={review} />}
+        {(review) => (
+          <ReviewsListItem
+            review={review}
+            onReviewChange={handleReviewChange}
+          />
+        )}
       </For>
       <Pagination current={page()} maxPage={maxPage()} onChange={setPage} />
     </div>

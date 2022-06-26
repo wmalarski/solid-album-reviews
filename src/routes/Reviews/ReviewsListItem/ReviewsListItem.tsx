@@ -9,6 +9,7 @@ import * as classes from "./ReviewsListItem.css";
 
 type Props = {
   review: ReviewWithAlbumAndArtistFragment;
+  onReviewChange: () => void;
 };
 
 export const ReviewsListItem: Component<Props> = (props) => {
@@ -24,7 +25,10 @@ export const ReviewsListItem: Component<Props> = (props) => {
         <Link href={paths.album(props.review.albumByAlbum.id)}>
           {formatAlbum(props.review.albumByAlbum)}
         </Link>
-        <DeleteReviewDialog reviewId={props.review.id} />
+        <DeleteReviewDialog
+          reviewId={props.review.id}
+          onSuccess={() => props.onReviewChange()}
+        />
         <pre>{JSON.stringify(props.review, null, 2)}</pre>
       </div>
     </div>

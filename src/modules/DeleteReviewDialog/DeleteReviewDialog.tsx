@@ -12,6 +12,7 @@ import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
 type Props = {
   reviewId: number;
+  onSuccess: () => void;
 };
 
 export const DeleteReviewDialog: Component<Props> = (props) => {
@@ -29,6 +30,7 @@ export const DeleteReviewDialog: Component<Props> = (props) => {
   const handleSubmit = async () => {
     await graphqlSdk.DeleteReview({ id: props.reviewId });
     state.close();
+    props.onSuccess();
   };
 
   return (
