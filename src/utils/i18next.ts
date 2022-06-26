@@ -53,6 +53,12 @@ const dict = {
       cancel: "Cancel",
       remove: "Remove",
     },
+    GoogleRedirectButton: {
+      text: "Google",
+    },
+    YtRedirectButton: {
+      text: "YouTube",
+    },
     home: {},
   },
 };
