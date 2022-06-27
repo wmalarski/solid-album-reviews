@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import {
   ReviewFragment,
   ReviewInsertInput,
@@ -44,9 +45,9 @@ export const ReviewForm: Component<Props> = (props) => {
           onChange={(event) => setRate(Number(event.currentTarget.value))}
         />
       </label>
-      <button type="submit" class={classes.submit}>
+      <Button type="submit" class={classes.submit}>
         {t("ReviewForm.submit")}
-      </button>
+      </Button>
     </form>
   );
 };

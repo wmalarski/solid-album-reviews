@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { nhost } from "@services/nhost";
 import { useI18n } from "@solid-primitives/i18n";
 import { paths } from "@utils/paths";
@@ -21,7 +22,7 @@ export const Header: Component = () => {
       <nav class={classes.navigation}>
         <HeaderLink href={paths.search}>{t("header.search")}</HeaderLink>
         <HeaderLink href={paths.reviews}>{t("header.reviews")}</HeaderLink>
-        <button onClick={handleSignOut}>{t("header.signOut")}</button>
+        <Button onClick={handleSignOut}>{t("header.signOut")}</Button>
       </nav>
     </header>
   );

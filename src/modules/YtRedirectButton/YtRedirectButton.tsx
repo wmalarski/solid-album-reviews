@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { redirectToYt } from "@services/redirects";
 import { AlbumWithArtistFragment } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
@@ -16,8 +17,8 @@ export const YtRedirectButton: Component<Props> = (props) => {
   };
 
   return (
-    <button class={classes.container} onClick={handleRedirectClick}>
+    <Button class={classes.container} onClick={handleRedirectClick}>
       {t("YtRedirectButton.text")}
-    </button>
+    </Button>
   );
 };

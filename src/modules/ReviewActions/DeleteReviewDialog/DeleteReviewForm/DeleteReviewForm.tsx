@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { useI18n } from "@solid-primitives/i18n";
 import { Component } from "solid-js";
 import * as classes from "./DeleteReviewForm.css";
@@ -12,12 +13,12 @@ export const DeleteReviewForm: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <button class={classes.submit} onClick={() => props.onCancel()}>
+      <Button class={classes.submit} onClick={() => props.onCancel()}>
         {t("DeleteReviewForm.cancel")}
-      </button>
-      <button class={classes.submit} onClick={() => props.onDelete()}>
+      </Button>
+      <Button class={classes.submit} onClick={() => props.onDelete()}>
         {t("DeleteReviewForm.remove")}
-      </button>
+      </Button>
     </div>
   );
 };

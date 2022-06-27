@@ -7,9 +7,9 @@ type Props = {
 
 export const ThemeProvider: Component<Props> = (props: Props) => {
   return (
-    <div>
+    <>
       {props.children}
       <div id={portalContainerId} />
-    </div>
+    </>
   );
 };

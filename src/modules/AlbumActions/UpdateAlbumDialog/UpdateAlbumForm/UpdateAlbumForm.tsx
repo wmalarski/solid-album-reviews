@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { AlbumFragment, AlbumSetInput } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
 import { Component, createSignal } from "solid-js";
@@ -38,7 +39,7 @@ export const UpdateAlbumForm: Component<Props> = (props) => {
           onChange={(event) => setYear(Number(event.currentTarget.value))}
         />
       </label>
-      <button type="submit">{t("UpdateAlbumForm.submit")}</button>
+      <Button type="submit">{t("UpdateAlbumForm.submit")}</Button>
     </form>
   );
 };

@@ -119,6 +119,7 @@ export const tokens = {
       ...colors,
       accent: colors.white100,
       lightBlue: "#EFF4FE",
+      secondBlue: "#DEE3ED",
 
       label: colors.gray100,
       labelSecondary: colors.gray80,
@@ -141,6 +142,7 @@ export const tokens = {
       ...colors,
       accent: colors.black100,
       lightBlue: "#252C39",
+      secondBlue: "#262D4A",
 
       label: colors.white100,
       labelSecondary: colors.white80,

@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { Form, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import { ErrorPayload } from "@nhost/core";
@@ -40,7 +41,7 @@ export const SignInForm: Component<Props> = (props) => {
         value={password()}
         onChange={(e) => setPassword(e.currentTarget.value)}
       />
-      <button type="submit">{t("SignIn.button")}</button>
+      <Button type="submit">{t("SignIn.button")}</Button>
       {props.error && <span>{props.error.message}</span>}
       <Link href={paths.signUp}>{t("SignIn.signUp")}</Link>
     </Form>

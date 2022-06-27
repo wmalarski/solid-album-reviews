@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { Dialog } from "@components/Dialog/Dialog";
 import { graphqlSdk } from "@services/fetcher";
 import { AlbumFragment, AlbumSetInput } from "@services/types";
@@ -35,9 +36,9 @@ export const UpdateAlbumDialog: Component<Props> = (props) => {
 
   return (
     <>
-      <button {...openButtonProps} ref={openButtonRef}>
+      <Button {...openButtonProps} ref={openButtonRef}>
         {t("UpdateAlbumDialog.trigger")}
-      </button>
+      </Button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
           <Dialog

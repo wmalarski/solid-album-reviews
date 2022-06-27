@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { useI18n } from "@solid-primitives/i18n";
 import { Component } from "solid-js";
 import * as classes from "./Pagination.css";
@@ -21,21 +22,21 @@ export const Pagination: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <button
+      <Button
         class={classes.item}
         disabled={props.current <= 0}
         onClick={handlePreviousClick}
       >
         {t("Pagination.previous")}
-      </button>
+      </Button>
       {props.current + 1}
-      <button
+      <Button
         class={classes.item}
         disabled={props.current >= props.maxPage - 1}
         onClick={handleNextClick}
       >
         {t("Pagination.next")}
-      </button>
+      </Button>
     </div>
   );
 };

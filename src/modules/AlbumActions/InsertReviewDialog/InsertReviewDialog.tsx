@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { Dialog } from "@components/Dialog/Dialog";
 import { ReviewForm } from "@modules/ReviewForm/ReviewForm";
 import { graphqlSdk } from "@services/fetcher";
@@ -36,9 +37,9 @@ export const InsertReviewDialog: Component<Props> = (props) => {
 
   return (
     <>
-      <button {...openButtonProps} ref={openButtonRef}>
+      <Button {...openButtonProps} ref={openButtonRef}>
         {t("InsertReviewDialog.trigger")}
-      </button>
+      </Button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
           <Dialog

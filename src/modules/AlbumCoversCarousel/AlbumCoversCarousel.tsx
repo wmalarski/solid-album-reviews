@@ -1,3 +1,4 @@
+import { Button } from "@components/Button/Button";
 import { CoverKind, fetchCovers } from "@services/coverArt";
 import { Component, createResource, createSignal, Show } from "solid-js";
 import * as classes from "./AlbumCoversCarousel.css";
@@ -47,20 +48,20 @@ export const AlbumCoversCarousel: Component<Props> = (props) => {
           src={thumbnails()?.[index()]}
         />
         <Show when={props.isHovering}>
-          <button
+          <Button
             class={classes.previous}
             disabled={index() <= 0}
             onClick={handlePreviousClick}
           >
             {"<"}
-          </button>
-          <button
+          </Button>
+          <Button
             class={classes.next}
             disabled={index() >= (thumbnails()?.length || 0) - 1}
             onClick={handleNextClick}
           >
             {">"}
-          </button>
+          </Button>
         </Show>
       </div>
     </div>
