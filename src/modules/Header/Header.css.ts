@@ -1,4 +1,5 @@
 import { sprinkles } from "@styles/sprinkles.css";
+import { style } from "@vanilla-extract/css";
 
 export const container = sprinkles({
   alignItems: "center",
@@ -10,6 +11,18 @@ export const container = sprinkles({
 });
 
 export const navigation = sprinkles({
+  alignItems: "center",
   display: "flex",
   gap: "4",
 });
+
+export const logo = style([
+  {
+    textDecoration: "none",
+  },
+  sprinkles({
+    color: "label",
+    fontSize: "4",
+    textTransform: "uppercase",
+  }),
+]);

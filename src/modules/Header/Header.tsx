@@ -4,6 +4,7 @@ import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
 import type { Component } from "solid-js";
 import * as classes from "./Header.css";
+import { HeaderLink } from "./HeaderLink/HeaderLink";
 
 export const Header: Component = () => {
   const [t] = useI18n();
@@ -14,10 +15,12 @@ export const Header: Component = () => {
 
   return (
     <header class={classes.container}>
-      <Link href={paths.root}>{t("header.title")}</Link>
+      <Link class={classes.logo} href={paths.root}>
+        {t("header.title")}
+      </Link>
       <nav class={classes.navigation}>
-        <Link href={paths.search}>{t("header.search")}</Link>
-        <Link href={paths.reviews}>{t("header.reviews")}</Link>
+        <HeaderLink href={paths.search}>{t("header.search")}</HeaderLink>
+        <HeaderLink href={paths.reviews}>{t("header.reviews")}</HeaderLink>
         <button onClick={handleSignOut}>{t("header.signOut")}</button>
       </nav>
     </header>
