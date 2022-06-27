@@ -1,6 +1,6 @@
+import { Input } from "@components/Input/Input";
 import { debounce } from "@solid-primitives/scheduled";
 import { Component, createSignal } from "solid-js";
-import * as classes from "./SearchInput.css";
 
 type Props = {
   onQueryChange: (query: string) => void;
@@ -19,8 +19,7 @@ export const SearchInput: Component<Props> = (props) => {
   };
 
   return (
-    <input
-      class={classes.input}
+    <Input
       value={input()}
       onChange={(e) => handleInputChange(e.currentTarget.value)}
     />

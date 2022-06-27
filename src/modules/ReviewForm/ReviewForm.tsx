@@ -1,4 +1,5 @@
 import { Button } from "@components/Button/Button";
+import { Input } from "@components/Input/Input";
 import {
   ReviewFragment,
   ReviewInsertInput,
@@ -29,14 +30,14 @@ export const ReviewForm: Component<Props> = (props) => {
     <form class={classes.container} onSubmit={handleSubmit}>
       <label>
         {t("ReviewForm.textLabel")}
-        <input
+        <Input
           value={text()}
           onChange={(event) => setText(event.currentTarget.value)}
         />
       </label>
       <label>
         {t("ReviewForm.rateLabel")}
-        <input
+        <Input
           type="number"
           min={0}
           max={10}

@@ -1,3 +1,4 @@
+import { Input } from "@components/Input/Input";
 import { debounce } from "@solid-primitives/scheduled";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./ReviewsFilters.css";
@@ -46,21 +47,18 @@ export const ReviewsFilters: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <input
-        class={classes.input}
+      <Input
         value={input()}
         onChange={(e) => handleInputChange(e.currentTarget.value)}
       />
-      <input
-        class={classes.input}
+      <Input
         type="number"
         min={0}
         value={lower()}
         max={upper()}
         onChange={(e) => handleLowerChange(e.currentTarget.value)}
       />
-      <input
-        class={classes.input}
+      <Input
         type="number"
         min={lower()}
         value={upper()}

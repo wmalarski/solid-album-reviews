@@ -4,7 +4,3 @@ import { style } from "@vanilla-extract/css";
 export const container = style({
   padding: vars.space[4],
 });
-
-export const input = style({
-  padding: vars.space[4],
-});
