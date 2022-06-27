@@ -15,6 +15,6 @@ globalStyle("code", {
     "source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace",
 });
 
-globalStyle("*, *::before, *::after", {
-  boxSizing: "inherit",
+globalStyle("*, ::before, ::after", {
+  boxSizing: "border-box",
 });

@@ -6,6 +6,7 @@ import { ThemeProvider } from "@styles/ThemeProvider";
 import { i18next } from "@utils/i18next";
 import { Router } from "solid-app-router";
 import type { Component } from "solid-js";
+import "./styles/global.css";
 
 const App: Component = () => {
   return (
