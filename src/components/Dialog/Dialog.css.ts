@@ -22,9 +22,17 @@ export const container = style([
 export const content = style({
   background: vars.colors.background,
   color: vars.colors.black100,
-  padding: vars.space[12],
+  padding: vars.space[8],
 });
 
 export const title = style({
-  marginTop: 0,
+  marginBottom: vars.space[4],
+  marginTop: vars.space[4],
+});
+
+export const header = sprinkles({
+  alignItems: "center",
+  display: "flex",
+  gap: "4",
+  justifyContent: "space-between",
 });

@@ -12,4 +12,5 @@ export const container = style({
   backgroundColor: vars.colors.lightBlue,
   cursor: "pointer",
   padding: vars.space[4],
+  textAlign: "center",
 });

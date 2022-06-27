@@ -1,4 +1,5 @@
 import { Button } from "@components/Button/Button";
+import { Form, FormActions, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import {
   ReviewFragment,
@@ -27,15 +28,15 @@ export const ReviewForm: Component<Props> = (props) => {
   };
 
   return (
-    <form class={classes.container} onSubmit={handleSubmit}>
-      <label>
+    <Form class={classes.container} onSubmit={handleSubmit}>
+      <FormLabel>
         {t("ReviewForm.textLabel")}
         <Input
           value={text()}
           onChange={(event) => setText(event.currentTarget.value)}
         />
-      </label>
-      <label>
+      </FormLabel>
+      <FormLabel>
         {t("ReviewForm.rateLabel")}
         <Input
           type="number"
@@ -45,10 +46,12 @@ export const ReviewForm: Component<Props> = (props) => {
           value={rate()}
           onChange={(event) => setRate(Number(event.currentTarget.value))}
         />
-      </label>
-      <Button type="submit" class={classes.submit}>
-        {t("ReviewForm.submit")}
-      </Button>
-    </form>
+      </FormLabel>
+      <FormActions>
+        <Button type="submit" class={classes.submit}>
+          {t("ReviewForm.submit")}
+        </Button>
+      </FormActions>
+    </Form>
   );
 };

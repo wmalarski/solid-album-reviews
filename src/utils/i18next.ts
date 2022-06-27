@@ -18,6 +18,9 @@ const dict = {
       cancel: "Cancel",
       remove: "Remove",
     },
+    Dialog: {
+      close: "Close",
+    },
     GoogleRedirectButton: {
       text: "Google",
     },

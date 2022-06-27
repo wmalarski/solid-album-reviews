@@ -9,6 +9,8 @@ import {
 } from "@solid-aria/overlays";
 import * as classes from "./Dialog.css";
 
+import { Button } from "@components/Button/Button";
+import { useI18n } from "@solid-primitives/i18n";
 import { Component, JSX } from "solid-js";
 
 type Props = AriaDialogProps &
@@ -19,7 +21,10 @@ type Props = AriaDialogProps &
   };
 
 export const Dialog: Component<Props> = (props) => {
+  const [t] = useI18n();
+
   let ref: HTMLDivElement | undefined;
+
   const { overlayProps, underlayProps } = createOverlay(props, () => ref);
 
   createPreventScroll();
@@ -38,9 +43,14 @@ export const Dialog: Component<Props> = (props) => {
           ref={ref}
           class={classes.content}
         >
-          <h3 {...titleProps} class={classes.title}>
-            {props.title}
-          </h3>
+          <div class={classes.header}>
+            <h3 {...titleProps} class={classes.title}>
+              {props.title}
+            </h3>
+            <Button onClick={() => props.onClose?.()}>
+              {t("Dialog.close")}
+            </Button>
+          </div>
           {props.children}
         </div>
       </FocusScope>
