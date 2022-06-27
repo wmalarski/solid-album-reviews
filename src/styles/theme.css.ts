@@ -1,28 +1,28 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
-import { createTheme } from "@vanilla-extract/css";
+import {
+  createGlobalTheme,
+  createGlobalThemeContract,
+} from "@vanilla-extract/css";
+import deepmerge from "deepmerge";
+import { Mode, tokens } from "./tokens";
+import { Theme } from "./types";
 
-export const [themeClass, vars] = createTheme({
-  color: {
-    background: "#ffffff",
-    gray: "#f0f1f2",
-    blackA5: "rgba(0, 0, 0, 0.5)",
-    black: "#000",
-  },
-  space: {
-    xs: "4px",
-    sm: "8px",
-    md: "16px",
-    lg: "24px",
-    xl: "32px",
-    smallCover: "250px",
-    smallCoverHover: "300px",
-    largeCover: "500px",
-    largeCoverHover: "550px",
-  },
-  border: {
-    xs: "solid 1px #f0f1f2",
-  },
-  zIndex: {
-    dialog: "100",
-  },
-});
+const getVarName = (_value: string | null, path: string[]) => path.join("-");
+
+const baseTokens: Omit<Theme, "colors"> = tokens;
+const baseVars = createGlobalThemeContract(baseTokens, getVarName);
+createGlobalTheme(":root", baseVars, baseTokens);
+
+const makeColorScheme = (mode: Mode) => {
+  return { colors: tokens.colors[mode] };
+};
+
+const modeTokens = makeColorScheme("light");
+const modeVars = createGlobalThemeContract(modeTokens, getVarName);
+createGlobalTheme('[data-mode="light"]', modeVars, modeTokens);
+createGlobalTheme('[data-mode="dark"]', modeVars, makeColorScheme("dark"));
+
+type BaseVars = typeof baseVars;
+type ModeVars = typeof modeVars;
+type Vars = BaseVars & ModeVars;
+export const vars = deepmerge(baseVars, modeVars) as Vars;

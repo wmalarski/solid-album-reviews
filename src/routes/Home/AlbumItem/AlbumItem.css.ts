@@ -47,5 +47,5 @@ export const container = style({
 });
 
 export const actions = style({
-  backgroundColor: vars.color.background,
+  backgroundColor: vars.colors.background,
 });

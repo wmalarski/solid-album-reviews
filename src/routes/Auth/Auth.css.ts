@@ -3,7 +3,7 @@ import { style } from "@vanilla-extract/css";
 
 export const container = style({
   alignItems: "center",
-  backgroundColor: vars.color.gray,
+  backgroundColor: vars.colors.backgroundElevated,
   display: "flex",
   height: "100vh",
   justifyContent: "center",
@@ -13,7 +13,6 @@ export const container = style({
 });
 
 export const card = style({
-  backgroundColor: vars.color.background,
-  border: vars.border.xs,
-  padding: vars.space.md,
+  backgroundColor: vars.colors.backgroundElevated,
+  padding: vars.space[4],
 });

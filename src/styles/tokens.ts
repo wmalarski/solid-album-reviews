@@ -117,14 +117,6 @@ export const tokens = {
   colors: {
     light: {
       ...colors,
-      blue: colors.blue60,
-      green: colors.green60,
-      red: colors.red60,
-      purple: colors.purple60,
-      pink: colors.pink60,
-      orange: colors.orange60,
-      yellow: colors.yellow60,
-
       accent: colors.white100,
       lightBlue: "#EFF4FE",
 
@@ -147,14 +139,6 @@ export const tokens = {
     },
     dark: {
       ...colors,
-      blue: colors.blue50,
-      green: colors.green50,
-      red: colors.red50,
-      purple: colors.purple50,
-      pink: colors.pink50,
-      orange: colors.orange50,
-      yellow: colors.yellow50,
-
       accent: colors.black100,
       lightBlue: "#252C39",
 
@@ -196,6 +180,10 @@ export const tokens = {
     "10": "40px",
     "11": "64px",
     "12": "128px",
+    smallCover: "250px",
+    smallCoverHover: "300px",
+    largeCover: "500px",
+    largeCoverHover: "550px",
   },
   borderWidths: {
     "0": "0px",

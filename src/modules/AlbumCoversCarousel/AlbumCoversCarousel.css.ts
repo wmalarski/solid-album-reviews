@@ -37,12 +37,12 @@ const button = style({
     opacity: 0.8,
   },
   all: "unset",
-  backgroundColor: vars.color.gray,
+  backgroundColor: vars.colors.backgroundElevated,
   cursor: "pointer",
   height: "100%",
   opacity: 0.5,
   position: "absolute",
-  width: vars.space.lg,
+  width: vars.space[6],
 });
 
 export const previous = style([button, { left: 0 }]);
