@@ -11,8 +11,8 @@ const dict = {
       remove: "Remove",
     },
     DeleteReviewDialog: {
-      title: "Delete album",
-      trigger: "Delete",
+      title: "Delete review",
+      trigger: "Delete review",
     },
     DeleteReviewForm: {
       cancel: "Cancel",
@@ -62,7 +62,7 @@ const dict = {
     },
     UpdateReviewDialog: {
       title: "Update review",
-      trigger: "Update",
+      trigger: "Update review",
     },
     YtRedirectButton: {
       text: "YouTube",
