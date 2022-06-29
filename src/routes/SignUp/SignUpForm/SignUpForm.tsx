@@ -1,11 +1,11 @@
 import { Button } from "@components/Button/Button";
 import { Form, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
+import { StyledLink } from "@components/StyledLink/StyledLink";
 import { ErrorPayload } from "@nhost/core";
 import { SignUpParams } from "@nhost/hasura-auth-js";
 import { useI18n } from "@solid-primitives/i18n";
 import { paths } from "@utils/paths";
-import { Link } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./SignUpForm.css";
 
@@ -43,7 +43,7 @@ export const SignUpForm: Component<Props> = (props) => {
       />
       <Button type="submit">{t("SignUp.button")}</Button>
       {props.error && <span>{props.error.message}</span>}
-      <Link href={paths.signIn}>{t("SignUp.signIn")}</Link>
+      <StyledLink href={paths.signIn}>{t("SignUp.signIn")}</StyledLink>
     </Form>
   );
 };

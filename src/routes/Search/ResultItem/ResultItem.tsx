@@ -1,9 +1,9 @@
+import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
-import { Link } from "solid-app-router";
 import { Component } from "solid-js";
 import * as classes from "./ResultItem.css";
 
@@ -21,11 +21,10 @@ export const ResultItem: Component<Props> = (props) => {
         kind="small"
       />
       <div class={classes.right}>
-        <Link href={paths.album(props.album.id)}>
+        <StyledLink href={paths.album(props.album.id)} class={classes.heading}>
           {formatAlbum(props.album)}
-        </Link>
+        </StyledLink>
         <AlbumActions album={props.album} />
-        <pre>{JSON.stringify(props.album, null, 2)}</pre>
       </div>
     </div>
   );

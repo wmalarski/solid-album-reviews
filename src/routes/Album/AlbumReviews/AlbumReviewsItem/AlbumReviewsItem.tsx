@@ -1,3 +1,4 @@
+import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import {
@@ -6,7 +7,6 @@ import {
 } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
-import { Link } from "solid-app-router";
 import { Component, For } from "solid-js";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
@@ -26,9 +26,9 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         kind="small"
       />
       <div class={classes.right}>
-        <Link href={paths.album(props.album.id)}>
+        <StyledLink href={paths.album(props.album.id)}>
           {formatAlbum(props.album)}
-        </Link>
+        </StyledLink>
         <AlbumActions album={props.album} />
         <For each={props.album.reviews}>
           {(review) => (

@@ -5,6 +5,17 @@ export const container = style({
   display: "flex",
 });
 
+export const containerVariant = styleVariants({
+  large: {
+    minHeight: vars.space.largeCover,
+    minWidth: vars.space.largeCover,
+  },
+  small: {
+    minHeight: vars.space.smallCover,
+    minWidth: vars.space.smallCover,
+  },
+});
+
 export const wrapper = style({
   position: "relative",
 });

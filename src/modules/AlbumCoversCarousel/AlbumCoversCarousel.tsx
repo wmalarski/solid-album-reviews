@@ -1,5 +1,6 @@
 import { Button } from "@components/Button/Button";
 import { CoverKind, fetchCovers } from "@services/coverArt";
+import clsx from "clsx";
 import { Component, createResource, createSignal, Show } from "solid-js";
 import * as classes from "./AlbumCoversCarousel.css";
 
@@ -28,14 +29,14 @@ export const AlbumCoversCarousel: Component<Props> = (props) => {
   };
 
   return (
-    <div class={classes.container}>
+    <div class={clsx(classes.container, classes.containerVariant[props.kind])}>
       <div class={classes.wrapper}>
         <img
           alt={props.label}
           aria-label={props.label}
-          classList={{
-            [classes.image]: true,
-            [classes.imageVariant[
+          class={clsx(
+            classes.image,
+            classes.imageVariant[
               props.isHovering
                 ? props.kind === "small"
                   ? "smallHover"
@@ -43,8 +44,8 @@ export const AlbumCoversCarousel: Component<Props> = (props) => {
                 : props.kind === "small"
                 ? "smallNormal"
                 : "largeNormal"
-            ]]: true,
-          }}
+            ]
+          )}
           src={thumbnails()?.[index()]}
         />
         <Show when={props.isHovering}>

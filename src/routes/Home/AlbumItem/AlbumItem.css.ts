@@ -1,3 +1,4 @@
+import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/theme.css";
 import { style, styleVariants } from "@vanilla-extract/css";
 import { calc } from "@vanilla-extract/css-utils";
@@ -8,6 +9,7 @@ const shift = calc.divide(
 );
 
 export const wrapper = style({
+  backgroundColor: "background",
   overflow: "hidden",
   position: "absolute",
   transition: "top 0.2s, left 0.2s",
@@ -41,11 +43,21 @@ export const imageVariant = styleVariants({
 });
 
 export const container = style({
+  backgroundColor: "background",
   height: vars.space.smallCover,
   position: "relative",
   width: vars.space.smallCover,
 });
 
-export const actions = style({
-  backgroundColor: vars.colors.background,
+export const footer = sprinkles({
+  backgroundColor: "background",
+  maxWidth: "smallCoverHover",
+  paddingTop: "4",
+});
+
+export const heading = style({
+  overflow: "hidden",
+  padding: vars.space[4],
+  textOverflow: "ellipsis",
+  whiteSpace: "nowrap",
 });
