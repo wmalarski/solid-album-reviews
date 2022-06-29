@@ -22,14 +22,18 @@ export const ReviewsListItem: Component<Props> = (props) => {
         kind="small"
       />
       <div class={classes.right}>
-        <Link href={paths.album(props.review.albumByAlbum.id)}>
-          {formatAlbum(props.review.albumByAlbum)}
-        </Link>
+        <div class={classes.data}>
+          <Link href={paths.album(props.review.albumByAlbum.id)}>
+            {formatAlbum(props.review.albumByAlbum)}
+          </Link>
+          <span>{props.review.text}</span>
+          <span>{props.review.rate}</span>
+          <span>{props.review.createdAt}</span>
+        </div>
         <ReviewActions
           review={props.review}
           onReviewChange={() => props.onReviewChange()}
         />
-        <pre>{JSON.stringify(props.review, null, 2)}</pre>
       </div>
     </div>
   );
