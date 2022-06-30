@@ -8,19 +8,16 @@ import {
 } from "@solid-aria/overlays";
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
-import { paths } from "@utils/paths";
-import { useNavigate } from "solid-app-router";
 import { Component, Show } from "solid-js";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
 type Props = {
   albumId: number;
+  onSuccess: () => void;
 };
 
 export const DeleteAlbumDialog: Component<Props> = (props) => {
   const [t] = useI18n();
-
-  const navigate = useNavigate();
 
   let openButtonRef: HTMLButtonElement | undefined;
 
@@ -34,8 +31,7 @@ export const DeleteAlbumDialog: Component<Props> = (props) => {
   const handleSubmit = async () => {
     await graphqlSdk.DeleteAlbum({ id: props.albumId });
     state.close();
-    navigate(paths.root);
-    // props.onSuccess();
+    props.onSuccess();
   };
 
   return (

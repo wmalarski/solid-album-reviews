@@ -14,6 +14,7 @@ import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type Props = {
   album: AlbumFragment;
+  onSuccess: () => void;
 };
 
 export const UpdateAlbumDialog: Component<Props> = (props) => {
@@ -31,7 +32,7 @@ export const UpdateAlbumDialog: Component<Props> = (props) => {
   const handleSubmit = async (input: AlbumSetInput) => {
     await graphqlSdk.UpdateAlbum({ id: props.album.id, input });
     state.close();
-    // props.onSuccess();
+    props.onSuccess();
   };
 
   return (

@@ -11,24 +11,13 @@ import * as classes from "./ReviewActions.css";
 
 type Props = {
   review: Partial<ReviewWithAlbumAndArtistFragment> & ReviewFragment;
-  onReviewChange: () => void;
+  onReviewDelete: () => void;
+  onReviewUpdate: () => void;
 };
 
 export const ReviewActions: Component<Props> = (props) => {
-  const handleReviewChange = () => {
-    props.onReviewChange();
-  };
-
   return (
     <div class={classes.container}>
-      <DeleteReviewDialog
-        reviewId={props.review.id}
-        onSuccess={handleReviewChange}
-      />
-      <UpdateReviewDialog
-        review={props.review}
-        onSuccess={handleReviewChange}
-      />
       <Show when={props.review.albumByAlbum}>
         {(album) => (
           <>
@@ -37,6 +26,14 @@ export const ReviewActions: Component<Props> = (props) => {
           </>
         )}
       </Show>
+      <UpdateReviewDialog
+        review={props.review}
+        onSuccess={() => props.onReviewUpdate()}
+      />
+      <DeleteReviewDialog
+        reviewId={props.review.id}
+        onSuccess={() => props.onReviewDelete()}
+      />
     </div>
   );
 };

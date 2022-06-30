@@ -9,6 +9,9 @@ import { UpdateAlbumDialog } from "./UpdateAlbumDialog/UpdateAlbumDialog";
 
 type Props = {
   album: AlbumWithArtistFragment;
+  onAlbumDelete: () => void;
+  onReviewInsert: () => void;
+  onAlbumUpdate: () => void;
 };
 
 export const AlbumActions: Component<Props> = (props) => {
@@ -16,9 +19,18 @@ export const AlbumActions: Component<Props> = (props) => {
     <div class={classes.container}>
       <YtRedirectButton album={props.album} />
       <GoogleRedirectButton album={props.album} />
-      <UpdateAlbumDialog album={props.album} />
-      <InsertReviewDialog albumId={props.album.id} />
-      <DeleteAlbumDialog albumId={props.album.id} />
+      <InsertReviewDialog
+        albumId={props.album.id}
+        onSuccess={() => props.onReviewInsert()}
+      />
+      <UpdateAlbumDialog
+        album={props.album}
+        onSuccess={() => props.onAlbumUpdate()}
+      />
+      <DeleteAlbumDialog
+        albumId={props.album.id}
+        onSuccess={() => props.onAlbumDelete()}
+      />
     </div>
   );
 };
