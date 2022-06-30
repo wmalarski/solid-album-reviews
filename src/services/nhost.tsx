@@ -13,6 +13,11 @@ export const nhost = new NhostClient({
   backendUrl: import.meta.env.VITE_NHOST_BACKEND_URL || "",
 });
 
+export type NhostResponse<R> = {
+  data?: R;
+  errors?: { message: string; extensions?: unknown }[];
+};
+
 type NhostSessionState =
   | {
       status: "auth";
