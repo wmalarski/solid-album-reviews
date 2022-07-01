@@ -11,11 +11,13 @@ import {
 
 type SearchResourceContextValue = {
   albums: () => NhostResponse<SelectAlbumsWithArtistQuery> | undefined;
+  maxPage: () => number;
   refetch: () => void;
 };
 
 const SearchResourceContext = createContext<SearchResourceContextValue>({
   albums: () => void 0,
+  maxPage: () => 0,
   refetch: () => void 0,
 });
 
@@ -52,8 +54,13 @@ export const SearchResourceProvider: Component<Props> = (props) => {
     loader
   );
 
+  const maxPage = () => {
+    const count = albums()?.data?.albumAggregate.aggregate?.count || 0;
+    return Math.ceil(count / pageLimit);
+  };
+
   return (
-    <SearchResourceContext.Provider value={{ albums, refetch }}>
+    <SearchResourceContext.Provider value={{ albums, maxPage, refetch }}>
       {props.children}
     </SearchResourceContext.Provider>
   );

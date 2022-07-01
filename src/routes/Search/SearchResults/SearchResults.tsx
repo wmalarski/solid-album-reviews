@@ -9,15 +9,8 @@ type Props = {
   onPageChange: (page: number) => void;
 };
 
-const pageLimit = 10;
-
 export const SearchResults: Component<Props> = (props) => {
-  const { albums } = useSearchResource();
-
-  const maxPage = () => {
-    const count = albums()?.data?.albumAggregate.aggregate?.count || 0;
-    return Math.ceil(count / pageLimit);
-  };
+  const { albums, maxPage } = useSearchResource();
 
   return (
     <div class={classes.container}>
