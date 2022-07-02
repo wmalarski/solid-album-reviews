@@ -1,9 +1,10 @@
 import { sprinkles } from "@styles/sprinkles.css";
 
 export const container = sprinkles({
+  alignItems: "center",
   backgroundColor: "background",
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "row",
   padding: "4",
 });
 
@@ -13,11 +14,4 @@ export const label = sprinkles({
 
 export const input = sprinkles({
   width: "full",
-});
-
-export const actions = sprinkles({
-  display: "flex",
-  justifyContent: "flex-end",
-  paddingBottom: "4",
-  paddingX: "4",
 });

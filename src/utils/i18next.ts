@@ -43,6 +43,17 @@ const dict = {
       reviews: "Reviews",
       text: "Text",
     },
+    ReviewsFilters: {
+      button: "Search",
+      lower: "Lower",
+      search: "Search",
+      upper: "Upper",
+    },
+    SearchInput: {
+      button: "Search",
+      label: "Search",
+      placeholder: "Search",
+    },
     SignIn: {
       button: "Sign In",
       email: "Email",
