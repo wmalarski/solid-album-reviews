@@ -23,7 +23,8 @@ export const AlbumDetails: Component = () => {
   return (
     <Show when={album()?.data?.albumByPk}>
       {(album) => (
-        <div>
+        <div class={classes.container}>
+          <h1>{formatAlbum(album)}</h1>
           <AlbumCoversCarousel
             isHovering={true}
             label={formatAlbum(album)}
@@ -35,7 +36,6 @@ export const AlbumDetails: Component = () => {
             onAlbumDelete={handleAlbumDelete}
             onAlbumUpdate={handleAlbumUpdate}
           />
-          <pre class={classes.container}>{JSON.stringify(album, null, 2)}</pre>
         </div>
       )}
     </Show>

@@ -1,9 +1,9 @@
+import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
-import { Link } from "solid-app-router";
 import { Component } from "solid-js";
 import * as classes from "./ReviewsListItem.css";
 
@@ -23,9 +23,9 @@ export const ReviewsListItem: Component<Props> = (props) => {
       />
       <div class={classes.right}>
         <div class={classes.data}>
-          <Link href={paths.album(props.review.albumByAlbum.id)}>
+          <StyledLink href={paths.album(props.review.albumByAlbum.id)}>
             {formatAlbum(props.review.albumByAlbum)}
-          </Link>
+          </StyledLink>
           <span>{props.review.text}</span>
           <span>{props.review.rate}</span>
           <span>{props.review.createdAt}</span>

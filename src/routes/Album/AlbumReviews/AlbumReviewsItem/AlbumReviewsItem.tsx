@@ -50,20 +50,20 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         kind="small"
       />
       <div class={classes.right}>
-        <StyledLink href={paths.album(props.album.id)}>
+        <StyledLink href={paths.album(props.album.id)} class={classes.heading}>
           {formatAlbum(props.album)}
         </StyledLink>
+        <For each={props.album.reviews}>
+          {(review) => (
+            <ReviewItem review={review} onReviewChange={handleReviewChange} />
+          )}
+        </For>
         <AlbumActions
           album={props.album}
           onAlbumDelete={handleAlbumDelete}
           onAlbumUpdate={handleAlbumUpdate}
           onReviewInsert={handleReviewChange}
         />
-        <For each={props.album.reviews}>
-          {(review) => (
-            <ReviewItem review={review} onReviewChange={handleReviewChange} />
-          )}
-        </For>
       </div>
     </div>
   );
