@@ -2,6 +2,7 @@ import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
+import { useI18n } from "@solid-primitives/i18n";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { Component } from "solid-js";
@@ -13,6 +14,8 @@ type Props = {
 };
 
 export const ReviewsListItem: Component<Props> = (props) => {
+  const [t] = useI18n();
+
   return (
     <div class={classes.container}>
       <AlbumCoversCarousel
@@ -22,12 +25,18 @@ export const ReviewsListItem: Component<Props> = (props) => {
         kind="small"
       />
       <div class={classes.right}>
+        <StyledLink
+          href={paths.album(props.review.albumByAlbum.id)}
+          class={classes.heading}
+        >
+          {formatAlbum(props.review.albumByAlbum)}
+        </StyledLink>
         <div class={classes.data}>
-          <StyledLink href={paths.album(props.review.albumByAlbum.id)}>
-            {formatAlbum(props.review.albumByAlbum)}
-          </StyledLink>
+          <span>{t("ReviewItem.rate")}</span>
           <span>{props.review.text}</span>
+          <span>{t("ReviewItem.text")}</span>
           <span>{props.review.rate}</span>
+          <span>{t("ReviewItem.date")}</span>
           <span>{props.review.createdAt}</span>
         </div>
         <ReviewActions

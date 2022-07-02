@@ -13,5 +13,6 @@ export const right = sprinkles({
 });
 
 export const heading = sprinkles({
+  fontSize: "4",
   padding: "4",
 });

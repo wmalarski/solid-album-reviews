@@ -37,6 +37,12 @@ const dict = {
       submit: "Submit",
       textLabel: "Text",
     },
+    ReviewItem: {
+      date: "Date",
+      rate: "Rate",
+      reviews: "Reviews",
+      text: "Text",
+    },
     SignIn: {
       button: "Sign In",
       email: "Email",

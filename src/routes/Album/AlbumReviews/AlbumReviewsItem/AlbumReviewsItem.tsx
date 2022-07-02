@@ -6,10 +6,11 @@ import {
   AlbumWithArtistFragment,
   AlbumWithReviewsFragment,
 } from "@services/types";
+import { useI18n } from "@solid-primitives/i18n";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { useNavigate } from "solid-app-router";
-import { Component, For } from "solid-js";
+import { Component, For, Show } from "solid-js";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
 
@@ -19,6 +20,8 @@ type Props = {
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
+  const [t] = useI18n();
+
   const navigate = useNavigate();
   const { refetchAlbums, refetchAlbum } = useAlbumResource();
 
@@ -53,6 +56,9 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
         <StyledLink href={paths.album(props.album.id)} class={classes.heading}>
           {formatAlbum(props.album)}
         </StyledLink>
+        <Show when={props.album.reviews.length > 0}>
+          <span class={classes.subheading}>{t("ReviewItem.reviews")}</span>
+        </Show>
         <For each={props.album.reviews}>
           {(review) => (
             <ReviewItem review={review} onReviewChange={handleReviewChange} />
