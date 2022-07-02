@@ -30,7 +30,6 @@ export const ResultItem: Component<Props> = (props) => {
         <AlbumActions
           album={props.album}
           onAlbumDelete={refetch}
-          onReviewInsert={refetch} // TODO remove
           onAlbumUpdate={refetch}
         />
       </div>

@@ -1,23 +1,27 @@
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
-import { graphqlSdk } from "@services/fetcher";
 import { formatAlbum } from "@utils/formatters";
-import { Component, createResource, Show } from "solid-js";
+import { paths } from "@utils/paths";
+import { useNavigate } from "solid-app-router";
+import { Component, Show } from "solid-js";
+import { useAlbumResource } from "../Album.utils";
 import * as classes from "./AlbumDetails.css";
 
-const loader = (id: number) => {
-  return graphqlSdk.SelectAlbum({ id });
-};
+export const AlbumDetails: Component = () => {
+  const navigate = useNavigate();
 
-type Props = {
-  albumId: number;
-};
+  const { album, refetchAlbum } = useAlbumResource();
 
-export const AlbumDetails: Component<Props> = (props) => {
-  const [selectAlbum] = createResource(() => props.albumId, loader);
+  const handleAlbumDelete = () => {
+    navigate(paths.root);
+  };
+
+  const handleAlbumUpdate = () => {
+    refetchAlbum();
+  };
 
   return (
-    <Show when={selectAlbum()?.data?.albumByPk}>
+    <Show when={album()?.data?.albumByPk}>
       {(album) => (
         <div>
           <AlbumCoversCarousel
@@ -26,7 +30,11 @@ export const AlbumDetails: Component<Props> = (props) => {
             sid={album.sid}
             kind="large"
           />
-          <AlbumActions album={album} />
+          <AlbumActions
+            album={album}
+            onAlbumDelete={handleAlbumDelete}
+            onAlbumUpdate={handleAlbumUpdate}
+          />
           <pre class={classes.container}>{JSON.stringify(album, null, 2)}</pre>
         </div>
       )}

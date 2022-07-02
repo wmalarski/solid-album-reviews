@@ -10,7 +10,7 @@ import { UpdateAlbumDialog } from "./UpdateAlbumDialog/UpdateAlbumDialog";
 type Props = {
   album: AlbumWithArtistFragment;
   onAlbumDelete: () => void;
-  onReviewInsert: () => void;
+  onReviewInsert?: () => void;
   onAlbumUpdate: () => void;
 };
 
@@ -21,7 +21,7 @@ export const AlbumActions: Component<Props> = (props) => {
       <GoogleRedirectButton album={props.album} />
       <InsertReviewDialog
         albumId={props.album.id}
-        onSuccess={() => props.onReviewInsert()}
+        onSuccess={() => props.onReviewInsert?.()}
       />
       <UpdateAlbumDialog
         album={props.album}
