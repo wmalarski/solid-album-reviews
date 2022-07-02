@@ -16,7 +16,6 @@ import { ReviewItem } from "./ReviewItem/ReviewItem";
 type Props = {
   isCurrent: boolean;
   album: AlbumWithReviewsFragment & AlbumWithArtistFragment;
-  onAlbumChange: () => void;
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
@@ -38,7 +37,7 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
     refetchAlbums();
   };
 
-  const handleReviewInsert = () => {
+  const handleReviewChange = () => {
     refetchAlbums();
   };
 
@@ -58,14 +57,11 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
           album={props.album}
           onAlbumDelete={handleAlbumDelete}
           onAlbumUpdate={handleAlbumUpdate}
-          onReviewInsert={handleReviewInsert}
+          onReviewInsert={handleReviewChange}
         />
         <For each={props.album.reviews}>
           {(review) => (
-            <ReviewItem
-              review={review}
-              onReviewChange={() => props.onAlbumChange()}
-            />
+            <ReviewItem review={review} onReviewChange={handleReviewChange} />
           )}
         </For>
       </div>

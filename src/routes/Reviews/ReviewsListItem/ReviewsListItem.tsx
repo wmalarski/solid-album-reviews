@@ -32,7 +32,8 @@ export const ReviewsListItem: Component<Props> = (props) => {
         </div>
         <ReviewActions
           review={props.review}
-          onReviewChange={() => props.onReviewChange()}
+          onReviewDelete={() => props.onReviewChange()}
+          onReviewUpdate={() => props.onReviewChange()}
         />
       </div>
     </div>

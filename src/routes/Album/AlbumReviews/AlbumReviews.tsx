@@ -11,11 +11,7 @@ type Props = {
 };
 
 export const AlbumReviews: Component<Props> = (props) => {
-  const { album, albums, refetchAlbums, maxPage } = useAlbumResource();
-
-  const handleAlbumsChange = () => {
-    refetchAlbums();
-  };
+  const { album, albums, maxPage } = useAlbumResource();
 
   return (
     <div class={classes.container}>
@@ -25,7 +21,7 @@ export const AlbumReviews: Component<Props> = (props) => {
             {(album) => (
               <AlbumReviewsItem
                 album={{ ...album, artistByArtist: artist }}
-                onAlbumChange={handleAlbumsChange}
+                isCurrent={album.id === props.albumId}
               />
             )}
           </For>

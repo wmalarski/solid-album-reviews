@@ -13,7 +13,8 @@ export const ReviewItem: Component<Props> = (props) => {
     <div class={classes.container}>
       <pre>{JSON.stringify(props.review, null, 2)}</pre>
       <ReviewActions
-        onReviewChange={() => props.onReviewChange()}
+        onReviewDelete={() => props.onReviewChange()}
+        onReviewUpdate={() => props.onReviewChange()}
         review={props.review}
       />
     </div>
