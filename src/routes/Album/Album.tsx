@@ -20,7 +20,7 @@ const Album: Component = () => {
     <Show when={albumId} fallback={<Navigate href={paths.notFound} />}>
       {(albumId) => (
         <AlbumResourceProvider albumId={albumId} page={page()}>
-          <AlbumDetails albumId={albumId} />
+          <AlbumDetails />
           <AlbumReviews
             albumId={albumId}
             page={page()}

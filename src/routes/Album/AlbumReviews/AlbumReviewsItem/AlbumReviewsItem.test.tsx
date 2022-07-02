@@ -19,7 +19,7 @@ const renderComponent = ({
       ...mockAlbumWithReviewsFragment(),
       ...mockAlbumWithArtistFragment(),
     },
-    onAlbumChange: () => void 0,
+    isCurrent: true,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

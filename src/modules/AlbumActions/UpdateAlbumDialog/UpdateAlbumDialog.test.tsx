@@ -13,6 +13,7 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     album: mockAlbumWithArtistFragment(),
+    onSuccess: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

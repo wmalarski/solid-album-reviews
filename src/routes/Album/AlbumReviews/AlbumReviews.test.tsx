@@ -12,6 +12,8 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     albumId: 0,
+    onPageChange: () => void 0,
+    page: 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

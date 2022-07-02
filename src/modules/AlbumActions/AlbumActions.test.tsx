@@ -13,6 +13,9 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     album: mockAlbumWithArtistFragment(),
+    onAlbumDelete: () => void 0,
+    onAlbumUpdate: () => void 0,
+    onReviewInsert: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>

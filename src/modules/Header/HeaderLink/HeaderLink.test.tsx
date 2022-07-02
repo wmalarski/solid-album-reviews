@@ -10,7 +10,10 @@ const renderComponent = ({
   wrapperProps,
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {};
+  const defaultProps: Props = {
+    children: "Hello",
+    href: "link",
+  };
   return render(() => (
     <TestWrapper {...wrapperProps}>
       <HeaderLink {...defaultProps} {...props} />

@@ -12,7 +12,8 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    onReviewChange: () => void 0,
+    onReviewDelete: () => void 0,
+    onReviewUpdate: () => void 0,
     review: mockReviewFragment(),
   };
   return render(() => (
