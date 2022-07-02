@@ -3,7 +3,7 @@ import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCar
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
-import { formatAlbum } from "@utils/formatters";
+import { formatAlbum, formatDate } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { Component } from "solid-js";
 import * as classes from "./ReviewsListItem.css";
@@ -37,7 +37,7 @@ export const ReviewsListItem: Component<Props> = (props) => {
           <span>{t("ReviewItem.text")}</span>
           <span>{props.review.rate}</span>
           <span>{t("ReviewItem.date")}</span>
-          <span>{props.review.createdAt}</span>
+          <span>{formatDate(props.review.createdAt)}</span>
         </div>
         <ReviewActions
           review={props.review}

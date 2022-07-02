@@ -14,3 +14,7 @@ export const formatAlbum = (album: FormatAlbumArgs): string => {
   const year = album.year ? `(${album.year})` : "";
   return `${album.title}${artist}${year}`;
 };
+
+export const formatDate = (date: string): string => {
+  return new Intl.DateTimeFormat().format(new Date(date));
+};

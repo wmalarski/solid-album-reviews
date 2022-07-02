@@ -1,6 +1,7 @@
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import { ReviewFragment } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
+import { formatDate } from "@utils/formatters";
 import { Component } from "solid-js";
 import * as classes from "./ReviewItem.css";
 
@@ -20,7 +21,7 @@ export const ReviewItem: Component<Props> = (props) => {
         <span>{t("ReviewItem.text")}</span>
         <span>{props.review.text}</span>
         <span>{t("ReviewItem.date")}</span>
-        <span>{props.review.createdAt}</span>
+        <span>{formatDate(props.review.createdAt)}</span>
       </div>
       <ReviewActions
         onReviewDelete={() => props.onReviewChange()}
