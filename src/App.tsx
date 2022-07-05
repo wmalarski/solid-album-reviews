@@ -13,7 +13,7 @@ const App: Component = () => {
     <I18nContext.Provider value={i18next}>
       <ThemeProvider>
         <NhostProvider>
-          <OverlayProvider>
+          <OverlayProvider style={{ height: "100vh" }}>
             <Router>
               <AppRouter />
             </Router>

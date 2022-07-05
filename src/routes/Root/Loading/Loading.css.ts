@@ -3,7 +3,10 @@ import { style } from "@vanilla-extract/css";
 
 export const container = style([
   sprinkles({
-    backgroundColor: "backgroundElevated",
+    alignItems: "center",
+    color: "label",
+    display: "flex",
+    justifyContent: "center",
     width: "full",
   }),
   {

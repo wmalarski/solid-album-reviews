@@ -13,6 +13,7 @@ export const wrapper = sprinkles({
 });
 
 export const image = style({
+  color: vars.colors.label,
   transition: "width 0.2s, height 0.2s",
 });
 

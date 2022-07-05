@@ -14,5 +14,6 @@ export const data = style([
   {
     columnGap: vars.space[4],
     gridTemplateColumns: "auto 1fr",
+    rowGap: vars.space[4],
   },
 ]);

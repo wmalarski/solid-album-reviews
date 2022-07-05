@@ -21,6 +21,7 @@ const modeTokens = makeColorScheme("light");
 const modeVars = createGlobalThemeContract(modeTokens, getVarName);
 createGlobalTheme('[data-mode="light"]', modeVars, modeTokens);
 createGlobalTheme('[data-mode="dark"]', modeVars, makeColorScheme("dark"));
+// createGlobalTheme('[data-overlay-container="dark"]', modeVars, makeColorScheme("dark"));
 
 type BaseVars = typeof baseVars;
 type ModeVars = typeof modeVars;

@@ -10,6 +10,7 @@ export const container = style({
   },
   all: "unset",
   backgroundColor: vars.colors.lightBlue,
+  color: vars.colors.label,
   cursor: "pointer",
   padding: vars.space[4],
   textAlign: "center",
