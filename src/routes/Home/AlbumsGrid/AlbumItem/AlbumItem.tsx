@@ -1,6 +1,6 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { AlbumCoversCarousel } from "@routes/Home/AlbumsGrid/AlbumItem/AlbumCoversCarousel/AlbumCoversCarousel";
 import type { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";

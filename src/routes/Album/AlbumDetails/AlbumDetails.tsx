@@ -1,5 +1,5 @@
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import { useNavigate } from "solid-app-router";
@@ -25,12 +25,7 @@ export const AlbumDetails: Component = () => {
       {(album) => (
         <div class={classes.container}>
           <h1>{formatAlbum(album)}</h1>
-          <AlbumCoversCarousel
-            isHovering={true}
-            label={formatAlbum(album)}
-            sid={album.sid}
-            kind="large"
-          />
+          <AlbumCover label={formatAlbum(album)} sid={album.sid} kind="large" />
           <AlbumActions
             album={album}
             onAlbumDelete={handleAlbumDelete}

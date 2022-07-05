@@ -1,6 +1,6 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { useSearchResource } from "@routes/Search/Search.utils";
 import { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
@@ -17,8 +17,7 @@ export const ResultItem: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <AlbumCoversCarousel
-        isHovering={false}
+      <AlbumCover
         label={formatAlbum(props.album)}
         sid={props.album.sid}
         kind="small"

@@ -1,5 +1,5 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
-import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import { ReviewWithAlbumAndArtistFragment } from "@services/types";
 import { useI18n } from "@solid-primitives/i18n";
@@ -18,8 +18,7 @@ export const ReviewsListItem: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <AlbumCoversCarousel
-        isHovering={false}
+      <AlbumCover
         label={formatAlbum(props.review.albumByAlbum)}
         sid={props.review.albumByAlbum.sid}
         kind="small"

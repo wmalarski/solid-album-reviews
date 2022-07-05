@@ -1,6 +1,6 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCoversCarousel } from "@modules/AlbumCoversCarousel/AlbumCoversCarousel";
+import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { useAlbumResource } from "@routes/Album/Album.utils";
 import {
   AlbumWithArtistFragment,
@@ -46,8 +46,7 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
 
   return (
     <div class={classes.container}>
-      <AlbumCoversCarousel
-        isHovering={false}
+      <AlbumCover
         label={formatAlbum(props.album)}
         sid={props.album.sid}
         kind="small"
