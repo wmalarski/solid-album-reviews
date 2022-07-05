@@ -8,12 +8,16 @@ const shift = calc.divide(
   2
 );
 
-export const wrapper = style({
-  backgroundColor: "background",
-  overflow: "hidden",
-  position: "absolute",
-  transition: "top 0.2s, left 0.2s",
-});
+export const wrapper = style([
+  sprinkles({
+    backgroundColor: "background",
+    overflow: "hidden",
+    position: "absolute",
+  }),
+  {
+    transition: "top 0.2s, left 0.2s",
+  },
+]);
 
 export const wrapperVariants = styleVariants({
   hover: {
@@ -27,11 +31,11 @@ export const wrapperVariants = styleVariants({
   },
 });
 
-export const container = style({
+export const container = sprinkles({
   backgroundColor: "background",
-  height: vars.space.smallCover,
+  height: "smallCover",
   position: "relative",
-  width: vars.space.smallCover,
+  width: "smallCover",
 });
 
 export const footer = sprinkles({
@@ -40,9 +44,13 @@ export const footer = sprinkles({
   paddingTop: "4",
 });
 
-export const heading = style({
-  overflow: "hidden",
-  padding: vars.space[4],
-  textOverflow: "ellipsis",
-  whiteSpace: "nowrap",
-});
+export const heading = style([
+  sprinkles({
+    overflow: "hidden",
+    padding: "4",
+    whiteSpace: "nowrap",
+  }),
+  {
+    textOverflow: "ellipsis",
+  },
+]);

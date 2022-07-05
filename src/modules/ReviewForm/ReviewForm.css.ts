@@ -1,12 +1,11 @@
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import { sprinkles } from "@styles/sprinkles.css";
 
-export const container = style({
+export const container = sprinkles({
   display: "flex",
   flexDirection: "column",
-  padding: vars.space[4],
+  padding: "4",
 });
 
-export const submit = style({
-  marginTop: vars.space[4],
+export const submit = sprinkles({
+  marginTop: "4",
 });

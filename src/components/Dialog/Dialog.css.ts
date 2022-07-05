@@ -19,15 +19,15 @@ export const container = style([
   },
 ]);
 
-export const content = style({
-  background: vars.colors.background,
-  color: vars.colors.black100,
-  padding: vars.space[8],
+export const content = sprinkles({
+  backgroundColor: "background",
+  color: "black100",
+  padding: "8",
 });
 
-export const title = style({
-  marginBottom: vars.space[4],
-  marginTop: vars.space[4],
+export const title = sprinkles({
+  marginBottom: "4",
+  marginTop: "4",
 });
 
 export const header = sprinkles({

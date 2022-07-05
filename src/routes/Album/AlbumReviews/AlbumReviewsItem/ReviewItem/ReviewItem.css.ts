@@ -6,9 +6,13 @@ export const container = sprinkles({
   padding: "4",
 });
 
-export const data = style({
-  columnGap: vars.space[4],
-  display: "grid",
-  gridTemplateColumns: "auto 1fr",
-  paddingLeft: vars.space[4],
-});
+export const data = style([
+  sprinkles({
+    display: "grid",
+    paddingLeft: "4",
+  }),
+  {
+    columnGap: vars.space[4],
+    gridTemplateColumns: "auto 1fr",
+  },
+]);

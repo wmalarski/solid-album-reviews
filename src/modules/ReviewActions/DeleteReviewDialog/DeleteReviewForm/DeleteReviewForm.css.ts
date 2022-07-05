@@ -1,6 +1,5 @@
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import { sprinkles } from "@styles/sprinkles.css";
 
-export const submit = style({
-  marginTop: vars.space[4],
+export const submit = sprinkles({
+  marginTop: "4",
 });

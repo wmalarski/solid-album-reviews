@@ -1,7 +1,8 @@
+import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/theme.css";
 import { style, styleVariants } from "@vanilla-extract/css";
 
-export const container = style({
+export const container = sprinkles({
   display: "flex",
 });
 
@@ -16,7 +17,7 @@ export const containerVariant = styleVariants({
   },
 });
 
-export const wrapper = style({
+export const wrapper = sprinkles({
   position: "relative",
 });
 

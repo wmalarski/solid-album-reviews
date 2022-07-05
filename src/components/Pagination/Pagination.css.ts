@@ -1,6 +1,4 @@
 import { sprinkles } from "@styles/sprinkles.css";
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
 
 export const container = sprinkles({
   alignItems: "center",
@@ -12,6 +10,6 @@ export const container = sprinkles({
   padding: "4",
 });
 
-export const item = style({
-  padding: vars.space[4],
+export const item = sprinkles({
+  padding: "4",
 });

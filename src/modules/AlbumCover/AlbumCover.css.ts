@@ -1,8 +1,9 @@
+import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/theme.css";
-import { style, styleVariants } from "@vanilla-extract/css";
+import { styleVariants } from "@vanilla-extract/css";
 
-export const image = style({
-  padding: vars.space[4],
+export const image = sprinkles({
+  padding: "4",
 });
 
 export const imageVariant = styleVariants({

@@ -1,18 +1,22 @@
-import { vars } from "@styles/theme.css";
+import { sprinkles } from "@styles/sprinkles.css";
 import { style } from "@vanilla-extract/css";
 
-export const container = style({
-  alignItems: "center",
-  backgroundColor: vars.colors.backgroundElevated,
-  display: "flex",
-  height: "100vh",
-  justifyContent: "center",
-  overflow: "clip",
-  position: "absolute",
-  width: "100vw",
-});
+export const container = style([
+  sprinkles({
+    alignItems: "center",
+    backgroundColor: "backgroundElevated",
+    display: "flex",
+    justifyContent: "center",
+    position: "absolute",
+  }),
+  {
+    height: "100vh",
+    overflow: "clip",
+    width: "100vw",
+  },
+]);
 
-export const card = style({
-  backgroundColor: vars.colors.background,
-  padding: vars.space[8],
+export const card = sprinkles({
+  backgroundColor: "background",
+  padding: "8",
 });
