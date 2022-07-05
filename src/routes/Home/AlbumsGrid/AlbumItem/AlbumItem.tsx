@@ -67,6 +67,7 @@ export const AlbumItem: Component<Props> = (props) => {
                 </Show>
                 <AlbumActions
                   album={props.album}
+                  asIcons
                   onAlbumDelete={refetch}
                   onAlbumUpdate={handleAlbumUpdate}
                   onReviewInsert={refetch}

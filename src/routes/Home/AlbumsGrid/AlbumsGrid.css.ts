@@ -2,5 +2,10 @@ import { vars } from "@styles/theme.css";
 import { style } from "@vanilla-extract/css";
 
 export const container = style({
-  padding: vars.space[4],
+  display: "grid",
+  gridTemplateColumns: `repeat(auto-fit, ${vars.space.smallCover})`,
+  justifyContent: "center",
+  margin: "0 auto",
+  paddingBottom: vars.space["12"],
+  paddingTop: vars.space["8"],
 });

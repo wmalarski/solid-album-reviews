@@ -8,12 +8,14 @@ import {
 } from "@solid-aria/overlays";
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
+import { BsTrash } from "solid-icons/bs";
 import { Component, Show } from "solid-js";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
 type Props = {
   albumId: number;
   onSuccess: () => void;
+  isIcon?: boolean;
 };
 
 export const DeleteAlbumDialog: Component<Props> = (props) => {
@@ -36,8 +38,12 @@ export const DeleteAlbumDialog: Component<Props> = (props) => {
 
   return (
     <>
-      <Button {...openButtonProps} ref={openButtonRef}>
-        {t("DeleteAlbumDialog.trigger")}
+      <Button
+        {...openButtonProps}
+        ref={openButtonRef}
+        aria-label={t("DeleteAlbumDialog.trigger")}
+      >
+        {props.isIcon ? <BsTrash size={20} /> : t("DeleteAlbumDialog.trigger")}
       </Button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>

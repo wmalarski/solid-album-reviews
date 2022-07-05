@@ -9,12 +9,14 @@ import {
 } from "@solid-aria/overlays";
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
+import { BsPencilSquare } from "solid-icons/bs";
 import { Component, Show } from "solid-js";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type Props = {
   album: AlbumFragment;
   onSuccess: () => void;
+  isIcon?: boolean;
 };
 
 export const UpdateAlbumDialog: Component<Props> = (props) => {
@@ -37,8 +39,16 @@ export const UpdateAlbumDialog: Component<Props> = (props) => {
 
   return (
     <>
-      <Button {...openButtonProps} ref={openButtonRef}>
-        {t("UpdateAlbumDialog.trigger")}
+      <Button
+        {...openButtonProps}
+        ref={openButtonRef}
+        aria-label={t("UpdateAlbumDialog.trigger")}
+      >
+        {props.isIcon ? (
+          <BsPencilSquare size={20} />
+        ) : (
+          t("UpdateAlbumDialog.trigger")
+        )}
       </Button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>

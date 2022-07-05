@@ -10,10 +10,12 @@ import {
 } from "@solid-aria/overlays";
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
+import { BsChatLeftText } from "solid-icons/bs";
 import { Component, Show } from "solid-js";
 
 type Props = {
   albumId: number;
+  isIcon?: boolean;
   onSuccess: () => void;
 };
 
@@ -38,8 +40,16 @@ export const InsertReviewDialog: Component<Props> = (props) => {
 
   return (
     <>
-      <Button {...openButtonProps} ref={openButtonRef}>
-        {t("InsertReviewDialog.trigger")}
+      <Button
+        {...openButtonProps}
+        ref={openButtonRef}
+        aria-label={t("InsertReviewDialog.trigger")}
+      >
+        {props.isIcon ? (
+          <BsChatLeftText size={20} />
+        ) : (
+          t("InsertReviewDialog.trigger")
+        )}
       </Button>
       <Show when={state.isOpen()}>
         <OverlayContainer portalContainer={getPortalContainer()}>
