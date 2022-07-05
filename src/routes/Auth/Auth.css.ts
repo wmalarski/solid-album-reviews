@@ -13,6 +13,6 @@ export const container = style({
 });
 
 export const card = style({
-  backgroundColor: vars.colors.backgroundElevated,
-  padding: vars.space[4],
+  backgroundColor: vars.colors.background,
+  padding: vars.space[8],
 });

@@ -27,21 +27,6 @@ export const wrapperVariants = styleVariants({
   },
 });
 
-export const image = style({
-  transition: "width 0.2s, height 0.2s",
-});
-
-export const imageVariant = styleVariants({
-  hover: {
-    height: vars.space.smallCoverHover,
-    width: vars.space.smallCoverHover,
-  },
-  no: {
-    height: vars.space.smallCover,
-    width: vars.space.smallCover,
-  },
-});
-
 export const container = style({
   backgroundColor: "background",
   height: vars.space.smallCover,

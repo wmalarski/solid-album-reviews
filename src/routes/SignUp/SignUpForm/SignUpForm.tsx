@@ -27,7 +27,7 @@ export const SignUpForm: Component<Props> = (props) => {
 
   return (
     <Form class={classes.container} onSubmit={handleSubmit}>
-      <h1>{t("SignUp.header")}</h1>
+      <h1 class={classes.heading}>{t("SignUp.header")}</h1>
       <FormLabel for="email">{t("SignUp.email")}</FormLabel>
       <Input
         id="email"

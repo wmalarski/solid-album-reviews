@@ -27,7 +27,7 @@ export const SignInForm: Component<Props> = (props) => {
 
   return (
     <Form class={classes.container} onSubmit={handleSubmit}>
-      <h1>{t("SignIn.header")}</h1>
+      <h1 class={classes.heading}>{t("SignIn.header")}</h1>
       <FormLabel for="email">{t("SignIn.email")}</FormLabel>
       <Input
         id="email"
