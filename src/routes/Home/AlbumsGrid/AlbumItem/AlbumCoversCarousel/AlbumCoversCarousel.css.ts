@@ -4,17 +4,8 @@ import { style, styleVariants } from "@vanilla-extract/css";
 
 export const container = sprinkles({
   display: "flex",
-});
-
-export const containerVariant = styleVariants({
-  large: {
-    minHeight: vars.space.largeCover,
-    minWidth: vars.space.largeCover,
-  },
-  small: {
-    minHeight: vars.space.smallCover,
-    minWidth: vars.space.smallCover,
-  },
+  minHeight: "smallCover",
+  minWidth: "smallCover",
 });
 
 export const wrapper = sprinkles({
@@ -26,19 +17,11 @@ export const image = style({
 });
 
 export const imageVariant = styleVariants({
-  largeHover: {
-    height: vars.space.largeCoverHover,
-    width: vars.space.largeCoverHover,
-  },
-  largeNormal: {
-    height: vars.space.largeCover,
-    width: vars.space.largeCover,
-  },
-  smallHover: {
+  hover: {
     height: vars.space.smallCoverHover,
     width: vars.space.smallCoverHover,
   },
-  smallNormal: {
+  outside: {
     height: vars.space.smallCover,
     width: vars.space.smallCover,
   },

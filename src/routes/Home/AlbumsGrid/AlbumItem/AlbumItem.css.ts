@@ -40,14 +40,14 @@ export const container = sprinkles({
 
 export const footer = sprinkles({
   backgroundColor: "background",
-  maxWidth: "smallCoverHover",
-  paddingTop: "4",
 });
 
 export const heading = style([
   sprinkles({
+    display: "inline-block",
+    maxWidth: "smallCoverHover",
     overflow: "hidden",
-    padding: "4",
+    paddingX: "4",
     whiteSpace: "nowrap",
   }),
   {

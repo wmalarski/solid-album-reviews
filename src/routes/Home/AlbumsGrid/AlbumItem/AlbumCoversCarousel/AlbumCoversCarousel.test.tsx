@@ -12,7 +12,6 @@ const renderComponent = ({
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
     isHovering: false,
-    kind: "small",
     label: "label",
     sid: "sid",
   };

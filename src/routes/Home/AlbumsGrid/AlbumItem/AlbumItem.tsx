@@ -54,7 +54,6 @@ export const AlbumItem: Component<Props> = (props) => {
               isHovering={isHovering()}
               label={label()}
               sid={mBid}
-              kind="small"
             />
             <Show when={isHovering()}>
               <div class={classes.footer}>
