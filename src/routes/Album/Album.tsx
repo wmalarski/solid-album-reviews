@@ -1,6 +1,6 @@
 import { paths } from "@utils/paths";
-import { Navigate, useParams } from "solid-app-router";
-import { Component, createSignal, Show } from "solid-js";
+import { Navigate, useParams, useSearchParams } from "solid-app-router";
+import { Component, Show } from "solid-js";
 import * as classes from "./Album.css";
 import { AlbumResourceProvider } from "./Album.utils";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
@@ -12,10 +12,17 @@ type AlbumParams = {
 
 const Album: Component = () => {
   const params = useParams<AlbumParams>();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const albumId = /\d+/.test(params.albumId) ? Number(params.albumId) : null;
 
-  const [page, setPage] = createSignal(0);
+  const handlePageChange = (update: number) => {
+    setSearchParams({ page: update });
+  };
+
+  const page = () => {
+    return Number(searchParams.page || "0");
+  };
 
   return (
     <Show when={albumId} fallback={<Navigate href={paths.notFound} />}>
@@ -26,7 +33,7 @@ const Album: Component = () => {
             <AlbumReviews
               albumId={albumId}
               page={page()}
-              onPageChange={setPage}
+              onPageChange={handlePageChange}
             />
           </div>
         </AlbumResourceProvider>
