@@ -11,10 +11,8 @@ const renderComponent = ({
   ...props
 }: PropsWithTestWrapper<Props> = {}) => {
   const defaultProps: Props = {
-    onQueryChange: () => void 0,
-    onRangeChange: () => void 0,
-    query: "",
-    args: { lower: 0, upper: 1 },
+    args: { lower: 0, query: "", upper: 1 },
+    onArgsChange: () => void 0,
   };
   return render(() => (
     <TestWrapper {...wrapperProps}>
