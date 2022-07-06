@@ -6,6 +6,7 @@ import { ThemeProvider } from "@styles/ThemeProvider";
 import { i18next } from "@utils/i18next";
 import { Router } from "solid-app-router";
 import type { Component } from "solid-js";
+import * as classes from "./App.css";
 import "./styles/global.css";
 
 const App: Component = () => {
@@ -13,7 +14,7 @@ const App: Component = () => {
     <I18nContext.Provider value={i18next}>
       <ThemeProvider>
         <NhostProvider>
-          <OverlayProvider style={{ height: "100vh" }}>
+          <OverlayProvider class={classes.overlay}>
             <Router>
               <AppRouter />
             </Router>
