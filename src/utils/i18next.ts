@@ -30,6 +30,7 @@ const dict = {
     },
     Pagination: {
       next: "Next",
+      of: "{{current}} of {{max}}",
       previous: "Previous",
     },
     ReviewForm: {

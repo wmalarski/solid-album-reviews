@@ -29,7 +29,12 @@ export const Pagination: Component<Props> = (props) => {
       >
         {t("Pagination.previous")}
       </Button>
-      {props.current + 1}
+      <span>
+        {t("Pagination.of", {
+          current: String(props.current + 1),
+          max: String(props.maxPage),
+        })}
+      </span>
       <Button
         class={classes.item}
         disabled={props.current >= props.maxPage - 1}

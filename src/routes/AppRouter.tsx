@@ -1,16 +1,17 @@
 import { Route, Routes } from "solid-app-router";
-import { Component } from "solid-js";
-import Album from "./Album/Album";
-import Auth from "./Auth/Auth";
-import Home from "./Home/Home";
-import NotFound from "./NotFound/NotFound";
-import Protected from "./Protected/Protected";
-import Public from "./Public/Public";
-import Reviews from "./Reviews/Reviews";
-import Root from "./Root/Root";
-import Search from "./Search/Search";
-import SignIn from "./SignIn/SignIn";
-import SignUp from "./SignUp/SignUp";
+import { Component, lazy } from "solid-js";
+
+const Album = lazy(() => import("./Album/Album"));
+const Auth = lazy(() => import("./Auth/Auth"));
+const Home = lazy(() => import("./Home/Home"));
+const NotFound = lazy(() => import("./NotFound/NotFound"));
+const Protected = lazy(() => import("./Protected/Protected"));
+const Public = lazy(() => import("./Public/Public"));
+const Reviews = lazy(() => import("./Reviews/Reviews"));
+const Root = lazy(() => import("./Root/Root"));
+const Search = lazy(() => import("./Search/Search"));
+const SignIn = lazy(() => import("./SignIn/SignIn"));
+const SignUp = lazy(() => import("./SignUp/SignUp"));
 
 export const AppRouter: Component = () => {
   return (
