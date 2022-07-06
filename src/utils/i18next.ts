@@ -94,7 +94,9 @@ const dict = {
       signOut: "Sign Out",
       title: "Album Reviews",
     },
-    home: {},
+    home: {
+      refetch: "Reload",
+    },
     loading: {
       text: "Loading...",
     },
