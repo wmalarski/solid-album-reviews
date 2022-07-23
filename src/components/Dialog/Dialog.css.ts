@@ -21,7 +21,6 @@ export const container = style([
 
 export const content = sprinkles({
   backgroundColor: "background",
-  color: "black100",
   padding: "8",
 });
 

@@ -6,10 +6,20 @@ import type { AlbumDataLoaderResult } from "./Album.data";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
 
 const Album: Component = () => {
-  const { albumId } = useRouteData<AlbumDataLoaderResult>();
+  const { album } = useRouteData<AlbumDataLoaderResult>();
+
+  const isValid = () => {
+    const result = album();
+
+    if (!result) {
+      return true;
+    }
+
+    return !!result.data;
+  };
 
   return (
-    <Show when={albumId()} fallback={<Navigate href={paths.notFound} />}>
+    <Show when={isValid()} fallback={<Navigate href={paths.notFound} />}>
       <div class={classes.container}>
         <AlbumDetails />
         <Outlet />
