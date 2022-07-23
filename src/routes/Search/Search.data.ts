@@ -39,7 +39,11 @@ export const searchDataLoader = ({
     return Math.ceil(count / pageLimit);
   };
 
-  return { albums, maxPage, refetch };
+  const page = () => {
+    return +(location.query.page || "0") || 0;
+  };
+
+  return { albums, maxPage, page, refetch };
 };
 
 export type SearchDataLoaderResult = ReturnType<typeof searchDataLoader>;

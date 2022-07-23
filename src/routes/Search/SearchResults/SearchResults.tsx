@@ -1,17 +1,18 @@
 import { Pagination } from "@components/Pagination/Pagination";
-import { useRouteData } from "solid-app-router";
+import { useRouteData, useSearchParams } from "solid-app-router";
 import { Component, For } from "solid-js";
 import { SearchDataLoaderResult } from "../Search.data";
 import { ResultItem } from "./ResultItem/ResultItem";
 import * as classes from "./SearchResults.css";
 
-type Props = {
-  page: number;
-  onPageChange: (page: number) => void;
-};
+export const SearchResults: Component = () => {
+  const [, setSearchParams] = useSearchParams();
 
-export const SearchResults: Component<Props> = (props) => {
-  const { albums, maxPage } = useRouteData<SearchDataLoaderResult>();
+  const { albums, maxPage, page } = useRouteData<SearchDataLoaderResult>();
+
+  const handlePageChange = (update: number) => {
+    setSearchParams({ page: update });
+  };
 
   return (
     <div class={classes.container}>
@@ -19,9 +20,9 @@ export const SearchResults: Component<Props> = (props) => {
         {(album) => <ResultItem album={album} />}
       </For>
       <Pagination
-        current={props.page}
+        current={page()}
         maxPage={maxPage()}
-        onChange={(page) => props.onPageChange(page)}
+        onChange={handlePageChange}
       />
     </div>
   );

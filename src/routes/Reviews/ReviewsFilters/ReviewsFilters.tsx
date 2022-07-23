@@ -3,24 +3,24 @@ import { FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import { useI18n } from "@solid-primitives/i18n";
 import { debounce } from "@solid-primitives/scheduled";
+import { useRouteData, useSearchParams } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
-import { ReviewsLoaderArgs } from "../Reviews.utils";
+import { ReviewsDataLoaderReturn, ReviewsLoaderArgs } from "../Reviews.data";
 import * as classes from "./ReviewsFilters.css";
 
-type Props = {
-  args: ReviewsLoaderArgs;
-  onArgsChange: (range: ReviewsLoaderArgs) => void;
-};
+export const ReviewsFilters: Component = () => {
+  const [, setSearchParams] = useSearchParams();
 
-export const ReviewsFilters: Component<Props> = (props) => {
+  const { args } = useRouteData<ReviewsDataLoaderReturn>();
+
   const [t] = useI18n();
 
   const [input, setInput] = createSignal("");
   const [lower, setLower] = createSignal(0);
   const [upper, setUpper] = createSignal(10);
 
-  const debouncedSetArgs = debounce((args: Partial<ReviewsLoaderArgs>) => {
-    props.onArgsChange({ ...props.args, ...args });
+  const debouncedSetArgs = debounce((update: Partial<ReviewsLoaderArgs>) => {
+    setSearchParams({ ...args(), page: 0, ...update });
   }, 250);
 
   const handleInputChange = (value: string) => {
@@ -41,7 +41,12 @@ export const ReviewsFilters: Component<Props> = (props) => {
   };
 
   const handleButtonClick = () => {
-    props.onArgsChange({ lower: lower(), query: input(), upper: upper() });
+    setSearchParams({
+      lower: lower(),
+      page: 0,
+      query: input(),
+      upper: upper(),
+    });
   };
 
   return (

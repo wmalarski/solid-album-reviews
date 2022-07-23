@@ -1,5 +1,6 @@
 import { Route, Routes } from "solid-app-router";
 import { Component, lazy } from "solid-js";
+import { reviewsDataLoader } from "./Reviews/Reviews.data";
 import { searchDataLoader } from "./Search/Search.data";
 
 const Album = lazy(() => import("./Album/Album"));
@@ -27,7 +28,11 @@ export const AppRouter: Component = () => {
         <Route path="/" element={<Protected />}>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} data={searchDataLoader} />
-          <Route path="/reviews" element={<Reviews />} />
+          <Route
+            path="/reviews"
+            element={<Reviews />}
+            data={reviewsDataLoader}
+          />
           <Route path="/album/:albumId" element={<Album />} />
         </Route>
       </Route>

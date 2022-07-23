@@ -3,20 +3,23 @@ import { FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import { useI18n } from "@solid-primitives/i18n";
 import { debounce } from "@solid-primitives/scheduled";
+import { useSearchParams } from "solid-app-router";
 import { Component, createSignal } from "solid-js";
 import * as classes from "./SearchInput.css";
 
-type Props = {
-  onQueryChange: (query: string) => void;
-};
+export const SearchInput: Component = () => {
+  const [, setSearchParams] = useSearchParams();
 
-export const SearchInput: Component<Props> = (props) => {
   const [t] = useI18n();
 
   const [input, setInput] = createSignal("");
 
+  const handleQueryChange = (update: string) => {
+    setSearchParams({ page: 0, query: update });
+  };
+
   const debouncedSetQuery = debounce((arg: string) => {
-    props.onQueryChange(arg);
+    handleQueryChange(arg);
   }, 250);
 
   const handleInputChange = (value: string) => {
@@ -25,7 +28,7 @@ export const SearchInput: Component<Props> = (props) => {
   };
 
   const handleButtonClick = () => {
-    props.onQueryChange(input());
+    handleQueryChange(input());
   };
 
   return (
