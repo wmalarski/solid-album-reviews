@@ -1,7 +1,7 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
-import { SearchDataLoaderResult } from "@routes/Search/Search.data";
+import type { SearchDataLoaderResult } from "@routes/Search/Search.data";
 import { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";

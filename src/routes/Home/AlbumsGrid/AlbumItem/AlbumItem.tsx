@@ -7,7 +7,7 @@ import { paths } from "@utils/paths";
 import clsx from "clsx";
 import { useNavigate, useRouteData } from "solid-app-router";
 import { Component, createMemo, createSignal, Show } from "solid-js";
-import { HomeDataLoaderResult } from "../../Home.data";
+import type { HomeDataLoaderResult } from "../../Home.data";
 import * as classes from "./AlbumItem.css";
 
 type Props = {

@@ -2,7 +2,7 @@ import { Button } from "@components/Button/Button";
 import { useI18n } from "@solid-primitives/i18n";
 import { useRouteData } from "solid-app-router";
 import { Component, For, Show } from "solid-js";
-import { HomeDataLoaderResult } from "../Home.data";
+import type { HomeDataLoaderResult } from "../Home.data";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
 import * as classes from "./AlbumsGrid.css";
 import { requireAlbumFragment } from "./AlbumsGrid.utils";

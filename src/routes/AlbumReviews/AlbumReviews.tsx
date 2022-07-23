@@ -1,17 +1,19 @@
 import { Pagination } from "@components/Pagination/Pagination";
+import { useRouteData, useSearchParams } from "solid-app-router";
 import { Component, For, Show } from "solid-js";
-import { useAlbumResource } from "../Album.utils";
 import * as classes from "./AlbumReviews.css";
+import type { AlbumReviewDataLoaderResult } from "./AlbumReviews.data";
 import { AlbumReviewsItem } from "./AlbumReviewsItem/AlbumReviewsItem";
 
-type Props = {
-  albumId: number;
-  page: number;
-  onPageChange: (page: number) => void;
-};
+const AlbumReviews: Component = () => {
+  const [, setSearchParams] = useSearchParams();
 
-export const AlbumReviews: Component<Props> = (props) => {
-  const { album, albums, maxPage } = useAlbumResource();
+  const handlePageChange = (update: number) => {
+    setSearchParams({ page: update });
+  };
+
+  const { album, albums, maxPage, page, albumId } =
+    useRouteData<AlbumReviewDataLoaderResult>();
 
   return (
     <div class={classes.container}>
@@ -21,17 +23,19 @@ export const AlbumReviews: Component<Props> = (props) => {
             {(album) => (
               <AlbumReviewsItem
                 album={{ ...album, artistByArtist: artist }}
-                isCurrent={album.id === props.albumId}
+                isCurrent={album.id === albumId()}
               />
             )}
           </For>
         )}
       </Show>
       <Pagination
-        current={props.page}
+        current={page()}
         maxPage={maxPage()}
-        onChange={(page) => props.onPageChange(page)}
+        onChange={handlePageChange}
       />
     </div>
   );
 };
+
+export default AlbumReviews;

@@ -2,22 +2,22 @@ import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
-import { useNavigate } from "solid-app-router";
+import { useNavigate, useRouteData } from "solid-app-router";
 import { Component, Show } from "solid-js";
-import { useAlbumResource } from "../Album.utils";
+import type { AlbumDataLoaderResult } from "../Album.data";
 import * as classes from "./AlbumDetails.css";
 
 export const AlbumDetails: Component = () => {
   const navigate = useNavigate();
 
-  const { album, refetchAlbum } = useAlbumResource();
+  const { album, refetch } = useRouteData<AlbumDataLoaderResult>();
 
   const handleAlbumDelete = () => {
     navigate(paths.root);
   };
 
   const handleAlbumUpdate = () => {
-    refetchAlbum();
+    refetch();
   };
 
   return (
