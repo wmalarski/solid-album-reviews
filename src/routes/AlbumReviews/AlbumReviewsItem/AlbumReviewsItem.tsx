@@ -1,7 +1,6 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
-import { useAlbumResource } from "@routes/Album/Album.utils";
 import {
   AlbumWithArtistFragment,
   AlbumWithReviewsFragment,
@@ -9,8 +8,9 @@ import {
 import { useI18n } from "@solid-primitives/i18n";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
-import { useNavigate } from "solid-app-router";
+import { useNavigate, useRouteData } from "solid-app-router";
 import { Component, For, Show } from "solid-js";
+import { AlbumReviewDataLoaderResult } from "../AlbumReviews.data";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
 
@@ -23,7 +23,8 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
   const [t] = useI18n();
 
   const navigate = useNavigate();
-  const { refetchAlbums, refetchAlbum } = useAlbumResource();
+  const { refetchAlbums, refetchAlbum } =
+    useRouteData<AlbumReviewDataLoaderResult>();
 
   const handleAlbumDelete = () => {
     if (props.isCurrent) {
