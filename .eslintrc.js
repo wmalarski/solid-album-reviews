@@ -43,7 +43,6 @@ module.exports = {
     "sort-keys-fix/sort-keys-fix": "warn",
     "@typescript-eslint/array-type": "error",
     "@typescript-eslint/consistent-type-definitions": ["error", "type"],
-    "@typescript-eslint/explicit-module-boundary-types": "error",
     "@typescript-eslint/naming-convention": [
       "error",
       {

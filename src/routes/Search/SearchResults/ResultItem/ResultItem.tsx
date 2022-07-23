@@ -1,10 +1,11 @@
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
-import { useSearchResource } from "@routes/Search/Search.utils";
+import { SearchDataLoaderResult } from "@routes/Search/Search.data";
 import { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
+import { useRouteData } from "solid-app-router";
 import { Component } from "solid-js";
 import * as classes from "./ResultItem.css";
 
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export const ResultItem: Component<Props> = (props) => {
-  const { refetch } = useSearchResource();
+  const { refetch } = useRouteData<SearchDataLoaderResult>();
 
   return (
     <div class={classes.container}>

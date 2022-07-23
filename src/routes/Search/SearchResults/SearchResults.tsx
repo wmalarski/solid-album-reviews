@@ -1,6 +1,7 @@
 import { Pagination } from "@components/Pagination/Pagination";
+import { useRouteData } from "solid-app-router";
 import { Component, For } from "solid-js";
-import { useSearchResource } from "../Search.utils";
+import { SearchDataLoaderResult } from "../Search.data";
 import { ResultItem } from "./ResultItem/ResultItem";
 import * as classes from "./SearchResults.css";
 
@@ -10,7 +11,7 @@ type Props = {
 };
 
 export const SearchResults: Component<Props> = (props) => {
-  const { albums, maxPage } = useSearchResource();
+  const { albums, maxPage } = useRouteData<SearchDataLoaderResult>();
 
   return (
     <div class={classes.container}>
