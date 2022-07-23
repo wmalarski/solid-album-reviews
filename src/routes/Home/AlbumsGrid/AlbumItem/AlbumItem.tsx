@@ -5,9 +5,9 @@ import type { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
 import { paths } from "@utils/paths";
 import clsx from "clsx";
-import { useNavigate } from "solid-app-router";
+import { useNavigate, useRouteData } from "solid-app-router";
 import { Component, createMemo, createSignal, Show } from "solid-js";
-import { useHomeResource } from "../../Home.utils";
+import { HomeDataLoaderResult } from "../../Home.data";
 import * as classes from "./AlbumItem.css";
 
 type Props = {
@@ -15,7 +15,8 @@ type Props = {
 };
 
 export const AlbumItem: Component<Props> = (props) => {
-  const { refetch } = useHomeResource();
+  const { refetch } = useRouteData<HomeDataLoaderResult>();
+
   const navigate = useNavigate();
 
   const [isHovering, setIsHovering] = createSignal(false);
