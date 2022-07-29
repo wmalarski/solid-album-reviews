@@ -4,53 +4,58 @@ import { albumDataLoader } from "./Album/Album.data";
 import { albumReviewsDataLoader } from "./AlbumReviews/AlbumReviews.data";
 import { homeDataLoader } from "./Home/Home.data";
 import { reviewsDataLoader } from "./Reviews/Reviews.data";
+import { reviewsGridDataLoader } from "./ReviewsGrid/ReviewsGrid.data";
 import { searchDataLoader } from "./Search/Search.data";
-
-const Album = lazy(() => import("./Album/Album"));
-const AlbumReviews = lazy(() => import("./AlbumReviews/AlbumReviews"));
-const Auth = lazy(() => import("./Auth/Auth"));
-const Home = lazy(() => import("./Home/Home"));
-const NotFound = lazy(() => import("./NotFound/NotFound"));
-const Protected = lazy(() => import("./Protected/Protected"));
-const Public = lazy(() => import("./Public/Public"));
-const Reviews = lazy(() => import("./Reviews/Reviews"));
-const Root = lazy(() => import("./Root/Root"));
-const Search = lazy(() => import("./Search/Search"));
-const SignIn = lazy(() => import("./SignIn/SignIn"));
-const SignUp = lazy(() => import("./SignUp/SignUp"));
 
 export const AppRouter: Component = () => {
   return (
     <Routes>
-      <Route path="/" element={<Root />}>
-        <Route path="/auth" element={<Public />}>
-          <Route path="/" element={<Auth />}>
-            <Route path="/" element={<SignIn />} />
-            <Route path="/signUp" element={<SignUp />} />
+      <Route path="/" component={lazy(() => import("./Root/Root"))}>
+        <Route path="/auth" component={lazy(() => import("./Public/Public"))}>
+          <Route path="/" component={lazy(() => import("./Auth/Auth"))}>
+            <Route path="/" component={lazy(() => import("./SignIn/SignIn"))} />
+            <Route
+              path="/signUp"
+              component={lazy(() => import("./SignUp/SignUp"))}
+            />
           </Route>
         </Route>
-        <Route path="/" element={<Protected />}>
-          <Route path="/" element={<Home />} data={homeDataLoader} />
-          <Route path="/search" element={<Search />} data={searchDataLoader} />
+        <Route path="/" component={lazy(() => import("./Protected/Protected"))}>
           <Route
-            path="/reviews"
-            element={<Reviews />}
-            data={reviewsDataLoader}
+            path="/"
+            component={lazy(() => import("./Home/Home"))}
+            data={homeDataLoader}
           />
           <Route
+            path="/search"
+            component={lazy(() => import("./Search/Search"))}
+            data={searchDataLoader}
+          />
+          <Route
+            path="/reviews"
+            component={lazy(() => import("./Reviews/Reviews"))}
+            data={reviewsDataLoader}
+          >
+            <Route
+              path="/"
+              component={lazy(() => import("./ReviewsGrid/ReviewsGrid"))}
+              data={reviewsGridDataLoader}
+            />
+          </Route>
+          <Route
             path="/album/:albumId"
-            element={<Album />}
+            component={lazy(() => import("./Album/Album"))}
             data={albumDataLoader}
           >
             <Route
               path="/"
-              element={<AlbumReviews />}
+              component={lazy(() => import("./AlbumReviews/AlbumReviews"))}
               data={albumReviewsDataLoader}
             />
           </Route>
         </Route>
       </Route>
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" component={lazy(() => import("./NotFound/NotFound"))} />
     </Routes>
   );
 };

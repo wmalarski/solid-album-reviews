@@ -12,6 +12,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  bigint: any;
+  bytea: any;
   citext: any;
   jsonb: any;
   numeric: any;
@@ -19,13 +21,8 @@ export type Scalars = {
   uuid: any;
 };
 
-export type BooleanCastExp = {
-  String?: InputMaybe<StringComparisonExp>;
-};
-
 /** Boolean expression to compare columns of type "Boolean". All fields are combined with logical 'AND'. */
 export type BooleanComparisonExp = {
-  _cast?: InputMaybe<BooleanCastExp>;
   _eq?: InputMaybe<Scalars['Boolean']>;
   _gt?: InputMaybe<Scalars['Boolean']>;
   _gte?: InputMaybe<Scalars['Boolean']>;
@@ -37,13 +34,8 @@ export type BooleanComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['Boolean']>>;
 };
 
-export type IntCastExp = {
-  String?: InputMaybe<StringComparisonExp>;
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type IntComparisonExp = {
-  _cast?: InputMaybe<IntCastExp>;
   _eq?: InputMaybe<Scalars['Int']>;
   _gt?: InputMaybe<Scalars['Int']>;
   _gte?: InputMaybe<Scalars['Int']>;
@@ -788,14 +780,14 @@ export type ArtistVarianceFields = {
   profile?: Maybe<Scalars['Float']>;
 };
 
-/** columns and relationships of "auth.provider_requests" */
+/** Oauth requests, inserted before redirecting to the provider's site. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthProviderRequests = {
   id: Scalars['uuid'];
   options?: Maybe<Scalars['jsonb']>;
 };
 
 
-/** columns and relationships of "auth.provider_requests" */
+/** Oauth requests, inserted before redirecting to the provider's site. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthProviderRequestsOptionsArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
@@ -924,7 +916,7 @@ export enum AuthProviderRequestsUpdateColumn {
   Options = 'options'
 }
 
-/** columns and relationships of "auth.providers" */
+/** List of available Oauth providers. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthProviders = {
   id: Scalars['String'];
   /** An array relationship */
@@ -934,7 +926,7 @@ export type AuthProviders = {
 };
 
 
-/** columns and relationships of "auth.providers" */
+/** List of available Oauth providers. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthProvidersUserProvidersArgs = {
   distinct_on?: InputMaybe<Array<AuthUserProvidersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -944,7 +936,7 @@ export type AuthProvidersUserProvidersArgs = {
 };
 
 
-/** columns and relationships of "auth.providers" */
+/** List of available Oauth providers. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthProvidersUserProvidersAggregateArgs = {
   distinct_on?: InputMaybe<Array<AuthUserProvidersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1054,7 +1046,7 @@ export enum AuthProvidersUpdateColumn {
   Id = 'id'
 }
 
-/** columns and relationships of "auth.refresh_tokens" */
+/** User refresh tokens. Hasura auth uses them to rotate new access tokens as long as the refresh token is not expired. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRefreshTokens = {
   createdAt: Scalars['timestamptz'];
   expiresAt: Scalars['timestamptz'];
@@ -1218,7 +1210,7 @@ export enum AuthRefreshTokensUpdateColumn {
   UserId = 'userId'
 }
 
-/** columns and relationships of "auth.roles" */
+/** Persistent Hasura roles for users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRoles = {
   role: Scalars['String'];
   /** An array relationship */
@@ -1232,7 +1224,7 @@ export type AuthRoles = {
 };
 
 
-/** columns and relationships of "auth.roles" */
+/** Persistent Hasura roles for users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRolesUserRolesArgs = {
   distinct_on?: InputMaybe<Array<AuthUserRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1242,7 +1234,7 @@ export type AuthRolesUserRolesArgs = {
 };
 
 
-/** columns and relationships of "auth.roles" */
+/** Persistent Hasura roles for users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRolesUserRolesAggregateArgs = {
   distinct_on?: InputMaybe<Array<AuthUserRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1252,7 +1244,7 @@ export type AuthRolesUserRolesAggregateArgs = {
 };
 
 
-/** columns and relationships of "auth.roles" */
+/** Persistent Hasura roles for users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRolesUsersByDefaultRoleArgs = {
   distinct_on?: InputMaybe<Array<UsersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1262,7 +1254,7 @@ export type AuthRolesUsersByDefaultRoleArgs = {
 };
 
 
-/** columns and relationships of "auth.roles" */
+/** Persistent Hasura roles for users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthRolesUsersByDefaultRoleAggregateArgs = {
   distinct_on?: InputMaybe<Array<UsersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1375,7 +1367,296 @@ export enum AuthRolesUpdateColumn {
   Role = 'role'
 }
 
-/** columns and relationships of "auth.user_providers" */
+/** User webauthn authenticators. Don't modify its structure as Hasura Auth relies on it to function properly. */
+export type AuthUserAuthenticators = {
+  counter: Scalars['bigint'];
+  credentialId: Scalars['String'];
+  credentialPublicKey?: Maybe<Scalars['bytea']>;
+  id: Scalars['uuid'];
+  transports: Scalars['String'];
+  /** An object relationship */
+  user: Users;
+  userId: Scalars['uuid'];
+};
+
+/** aggregated selection of "auth.user_authenticators" */
+export type AuthUserAuthenticatorsAggregate = {
+  aggregate?: Maybe<AuthUserAuthenticatorsAggregateFields>;
+  nodes: Array<AuthUserAuthenticators>;
+};
+
+/** aggregate fields of "auth.user_authenticators" */
+export type AuthUserAuthenticatorsAggregateFields = {
+  avg?: Maybe<AuthUserAuthenticatorsAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<AuthUserAuthenticatorsMaxFields>;
+  min?: Maybe<AuthUserAuthenticatorsMinFields>;
+  stddev?: Maybe<AuthUserAuthenticatorsStddevFields>;
+  stddev_pop?: Maybe<AuthUserAuthenticatorsStddevPopFields>;
+  stddev_samp?: Maybe<AuthUserAuthenticatorsStddevSampFields>;
+  sum?: Maybe<AuthUserAuthenticatorsSumFields>;
+  var_pop?: Maybe<AuthUserAuthenticatorsVarPopFields>;
+  var_samp?: Maybe<AuthUserAuthenticatorsVarSampFields>;
+  variance?: Maybe<AuthUserAuthenticatorsVarianceFields>;
+};
+
+
+/** aggregate fields of "auth.user_authenticators" */
+export type AuthUserAuthenticatorsAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsAggregateOrderBy = {
+  avg?: InputMaybe<AuthUserAuthenticatorsAvgOrderBy>;
+  count?: InputMaybe<OrderBy>;
+  max?: InputMaybe<AuthUserAuthenticatorsMaxOrderBy>;
+  min?: InputMaybe<AuthUserAuthenticatorsMinOrderBy>;
+  stddev?: InputMaybe<AuthUserAuthenticatorsStddevOrderBy>;
+  stddev_pop?: InputMaybe<AuthUserAuthenticatorsStddevPopOrderBy>;
+  stddev_samp?: InputMaybe<AuthUserAuthenticatorsStddevSampOrderBy>;
+  sum?: InputMaybe<AuthUserAuthenticatorsSumOrderBy>;
+  var_pop?: InputMaybe<AuthUserAuthenticatorsVarPopOrderBy>;
+  var_samp?: InputMaybe<AuthUserAuthenticatorsVarSampOrderBy>;
+  variance?: InputMaybe<AuthUserAuthenticatorsVarianceOrderBy>;
+};
+
+/** input type for inserting array relation for remote table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsArrRelInsertInput = {
+  data: Array<AuthUserAuthenticatorsInsertInput>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<AuthUserAuthenticatorsOnConflict>;
+};
+
+/** aggregate avg on columns */
+export type AuthUserAuthenticatorsAvgFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsAvgOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** Boolean expression to filter rows from the table "auth.user_authenticators". All fields are combined with a logical 'AND'. */
+export type AuthUserAuthenticatorsBoolExp = {
+  _and?: InputMaybe<Array<AuthUserAuthenticatorsBoolExp>>;
+  _not?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+  _or?: InputMaybe<Array<AuthUserAuthenticatorsBoolExp>>;
+  counter?: InputMaybe<BigintComparisonExp>;
+  credentialId?: InputMaybe<StringComparisonExp>;
+  credentialPublicKey?: InputMaybe<ByteaComparisonExp>;
+  id?: InputMaybe<UuidComparisonExp>;
+  transports?: InputMaybe<StringComparisonExp>;
+  user?: InputMaybe<UsersBoolExp>;
+  userId?: InputMaybe<UuidComparisonExp>;
+};
+
+/** unique or primary key constraints on table "auth.user_authenticators" */
+export enum AuthUserAuthenticatorsConstraint {
+  /** unique or primary key constraint on columns "credential_id" */
+  UserAuthenticatorsCredentialIdKey = 'user_authenticators_credential_id_key',
+  /** unique or primary key constraint on columns "id" */
+  UserAuthenticatorsPkey = 'user_authenticators_pkey'
+}
+
+/** input type for incrementing numeric columns in table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsIncInput = {
+  counter?: InputMaybe<Scalars['bigint']>;
+};
+
+/** input type for inserting data into table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsInsertInput = {
+  counter?: InputMaybe<Scalars['bigint']>;
+  credentialId?: InputMaybe<Scalars['String']>;
+  credentialPublicKey?: InputMaybe<Scalars['bytea']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  transports?: InputMaybe<Scalars['String']>;
+  user?: InputMaybe<UsersObjRelInsertInput>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate max on columns */
+export type AuthUserAuthenticatorsMaxFields = {
+  counter?: Maybe<Scalars['bigint']>;
+  credentialId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  transports?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by max() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsMaxOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+  credentialId?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  transports?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** aggregate min on columns */
+export type AuthUserAuthenticatorsMinFields = {
+  counter?: Maybe<Scalars['bigint']>;
+  credentialId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['uuid']>;
+  transports?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsMinOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+  credentialId?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  transports?: InputMaybe<OrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** response of any mutation on the table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsMutationResponse = {
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<AuthUserAuthenticators>;
+};
+
+/** on_conflict condition type for table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsOnConflict = {
+  constraint: AuthUserAuthenticatorsConstraint;
+  update_columns?: Array<AuthUserAuthenticatorsUpdateColumn>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+};
+
+/** Ordering options when selecting data from "auth.user_authenticators". */
+export type AuthUserAuthenticatorsOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+  credentialId?: InputMaybe<OrderBy>;
+  credentialPublicKey?: InputMaybe<OrderBy>;
+  id?: InputMaybe<OrderBy>;
+  transports?: InputMaybe<OrderBy>;
+  user?: InputMaybe<UsersOrderBy>;
+  userId?: InputMaybe<OrderBy>;
+};
+
+/** primary key columns input for table: authUserAuthenticators */
+export type AuthUserAuthenticatorsPkColumnsInput = {
+  id: Scalars['uuid'];
+};
+
+/** select columns of table "auth.user_authenticators" */
+export enum AuthUserAuthenticatorsSelectColumn {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  CredentialId = 'credentialId',
+  /** column name */
+  CredentialPublicKey = 'credentialPublicKey',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Transports = 'transports',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** input type for updating data in table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsSetInput = {
+  counter?: InputMaybe<Scalars['bigint']>;
+  credentialId?: InputMaybe<Scalars['String']>;
+  credentialPublicKey?: InputMaybe<Scalars['bytea']>;
+  id?: InputMaybe<Scalars['uuid']>;
+  transports?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['uuid']>;
+};
+
+/** aggregate stddev on columns */
+export type AuthUserAuthenticatorsStddevFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsStddevOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddev_pop on columns */
+export type AuthUserAuthenticatorsStddevPopFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsStddevPopOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** aggregate stddev_samp on columns */
+export type AuthUserAuthenticatorsStddevSampFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsStddevSampOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** aggregate sum on columns */
+export type AuthUserAuthenticatorsSumFields = {
+  counter?: Maybe<Scalars['bigint']>;
+};
+
+/** order by sum() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsSumOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** update columns of table "auth.user_authenticators" */
+export enum AuthUserAuthenticatorsUpdateColumn {
+  /** column name */
+  Counter = 'counter',
+  /** column name */
+  CredentialId = 'credentialId',
+  /** column name */
+  CredentialPublicKey = 'credentialPublicKey',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Transports = 'transports',
+  /** column name */
+  UserId = 'userId'
+}
+
+/** aggregate var_pop on columns */
+export type AuthUserAuthenticatorsVarPopFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsVarPopOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** aggregate var_samp on columns */
+export type AuthUserAuthenticatorsVarSampFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsVarSampOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** aggregate variance on columns */
+export type AuthUserAuthenticatorsVarianceFields = {
+  counter?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "auth.user_authenticators" */
+export type AuthUserAuthenticatorsVarianceOrderBy = {
+  counter?: InputMaybe<OrderBy>;
+};
+
+/** Active providers for a given user. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthUserProviders = {
   accessToken: Scalars['String'];
   createdAt: Scalars['timestamptz'];
@@ -1600,7 +1881,7 @@ export enum AuthUserProvidersUpdateColumn {
   UserId = 'userId'
 }
 
-/** columns and relationships of "auth.user_roles" */
+/** Roles of users. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type AuthUserRoles = {
   createdAt: Scalars['timestamptz'];
   id: Scalars['uuid'];
@@ -1770,6 +2051,19 @@ export enum AuthUserRolesUpdateColumn {
   /** column name */
   UserId = 'userId'
 }
+
+/** Boolean expression to compare columns of type "bigint". All fields are combined with logical 'AND'. */
+export type BigintComparisonExp = {
+  _eq?: InputMaybe<Scalars['bigint']>;
+  _gt?: InputMaybe<Scalars['bigint']>;
+  _gte?: InputMaybe<Scalars['bigint']>;
+  _in?: InputMaybe<Array<Scalars['bigint']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bigint']>;
+  _lte?: InputMaybe<Scalars['bigint']>;
+  _neq?: InputMaybe<Scalars['bigint']>;
+  _nin?: InputMaybe<Array<Scalars['bigint']>>;
+};
 
 /** columns and relationships of "storage.buckets" */
 export type Buckets = {
@@ -2045,6 +2339,19 @@ export type BucketsVarianceFields = {
   downloadExpiration?: Maybe<Scalars['Float']>;
   maxUploadFileSize?: Maybe<Scalars['Float']>;
   minUploadFileSize?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to compare columns of type "bytea". All fields are combined with logical 'AND'. */
+export type ByteaComparisonExp = {
+  _eq?: InputMaybe<Scalars['bytea']>;
+  _gt?: InputMaybe<Scalars['bytea']>;
+  _gte?: InputMaybe<Scalars['bytea']>;
+  _in?: InputMaybe<Array<Scalars['bytea']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['bytea']>;
+  _lte?: InputMaybe<Scalars['bytea']>;
+  _neq?: InputMaybe<Scalars['bytea']>;
+  _nin?: InputMaybe<Array<Scalars['bytea']>>;
 };
 
 /** Boolean expression to compare columns of type "citext". All fields are combined with logical 'AND'. */
@@ -2465,6 +2772,10 @@ export type MutationRoot = {
   deleteAuthRole?: Maybe<AuthRoles>;
   /** delete data from the table: "auth.roles" */
   deleteAuthRoles?: Maybe<AuthRolesMutationResponse>;
+  /** delete single row from the table: "auth.user_authenticators" */
+  deleteAuthUserAuthenticator?: Maybe<AuthUserAuthenticators>;
+  /** delete data from the table: "auth.user_authenticators" */
+  deleteAuthUserAuthenticators?: Maybe<AuthUserAuthenticatorsMutationResponse>;
   /** delete single row from the table: "auth.user_providers" */
   deleteAuthUserProvider?: Maybe<AuthUserProviders>;
   /** delete data from the table: "auth.user_providers" */
@@ -2521,6 +2832,10 @@ export type MutationRoot = {
   insertAuthRole?: Maybe<AuthRoles>;
   /** insert data into the table: "auth.roles" */
   insertAuthRoles?: Maybe<AuthRolesMutationResponse>;
+  /** insert a single row into the table: "auth.user_authenticators" */
+  insertAuthUserAuthenticator?: Maybe<AuthUserAuthenticators>;
+  /** insert data into the table: "auth.user_authenticators" */
+  insertAuthUserAuthenticators?: Maybe<AuthUserAuthenticatorsMutationResponse>;
   /** insert a single row into the table: "auth.user_providers" */
   insertAuthUserProvider?: Maybe<AuthUserProviders>;
   /** insert data into the table: "auth.user_providers" */
@@ -2577,6 +2892,10 @@ export type MutationRoot = {
   updateAuthRole?: Maybe<AuthRoles>;
   /** update data of the table: "auth.roles" */
   updateAuthRoles?: Maybe<AuthRolesMutationResponse>;
+  /** update single row of the table: "auth.user_authenticators" */
+  updateAuthUserAuthenticator?: Maybe<AuthUserAuthenticators>;
+  /** update data of the table: "auth.user_authenticators" */
+  updateAuthUserAuthenticators?: Maybe<AuthUserAuthenticatorsMutationResponse>;
   /** update single row of the table: "auth.user_providers" */
   updateAuthUserProvider?: Maybe<AuthUserProviders>;
   /** update data of the table: "auth.user_providers" */
@@ -2665,6 +2984,18 @@ export type MutationRootDeleteAuthRoleArgs = {
 /** mutation root */
 export type MutationRootDeleteAuthRolesArgs = {
   where: AuthRolesBoolExp;
+};
+
+
+/** mutation root */
+export type MutationRootDeleteAuthUserAuthenticatorArgs = {
+  id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type MutationRootDeleteAuthUserAuthenticatorsArgs = {
+  where: AuthUserAuthenticatorsBoolExp;
 };
 
 
@@ -2841,6 +3172,20 @@ export type MutationRootInsertAuthRoleArgs = {
 export type MutationRootInsertAuthRolesArgs = {
   objects: Array<AuthRolesInsertInput>;
   on_conflict?: InputMaybe<AuthRolesOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertAuthUserAuthenticatorArgs = {
+  object: AuthUserAuthenticatorsInsertInput;
+  on_conflict?: InputMaybe<AuthUserAuthenticatorsOnConflict>;
+};
+
+
+/** mutation root */
+export type MutationRootInsertAuthUserAuthenticatorsArgs = {
+  objects: Array<AuthUserAuthenticatorsInsertInput>;
+  on_conflict?: InputMaybe<AuthUserAuthenticatorsOnConflict>;
 };
 
 
@@ -3051,6 +3396,22 @@ export type MutationRootUpdateAuthRolesArgs = {
 
 
 /** mutation root */
+export type MutationRootUpdateAuthUserAuthenticatorArgs = {
+  _inc?: InputMaybe<AuthUserAuthenticatorsIncInput>;
+  _set?: InputMaybe<AuthUserAuthenticatorsSetInput>;
+  pk_columns: AuthUserAuthenticatorsPkColumnsInput;
+};
+
+
+/** mutation root */
+export type MutationRootUpdateAuthUserAuthenticatorsArgs = {
+  _inc?: InputMaybe<AuthUserAuthenticatorsIncInput>;
+  _set?: InputMaybe<AuthUserAuthenticatorsSetInput>;
+  where: AuthUserAuthenticatorsBoolExp;
+};
+
+
+/** mutation root */
 export type MutationRootUpdateAuthUserProviderArgs = {
   _set?: InputMaybe<AuthUserProvidersSetInput>;
   pk_columns: AuthUserProvidersPkColumnsInput;
@@ -3213,13 +3574,8 @@ export type MutationRootUpdateVisitByPkArgs = {
   pk_columns: VisitPkColumnsInput;
 };
 
-export type NumericCastExp = {
-  String?: InputMaybe<StringComparisonExp>;
-};
-
 /** Boolean expression to compare columns of type "numeric". All fields are combined with logical 'AND'. */
 export type NumericComparisonExp = {
-  _cast?: InputMaybe<NumericCastExp>;
   _eq?: InputMaybe<Scalars['numeric']>;
   _gt?: InputMaybe<Scalars['numeric']>;
   _gte?: InputMaybe<Scalars['numeric']>;
@@ -3568,6 +3924,12 @@ export type QueryRoot = {
   authRoles: Array<AuthRoles>;
   /** fetch aggregated fields from the table: "auth.roles" */
   authRolesAggregate: AuthRolesAggregate;
+  /** fetch data from the table: "auth.user_authenticators" using primary key columns */
+  authUserAuthenticator?: Maybe<AuthUserAuthenticators>;
+  /** fetch data from the table: "auth.user_authenticators" */
+  authUserAuthenticators: Array<AuthUserAuthenticators>;
+  /** fetch aggregated fields from the table: "auth.user_authenticators" */
+  authUserAuthenticatorsAggregate: AuthUserAuthenticatorsAggregate;
   /** fetch data from the table: "auth.user_providers" using primary key columns */
   authUserProvider?: Maybe<AuthUserProviders>;
   /** fetch data from the table: "auth.user_providers" */
@@ -3608,6 +3970,10 @@ export type QueryRoot = {
   review_aggregate: ReviewAggregate;
   /** fetch data from the table: "review" using primary key columns */
   review_by_pk?: Maybe<Review>;
+  /** fetch data from the table: "review_grid" */
+  review_grid: Array<ReviewGrid>;
+  /** fetch aggregated fields from the table: "review_grid" */
+  review_grid_aggregate: ReviewGridAggregate;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
   /** fetch data from the table: "auth.users" */
@@ -3758,6 +4124,29 @@ export type QueryRootAuthRolesAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AuthRolesOrderBy>>;
   where?: InputMaybe<AuthRolesBoolExp>;
+};
+
+
+export type QueryRootAuthUserAuthenticatorArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type QueryRootAuthUserAuthenticatorsArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+};
+
+
+export type QueryRootAuthUserAuthenticatorsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
 };
 
 
@@ -3914,6 +4303,24 @@ export type QueryRootReviewAggregateArgs = {
 
 export type QueryRootReviewByPkArgs = {
   id: Scalars['Int'];
+};
+
+
+export type QueryRootReviewGridArgs = {
+  distinct_on?: InputMaybe<Array<ReviewGridSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<ReviewGridOrderBy>>;
+  where?: InputMaybe<ReviewGridBoolExp>;
+};
+
+
+export type QueryRootReviewGridAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ReviewGridSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<ReviewGridOrderBy>>;
+  where?: InputMaybe<ReviewGridBoolExp>;
 };
 
 
@@ -4231,6 +4638,130 @@ export enum ReviewConstraint {
   ReviewPkey = 'review_pkey'
 }
 
+/** columns and relationships of "review_grid" */
+export type ReviewGrid = {
+  avg?: Maybe<Scalars['numeric']>;
+  count?: Maybe<Scalars['bigint']>;
+  day?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregated selection of "review_grid" */
+export type ReviewGridAggregate = {
+  aggregate?: Maybe<ReviewGridAggregateFields>;
+  nodes: Array<ReviewGrid>;
+};
+
+/** aggregate fields of "review_grid" */
+export type ReviewGridAggregateFields = {
+  avg?: Maybe<ReviewGridAvgFields>;
+  count: Scalars['Int'];
+  max?: Maybe<ReviewGridMaxFields>;
+  min?: Maybe<ReviewGridMinFields>;
+  stddev?: Maybe<ReviewGridStddevFields>;
+  stddev_pop?: Maybe<ReviewGridStddevPopFields>;
+  stddev_samp?: Maybe<ReviewGridStddevSampFields>;
+  sum?: Maybe<ReviewGridSumFields>;
+  var_pop?: Maybe<ReviewGridVarPopFields>;
+  var_samp?: Maybe<ReviewGridVarSampFields>;
+  variance?: Maybe<ReviewGridVarianceFields>;
+};
+
+
+/** aggregate fields of "review_grid" */
+export type ReviewGridAggregateFieldsCountArgs = {
+  columns?: InputMaybe<Array<ReviewGridSelectColumn>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type ReviewGridAvgFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "review_grid". All fields are combined with a logical 'AND'. */
+export type ReviewGridBoolExp = {
+  _and?: InputMaybe<Array<ReviewGridBoolExp>>;
+  _not?: InputMaybe<ReviewGridBoolExp>;
+  _or?: InputMaybe<Array<ReviewGridBoolExp>>;
+  avg?: InputMaybe<NumericComparisonExp>;
+  count?: InputMaybe<BigintComparisonExp>;
+  day?: InputMaybe<TimestamptzComparisonExp>;
+};
+
+/** aggregate max on columns */
+export type ReviewGridMaxFields = {
+  avg?: Maybe<Scalars['numeric']>;
+  count?: Maybe<Scalars['bigint']>;
+  day?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type ReviewGridMinFields = {
+  avg?: Maybe<Scalars['numeric']>;
+  count?: Maybe<Scalars['bigint']>;
+  day?: Maybe<Scalars['timestamptz']>;
+};
+
+/** Ordering options when selecting data from "review_grid". */
+export type ReviewGridOrderBy = {
+  avg?: InputMaybe<OrderBy>;
+  count?: InputMaybe<OrderBy>;
+  day?: InputMaybe<OrderBy>;
+};
+
+/** select columns of table "review_grid" */
+export enum ReviewGridSelectColumn {
+  /** column name */
+  Avg = 'avg',
+  /** column name */
+  Count = 'count',
+  /** column name */
+  Day = 'day'
+}
+
+/** aggregate stddev on columns */
+export type ReviewGridStddevFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type ReviewGridStddevPopFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type ReviewGridStddevSampFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate sum on columns */
+export type ReviewGridSumFields = {
+  avg?: Maybe<Scalars['numeric']>;
+  count?: Maybe<Scalars['bigint']>;
+};
+
+/** aggregate var_pop on columns */
+export type ReviewGridVarPopFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type ReviewGridVarSampFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type ReviewGridVarianceFields = {
+  avg?: Maybe<Scalars['Float']>;
+  count?: Maybe<Scalars['Float']>;
+};
+
 /** input type for incrementing numeric columns in table "review" */
 export type ReviewIncInput = {
   album?: InputMaybe<Scalars['Int']>;
@@ -4536,6 +5067,12 @@ export type SubscriptionRoot = {
   authRoles: Array<AuthRoles>;
   /** fetch aggregated fields from the table: "auth.roles" */
   authRolesAggregate: AuthRolesAggregate;
+  /** fetch data from the table: "auth.user_authenticators" using primary key columns */
+  authUserAuthenticator?: Maybe<AuthUserAuthenticators>;
+  /** fetch data from the table: "auth.user_authenticators" */
+  authUserAuthenticators: Array<AuthUserAuthenticators>;
+  /** fetch aggregated fields from the table: "auth.user_authenticators" */
+  authUserAuthenticatorsAggregate: AuthUserAuthenticatorsAggregate;
   /** fetch data from the table: "auth.user_providers" using primary key columns */
   authUserProvider?: Maybe<AuthUserProviders>;
   /** fetch data from the table: "auth.user_providers" */
@@ -4576,6 +5113,10 @@ export type SubscriptionRoot = {
   review_aggregate: ReviewAggregate;
   /** fetch data from the table: "review" using primary key columns */
   review_by_pk?: Maybe<Review>;
+  /** fetch data from the table: "review_grid" */
+  review_grid: Array<ReviewGrid>;
+  /** fetch aggregated fields from the table: "review_grid" */
+  review_grid_aggregate: ReviewGridAggregate;
   /** fetch data from the table: "auth.users" using primary key columns */
   user?: Maybe<Users>;
   /** fetch data from the table: "auth.users" */
@@ -4726,6 +5267,29 @@ export type SubscriptionRootAuthRolesAggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AuthRolesOrderBy>>;
   where?: InputMaybe<AuthRolesBoolExp>;
+};
+
+
+export type SubscriptionRootAuthUserAuthenticatorArgs = {
+  id: Scalars['uuid'];
+};
+
+
+export type SubscriptionRootAuthUserAuthenticatorsArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+};
+
+
+export type SubscriptionRootAuthUserAuthenticatorsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
 };
 
 
@@ -4885,6 +5449,24 @@ export type SubscriptionRootReviewByPkArgs = {
 };
 
 
+export type SubscriptionRootReviewGridArgs = {
+  distinct_on?: InputMaybe<Array<ReviewGridSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<ReviewGridOrderBy>>;
+  where?: InputMaybe<ReviewGridBoolExp>;
+};
+
+
+export type SubscriptionRootReviewGridAggregateArgs = {
+  distinct_on?: InputMaybe<Array<ReviewGridSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<ReviewGridOrderBy>>;
+  where?: InputMaybe<ReviewGridBoolExp>;
+};
+
+
 export type SubscriptionRootUserArgs = {
   id: Scalars['uuid'];
 };
@@ -4930,13 +5512,8 @@ export type SubscriptionRootVisitByPkArgs = {
   id: Scalars['Int'];
 };
 
-export type TimestamptzCastExp = {
-  String?: InputMaybe<StringComparisonExp>;
-};
-
 /** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
 export type TimestamptzComparisonExp = {
-  _cast?: InputMaybe<TimestamptzCastExp>;
   _eq?: InputMaybe<Scalars['timestamptz']>;
   _gt?: InputMaybe<Scalars['timestamptz']>;
   _gte?: InputMaybe<Scalars['timestamptz']>;
@@ -4948,11 +5525,16 @@ export type TimestamptzComparisonExp = {
   _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
 };
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type Users = {
   activeMfaType?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  authenticators: Array<AuthUserAuthenticators>;
+  /** An aggregate relationship */
+  authenticators_aggregate: AuthUserAuthenticatorsAggregate;
   avatarUrl: Scalars['String'];
   createdAt: Scalars['timestamptz'];
+  currentChallenge?: Maybe<Scalars['String']>;
   defaultRole: Scalars['String'];
   /** An object relationship */
   defaultRoleByRole: AuthRoles;
@@ -4991,13 +5573,33 @@ export type Users = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
+export type UsersAuthenticatorsArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+};
+
+
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
+export type UsersAuthenticatorsAggregateArgs = {
+  distinct_on?: InputMaybe<Array<AuthUserAuthenticatorsSelectColumn>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AuthUserAuthenticatorsOrderBy>>;
+  where?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
+};
+
+
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersMetadataArgs = {
   path?: InputMaybe<Scalars['String']>;
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersRefreshTokensArgs = {
   distinct_on?: InputMaybe<Array<AuthRefreshTokensSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5007,7 +5609,7 @@ export type UsersRefreshTokensArgs = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersRefreshTokensAggregateArgs = {
   distinct_on?: InputMaybe<Array<AuthRefreshTokensSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5017,7 +5619,7 @@ export type UsersRefreshTokensAggregateArgs = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersRolesArgs = {
   distinct_on?: InputMaybe<Array<AuthUserRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5027,7 +5629,7 @@ export type UsersRolesArgs = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersRolesAggregateArgs = {
   distinct_on?: InputMaybe<Array<AuthUserRolesSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5037,7 +5639,7 @@ export type UsersRolesAggregateArgs = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersUserProvidersArgs = {
   distinct_on?: InputMaybe<Array<AuthUserProvidersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5047,7 +5649,7 @@ export type UsersUserProvidersArgs = {
 };
 
 
-/** columns and relationships of "auth.users" */
+/** User account information. Don't modify its structure as Hasura Auth relies on it to function properly. */
 export type UsersUserProvidersAggregateArgs = {
   distinct_on?: InputMaybe<Array<AuthUserProvidersSelectColumn>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -5101,8 +5703,10 @@ export type UsersBoolExp = {
   _not?: InputMaybe<UsersBoolExp>;
   _or?: InputMaybe<Array<UsersBoolExp>>;
   activeMfaType?: InputMaybe<StringComparisonExp>;
+  authenticators?: InputMaybe<AuthUserAuthenticatorsBoolExp>;
   avatarUrl?: InputMaybe<StringComparisonExp>;
   createdAt?: InputMaybe<TimestamptzComparisonExp>;
+  currentChallenge?: InputMaybe<StringComparisonExp>;
   defaultRole?: InputMaybe<StringComparisonExp>;
   defaultRoleByRole?: InputMaybe<AuthRolesBoolExp>;
   disabled?: InputMaybe<BooleanComparisonExp>;
@@ -5158,8 +5762,10 @@ export type UsersDeleteKeyInput = {
 /** input type for inserting data into table "auth.users" */
 export type UsersInsertInput = {
   activeMfaType?: InputMaybe<Scalars['String']>;
+  authenticators?: InputMaybe<AuthUserAuthenticatorsArrRelInsertInput>;
   avatarUrl?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  currentChallenge?: InputMaybe<Scalars['String']>;
   defaultRole?: InputMaybe<Scalars['String']>;
   defaultRoleByRole?: InputMaybe<AuthRolesObjRelInsertInput>;
   disabled?: InputMaybe<Scalars['Boolean']>;
@@ -5192,6 +5798,7 @@ export type UsersMaxFields = {
   activeMfaType?: Maybe<Scalars['String']>;
   avatarUrl?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  currentChallenge?: Maybe<Scalars['String']>;
   defaultRole?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['citext']>;
@@ -5215,6 +5822,7 @@ export type UsersMaxOrderBy = {
   activeMfaType?: InputMaybe<OrderBy>;
   avatarUrl?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  currentChallenge?: InputMaybe<OrderBy>;
   defaultRole?: InputMaybe<OrderBy>;
   displayName?: InputMaybe<OrderBy>;
   email?: InputMaybe<OrderBy>;
@@ -5238,6 +5846,7 @@ export type UsersMinFields = {
   activeMfaType?: Maybe<Scalars['String']>;
   avatarUrl?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
+  currentChallenge?: Maybe<Scalars['String']>;
   defaultRole?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['citext']>;
@@ -5261,6 +5870,7 @@ export type UsersMinOrderBy = {
   activeMfaType?: InputMaybe<OrderBy>;
   avatarUrl?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  currentChallenge?: InputMaybe<OrderBy>;
   defaultRole?: InputMaybe<OrderBy>;
   displayName?: InputMaybe<OrderBy>;
   email?: InputMaybe<OrderBy>;
@@ -5304,8 +5914,10 @@ export type UsersOnConflict = {
 /** Ordering options when selecting data from "auth.users". */
 export type UsersOrderBy = {
   activeMfaType?: InputMaybe<OrderBy>;
+  authenticators_aggregate?: InputMaybe<AuthUserAuthenticatorsAggregateOrderBy>;
   avatarUrl?: InputMaybe<OrderBy>;
   createdAt?: InputMaybe<OrderBy>;
+  currentChallenge?: InputMaybe<OrderBy>;
   defaultRole?: InputMaybe<OrderBy>;
   defaultRoleByRole?: InputMaybe<AuthRolesOrderBy>;
   disabled?: InputMaybe<OrderBy>;
@@ -5351,6 +5963,8 @@ export enum UsersSelectColumn {
   AvatarUrl = 'avatarUrl',
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  CurrentChallenge = 'currentChallenge',
   /** column name */
   DefaultRole = 'defaultRole',
   /** column name */
@@ -5400,6 +6014,7 @@ export type UsersSetInput = {
   activeMfaType?: InputMaybe<Scalars['String']>;
   avatarUrl?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
+  currentChallenge?: InputMaybe<Scalars['String']>;
   defaultRole?: InputMaybe<Scalars['String']>;
   disabled?: InputMaybe<Scalars['Boolean']>;
   displayName?: InputMaybe<Scalars['String']>;
@@ -5431,6 +6046,8 @@ export enum UsersUpdateColumn {
   AvatarUrl = 'avatarUrl',
   /** column name */
   CreatedAt = 'createdAt',
+  /** column name */
+  CurrentChallenge = 'currentChallenge',
   /** column name */
   DefaultRole = 'defaultRole',
   /** column name */
@@ -5475,13 +6092,8 @@ export enum UsersUpdateColumn {
   UpdatedAt = 'updatedAt'
 }
 
-export type UuidCastExp = {
-  String?: InputMaybe<StringComparisonExp>;
-};
-
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
 export type UuidComparisonExp = {
-  _cast?: InputMaybe<UuidCastExp>;
   _eq?: InputMaybe<Scalars['uuid']>;
   _gt?: InputMaybe<Scalars['uuid']>;
   _gte?: InputMaybe<Scalars['uuid']>;
@@ -5943,6 +6555,14 @@ export type DeleteReviewMutationVariables = Exact<{
 
 export type DeleteReviewMutation = { deleteReview?: { returning: Array<{ album: number }> } | null };
 
+export type SelectReviewsGridQueryVariables = Exact<{
+  limit?: InputMaybe<Scalars['Int']>;
+  start?: InputMaybe<Scalars['timestamptz']>;
+}>;
+
+
+export type SelectReviewsGridQuery = { __typename: 'query_root', review_grid: Array<{ count?: any | null, day?: any | null, avg?: any | null }> };
+
 export const Artist = gql`
     fragment Artist on artist {
   id
@@ -6143,6 +6763,20 @@ export const DeleteReview = gql`
     returning {
       album
     }
+  }
+}
+    `;
+export const SelectReviewsGrid = gql`
+    query SelectReviewsGrid($limit: Int, $start: timestamptz) {
+  __typename
+  review_grid(
+    limit: $limit
+    order_by: [{day: desc}]
+    where: {day: {_gte: $start}}
+  ) {
+    count
+    day
+    avg
   }
 }
     `;
@@ -6349,6 +6983,20 @@ export const DeleteReviewDocument = gql`
   }
 }
     `;
+export const SelectReviewsGridDocument = gql`
+    query SelectReviewsGrid($limit: Int, $start: timestamptz) {
+  __typename
+  review_grid(
+    limit: $limit
+    order_by: [{day: desc}]
+    where: {day: {_gte: $start}}
+  ) {
+    count
+    day
+    avg
+  }
+}
+    `;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<{ data?: R, errors?: Array<{ message: string; extensions?: unknown }> }>
 export function getSdk<C>(requester: Requester<C>) {
   return {
@@ -6390,6 +7038,9 @@ export function getSdk<C>(requester: Requester<C>) {
     },
     DeleteReview(variables?: DeleteReviewMutationVariables, options?: C): Promise<{ data?: DeleteReviewMutation, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
       return requester<DeleteReviewMutation, DeleteReviewMutationVariables>(DeleteReviewDocument, variables, options);
+    },
+    SelectReviewsGrid(variables?: SelectReviewsGridQueryVariables, options?: C): Promise<{ data?: SelectReviewsGridQuery, errors?: Array<{ message: string; extensions?: unknown }>, extensions?: unknown }> {
+      return requester<SelectReviewsGridQuery, SelectReviewsGridQueryVariables>(SelectReviewsGridDocument, variables, options);
     }
   };
 }

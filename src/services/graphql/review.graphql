@@ -76,3 +76,16 @@ mutation DeleteReview($id: Int) {
     }
   }
 }
+
+query SelectReviewsGrid($limit: Int, $start: timestamptz) {
+  __typename
+  review_grid(
+    limit: $limit
+    order_by: [{ day: desc }]
+    where: { day: { _gte: $start } }
+  ) {
+    count
+    day
+    avg
+  }
+}
