@@ -1,4 +1,5 @@
 import { graphqlSdk } from "@services/fetcher";
+import { useNhostStatus } from "@services/nhost";
 import { RouteDataFunc } from "solid-app-router";
 import { createResource } from "solid-js";
 
@@ -11,29 +12,37 @@ export type ReviewsLoaderArgs = {
   page: number;
 };
 
-const loader = (args: ReviewsLoaderArgs) => {
+const loader = (args: ReviewsLoaderArgs & { isAuthorized: boolean }) => {
   const pattern = `%${args.query}%`;
-  return graphqlSdk.SelectReviewsWithAlbumAndArtist({
-    limit: pageLimit,
-    offset: args.page * pageLimit,
-    where: {
-      _and: [
-        { rate: { _gte: args.lower } },
-        { rate: { _lte: args.upper } },
-        {
-          _or: [
-            { albumByAlbum: { title: { _ilike: pattern } } },
-            { albumByAlbum: { artistByArtist: { name: { _ilike: pattern } } } },
+  return !args.isAuthorized
+    ? Promise.resolve(null)
+    : graphqlSdk.SelectReviewsWithAlbumAndArtist({
+        limit: pageLimit,
+        offset: args.page * pageLimit,
+        where: {
+          _and: [
+            { rate: { _gte: args.lower } },
+            { rate: { _lte: args.upper } },
+            {
+              _or: [
+                { albumByAlbum: { title: { _ilike: pattern } } },
+                {
+                  albumByAlbum: {
+                    artistByArtist: { name: { _ilike: pattern } },
+                  },
+                },
+              ],
+            },
           ],
         },
-      ],
-    },
-  });
+      });
 };
 
 export const reviewsDataLoader = ({
   location,
 }: Parameters<RouteDataFunc>[0]) => {
+  const status = useNhostStatus();
+
   const args = (): ReviewsLoaderArgs => {
     return {
       lower: +(location.query.lower || "0") || 0,
@@ -43,7 +52,10 @@ export const reviewsDataLoader = ({
     };
   };
 
-  const [reviews, { refetch }] = createResource(() => args(), loader);
+  const [reviews, { refetch }] = createResource(
+    () => ({ ...args(), isAuthorized: status() === "auth" }),
+    loader
+  );
 
   const maxPage = () => {
     const count = reviews()?.data?.reviewAggregate.aggregate?.count || 0;

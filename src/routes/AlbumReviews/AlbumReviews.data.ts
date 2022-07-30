@@ -1,35 +1,41 @@
 import type { AlbumDataLoaderResult } from "@routes/Album/Album.data";
 import { graphqlSdk } from "@services/fetcher";
+import { useNhostStatus } from "@services/nhost";
 import { RouteDataFunc } from "solid-app-router";
 import { createResource } from "solid-js";
 
 type AlbumsLoaderArgs = {
   page: number;
   albumId: number;
+  isAuthorized: boolean;
 };
 
 const pageLimit = 20;
 
-const albumsLoader = ({ page, albumId }: AlbumsLoaderArgs) => {
-  return graphqlSdk.SelectAlbumsWithReviews({
-    limit: pageLimit,
-    offset: page * pageLimit,
-    where: {
-      artistByArtist: {
-        albums: {
-          id: {
-            _eq: albumId,
+const albumsLoader = ({ page, albumId, isAuthorized }: AlbumsLoaderArgs) => {
+  return !isAuthorized
+    ? Promise.resolve(null)
+    : graphqlSdk.SelectAlbumsWithReviews({
+        limit: pageLimit,
+        offset: page * pageLimit,
+        where: {
+          artistByArtist: {
+            albums: {
+              id: {
+                _eq: albumId,
+              },
+            },
           },
         },
-      },
-    },
-  });
+      });
 };
 
 export const albumReviewsDataLoader = ({
   location,
   data,
 }: Parameters<RouteDataFunc>[0]) => {
+  const status = useNhostStatus();
+
   const {
     album,
     albumId,
@@ -41,7 +47,11 @@ export const albumReviewsDataLoader = ({
   };
 
   const [albums, { refetch: refetchAlbums }] = createResource(
-    () => ({ albumId: albumId(), page: page() }),
+    () => ({
+      albumId: albumId(),
+      isAuthorized: status() === "auth",
+      page: page(),
+    }),
     albumsLoader
   );
 
