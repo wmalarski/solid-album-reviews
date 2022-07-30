@@ -1,6 +1,6 @@
-import { vars } from "@styles/theme.css";
-import { sprinkles } from "@styles/sprinkles.css";
+import { style } from "@vanilla-extract/css";
 
-export const container = sprinkles({
-  padding: "4",
+export const container = style({
+  display: "grid",
+  // gridTemplateRows: "repeat(7, 1fr)",
 });

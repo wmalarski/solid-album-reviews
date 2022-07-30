@@ -5,9 +5,7 @@ const pageLimit = 180;
 
 const loader = () => {
   const date = new Date();
-  console.log({ date });
   date.setDate(date.getDate() - pageLimit);
-  console.log({ date });
 
   return graphqlSdk.SelectReviewsGrid({
     limit: pageLimit,
