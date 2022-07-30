@@ -1,9 +1,9 @@
 import { useI18n } from "@solid-primitives/i18n";
-import { useRouteData } from "solid-app-router";
-import { Component, For } from "solid-js";
+import { Component, createResource, For } from "solid-js";
 import * as classes from "./ReviewsGrid.css";
-import type { ReviewsGridDataLoaderReturn } from "./ReviewsGrid.data";
+import { loader } from "./ReviewsGrid.data";
 import { fillGrid } from "./ReviewsGrid.utils";
+import { ReviewsGridItem } from "./ReviewsGridItem/ReviewsGridItem";
 
 type Props = {
   data?: string;
@@ -12,7 +12,7 @@ type Props = {
 const ReviewsGrid: Component<Props> = () => {
   const [t] = useI18n();
 
-  const { reviews } = useRouteData<ReviewsGridDataLoaderReturn>();
+  const [reviews] = createResource(loader);
 
   return (
     <div>
@@ -22,18 +22,14 @@ const ReviewsGrid: Component<Props> = () => {
           {(column, index) => (
             <For each={column}>
               {(cell) => (
-                <pre
+                <div
                   style={{
                     "grid-column-start": index() + 1,
                     "grid-row-start": cell.date.getDay() + 1,
                   }}
                 >
-                  {JSON.stringify(
-                    { cell, day: cell.date.getDay(), index: index() },
-                    null,
-                    2
-                  )}
-                </pre>
+                  <ReviewsGridItem data={cell} />
+                </div>
               )}
             </For>
           )}

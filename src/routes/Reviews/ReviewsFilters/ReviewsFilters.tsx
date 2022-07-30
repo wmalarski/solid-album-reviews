@@ -20,7 +20,12 @@ export const ReviewsFilters: Component = () => {
   const [upper, setUpper] = createSignal(10);
 
   const debouncedSetArgs = debounce((update: Partial<ReviewsLoaderArgs>) => {
-    setSearchParams({ ...args(), page: 0, ...update });
+    setSearchParams({
+      ...args(),
+      date: undefined,
+      page: 0,
+      ...update,
+    });
   }, 250);
 
   const handleInputChange = (value: string) => {
@@ -42,6 +47,7 @@ export const ReviewsFilters: Component = () => {
 
   const handleButtonClick = () => {
     setSearchParams({
+      date: undefined,
       lower: lower(),
       page: 0,
       query: input(),

@@ -3,7 +3,7 @@ import { createResource } from "solid-js";
 
 const pageLimit = 180;
 
-const loader = () => {
+export const loader = () => {
   const date = new Date();
   date.setDate(date.getDate() - pageLimit);
 

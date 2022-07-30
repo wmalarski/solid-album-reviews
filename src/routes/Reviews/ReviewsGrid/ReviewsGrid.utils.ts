@@ -16,9 +16,8 @@ const getDateRange = (): Date[] => {
     );
 };
 
-type GridData = {
+export type GridData = {
   date: Date;
-  // day: number;
   item?: ReviewGrid;
   scale: number;
 };
