@@ -15,6 +15,6 @@ export const formatAlbum = (album: FormatAlbumArgs): string => {
   return `${album.title}${artist}${year}`;
 };
 
-export const formatDate = (date: string): string => {
-  return new Intl.DateTimeFormat().format(new Date(date));
+export const formatDate = (locale: string, date: string): string => {
+  return new Intl.DateTimeFormat(locale).format(new Date(date));
 };

@@ -1,4 +1,3 @@
-import { useI18n } from "@solid-primitives/i18n";
 import clsx from "clsx";
 import { useSearchParams } from "solid-app-router";
 import { Component } from "solid-js";
@@ -24,8 +23,6 @@ const ranges: { variant: keyof typeof classes.colorVariants; value: number }[] =
   ];
 
 export const ReviewsGridItem: Component<Props> = (props) => {
-  const [t] = useI18n();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const variant = () => {

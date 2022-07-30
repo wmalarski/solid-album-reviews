@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ReviewItem: Component<Props> = (props) => {
-  const [t] = useI18n();
+  const [t, i18n] = useI18n();
 
   return (
     <div class={classes.container}>
@@ -21,7 +21,7 @@ export const ReviewItem: Component<Props> = (props) => {
         <span>{t("ReviewItem.text")}</span>
         <span>{props.review.text}</span>
         <span>{t("ReviewItem.date")}</span>
-        <span>{formatDate(props.review.createdAt)}</span>
+        <span>{formatDate(i18n.locale(), props.review.createdAt)}</span>
       </div>
       <ReviewActions
         onReviewDelete={() => props.onReviewChange()}

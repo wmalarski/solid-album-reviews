@@ -2,7 +2,6 @@ import { vars } from "@styles/theme.css";
 import { style, styleVariants } from "@vanilla-extract/css";
 
 export const container = style({
-  // all: "unset",
   border: "1px solid black",
   height: vars.space["6"],
   width: vars.space["6"],

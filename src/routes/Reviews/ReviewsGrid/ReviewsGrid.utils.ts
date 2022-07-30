@@ -53,3 +53,41 @@ export const fillGrid = (count: number, query?: SelectReviewsGridQuery) => {
 
   return result;
 };
+
+export type MonthData = {
+  date: Date;
+  start: number;
+  size: number;
+};
+
+export const getMonths = (count: number) => {
+  const range = getDateRange(count);
+
+  const firstDays = range.filter((date) => date.getDay() === 0);
+
+  const map = firstDays
+    .map((date) => {
+      date.setUTCDate(1);
+      date.setUTCHours(0, 0, 0, 0);
+      return date;
+    })
+    .reduce((prev, curr) => {
+      const key = curr.toISOString();
+      const value = prev.get(key) || 0;
+      prev.set(key, value + 1);
+      return prev;
+    }, new Map<string, number>());
+
+  const days = new Array(...map.entries()).reduce<MonthData[]>((prev, curr) => {
+    const next = { date: new Date(curr[0]), size: curr[1] };
+    if (prev.length < 1) {
+      prev.push({ ...next, start: 0 });
+      return prev;
+    }
+    const last = prev[prev.length - 1];
+    prev.push({ ...next, start: last.start + last.size });
+    return prev;
+  }, []);
+
+  return days;
+};
