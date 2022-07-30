@@ -1,36 +1,13 @@
 import { graphqlSdk } from "@services/fetcher";
-import { useNhostStatus } from "@services/nhost";
-import { createResource } from "solid-js";
 
-type ReviewsLoaderArgs = {
-  isAuthorized: boolean;
-};
+export const gridLimit = 364;
 
-const pageLimit = 180;
-
-export const loader = ({ isAuthorized }: ReviewsLoaderArgs) => {
+export const loader = () => {
   const date = new Date();
-  date.setDate(date.getDate() - pageLimit);
+  date.setDate(date.getDate() - gridLimit);
 
-  return !isAuthorized
-    ? Promise.resolve(null)
-    : graphqlSdk.SelectReviewsGrid({
-        limit: pageLimit,
-        start: date.toISOString(),
-      });
+  return graphqlSdk.SelectReviewsGrid({
+    limit: gridLimit,
+    start: date.toISOString(),
+  });
 };
-
-export const reviewsGridDataLoader = () => {
-  const status = useNhostStatus();
-
-  const [reviews, { refetch }] = createResource(
-    () => ({ isAuthorized: status() === "auth" }),
-    loader
-  );
-
-  return { pageLimit, refetch, reviews };
-};
-
-export type ReviewsGridDataLoaderReturn = ReturnType<
-  typeof reviewsGridDataLoader
->;

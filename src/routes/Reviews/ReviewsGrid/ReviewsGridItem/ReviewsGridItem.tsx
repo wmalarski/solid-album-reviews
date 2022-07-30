@@ -46,10 +46,9 @@ export const ReviewsGridItem: Component<Props> = (props) => {
 
   return (
     <button
+      about={"hello"}
       onClick={handleClick}
-      class={clsx(classes.colorVariants[variant()])}
-    >
-      {JSON.stringify(props.data.scale, null, 2)}
-    </button>
+      class={clsx(classes.container, classes.colorVariants[variant()])}
+    />
   );
 };

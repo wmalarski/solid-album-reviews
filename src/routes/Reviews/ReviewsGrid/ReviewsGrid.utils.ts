@@ -1,10 +1,10 @@
 import type { ReviewGrid, SelectReviewsGridQuery } from "@services/types";
 
-const getDateRange = (): Date[] => {
+const getDateRange = (count: number): Date[] => {
   const init = new Date();
   init.setUTCHours(0, 0, 0, 0);
 
-  return Array(179)
+  return Array(count - 1)
     .fill(0)
     .reduce<Date[]>(
       (prev) => {
@@ -22,7 +22,7 @@ export type GridData = {
   scale: number;
 };
 
-export const fillGrid = (query?: SelectReviewsGridQuery) => {
+export const fillGrid = (count: number, query?: SelectReviewsGridQuery) => {
   const items = query?.review_grid || [];
 
   const max = items
@@ -33,7 +33,7 @@ export const fillGrid = (query?: SelectReviewsGridQuery) => {
     items.map((item) => [new Date(item.day).toISOString() as string, item])
   );
 
-  const range = getDateRange();
+  const range = getDateRange(count);
 
   const flatten = range.map((date) => {
     const item = map.get(date.toISOString());

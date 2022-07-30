@@ -6,6 +6,7 @@ import { createResource } from "solid-js";
 const pageLimit = 10;
 
 export type ReviewsLoaderArgs = {
+  date?: string;
   query: string;
   lower: number;
   upper: number;
@@ -14,6 +15,11 @@ export type ReviewsLoaderArgs = {
 
 const loader = (args: ReviewsLoaderArgs & { isAuthorized: boolean }) => {
   const pattern = `%${args.query}%`;
+
+  const fromDate = args.date ? new Date(args.date) : null;
+  const toDate = fromDate ? new Date(fromDate) : null;
+  toDate?.setDate(toDate.getDate() + 1);
+
   return !args.isAuthorized
     ? Promise.resolve(null)
     : graphqlSdk.SelectReviewsWithAlbumAndArtist({
@@ -23,6 +29,8 @@ const loader = (args: ReviewsLoaderArgs & { isAuthorized: boolean }) => {
           _and: [
             { rate: { _gte: args.lower } },
             { rate: { _lte: args.upper } },
+            { createdAt: { _gte: fromDate?.toISOString() } },
+            { createdAt: { _lte: toDate?.toISOString() } },
             {
               _or: [
                 { albumByAlbum: { title: { _ilike: pattern } } },
@@ -45,6 +53,7 @@ export const reviewsDataLoader = ({
 
   const args = (): ReviewsLoaderArgs => {
     return {
+      date: location.query.date,
       lower: +(location.query.lower || "0") || 0,
       page: +(location.query.page || "0") || 0,
       query: location.query.query || "",

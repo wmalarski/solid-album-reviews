@@ -1,9 +1,11 @@
-import { sprinkles } from "@styles/sprinkles.css";
 import { vars } from "@styles/theme.css";
-import { styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 
-export const container = sprinkles({
-  padding: "4",
+export const container = style({
+  // all: "unset",
+  border: "1px solid black",
+  height: vars.space["6"],
+  width: vars.space["6"],
 });
 
 export const colorVariants = styleVariants({
@@ -16,5 +18,5 @@ export const colorVariants = styleVariants({
   level07: { backgroundColor: vars.colors.green70 },
   level08: { backgroundColor: vars.colors.green80 },
   level09: { backgroundColor: vars.colors.green90 },
-  level10: {},
+  level10: { backgroundColor: vars.colors.backgroundElevated },
 });
