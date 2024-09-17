@@ -12,11 +12,12 @@
 		"format-and-lint:fix": "biome check . --write"
 	},
 	"dependencies": {
-		"@solidjs/start": "^1.0.6",
 		"@solid-primitives/i18n": "^2.1.1",
 		"@solid-primitives/scheduled": "^1.4.3",
+		"@solidjs/start": "^1.0.6",
 		"clsx": "^2.1.1",
 		"solid-js": "^1.8.22",
+		"tinybase": "^5.3.0",
 		"vinxi": "^0.4.3"
 	},
 	"devDependencies": {
