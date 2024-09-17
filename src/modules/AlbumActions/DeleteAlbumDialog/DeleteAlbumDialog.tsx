@@ -3,12 +3,14 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
+import { useAction } from "@solidjs/router";
 import { BsTrash } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { graphqlSdk } from "~/services/fetcher";
+import { deleteAlbumAction } from "~/services/album";
+import { getStoreContext } from "~/store/store";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
@@ -24,13 +26,15 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 
 	const state = createOverlayTriggerState({});
 
+	const action = useAction(deleteAlbumAction);
+
 	const { buttonProps: openButtonProps } = createButton(
 		{ onPress: () => state.open() },
 		() => openButtonRef,
 	);
 
 	const handleSubmit = async () => {
-		await graphqlSdk.DeleteAlbum({ id: props.albumId });
+		await action(getStoreContext(), { albumId: props.albumId });
 		state.close();
 	};
 

@@ -1,4 +1,5 @@
-import { useRouteData, useSearchParams } from "solid-app-router";
+import { useSearchParams } from "@solidjs/router";
+import { useRouteData } from "solid-app-router";
 import { type Component, For } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
 import type { ReviewsDataLoaderReturn } from "../Reviews.data";

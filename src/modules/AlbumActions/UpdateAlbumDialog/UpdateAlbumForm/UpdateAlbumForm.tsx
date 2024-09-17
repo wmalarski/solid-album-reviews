@@ -3,13 +3,14 @@ import { Button } from "~/components/Button/Button";
 import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
-import type { AlbumSetInput } from "~/services/types";
+import type { UpdateAlbumArgs } from "~/store/albums";
 import type { Album } from "~/store/types";
 
 type UpdateAlbumFormProps = {
 	initialAlbum: Album;
+	albumId: string;
 	onClose: () => void;
-	onSubmit: (args: AlbumSetInput) => void;
+	onSubmit: (args: UpdateAlbumArgs) => void;
 };
 
 export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
@@ -20,7 +21,7 @@ export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
 
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();
-		props.onSubmit({ title: title(), year: year() });
+		props.onSubmit({ title: title(), year: year(), albumId: props.albumId });
 	};
 
 	return (

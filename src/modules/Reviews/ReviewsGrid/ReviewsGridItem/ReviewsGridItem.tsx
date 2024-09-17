@@ -1,5 +1,5 @@
+import { useSearchParams } from "@solidjs/router";
 import clsx from "clsx";
-import { useSearchParams } from "solid-app-router";
 import type { Component } from "solid-js";
 import type { GridData } from "../ReviewsGrid.utils";
 import * as classes from "./ReviewsGridItem.css";

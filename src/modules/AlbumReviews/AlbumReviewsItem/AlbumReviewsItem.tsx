@@ -1,4 +1,5 @@
-import { useNavigate, useRouteData } from "solid-app-router";
+import { useNavigate } from "@solidjs/router";
+import { useRouteData } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";

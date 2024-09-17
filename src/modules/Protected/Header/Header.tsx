@@ -1,4 +1,4 @@
-import { Link } from "solid-app-router";
+import { A } from "@solidjs/router";
 import type { Component } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
@@ -17,9 +17,9 @@ export const Header: Component = () => {
 
 	return (
 		<header class={classes.container}>
-			<Link class={classes.logo} href={paths.root}>
+			<A class={classes.logo} href={paths.root}>
 				{t("header.title")}
-			</Link>
+			</A>
 			<nav class={classes.navigation}>
 				<HeaderLink href={paths.search}>{t("header.search")}</HeaderLink>
 				<HeaderLink href={paths.reviews}>{t("header.reviews")}</HeaderLink>

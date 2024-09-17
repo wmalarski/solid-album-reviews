@@ -1,6 +1,6 @@
 import { ALBUMS_TABLE_ID, type StoreContext } from "./store";
 
-type SelectAlbumArgs = {
+export type SelectAlbumArgs = {
 	albumId: string;
 };
 
@@ -27,7 +27,7 @@ export const updateAlbum = async (
 	});
 };
 
-type DeleteAlbumArgs = {
+export type DeleteAlbumArgs = {
 	albumId: string;
 };
 

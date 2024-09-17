@@ -3,13 +3,15 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
+import { useAction } from "@solidjs/router";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/ReviewForm/ReviewForm";
-import { graphqlSdk } from "~/services/fetcher";
-import type { ReviewSetInput } from "~/services/types";
+import { updateReviewAction } from "~/services/review";
+import type { UpdateReviewArgs } from "~/store/reviews";
+import { getStoreContext } from "~/store/store";
 import type { Review } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
@@ -27,13 +29,15 @@ export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
 
 	const state = createOverlayTriggerState({});
 
+	const action = useAction(updateReviewAction);
+
 	const { buttonProps: openButtonProps } = createButton(
 		{ onPress: () => state.open() },
 		() => openButtonRef,
 	);
 
-	const handleSubmit = async (input: ReviewSetInput) => {
-		await graphqlSdk.UpdateReview({ id: props.reviewId, input });
+	const handleSubmit = async (input: UpdateReviewArgs) => {
+		await action(getStoreContext(), input);
 		state.close();
 	};
 

@@ -3,11 +3,13 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
+import { useAction } from "@solidjs/router";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { graphqlSdk } from "~/services/fetcher";
+import { deleteReviewAction } from "~/services/review";
+import { getStoreContext } from "~/store/store";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
@@ -24,13 +26,15 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 
 	const state = createOverlayTriggerState({});
 
+	const action = useAction(deleteReviewAction);
+
 	const { buttonProps: openButtonProps } = createButton(
 		{ onPress: () => state.open() },
 		() => openButtonRef,
 	);
 
 	const handleSubmit = async () => {
-		await graphqlSdk.DeleteReview({ id: props.reviewId });
+		await action(getStoreContext(), { reviewId: props.reviewId });
 		state.close();
 	};
 

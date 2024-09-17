@@ -3,14 +3,16 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
+import { useAction } from "@solidjs/router";
 import { BsChatLeftText } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/ReviewForm/ReviewForm";
-import { graphqlSdk } from "~/services/fetcher";
-import type { ReviewInsertInput } from "~/services/types";
+import { createReviewAction } from "~/services/review";
+import type { CreateReviewArgs } from "~/store/reviews";
+import { getStoreContext } from "~/store/store";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
 type InsertReviewDialogProps = {
@@ -25,6 +27,8 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 
 	let openButtonRef: HTMLButtonElement | undefined;
 
+	const action = useAction(createReviewAction);
+
 	const state = createOverlayTriggerState({});
 
 	const { buttonProps: openButtonProps } = createButton(
@@ -32,9 +36,9 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 		() => openButtonRef,
 	);
 
-	const handleSubmit = async (input: ReviewInsertInput) => {
+	const handleSubmit = async (input: CreateReviewArgs) => {
 		const review = { ...input, album: props.albumId };
-		await graphqlSdk.InsertReview({ review });
+		await action(getStoreContext(), review);
 		state.close();
 	};
 

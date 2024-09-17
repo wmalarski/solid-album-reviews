@@ -1,8 +1,8 @@
-import { Header } from "@routes/Protected/Header/Header";
-import { Navigate } from "solid-app-router";
+import { Navigate } from "@solidjs/router";
 import { type Component, type ParentProps, Show } from "solid-js";
 import { useNhostStatus } from "~/services/nhost";
 import { paths } from "~/utils/paths";
+import { Header } from "./Header/Header";
 
 const Protected: Component<ParentProps> = (props) => {
 	const status = useNhostStatus();

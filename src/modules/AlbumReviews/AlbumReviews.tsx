@@ -1,4 +1,5 @@
-import { useRouteData, useSearchParams } from "solid-app-router";
+import { useSearchParams } from "@solidjs/router";
+import { useRouteData } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
 import * as classes from "./AlbumReviews.css";
@@ -22,7 +23,10 @@ const AlbumReviews: Component = () => {
 					<For each={albums()?.data?.album}>
 						{(album) => (
 							<AlbumReviewsItem
-								album={{ ...album, artistByArtist: artist }}
+								artist={artist()}
+								albumId={albumId}
+								album={album}
+								reviews={reviews}
 								isCurrent={album.id === albumId()}
 							/>
 						)}
