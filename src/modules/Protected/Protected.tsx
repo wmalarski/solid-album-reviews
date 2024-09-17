@@ -1,10 +1,10 @@
 import { Header } from "@routes/Protected/Header/Header";
-import { Navigate, Outlet } from "solid-app-router";
-import { type Component, Show } from "solid-js";
+import { Navigate } from "solid-app-router";
+import { type Component, type ParentProps, Show } from "solid-js";
 import { useNhostStatus } from "~/services/nhost";
 import { paths } from "~/utils/paths";
 
-const Protected: Component = () => {
+const Protected: Component<ParentProps> = (props) => {
 	const status = useNhostStatus();
 
 	return (
@@ -13,7 +13,7 @@ const Protected: Component = () => {
 			fallback={<Navigate href={paths.signIn} />}
 		>
 			<Header />
-			<Outlet />
+			{props.children}
 		</Show>
 	);
 };

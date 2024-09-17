@@ -1,5 +1,3 @@
-import type { SearchDataLoaderResult } from "@routes/Search/Search.data";
-import { useRouteData } from "solid-app-router";
 import type { Component } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
@@ -16,8 +14,6 @@ type ResultItemProps = {
 };
 
 export const ResultItem: Component<ResultItemProps> = (props) => {
-	const { refetch } = useRouteData<SearchDataLoaderResult>();
-
 	return (
 		<div class={classes.container}>
 			<AlbumCover
@@ -33,8 +29,6 @@ export const ResultItem: Component<ResultItemProps> = (props) => {
 					album={props.album}
 					artist={props.artist}
 					albumId={props.albumId}
-					onAlbumDelete={refetch}
-					onAlbumUpdate={refetch}
 				/>
 			</div>
 		</div>

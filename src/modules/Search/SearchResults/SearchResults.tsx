@@ -1,4 +1,3 @@
-import { useRouteData, useSearchParams } from "solid-app-router";
 import { type Component, For } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
 import type { SearchDataLoaderResult } from "../Search.data";

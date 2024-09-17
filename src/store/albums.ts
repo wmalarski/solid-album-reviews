@@ -11,13 +11,13 @@ export const selectAlbum = (
 	return context.store.getRow(ALBUMS_TABLE_ID, albumId);
 };
 
-type UpdateAlbumArgs = {
+export type UpdateAlbumArgs = {
 	year?: number | undefined;
 	title?: string | undefined;
 	albumId: string;
 };
 
-export const updateAlbum = (
+export const updateAlbum = async (
 	context: StoreContext,
 	{ albumId, title, year }: UpdateAlbumArgs,
 ) => {
@@ -31,7 +31,7 @@ type DeleteAlbumArgs = {
 	albumId: string;
 };
 
-export const deleteAlbum = (
+export const deleteAlbum = async (
 	context: StoreContext,
 	{ albumId }: DeleteAlbumArgs,
 ) => {

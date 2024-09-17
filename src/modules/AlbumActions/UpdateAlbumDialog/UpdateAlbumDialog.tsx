@@ -3,13 +3,15 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
+import { useAction } from "@solidjs/router";
 import { BsPencilSquare } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { graphqlSdk } from "~/services/fetcher";
-import type { AlbumSetInput } from "~/services/types";
+import { updateAlbumAction } from "~/services/album";
+import type { UpdateAlbumArgs } from "~/store/albums";
+import { getStoreContext } from "~/store/store";
 import type { Album } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
@@ -32,8 +34,10 @@ export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 		() => openButtonRef,
 	);
 
-	const handleSubmit = async (input: AlbumSetInput) => {
-		await graphqlSdk.UpdateAlbum({ id: props.albumId, input });
+	const action = useAction(updateAlbumAction);
+
+	const handleSubmit = async (input: UpdateAlbumArgs) => {
+		await action(getStoreContext(), input);
 		state.close();
 	};
 
