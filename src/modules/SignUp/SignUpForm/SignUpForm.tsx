@@ -4,9 +4,9 @@ import { Input } from "@components/Input/Input";
 import { StyledLink } from "@components/StyledLink/StyledLink";
 import type { ErrorPayload } from "@nhost/core";
 import type { SignUpParams } from "@nhost/hasura-auth-js";
-import { useI18n } from "@solid-primitives/i18n";
-import { paths } from "@utils/paths";
 import { type Component, createSignal } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
+import { paths } from "~/utils/paths";
 import * as classes from "./SignUpForm.css";
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 export const SignUpForm: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const [email, setEmail] = createSignal("");
 	const [password, setPassword] = createSignal("");

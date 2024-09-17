@@ -1,10 +1,10 @@
 import { Button } from "@components/Button/Button";
 import { FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
-import { useI18n } from "@solid-primitives/i18n";
 import { debounce } from "@solid-primitives/scheduled";
 import { useRouteData, useSearchParams } from "solid-app-router";
 import { type Component, createSignal } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import type {
 	ReviewsDataLoaderReturn,
 	ReviewsLoaderArgs,
@@ -16,7 +16,7 @@ export const ReviewsFilters: Component = () => {
 
 	const { args } = useRouteData<ReviewsDataLoaderReturn>();
 
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const [input, setInput] = createSignal("");
 	const [lower, setLower] = createSignal(0);

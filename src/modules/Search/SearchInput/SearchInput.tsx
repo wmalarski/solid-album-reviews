@@ -1,16 +1,16 @@
 import { Button } from "@components/Button/Button";
 import { FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
-import { useI18n } from "@solid-primitives/i18n";
 import { debounce } from "@solid-primitives/scheduled";
 import { useSearchParams } from "solid-app-router";
 import { type Component, createSignal } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./SearchInput.css";
 
 export const SearchInput: Component = () => {
 	const [, setSearchParams] = useSearchParams();
 
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const [input, setInput] = createSignal("");
 

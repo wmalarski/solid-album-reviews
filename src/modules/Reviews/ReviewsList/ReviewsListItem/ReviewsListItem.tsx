@@ -2,10 +2,10 @@ import { StyledLink } from "@components/StyledLink/StyledLink";
 import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
 import type { ReviewWithAlbumAndArtistFragment } from "@services/types";
-import { useI18n } from "@solid-primitives/i18n";
 import { formatAlbum, formatDate } from "@utils/formatters";
-import { paths } from "@utils/paths";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
+import { paths } from "~/utils/paths";
 import * as classes from "./ReviewsListItem.css";
 
 type Props = {
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const ReviewsListItem: Component<Props> = (props) => {
-	const [t, i18n] = useI18n();
+	const { t, locale } = useI18n();
 
 	return (
 		<div class={classes.container}>
@@ -36,7 +36,7 @@ export const ReviewsListItem: Component<Props> = (props) => {
 					<span>{t("ReviewItem.text")}</span>
 					<span>{props.review.rate}</span>
 					<span>{t("ReviewItem.date")}</span>
-					<span>{formatDate(i18n.locale(), props.review.createdAt)}</span>
+					<span>{formatDate(locale(), props.review.createdAt)}</span>
 				</div>
 				<ReviewActions
 					review={props.review}

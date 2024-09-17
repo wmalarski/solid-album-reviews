@@ -10,8 +10,8 @@ import {
 import * as classes from "./Dialog.css";
 
 import { Button } from "@components/Button/Button";
-import { useI18n } from "@solid-primitives/i18n";
 import type { Component, JSX } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 
 type Props = AriaDialogProps &
 	AriaModalProps &
@@ -21,7 +21,7 @@ type Props = AriaDialogProps &
 	};
 
 export const Dialog: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	let ref: HTMLDivElement | undefined;
 

@@ -4,9 +4,9 @@ import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
 import type { SearchDataLoaderResult } from "@routes/Search/Search.data";
 import type { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
-import { paths } from "@utils/paths";
 import { useRouteData } from "solid-app-router";
 import type { Component } from "solid-js";
+import { paths } from "~/utils/paths";
 import * as classes from "./ResultItem.css";
 
 type Props = {

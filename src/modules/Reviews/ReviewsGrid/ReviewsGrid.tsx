@@ -1,5 +1,5 @@
-import { useI18n } from "@solid-primitives/i18n";
 import { type Component, For, createResource } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./ReviewsGrid.css";
 import { gridLimit, loader } from "./ReviewsGrid.data";
 import { fillGrid, getMonths } from "./ReviewsGrid.utils";
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const ReviewsGrid: Component<Props> = () => {
-	const [, i18n] = useI18n();
+	const { locale } = useI18n();
 
 	const [reviews] = createResource(loader);
 
@@ -26,7 +26,7 @@ const ReviewsGrid: Component<Props> = () => {
 								"grid-row-start": 1,
 							}}
 						>
-							{Intl.DateTimeFormat(i18n.locale(), { month: "short" }).format(
+							{Intl.DateTimeFormat(locale(), { month: "short" }).format(
 								month.date,
 							)}
 						</span>

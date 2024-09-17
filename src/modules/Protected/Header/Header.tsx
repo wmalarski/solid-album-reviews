@@ -1,15 +1,15 @@
 import { Button } from "@components/Button/Button";
 import { nhost } from "@services/nhost";
-import { useI18n } from "@solid-primitives/i18n";
-import { paths } from "@utils/paths";
 import { Link } from "solid-app-router";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
+import { paths } from "~/utils/paths";
 import * as classes from "./Header.css";
 import { HeaderLink } from "./HeaderLink/HeaderLink";
 import { ThemeSwitch } from "./ThemeSwitch/ThemeSwitch";
 
 export const Header: Component = () => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const handleSignOut = () => {
 		nhost.auth.signOut();

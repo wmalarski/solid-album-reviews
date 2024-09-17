@@ -7,10 +7,10 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
-import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { BsPencilSquare } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type Props = {
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const UpdateAlbumDialog: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
 

@@ -8,10 +8,10 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
-import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { BsChatLeftText } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 
 type Props = {
 	albumId: number;
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const InsertReviewDialog: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
 

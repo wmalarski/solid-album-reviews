@@ -1,9 +1,9 @@
-import { useI18n } from "@solid-primitives/i18n";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./Loading.css";
 
 export const Loading: Component = () => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	return (
 		<div class={classes.container}>

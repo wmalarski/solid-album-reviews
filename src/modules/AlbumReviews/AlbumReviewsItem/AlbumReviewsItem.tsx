@@ -5,11 +5,11 @@ import type {
 	AlbumWithArtistFragment,
 	AlbumWithReviewsFragment,
 } from "@services/types";
-import { useI18n } from "@solid-primitives/i18n";
 import { formatAlbum } from "@utils/formatters";
-import { paths } from "@utils/paths";
 import { useNavigate, useRouteData } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
+import { paths } from "~/utils/paths";
 import type { AlbumReviewDataLoaderResult } from "../AlbumReviews.data";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
@@ -20,7 +20,7 @@ type Props = {
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const navigate = useNavigate();
 	const { refetchAlbums, refetchAlbum } =

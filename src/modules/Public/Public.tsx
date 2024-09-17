@@ -1,7 +1,7 @@
 import { useNhostStatus } from "@services/nhost";
-import { paths } from "@utils/paths";
 import { Navigate, Outlet } from "solid-app-router";
 import { type Component, Show } from "solid-js";
+import { paths } from "~/utils/paths";
 
 const Public: Component = () => {
 	const status = useNhostStatus();

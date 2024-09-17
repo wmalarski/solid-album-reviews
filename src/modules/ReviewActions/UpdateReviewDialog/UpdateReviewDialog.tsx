@@ -8,9 +8,9 @@ import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
-import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
 import { type Component, Show } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 
 type Props = {
 	review: ReviewFragment;
@@ -18,7 +18,7 @@ type Props = {
 };
 
 export const UpdateReviewDialog: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
 

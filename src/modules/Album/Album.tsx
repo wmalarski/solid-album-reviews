@@ -1,6 +1,6 @@
-import { paths } from "@utils/paths";
 import { Navigate, Outlet, useRouteData } from "solid-app-router";
 import { type Component, Show } from "solid-js";
+import { paths } from "~/utils/paths";
 import * as classes from "./Album.css";
 import type { AlbumDataLoaderResult } from "./Album.data";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";

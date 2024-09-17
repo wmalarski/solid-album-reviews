@@ -3,10 +3,10 @@ import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
 import { AlbumCoversCarousel } from "@routes/Home/AlbumsGrid/AlbumItem/AlbumCoversCarousel/AlbumCoversCarousel";
 import type { AlbumWithArtistFragment } from "@services/types";
 import { formatAlbum } from "@utils/formatters";
-import { paths } from "@utils/paths";
 import clsx from "clsx";
 import { useNavigate, useRouteData } from "solid-app-router";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
+import { paths } from "~/utils/paths";
 import type { HomeDataLoaderResult } from "../../Home.data";
 import * as classes from "./AlbumItem.css";
 

@@ -6,8 +6,8 @@ import type {
 	ReviewInsertInput,
 	ReviewSetInput,
 } from "@services/types";
-import { useI18n } from "@solid-primitives/i18n";
 import { type Component, createSignal } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./ReviewForm.css";
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const ReviewForm: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const [text, setText] = createSignal(props.initialReview?.text || "");
 	const [rate, setRate] = createSignal(props.initialReview?.rate || 0);

@@ -1,6 +1,6 @@
 import { Button } from "@components/Button/Button";
-import { useI18n } from "@solid-primitives/i18n";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./Pagination.css";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Pagination: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const handlePreviousClick = () => {
 		props.onChange(props.current - 1);

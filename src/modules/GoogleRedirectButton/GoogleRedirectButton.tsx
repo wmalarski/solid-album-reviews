@@ -1,9 +1,9 @@
 import { Button } from "@components/Button/Button";
 import { redirectToGoogle } from "@services/redirects";
 import type { AlbumWithArtistFragment } from "@services/types";
-import { useI18n } from "@solid-primitives/i18n";
 import { BsGoogle } from "solid-icons/bs";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 
 type Props = {
 	album: AlbumWithArtistFragment;
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const GoogleRedirectButton: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const handleRedirectClick = () => {
 		redirectToGoogle(props.album.title, props.album.artistByArtist.name);

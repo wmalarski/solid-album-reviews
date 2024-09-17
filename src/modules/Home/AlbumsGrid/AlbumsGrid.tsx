@@ -1,14 +1,14 @@
 import { Button } from "@components/Button/Button";
-import { useI18n } from "@solid-primitives/i18n";
 import { useRouteData } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import type { HomeDataLoaderResult } from "../Home.data";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
 import * as classes from "./AlbumsGrid.css";
 import { requireAlbumFragment } from "./AlbumsGrid.utils";
 
 export const AlbumsGrid: Component = () => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const { albums, refetch } = useRouteData<HomeDataLoaderResult>();
 

@@ -1,7 +1,7 @@
 import { Button } from "@components/Button/Button";
 import { FormActions } from "@components/Form/Form";
-import { useI18n } from "@solid-primitives/i18n";
 import type { Component } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./DeleteAlbumForm.css";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const DeleteAlbumForm: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	return (
 		<FormActions>

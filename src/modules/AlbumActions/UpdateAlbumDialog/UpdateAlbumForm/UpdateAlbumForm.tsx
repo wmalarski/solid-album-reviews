@@ -2,8 +2,8 @@ import { Button } from "@components/Button/Button";
 import { Form, FormActions, FormLabel } from "@components/Form/Form";
 import { Input } from "@components/Input/Input";
 import type { AlbumFragment, AlbumSetInput } from "@services/types";
-import { useI18n } from "@solid-primitives/i18n";
 import { type Component, createSignal } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 
 type Props = {
 	initialAlbum: AlbumFragment;
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const UpdateAlbumForm: Component<Props> = (props) => {
-	const [t] = useI18n();
+	const { t } = useI18n();
 
 	const [title, setTitle] = createSignal(props.initialAlbum.title || "");
 	const [year, setYear] = createSignal(props.initialAlbum.year || 0);
