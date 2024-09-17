@@ -13,13 +13,14 @@ import type { ReviewSetInput } from "~/services/types";
 import type { Review } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
-type Props = {
+type UpdateReviewDialogProps = {
 	reviewId: string;
 	review: Review;
-	onSuccess: () => void;
 };
 
-export const UpdateReviewDialog: Component<Props> = (props) => {
+export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
+	props,
+) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
@@ -34,7 +35,6 @@ export const UpdateReviewDialog: Component<Props> = (props) => {
 	const handleSubmit = async (input: ReviewSetInput) => {
 		await graphqlSdk.UpdateReview({ id: props.reviewId, input });
 		state.close();
-		props.onSuccess();
 	};
 
 	return (

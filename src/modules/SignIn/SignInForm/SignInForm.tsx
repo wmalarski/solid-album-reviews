@@ -9,12 +9,12 @@ import { useI18n } from "~/contexts/I18nContext";
 import { paths } from "~/utils/paths";
 import * as classes from "./SignInForm.css";
 
-type Props = {
+type SignInFormProps = {
 	error: ErrorPayload | null;
 	onSubmit: (args: SignInParams) => void;
 };
 
-export const SignInForm: Component<Props> = (props) => {
+export const SignInForm: Component<SignInFormProps> = (props) => {
 	const { t } = useI18n();
 
 	const [email, setEmail] = createSignal("");

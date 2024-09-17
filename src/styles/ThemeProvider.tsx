@@ -2,11 +2,11 @@ import type { Component, JSX } from "solid-js";
 import { portalContainerId } from "~/utils/getPortalContainer";
 import { getMode } from "./themeStore";
 
-type Props = {
+type ThemeProviderProps = {
 	children: JSX.Element;
 };
 
-export const ThemeProvider: Component<Props> = (props: Props) => {
+export const ThemeProvider: Component<ThemeProviderProps> = (props: Props) => {
 	document.body.setAttribute("data-mode", getMode());
 
 	return (

@@ -6,29 +6,20 @@ import { YtRedirectButton } from "~/modules/YtRedirectButton/YtRedirectButton";
 import type { Album, Artist, Review } from "~/store/types";
 import * as classes from "./ReviewActions.css";
 
-type Props = {
+type ReviewActionsProps = {
 	reviewId: string;
 	album: Album;
 	artist: Artist;
 	review: Review;
-	onReviewDelete: () => void;
-	onReviewUpdate: () => void;
 };
 
-export const ReviewActions: Component<Props> = (props) => {
+export const ReviewActions: Component<ReviewActionsProps> = (props) => {
 	return (
 		<div class={classes.container}>
 			<YtRedirectButton album={props.album} artist={props.artist} />
 			<GoogleRedirectButton album={props.album} artist={props.artist} />
-			<UpdateReviewDialog
-				review={props.review}
-				reviewId={props.reviewId}
-				onSuccess={() => props.onReviewUpdate()}
-			/>
-			<DeleteReviewDialog
-				reviewId={props.reviewId}
-				onSuccess={() => props.onReviewDelete()}
-			/>
+			<UpdateReviewDialog review={props.review} reviewId={props.reviewId} />
+			<DeleteReviewDialog reviewId={props.reviewId} />
 		</div>
 	);
 };

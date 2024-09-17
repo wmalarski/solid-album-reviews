@@ -5,13 +5,13 @@ import { useI18n } from "~/contexts/I18nContext";
 import { redirectToYt } from "~/services/redirects";
 import type { Album, Artist } from "~/store/types";
 
-type Props = {
+type YtRedirectButtonProps = {
 	album: Album;
 	artist: Artist;
 	isIcon?: boolean;
 };
 
-export const YtRedirectButton: Component<Props> = (props) => {
+export const YtRedirectButton: Component<YtRedirectButtonProps> = (props) => {
 	const { t } = useI18n();
 
 	const handleRedirectClick = () => {

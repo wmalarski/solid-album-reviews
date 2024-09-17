@@ -4,7 +4,7 @@ import type { Component } from "solid-js";
 import type { GridData } from "../ReviewsGrid.utils";
 import * as classes from "./ReviewsGridItem.css";
 
-type Props = {
+type ReviewsGridItemProps = {
 	data: GridData;
 };
 
@@ -22,7 +22,7 @@ const ranges: { variant: keyof typeof classes.colorVariants; value: number }[] =
 		{ value: 1.0, variant: "level01" },
 	];
 
-export const ReviewsGridItem: Component<Props> = (props) => {
+export const ReviewsGridItem: Component<ReviewsGridItemProps> = (props) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	const variant = () => {
@@ -43,6 +43,7 @@ export const ReviewsGridItem: Component<Props> = (props) => {
 
 	return (
 		<button
+			type="button"
 			about={"hello"}
 			onClick={handleClick}
 			class={clsx(classes.container, classes.colorVariants[variant()])}

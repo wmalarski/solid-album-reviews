@@ -1,38 +1,31 @@
-import { useNavigate, useRouteData } from "solid-app-router";
-import { type Component, Show } from "solid-js";
+import {} from "@solidjs/router";
+import type { Component } from "solid-js";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
+import type { Album, Artist } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
-import { paths } from "~/utils/paths";
-import type { AlbumDataLoaderResult } from "../Album.data";
 import * as classes from "./AlbumDetails.css";
 
-export const AlbumDetails: Component = () => {
-	const navigate = useNavigate();
+type AlbumDetailsProps = {
+	albumId: string;
+	album: Album;
+	artist: Artist;
+};
 
-	const { album, refetch } = useRouteData<AlbumDataLoaderResult>();
-
-	const handleAlbumDelete = () => {
-		navigate(paths.root);
-	};
-
-	const handleAlbumUpdate = () => {
-		refetch();
-	};
-
+export const AlbumDetails: Component<AlbumDetailsProps> = (props) => {
 	return (
-		<Show when={album()?.data?.albumByPk}>
-			{(album) => (
-				<div class={classes.container}>
-					<h1>{formatAlbum(album)}</h1>
-					<AlbumCover label={formatAlbum(album)} sid={album.sid} kind="large" />
-					<AlbumActions
-						album={album}
-						onAlbumDelete={handleAlbumDelete}
-						onAlbumUpdate={handleAlbumUpdate}
-					/>
-				</div>
-			)}
-		</Show>
+		<div class={classes.container}>
+			<h1>{formatAlbum(props.album)}</h1>
+			<AlbumCover
+				label={formatAlbum(props.album)}
+				sid={props.album.sid}
+				kind="large"
+			/>
+			<AlbumActions
+				albumId={props.albumId}
+				album={props.album}
+				artist={props.artist}
+			/>
+		</div>
 	);
 };

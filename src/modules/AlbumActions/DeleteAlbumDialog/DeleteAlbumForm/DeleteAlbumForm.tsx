@@ -4,12 +4,12 @@ import { FormActions } from "~/components/Form/Form";
 import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./DeleteAlbumForm.css";
 
-type Props = {
+type DeleteAlbumFormProps = {
 	onCancel: () => void;
 	onDelete: () => void;
 };
 
-export const DeleteAlbumForm: Component<Props> = (props) => {
+export const DeleteAlbumForm: Component<DeleteAlbumFormProps> = (props) => {
 	const { t } = useI18n();
 
 	return (

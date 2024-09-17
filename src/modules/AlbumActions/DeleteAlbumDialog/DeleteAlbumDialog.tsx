@@ -12,13 +12,12 @@ import { graphqlSdk } from "~/services/fetcher";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
-type Props = {
+type DeleteAlbumDialogProps = {
 	albumId: string;
-	onSuccess: () => void;
 	isIcon?: boolean;
 };
 
-export const DeleteAlbumDialog: Component<Props> = (props) => {
+export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
@@ -33,7 +32,6 @@ export const DeleteAlbumDialog: Component<Props> = (props) => {
 	const handleSubmit = async () => {
 		await graphqlSdk.DeleteAlbum({ id: props.albumId });
 		state.close();
-		props.onSuccess();
 	};
 
 	return (

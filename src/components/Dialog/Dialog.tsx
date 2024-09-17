@@ -13,14 +13,14 @@ import type { Component, JSX } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 
-type Props = AriaDialogProps &
+type DialogProps = AriaDialogProps &
 	AriaModalProps &
 	AriaOverlayProps & {
 		title?: JSX.Element;
 		children?: JSX.Element;
 	};
 
-export const Dialog: Component<Props> = (props) => {
+export const Dialog: Component<DialogProps> = (props) => {
 	const { t } = useI18n();
 
 	let ref: HTMLDivElement | undefined;

@@ -4,13 +4,15 @@ import { Button } from "~/components/Button/Button";
 import { fetchCovers } from "~/services/coverArt";
 import * as classes from "./AlbumCoversCarousel.css";
 
-type Props = {
+type AlbumCoversCarouselProps = {
 	isHovering: boolean;
 	label: string;
 	sid: string;
 };
 
-export const AlbumCoversCarousel: Component<Props> = (props) => {
+export const AlbumCoversCarousel: Component<AlbumCoversCarouselProps> = (
+	props,
+) => {
 	const [index, setIndex] = createSignal(0);
 
 	const [thumbnails] = createResource(

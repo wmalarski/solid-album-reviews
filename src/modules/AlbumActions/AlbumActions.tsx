@@ -7,17 +7,14 @@ import * as classes from "./AlbumActions.css";
 import { DeleteAlbumDialog } from "./DeleteAlbumDialog/DeleteAlbumDialog";
 import { UpdateAlbumDialog } from "./UpdateAlbumDialog/UpdateAlbumDialog";
 
-type Props = {
+type AlbumActionsProps = {
 	albumId: string;
 	album: Album;
 	artist: Artist;
-	onAlbumDelete: () => void;
-	onReviewInsert?: () => void;
-	onAlbumUpdate: () => void;
 	asIcons?: boolean;
 };
 
-export const AlbumActions: Component<Props> = (props) => {
+export const AlbumActions: Component<AlbumActionsProps> = (props) => {
 	return (
 		<div class={classes.container}>
 			<YtRedirectButton
@@ -30,22 +27,13 @@ export const AlbumActions: Component<Props> = (props) => {
 				artist={props.artist}
 				isIcon={props.asIcons}
 			/>
-			<InsertReviewDialog
-				albumId={props.albumId}
-				onSuccess={() => props.onReviewInsert?.()}
-				isIcon={props.asIcons}
-			/>
+			<InsertReviewDialog albumId={props.albumId} isIcon={props.asIcons} />
 			<UpdateAlbumDialog
 				album={props.album}
-				onSuccess={() => props.onAlbumUpdate()}
 				isIcon={props.asIcons}
 				albumId={props.albumId}
 			/>
-			<DeleteAlbumDialog
-				albumId={props.albumId}
-				onSuccess={() => props.onAlbumDelete()}
-				isIcon={props.asIcons}
-			/>
+			<DeleteAlbumDialog albumId={props.albumId} isIcon={props.asIcons} />
 		</div>
 	);
 };

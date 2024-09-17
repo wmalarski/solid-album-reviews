@@ -1,24 +1,21 @@
-import { AlbumCoversCarousel } from "@routes/Home/AlbumsGrid/AlbumItem/AlbumCoversCarousel/AlbumCoversCarousel";
+import { useNavigate } from "@solidjs/router";
 import clsx from "clsx";
-import { useNavigate, useRouteData } from "solid-app-router";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import type { Album, Artist } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
-import type { HomeDataLoaderResult } from "../../Home.data";
+import { AlbumCoversCarousel } from "./AlbumCoversCarousel/AlbumCoversCarousel";
 import * as classes from "./AlbumItem.css";
 
-type Props = {
+type AlbumItemProps = {
 	albumId: string;
 	album: Album;
 	artist: Artist;
 };
 
-export const AlbumItem: Component<Props> = (props) => {
-	const { refetch } = useRouteData<HomeDataLoaderResult>();
-
+export const AlbumItem: Component<AlbumItemProps> = (props) => {
 	const navigate = useNavigate();
 
 	const [isHovering, setIsHovering] = createSignal(false);
@@ -56,7 +53,7 @@ export const AlbumItem: Component<Props> = (props) => {
 						<AlbumCoversCarousel
 							isHovering={isHovering()}
 							label={label()}
-							sid={mBid}
+							sid={mBid()}
 						/>
 						<Show when={isHovering()}>
 							<div class={classes.footer}>
@@ -71,9 +68,7 @@ export const AlbumItem: Component<Props> = (props) => {
 									albumId={props.albumId}
 									artist={props.artist}
 									asIcons
-									onAlbumDelete={refetch}
 									onAlbumUpdate={handleAlbumUpdate}
-									onReviewInsert={refetch}
 								/>
 							</div>
 						</Show>

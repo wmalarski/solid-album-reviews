@@ -14,14 +14,13 @@ import type { Album } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
-type Props = {
+type UpdateAlbumDialogProps = {
 	albumId: string;
 	album: Album;
-	onSuccess: () => void;
 	isIcon?: boolean;
 };
 
-export const UpdateAlbumDialog: Component<Props> = (props) => {
+export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
@@ -36,7 +35,6 @@ export const UpdateAlbumDialog: Component<Props> = (props) => {
 	const handleSubmit = async (input: AlbumSetInput) => {
 		await graphqlSdk.UpdateAlbum({ id: props.albumId, input });
 		state.close();
-		props.onSuccess();
 	};
 
 	return (

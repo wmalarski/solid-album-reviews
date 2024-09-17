@@ -3,13 +3,13 @@ import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./Pagination.css";
 
-type Props = {
+type PaginationProps = {
 	current: number;
 	maxPage: number;
 	onChange: (page: number) => void;
 };
 
-export const Pagination: Component<Props> = (props) => {
+export const Pagination: Component<PaginationProps> = (props) => {
 	const { t } = useI18n();
 
 	const handlePreviousClick = () => {

@@ -8,7 +8,7 @@ import { formatAlbum, formatDate } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ReviewsListItem.css";
 
-type Props = {
+type ReviewsListItemProps = {
 	album: Album;
 	artist: Artist;
 	reviewId: string;
@@ -16,7 +16,7 @@ type Props = {
 	onReviewChange: () => void;
 };
 
-export const ReviewsListItem: Component<Props> = (props) => {
+export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
 	const { t, locale } = useI18n();
 
 	return (

@@ -1,31 +1,24 @@
-import { Navigate, Outlet, useRouteData } from "solid-app-router";
-import { type Component, Show } from "solid-js";
-import { paths } from "~/utils/paths";
+import {
+	type RouteSectionProps,
+	createAsync,
+	useParams,
+} from "@solidjs/router";
+import type { Component } from "solid-js";
+import { selectAlbumLoader } from "~/services/album";
 import * as classes from "./Album.css";
-import type { AlbumDataLoaderResult } from "./Album.data";
 import { AlbumDetails } from "./AlbumDetails/AlbumDetails";
 
-const Album: Component = () => {
-	const { album } = useRouteData<AlbumDataLoaderResult>();
+const AlbumPage: Component<RouteSectionProps> = (props) => {
+	const params = useParams();
 
-	const isValid = () => {
-		const result = album();
-
-		if (!result) {
-			return true;
-		}
-
-		return !!result.data;
-	};
+	const album = createAsync(() => selectAlbumLoader(params.boardId));
 
 	return (
-		<Show when={isValid()} fallback={<Navigate href={paths.notFound} />}>
-			<div class={classes.container}>
-				<AlbumDetails />
-				<Outlet />
-			</div>
-		</Show>
+		<div class={classes.container}>
+			<AlbumDetails album={album()} />
+			{props.children}
+		</div>
 	);
 };
 
-export default Album;
+export default AlbumPage;

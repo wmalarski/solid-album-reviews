@@ -5,11 +5,11 @@ import { gridLimit, loader } from "./ReviewsGrid.data";
 import { fillGrid, getMonths } from "./ReviewsGrid.utils";
 import { ReviewsGridItem } from "./ReviewsGridItem/ReviewsGridItem";
 
-type Props = {
+type ReviewsGridProps = {
 	data?: string;
 };
 
-const ReviewsGrid: Component<Props> = () => {
+const ReviewsGrid: Component<ReviewsGridProps> = () => {
 	const { locale } = useI18n();
 
 	const [reviews] = createResource(loader);

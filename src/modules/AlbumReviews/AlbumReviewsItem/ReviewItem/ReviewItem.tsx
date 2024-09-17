@@ -5,7 +5,7 @@ import type { Album, Artist, Review } from "~/store/types";
 import { formatDate } from "~/utils/formatters";
 import * as classes from "./ReviewItem.css";
 
-type Props = {
+type ReviewItemProps = {
 	reviewId: string;
 	album: Album;
 	artist: Artist;
@@ -13,7 +13,7 @@ type Props = {
 	onReviewChange: () => void;
 };
 
-export const ReviewItem: Component<Props> = (props) => {
+export const ReviewItem: Component<ReviewItemProps> = (props) => {
 	const { t, locale } = useI18n();
 
 	return (

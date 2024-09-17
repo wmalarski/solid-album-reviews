@@ -5,13 +5,15 @@ import { useI18n } from "~/contexts/I18nContext";
 import { redirectToGoogle } from "~/services/redirects";
 import type { Album, Artist } from "~/store/types";
 
-type Props = {
+type GoogleRedirectButtonProps = {
 	album: Album;
 	artist: Artist;
 	isIcon?: boolean;
 };
 
-export const GoogleRedirectButton: Component<Props> = (props) => {
+export const GoogleRedirectButton: Component<GoogleRedirectButtonProps> = (
+	props,
+) => {
 	const { t } = useI18n();
 
 	const handleRedirectClick = () => {

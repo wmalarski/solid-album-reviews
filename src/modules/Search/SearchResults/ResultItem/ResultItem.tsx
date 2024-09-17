@@ -9,13 +9,13 @@ import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ResultItem.css";
 
-type Props = {
+type ResultItemProps = {
 	albumId: string;
 	artist: Artist;
 	album: Album;
 };
 
-export const ResultItem: Component<Props> = (props) => {
+export const ResultItem: Component<ResultItemProps> = (props) => {
 	const { refetch } = useRouteData<SearchDataLoaderResult>();
 
 	return (

@@ -13,13 +13,14 @@ import { graphqlSdk } from "~/services/fetcher";
 import type { ReviewInsertInput } from "~/services/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
-type Props = {
+type InsertReviewDialogProps = {
 	albumId: string;
 	isIcon?: boolean;
-	onSuccess: () => void;
 };
 
-export const InsertReviewDialog: Component<Props> = (props) => {
+export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
+	props,
+) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
@@ -35,7 +36,6 @@ export const InsertReviewDialog: Component<Props> = (props) => {
 		const review = { ...input, album: props.albumId };
 		await graphqlSdk.InsertReview({ review });
 		state.close();
-		props.onSuccess();
 	};
 
 	return (

@@ -11,12 +11,13 @@ import { graphqlSdk } from "~/services/fetcher";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
-type Props = {
+type DeleteReviewDialogProps = {
 	reviewId: string;
-	onSuccess: () => void;
 };
 
-export const DeleteReviewDialog: Component<Props> = (props) => {
+export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
+	props,
+) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
@@ -31,7 +32,6 @@ export const DeleteReviewDialog: Component<Props> = (props) => {
 	const handleSubmit = async () => {
 		await graphqlSdk.DeleteReview({ id: props.reviewId });
 		state.close();
-		props.onSuccess();
 	};
 
 	return (

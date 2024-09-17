@@ -6,13 +6,13 @@ import { useI18n } from "~/contexts/I18nContext";
 import type { AlbumSetInput } from "~/services/types";
 import type { Album } from "~/store/types";
 
-type Props = {
+type UpdateAlbumFormProps = {
 	initialAlbum: Album;
 	onClose: () => void;
 	onSubmit: (args: AlbumSetInput) => void;
 };
 
-export const UpdateAlbumForm: Component<Props> = (props) => {
+export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
 	const { t } = useI18n();
 
 	const [title, setTitle] = createSignal(props.initialAlbum.title || "");

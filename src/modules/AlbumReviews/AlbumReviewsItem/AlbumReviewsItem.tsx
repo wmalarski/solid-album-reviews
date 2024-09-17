@@ -11,7 +11,7 @@ import type { AlbumReviewDataLoaderResult } from "../AlbumReviews.data";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
 
-type Props = {
+type AlbumReviewsItemProps = {
 	isCurrent: boolean;
 	albumId: string;
 	artist: Artist;
@@ -19,7 +19,7 @@ type Props = {
 	reviews: Review[];
 };
 
-export const AlbumReviewsItem: Component<Props> = (props) => {
+export const AlbumReviewsItem: Component<AlbumReviewsItemProps> = (props) => {
 	const { t } = useI18n();
 
 	const navigate = useNavigate();

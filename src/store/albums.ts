@@ -1,5 +1,16 @@
 import { ALBUMS_TABLE_ID, type StoreContext } from "./store";
 
+type SelectAlbumArgs = {
+	albumId: string;
+};
+
+export const selectAlbum = (
+	context: StoreContext,
+	{ albumId }: SelectAlbumArgs,
+) => {
+	return context.store.getRow(ALBUMS_TABLE_ID, albumId);
+};
+
 type UpdateAlbumArgs = {
 	year?: number | undefined;
 	title?: string | undefined;

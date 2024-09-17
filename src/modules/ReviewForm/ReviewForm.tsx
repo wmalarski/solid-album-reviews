@@ -7,13 +7,13 @@ import type { ReviewInsertInput, ReviewSetInput } from "~/services/types";
 import type { Review } from "~/store/types";
 import * as classes from "./ReviewForm.css";
 
-type Props = {
+type ReviewFormProps = {
 	initialReview?: Review;
 	onClose: () => void;
 	onSubmit: (input: ReviewInsertInput | ReviewSetInput) => void;
 };
 
-export const ReviewForm: Component<Props> = (props) => {
+export const ReviewForm: Component<ReviewFormProps> = (props) => {
 	const { t } = useI18n();
 
 	const [text, setText] = createSignal(props.initialReview?.text || "");
