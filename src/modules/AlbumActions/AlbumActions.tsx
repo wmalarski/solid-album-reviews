@@ -1,8 +1,8 @@
-import { InsertReviewDialog } from "@modules/AlbumActions/InsertReviewDialog/InsertReviewDialog";
-import { GoogleRedirectButton } from "@modules/GoogleRedirectButton/GoogleRedirectButton";
-import { YtRedirectButton } from "@modules/YtRedirectButton/YtRedirectButton";
-import type { AlbumWithArtistFragment } from "@services/types";
 import type { Component } from "solid-js";
+import { InsertReviewDialog } from "~/modules/AlbumActions/InsertReviewDialog/InsertReviewDialog";
+import { GoogleRedirectButton } from "~/modules/GoogleRedirectButton/GoogleRedirectButton";
+import { YtRedirectButton } from "~/modules/YtRedirectButton/YtRedirectButton";
+import type { AlbumWithArtistFragment } from "~/services/types";
 import * as classes from "./AlbumActions.css";
 import { DeleteAlbumDialog } from "./DeleteAlbumDialog/DeleteAlbumDialog";
 import { UpdateAlbumDialog } from "./UpdateAlbumDialog/UpdateAlbumDialog";

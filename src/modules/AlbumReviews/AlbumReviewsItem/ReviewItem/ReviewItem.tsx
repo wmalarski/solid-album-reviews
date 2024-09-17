@@ -1,8 +1,8 @@
-import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
-import type { ReviewFragment } from "@services/types";
-import { formatDate } from "@utils/formatters";
 import type { Component } from "solid-js";
 import { useI18n } from "~/contexts/I18nContext";
+import { ReviewActions } from "~/modules/ReviewActions/ReviewActions";
+import type { ReviewFragment } from "~/services/types";
+import { formatDate } from "~/utils/formatters";
 import * as classes from "./ReviewItem.css";
 
 type Props = {

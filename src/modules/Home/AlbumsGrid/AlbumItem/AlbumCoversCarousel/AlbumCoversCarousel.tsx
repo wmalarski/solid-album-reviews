@@ -1,7 +1,7 @@
-import { Button } from "@components/Button/Button";
-import { fetchCovers } from "@services/coverArt";
 import clsx from "clsx";
 import { type Component, Show, createResource, createSignal } from "solid-js";
+import { Button } from "~/components/Button/Button";
+import { fetchCovers } from "~/services/coverArt";
 import * as classes from "./AlbumCoversCarousel.css";
 
 type Props = {

@@ -1,6 +1,6 @@
-import { useNhostStatus } from "@services/nhost";
 import { Outlet } from "solid-app-router";
 import { type Component, Show } from "solid-js";
+import { useNhostStatus } from "~/services/nhost";
 import { Loading } from "./Loading/Loading";
 import * as classes from "./Root.css";
 

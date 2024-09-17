@@ -1,10 +1,10 @@
-import { StyledLink } from "@components/StyledLink/StyledLink";
-import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
-import { ReviewActions } from "@modules/ReviewActions/ReviewActions";
-import type { ReviewWithAlbumAndArtistFragment } from "@services/types";
-import { formatAlbum, formatDate } from "@utils/formatters";
 import type { Component } from "solid-js";
+import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";
+import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
+import { ReviewActions } from "~/modules/ReviewActions/ReviewActions";
+import type { ReviewWithAlbumAndArtistFragment } from "~/services/types";
+import { formatAlbum, formatDate } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ReviewsListItem.css";
 

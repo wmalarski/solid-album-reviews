@@ -1,4 +1,4 @@
-import { graphqlSdk } from "@services/fetcher";
+import { graphqlSdk } from "~/services/fetcher";
 
 export const gridLimit = 364;
 

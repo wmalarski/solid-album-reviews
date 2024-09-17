@@ -1,6 +1,6 @@
-import { Button } from "@components/Button/Button";
-import { FormActions } from "@components/Form/Form";
 import type { Component } from "solid-js";
+import { Button } from "~/components/Button/Button";
+import { FormActions } from "~/components/Form/Form";
 import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./DeleteReviewForm.css";
 

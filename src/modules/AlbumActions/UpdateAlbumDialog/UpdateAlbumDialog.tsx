@@ -1,16 +1,16 @@
-import { Button } from "@components/Button/Button";
-import { Dialog } from "@components/Dialog/Dialog";
-import { graphqlSdk } from "@services/fetcher";
-import type { AlbumFragment, AlbumSetInput } from "@services/types";
 import { createButton } from "@solid-aria/button";
 import {
 	OverlayContainer,
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
-import { getPortalContainer } from "@utils/getPortalContainer";
 import { BsPencilSquare } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
+import { Button } from "~/components/Button/Button";
+import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
+import { graphqlSdk } from "~/services/fetcher";
+import type { AlbumFragment, AlbumSetInput } from "~/services/types";
+import { getPortalContainer } from "~/utils/getPortalContainer";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type Props = {

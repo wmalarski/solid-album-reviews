@@ -1,8 +1,8 @@
-import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
-import { formatAlbum } from "@utils/formatters";
 import { useNavigate, useRouteData } from "solid-app-router";
 import { type Component, Show } from "solid-js";
+import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
+import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
+import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import type { AlbumDataLoaderResult } from "../Album.data";
 import * as classes from "./AlbumDetails.css";

@@ -1,12 +1,12 @@
-import { GoogleRedirectButton } from "@modules/GoogleRedirectButton/GoogleRedirectButton";
-import { DeleteReviewDialog } from "@modules/ReviewActions/DeleteReviewDialog/DeleteReviewDialog";
-import { UpdateReviewDialog } from "@modules/ReviewActions/UpdateReviewDialog/UpdateReviewDialog";
-import { YtRedirectButton } from "@modules/YtRedirectButton/YtRedirectButton";
+import { type Component, Show } from "solid-js";
+import { GoogleRedirectButton } from "~/modules/GoogleRedirectButton/GoogleRedirectButton";
+import { DeleteReviewDialog } from "~/modules/ReviewActions/DeleteReviewDialog/DeleteReviewDialog";
+import { UpdateReviewDialog } from "~/modules/ReviewActions/UpdateReviewDialog/UpdateReviewDialog";
+import { YtRedirectButton } from "~/modules/YtRedirectButton/YtRedirectButton";
 import type {
 	ReviewFragment,
 	ReviewWithAlbumAndArtistFragment,
-} from "@services/types";
-import { type Component, Show } from "solid-js";
+} from "~/services/types";
 import * as classes from "./ReviewActions.css";
 
 type Props = {

@@ -1,9 +1,9 @@
-import { Button } from "@components/Button/Button";
-import { redirectToGoogle } from "@services/redirects";
-import type { AlbumWithArtistFragment } from "@services/types";
 import { BsGoogle } from "solid-icons/bs";
 import type { Component } from "solid-js";
+import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
+import { redirectToGoogle } from "~/services/redirects";
+import type { AlbumWithArtistFragment } from "~/services/types";
 
 type Props = {
 	album: AlbumWithArtistFragment;

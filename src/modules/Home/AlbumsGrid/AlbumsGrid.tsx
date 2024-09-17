@@ -1,6 +1,6 @@
-import { Button } from "@components/Button/Button";
 import { useRouteData } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
+import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 import type { HomeDataLoaderResult } from "../Home.data";
 import { AlbumItem } from "./AlbumItem/AlbumItem";

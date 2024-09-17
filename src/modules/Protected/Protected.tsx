@@ -1,7 +1,7 @@
 import { Header } from "@routes/Protected/Header/Header";
-import { useNhostStatus } from "@services/nhost";
 import { Navigate, Outlet } from "solid-app-router";
 import { type Component, Show } from "solid-js";
+import { useNhostStatus } from "~/services/nhost";
 import { paths } from "~/utils/paths";
 
 const Protected: Component = () => {

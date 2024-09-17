@@ -1,7 +1,7 @@
 import type { ErrorPayload } from "@nhost/core";
 import type { SignInParams } from "@nhost/hasura-auth-js";
-import { nhost } from "@services/nhost";
 import { type Component, createSignal } from "solid-js";
+import { nhost } from "~/services/nhost";
 import { SignInForm } from "./SignInForm/SignInForm";
 
 const SignIn: Component = () => {

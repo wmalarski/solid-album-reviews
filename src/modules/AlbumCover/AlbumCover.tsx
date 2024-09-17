@@ -1,6 +1,6 @@
-import { type CoverKind, fetchCovers } from "@services/coverArt";
 import clsx from "clsx";
 import { type Component, createResource } from "solid-js";
+import { type CoverKind, fetchCovers } from "~/services/coverArt";
 import * as classes from "./AlbumCover.css";
 
 type Props = {

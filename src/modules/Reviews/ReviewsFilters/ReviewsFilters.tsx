@@ -1,9 +1,9 @@
-import { Button } from "@components/Button/Button";
-import { FormLabel } from "@components/Form/Form";
-import { Input } from "@components/Input/Input";
 import { debounce } from "@solid-primitives/scheduled";
 import { useRouteData, useSearchParams } from "solid-app-router";
 import { type Component, createSignal } from "solid-js";
+import { Button } from "~/components/Button/Button";
+import { FormLabel } from "~/components/Form/Form";
+import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
 import type {
 	ReviewsDataLoaderReturn,

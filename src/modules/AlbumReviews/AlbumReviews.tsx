@@ -1,6 +1,6 @@
-import { Pagination } from "@components/Pagination/Pagination";
 import { useRouteData, useSearchParams } from "solid-app-router";
 import { type Component, For, Show } from "solid-js";
+import { Pagination } from "~/components/Pagination/Pagination";
 import * as classes from "./AlbumReviews.css";
 import type { AlbumReviewDataLoaderResult } from "./AlbumReviews.data";
 import { AlbumReviewsItem } from "./AlbumReviewsItem/AlbumReviewsItem";

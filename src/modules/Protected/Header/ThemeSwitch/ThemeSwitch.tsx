@@ -1,8 +1,8 @@
-import { Button } from "@components/Button/Button";
 import { getMode, saveMode } from "@styles/themeStore";
 import type { Mode } from "@styles/tokens";
 import { BsMoonStars, BsSun } from "solid-icons/bs";
 import { type Component, createSignal } from "solid-js";
+import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 
 export const ThemeSwitch: Component = () => {

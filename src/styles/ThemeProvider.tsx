@@ -1,5 +1,5 @@
-import { portalContainerId } from "@utils/getPortalContainer";
 import type { Component, JSX } from "solid-js";
+import { portalContainerId } from "~/utils/getPortalContainer";
 import { getMode } from "./themeStore";
 
 type Props = {

@@ -1,7 +1,7 @@
-import { graphqlSdk } from "@services/fetcher";
-import { useNhostStatus } from "@services/nhost";
 import type { RouteDataFunc } from "solid-app-router";
 import { createResource } from "solid-js";
+import { graphqlSdk } from "~/services/fetcher";
+import { useNhostStatus } from "~/services/nhost";
 
 type AlbumLoaderArgs = {
 	albumId: number;

@@ -1,6 +1,6 @@
-import { graphqlSdk } from "@services/fetcher";
-import { useNhostStatus } from "@services/nhost";
 import { createResource } from "solid-js";
+import { graphqlSdk } from "~/services/fetcher";
+import { useNhostStatus } from "~/services/nhost";
 
 type HomeLoaderArgs = {
 	isAuthorized: boolean;

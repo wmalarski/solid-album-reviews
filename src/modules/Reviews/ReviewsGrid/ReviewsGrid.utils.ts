@@ -1,4 +1,4 @@
-import type { ReviewGrid, SelectReviewsGridQuery } from "@services/types";
+import type { ReviewGrid, SelectReviewsGridQuery } from "~/services/types";
 
 const getDateRange = (count: number): Date[] => {
 	const init = new Date();

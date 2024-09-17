@@ -1,7 +1,7 @@
 import type {
 	AlbumWithArtistFragment,
 	RandomAlbumWithArtistFragment,
-} from "@services/types";
+} from "~/services/types";
 
 export const requireAlbumFragment = (
 	random: RandomAlbumWithArtistFragment,

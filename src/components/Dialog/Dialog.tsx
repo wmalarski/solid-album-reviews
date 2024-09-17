@@ -9,8 +9,8 @@ import {
 } from "@solid-aria/overlays";
 import * as classes from "./Dialog.css";
 
-import { Button } from "@components/Button/Button";
 import type { Component, JSX } from "solid-js";
+import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 
 type Props = AriaDialogProps &

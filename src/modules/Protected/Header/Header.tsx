@@ -1,8 +1,8 @@
-import { Button } from "@components/Button/Button";
-import { nhost } from "@services/nhost";
 import { Link } from "solid-app-router";
 import type { Component } from "solid-js";
+import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
+import { nhost } from "~/services/nhost";
 import { paths } from "~/utils/paths";
 import * as classes from "./Header.css";
 import { HeaderLink } from "./HeaderLink/HeaderLink";

@@ -1,9 +1,9 @@
-import { Button } from "@components/Button/Button";
-import { Form, FormActions, FormLabel } from "@components/Form/Form";
-import { Input } from "@components/Input/Input";
-import type { AlbumFragment, AlbumSetInput } from "@services/types";
 import { type Component, createSignal } from "solid-js";
+import { Button } from "~/components/Button/Button";
+import { Form, FormActions, FormLabel } from "~/components/Form/Form";
+import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
+import type { AlbumFragment, AlbumSetInput } from "~/services/types";
 
 type Props = {
 	initialAlbum: AlbumFragment;

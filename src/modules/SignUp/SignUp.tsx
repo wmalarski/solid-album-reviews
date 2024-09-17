@@ -1,8 +1,8 @@
 import type { ErrorPayload } from "@nhost/core";
 import type { SignUpParams } from "@nhost/hasura-auth-js";
-import { nhost } from "@services/nhost";
 import { useNavigate } from "solid-app-router";
 import { type Component, createSignal } from "solid-js";
+import { nhost } from "~/services/nhost";
 import { paths } from "~/utils/paths";
 import { SignUpForm } from "./SignUpForm/SignUpForm";
 

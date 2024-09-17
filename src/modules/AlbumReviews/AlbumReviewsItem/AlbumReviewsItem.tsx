@@ -1,14 +1,14 @@
-import { StyledLink } from "@components/StyledLink/StyledLink";
-import { AlbumActions } from "@modules/AlbumActions/AlbumActions";
-import { AlbumCover } from "@modules/AlbumCover/AlbumCover";
+import { useNavigate, useRouteData } from "solid-app-router";
+import { type Component, For, Show } from "solid-js";
+import { StyledLink } from "~/components/StyledLink/StyledLink";
+import { useI18n } from "~/contexts/I18nContext";
+import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
+import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
 import type {
 	AlbumWithArtistFragment,
 	AlbumWithReviewsFragment,
-} from "@services/types";
-import { formatAlbum } from "@utils/formatters";
-import { useNavigate, useRouteData } from "solid-app-router";
-import { type Component, For, Show } from "solid-js";
-import { useI18n } from "~/contexts/I18nContext";
+} from "~/services/types";
+import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import type { AlbumReviewDataLoaderResult } from "../AlbumReviews.data";
 import * as classes from "./AlbumReviewsItem.css";

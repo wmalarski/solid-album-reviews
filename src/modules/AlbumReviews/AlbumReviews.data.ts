@@ -1,8 +1,8 @@
 import type { AlbumDataLoaderResult } from "@routes/Album/Album.data";
-import { graphqlSdk } from "@services/fetcher";
-import { useNhostStatus } from "@services/nhost";
 import type { RouteDataFunc } from "solid-app-router";
 import { createResource } from "solid-js";
+import { graphqlSdk } from "~/services/fetcher";
+import { useNhostStatus } from "~/services/nhost";
 
 type AlbumsLoaderArgs = {
 	page: number;
