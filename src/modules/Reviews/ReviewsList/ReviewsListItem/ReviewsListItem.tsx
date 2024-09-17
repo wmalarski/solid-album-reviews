@@ -3,13 +3,16 @@ import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
 import { ReviewActions } from "~/modules/ReviewActions/ReviewActions";
-import type { ReviewWithAlbumAndArtistFragment } from "~/services/types";
+import type { Album, Artist, Review } from "~/store/types";
 import { formatAlbum, formatDate } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ReviewsListItem.css";
 
 type Props = {
-	review: ReviewWithAlbumAndArtistFragment;
+	album: Album;
+	artist: Artist;
+	reviewId: string;
+	review: Review;
 	onReviewChange: () => void;
 };
 
@@ -19,16 +22,16 @@ export const ReviewsListItem: Component<Props> = (props) => {
 	return (
 		<div class={classes.container}>
 			<AlbumCover
-				label={formatAlbum(props.review.albumByAlbum)}
-				sid={props.review.albumByAlbum.sid}
+				label={formatAlbum(props.album)}
+				sid={props.album.sid}
 				kind="small"
 			/>
 			<div class={classes.right}>
 				<StyledLink
-					href={paths.album(props.review.albumByAlbum.id)}
+					href={paths.album(props.review.albumId)}
 					class={classes.heading}
 				>
-					{formatAlbum(props.review.albumByAlbum)}
+					{formatAlbum(props.album)}
 				</StyledLink>
 				<div class={classes.data}>
 					<span>{t("ReviewItem.rate")}</span>
@@ -40,6 +43,9 @@ export const ReviewsListItem: Component<Props> = (props) => {
 				</div>
 				<ReviewActions
 					review={props.review}
+					album={props.album}
+					artist={props.artist}
+					reviewId={props.reviewId}
 					onReviewDelete={() => props.onReviewChange()}
 					onReviewUpdate={() => props.onReviewChange()}
 				/>

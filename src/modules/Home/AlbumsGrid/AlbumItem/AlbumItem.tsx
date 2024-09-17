@@ -4,14 +4,16 @@ import { useNavigate, useRouteData } from "solid-app-router";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
-import type { AlbumWithArtistFragment } from "~/services/types";
+import type { Album, Artist } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import type { HomeDataLoaderResult } from "../../Home.data";
 import * as classes from "./AlbumItem.css";
 
 type Props = {
-	album: AlbumWithArtistFragment;
+	albumId: string;
+	album: Album;
+	artist: Artist;
 };
 
 export const AlbumItem: Component<Props> = (props) => {
@@ -34,7 +36,7 @@ export const AlbumItem: Component<Props> = (props) => {
 	};
 
 	const handleAlbumUpdate = () => {
-		navigate(paths.album(props.album.id));
+		navigate(paths.album(props.albumId));
 	};
 
 	return (
@@ -58,15 +60,16 @@ export const AlbumItem: Component<Props> = (props) => {
 						/>
 						<Show when={isHovering()}>
 							<div class={classes.footer}>
-								<Show when={props.album.id}>
-									{(id) => (
-										<StyledLink class={classes.heading} href={paths.album(id)}>
-											{label()}
-										</StyledLink>
-									)}
-								</Show>
+								<StyledLink
+									class={classes.heading}
+									href={paths.album(props.albumId)}
+								>
+									{label()}
+								</StyledLink>
 								<AlbumActions
 									album={props.album}
+									albumId={props.albumId}
+									artist={props.artist}
 									asIcons
 									onAlbumDelete={refetch}
 									onAlbumUpdate={handleAlbumUpdate}

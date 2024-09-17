@@ -1,16 +1,16 @@
-import { type Component, Show } from "solid-js";
+import type { Component } from "solid-js";
 import { GoogleRedirectButton } from "~/modules/GoogleRedirectButton/GoogleRedirectButton";
 import { DeleteReviewDialog } from "~/modules/ReviewActions/DeleteReviewDialog/DeleteReviewDialog";
 import { UpdateReviewDialog } from "~/modules/ReviewActions/UpdateReviewDialog/UpdateReviewDialog";
 import { YtRedirectButton } from "~/modules/YtRedirectButton/YtRedirectButton";
-import type {
-	ReviewFragment,
-	ReviewWithAlbumAndArtistFragment,
-} from "~/services/types";
+import type { Album, Artist, Review } from "~/store/types";
 import * as classes from "./ReviewActions.css";
 
 type Props = {
-	review: Partial<ReviewWithAlbumAndArtistFragment> & ReviewFragment;
+	reviewId: string;
+	album: Album;
+	artist: Artist;
+	review: Review;
 	onReviewDelete: () => void;
 	onReviewUpdate: () => void;
 };
@@ -18,20 +18,15 @@ type Props = {
 export const ReviewActions: Component<Props> = (props) => {
 	return (
 		<div class={classes.container}>
-			<Show when={props.review.albumByAlbum}>
-				{(album) => (
-					<>
-						<YtRedirectButton album={album} />
-						<GoogleRedirectButton album={album} />
-					</>
-				)}
-			</Show>
+			<YtRedirectButton album={props.album} artist={props.artist} />
+			<GoogleRedirectButton album={props.album} artist={props.artist} />
 			<UpdateReviewDialog
 				review={props.review}
+				reviewId={props.reviewId}
 				onSuccess={() => props.onReviewUpdate()}
 			/>
 			<DeleteReviewDialog
-				reviewId={props.review.id}
+				reviewId={props.reviewId}
 				onSuccess={() => props.onReviewDelete()}
 			/>
 		</div>

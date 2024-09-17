@@ -13,7 +13,7 @@ import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
 type Props = {
-	albumId: number;
+	albumId: string;
 	onSuccess: () => void;
 	isIcon?: boolean;
 };

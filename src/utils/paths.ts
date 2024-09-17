@@ -1,5 +1,5 @@
 export const paths = {
-	album: (id: number): string => `/album/${id}`,
+	album: (id: string): string => `/album/${id}`,
 	notFound: "/404",
 	reviews: "/reviews",
 	root: "/",

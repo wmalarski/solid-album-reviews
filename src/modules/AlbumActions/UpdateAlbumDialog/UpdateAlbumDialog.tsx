@@ -9,12 +9,14 @@ import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
 import { graphqlSdk } from "~/services/fetcher";
-import type { AlbumFragment, AlbumSetInput } from "~/services/types";
+import type { AlbumSetInput } from "~/services/types";
+import type { Album } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type Props = {
-	album: AlbumFragment;
+	albumId: string;
+	album: Album;
 	onSuccess: () => void;
 	isIcon?: boolean;
 };
@@ -32,7 +34,7 @@ export const UpdateAlbumDialog: Component<Props> = (props) => {
 	);
 
 	const handleSubmit = async (input: AlbumSetInput) => {
-		await graphqlSdk.UpdateAlbum({ id: props.album.id, input });
+		await graphqlSdk.UpdateAlbum({ id: props.albumId, input });
 		state.close();
 		props.onSuccess();
 	};

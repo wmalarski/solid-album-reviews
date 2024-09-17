@@ -14,7 +14,7 @@ import type { ReviewInsertInput } from "~/services/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
 type Props = {
-	albumId: number;
+	albumId: string;
 	isIcon?: boolean;
 	onSuccess: () => void;
 };

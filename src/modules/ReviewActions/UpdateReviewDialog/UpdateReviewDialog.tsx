@@ -9,11 +9,13 @@ import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/ReviewForm/ReviewForm";
 import { graphqlSdk } from "~/services/fetcher";
-import type { ReviewFragment, ReviewSetInput } from "~/services/types";
+import type { ReviewSetInput } from "~/services/types";
+import type { Review } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
 type Props = {
-	review: ReviewFragment;
+	reviewId: string;
+	review: Review;
 	onSuccess: () => void;
 };
 
@@ -30,7 +32,7 @@ export const UpdateReviewDialog: Component<Props> = (props) => {
 	);
 
 	const handleSubmit = async (input: ReviewSetInput) => {
-		await graphqlSdk.UpdateReview({ id: props.review.id, input });
+		await graphqlSdk.UpdateReview({ id: props.reviewId, input });
 		state.close();
 		props.onSuccess();
 	};

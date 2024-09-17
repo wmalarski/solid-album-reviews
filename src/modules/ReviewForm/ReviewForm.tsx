@@ -3,15 +3,12 @@ import { Button } from "~/components/Button/Button";
 import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
-import type {
-	ReviewFragment,
-	ReviewInsertInput,
-	ReviewSetInput,
-} from "~/services/types";
+import type { ReviewInsertInput, ReviewSetInput } from "~/services/types";
+import type { Review } from "~/store/types";
 import * as classes from "./ReviewForm.css";
 
 type Props = {
-	initialReview?: ReviewFragment;
+	initialReview?: Review;
 	onClose: () => void;
 	onSubmit: (input: ReviewInsertInput | ReviewSetInput) => void;
 };

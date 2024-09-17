@@ -4,10 +4,7 @@ import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
-import type {
-	AlbumWithArtistFragment,
-	AlbumWithReviewsFragment,
-} from "~/services/types";
+import type { Album, Artist, Review } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import type { AlbumReviewDataLoaderResult } from "../AlbumReviews.data";
@@ -16,7 +13,10 @@ import { ReviewItem } from "./ReviewItem/ReviewItem";
 
 type Props = {
 	isCurrent: boolean;
-	album: AlbumWithReviewsFragment & AlbumWithArtistFragment;
+	albumId: string;
+	artist: Artist;
+	album: Album;
+	reviews: Review[];
 };
 
 export const AlbumReviewsItem: Component<Props> = (props) => {
@@ -53,19 +53,27 @@ export const AlbumReviewsItem: Component<Props> = (props) => {
 				kind="small"
 			/>
 			<div class={classes.right}>
-				<StyledLink href={paths.album(props.album.id)} class={classes.heading}>
+				<StyledLink href={paths.album(props.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
 				</StyledLink>
-				<Show when={props.album.reviews.length > 0}>
+				<Show when={props.reviews.length > 0}>
 					<span class={classes.subheading}>{t("ReviewItem.reviews")}</span>
 				</Show>
-				<For each={props.album.reviews}>
+				<For each={props.reviews}>
 					{(review) => (
-						<ReviewItem review={review} onReviewChange={handleReviewChange} />
+						<ReviewItem
+							album={props.album}
+							artist={props.artist}
+							reviewId={review.id}
+							review={review}
+							onReviewChange={handleReviewChange}
+						/>
 					)}
 				</For>
 				<AlbumActions
+					albumId={props.albumId}
 					album={props.album}
+					artist={props.artist}
 					onAlbumDelete={handleAlbumDelete}
 					onAlbumUpdate={handleAlbumUpdate}
 					onReviewInsert={handleReviewChange}

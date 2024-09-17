@@ -12,7 +12,7 @@ import { getPortalContainer } from "~/utils/getPortalContainer";
 import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
 type Props = {
-	reviewId: number;
+	reviewId: string;
 	onSuccess: () => void;
 };
 
