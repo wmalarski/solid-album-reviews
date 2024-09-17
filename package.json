@@ -12,6 +12,8 @@
 		"format-and-lint:fix": "biome check . --write"
 	},
 	"dependencies": {
+		"@solidjs/meta": "0.29.4",
+		"@solidjs/router": "0.14.5",
 		"@solid-primitives/i18n": "^2.1.1",
 		"@solid-primitives/scheduled": "^1.4.3",
 		"@solidjs/start": "^1.0.6",
