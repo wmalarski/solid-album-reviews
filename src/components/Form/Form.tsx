@@ -1,23 +1,23 @@
 import clsx from "clsx";
-import { Component, JSX } from "solid-js";
+import type { Component, JSX } from "solid-js";
 import * as classes from "./Form.css";
 
 export const Form: Component<JSX.FormHTMLAttributes<HTMLFormElement>> = (
-  props
+	props,
 ) => {
-  return <form {...props} class={clsx(classes.form, props.class)} />;
+	return <form {...props} class={clsx(classes.form, props.class)} />;
 };
 
 export const FormLabel: Component<JSX.LabelHTMLAttributes<HTMLLabelElement>> = (
-  props
+	props,
 ) => {
-  // eslint-disable-next-line jsx-a11y/label-has-associated-control
-  return <label {...props} class={clsx(classes.label, props.class)} />;
+	// eslint-disable-next-line jsx-a11y/label-has-associated-control
+	return <label {...props} class={clsx(classes.label, props.class)} />;
 };
 
 export const FormActions: Component<JSX.HTMLAttributes<HTMLDivElement>> = (
-  props
+	props,
 ) => {
-  // eslint-disable-next-line jsx-a11y/label-has-associated-control
-  return <div {...props} class={clsx(classes.actions, props.class)} />;
+	// eslint-disable-next-line jsx-a11y/label-has-associated-control
+	return <div {...props} class={clsx(classes.actions, props.class)} />;
 };

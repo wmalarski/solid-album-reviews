@@ -3,54 +3,54 @@ import { Dialog } from "@components/Dialog/Dialog";
 import { graphqlSdk } from "@services/fetcher";
 import { createButton } from "@solid-aria/button";
 import {
-  createOverlayTriggerState,
-  OverlayContainer,
+	OverlayContainer,
+	createOverlayTriggerState,
 } from "@solid-aria/overlays";
 import { useI18n } from "@solid-primitives/i18n";
 import { getPortalContainer } from "@utils/getPortalContainer";
-import { Component, Show } from "solid-js";
+import { type Component, Show } from "solid-js";
 import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
 type Props = {
-  reviewId: number;
-  onSuccess: () => void;
+	reviewId: number;
+	onSuccess: () => void;
 };
 
 export const DeleteReviewDialog: Component<Props> = (props) => {
-  const [t] = useI18n();
+	const [t] = useI18n();
 
-  let openButtonRef: HTMLButtonElement | undefined;
+	let openButtonRef: HTMLButtonElement | undefined;
 
-  const state = createOverlayTriggerState({});
+	const state = createOverlayTriggerState({});
 
-  const { buttonProps: openButtonProps } = createButton(
-    { onPress: () => state.open() },
-    () => openButtonRef
-  );
+	const { buttonProps: openButtonProps } = createButton(
+		{ onPress: () => state.open() },
+		() => openButtonRef,
+	);
 
-  const handleSubmit = async () => {
-    await graphqlSdk.DeleteReview({ id: props.reviewId });
-    state.close();
-    props.onSuccess();
-  };
+	const handleSubmit = async () => {
+		await graphqlSdk.DeleteReview({ id: props.reviewId });
+		state.close();
+		props.onSuccess();
+	};
 
-  return (
-    <>
-      <Button {...openButtonProps} ref={openButtonRef}>
-        {t("DeleteReviewDialog.trigger")}
-      </Button>
-      <Show when={state.isOpen()}>
-        <OverlayContainer portalContainer={getPortalContainer()}>
-          <Dialog
-            isDismissable
-            isOpen
-            onClose={state.close}
-            title={t("DeleteReviewDialog.title")}
-          >
-            <DeleteReviewForm onCancel={state.close} onDelete={handleSubmit} />
-          </Dialog>
-        </OverlayContainer>
-      </Show>
-    </>
-  );
+	return (
+		<>
+			<Button {...openButtonProps} ref={openButtonRef}>
+				{t("DeleteReviewDialog.trigger")}
+			</Button>
+			<Show when={state.isOpen()}>
+				<OverlayContainer portalContainer={getPortalContainer()}>
+					<Dialog
+						isDismissable
+						isOpen
+						onClose={state.close}
+						title={t("DeleteReviewDialog.title")}
+					>
+						<DeleteReviewForm onCancel={state.close} onDelete={handleSubmit} />
+					</Dialog>
+				</OverlayContainer>
+			</Show>
+		</>
+	);
 };

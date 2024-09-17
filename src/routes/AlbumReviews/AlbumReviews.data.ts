@@ -1,68 +1,68 @@
 import type { AlbumDataLoaderResult } from "@routes/Album/Album.data";
 import { graphqlSdk } from "@services/fetcher";
 import { useNhostStatus } from "@services/nhost";
-import { RouteDataFunc } from "solid-app-router";
+import type { RouteDataFunc } from "solid-app-router";
 import { createResource } from "solid-js";
 
 type AlbumsLoaderArgs = {
-  page: number;
-  albumId: number;
-  isAuthorized: boolean;
+	page: number;
+	albumId: number;
+	isAuthorized: boolean;
 };
 
 const pageLimit = 20;
 
 const albumsLoader = ({ page, albumId, isAuthorized }: AlbumsLoaderArgs) => {
-  return !isAuthorized
-    ? Promise.resolve(null)
-    : graphqlSdk.SelectAlbumsWithReviews({
-        limit: pageLimit,
-        offset: page * pageLimit,
-        where: {
-          artistByArtist: {
-            albums: {
-              id: {
-                _eq: albumId,
-              },
-            },
-          },
-        },
-      });
+	return isAuthorized
+		? graphqlSdk.SelectAlbumsWithReviews({
+				limit: pageLimit,
+				offset: page * pageLimit,
+				where: {
+					artistByArtist: {
+						albums: {
+							id: {
+								_eq: albumId,
+							},
+						},
+					},
+				},
+			})
+		: Promise.resolve(null);
 };
 
 export const albumReviewsDataLoader = ({
-  location,
-  data,
+	location,
+	data,
 }: Parameters<RouteDataFunc>[0]) => {
-  const status = useNhostStatus();
+	const status = useNhostStatus();
 
-  const {
-    album,
-    albumId,
-    refetch: refetchAlbum,
-  } = data as AlbumDataLoaderResult;
+	const {
+		album,
+		albumId,
+		refetch: refetchAlbum,
+	} = data as AlbumDataLoaderResult;
 
-  const page = () => {
-    return +(location.query.page || "0");
-  };
+	const page = () => {
+		return +(location.query.page || "0");
+	};
 
-  const [albums, { refetch: refetchAlbums }] = createResource(
-    () => ({
-      albumId: albumId(),
-      isAuthorized: status() === "auth",
-      page: page(),
-    }),
-    albumsLoader
-  );
+	const [albums, { refetch: refetchAlbums }] = createResource(
+		() => ({
+			albumId: albumId(),
+			isAuthorized: status() === "auth",
+			page: page(),
+		}),
+		albumsLoader,
+	);
 
-  const maxPage = () => {
-    const count = albums()?.data?.albumAggregate.aggregate?.count || 0;
-    return Math.ceil(count / pageLimit);
-  };
+	const maxPage = () => {
+		const count = albums()?.data?.albumAggregate.aggregate?.count || 0;
+		return Math.ceil(count / pageLimit);
+	};
 
-  return { album, albumId, albums, maxPage, page, refetchAlbum, refetchAlbums };
+	return { album, albumId, albums, maxPage, page, refetchAlbum, refetchAlbums };
 };
 
 export type AlbumReviewDataLoaderResult = ReturnType<
-  typeof albumReviewsDataLoader
+	typeof albumReviewsDataLoader
 >;

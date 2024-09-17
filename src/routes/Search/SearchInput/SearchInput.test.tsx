@@ -1,5 +1,5 @@
-import { PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
-import { ComponentProps } from "solid-js";
+import { type PropsWithTestWrapper, TestWrapper } from "@tests/TestWrapper";
+import type { ComponentProps } from "solid-js";
 import { render, screen } from "solid-testing-library";
 import { describe, expect, test } from "vitest";
 import { SearchInput } from "./SearchInput";
@@ -7,23 +7,23 @@ import { SearchInput } from "./SearchInput";
 type Props = ComponentProps<typeof SearchInput>;
 
 const renderComponent = ({
-  wrapperProps,
-  ...props
+	wrapperProps,
+	...props
 }: PropsWithTestWrapper<Props> = {}) => {
-  const defaultProps: Props = {
-    onQueryChange: () => void 0,
-  };
-  return render(() => (
-    <TestWrapper {...wrapperProps}>
-      <SearchInput {...defaultProps} {...props} />
-    </TestWrapper>
-  ));
+	const defaultProps: Props = {
+		onQueryChange: () => void 0,
+	};
+	return render(() => (
+		<TestWrapper {...wrapperProps}>
+			<SearchInput {...defaultProps} {...props} />
+		</TestWrapper>
+	));
 };
 
 describe("<SearchInput />", () => {
-  test("renders", async () => {
-    const { unmount } = renderComponent();
-    await expect(screen.findByAltText("SearchInput")).resolves.toBeDefined();
-    unmount();
-  });
+	test("renders", async () => {
+		const { unmount } = renderComponent();
+		await expect(screen.findByAltText("SearchInput")).resolves.toBeDefined();
+		unmount();
+	});
 });

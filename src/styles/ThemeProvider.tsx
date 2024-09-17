@@ -1,18 +1,18 @@
 import { portalContainerId } from "@utils/getPortalContainer";
-import { Component, JSX } from "solid-js";
+import type { Component, JSX } from "solid-js";
 import { getMode } from "./themeStore";
 
 type Props = {
-  children: JSX.Element;
+	children: JSX.Element;
 };
 
 export const ThemeProvider: Component<Props> = (props: Props) => {
-  document.body.setAttribute("data-mode", getMode());
+	document.body.setAttribute("data-mode", getMode());
 
-  return (
-    <>
-      {props.children}
-      <div id={portalContainerId} />
-    </>
-  );
+	return (
+		<>
+			{props.children}
+			<div id={portalContainerId} />
+		</>
+	);
 };

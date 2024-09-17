@@ -10,19 +10,19 @@ import * as classes from "./App.css";
 import "./styles/global.css";
 
 const App: Component = () => {
-  return (
-    <I18nContext.Provider value={i18next}>
-      <ThemeProvider>
-        <NhostProvider>
-          <OverlayProvider class={classes.overlay}>
-            <Router>
-              <AppRouter />
-            </Router>
-          </OverlayProvider>
-        </NhostProvider>
-      </ThemeProvider>
-    </I18nContext.Provider>
-  );
+	return (
+		<I18nContext.Provider value={i18next}>
+			<ThemeProvider>
+				<NhostProvider>
+					<OverlayProvider class={classes.overlay}>
+						<Router>
+							<AppRouter />
+						</Router>
+					</OverlayProvider>
+				</NhostProvider>
+			</ThemeProvider>
+		</I18nContext.Provider>
+	);
 };
 
 export default App;

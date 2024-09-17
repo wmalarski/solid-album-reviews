@@ -3,42 +3,42 @@ import { vars } from "@styles/theme.css";
 import { style, styleVariants } from "@vanilla-extract/css";
 
 export const container = sprinkles({
-  display: "flex",
-  minHeight: "smallCover",
-  minWidth: "smallCover",
+	display: "flex",
+	minHeight: "smallCover",
+	minWidth: "smallCover",
 });
 
 export const wrapper = sprinkles({
-  position: "relative",
+	position: "relative",
 });
 
 export const image = style({
-  color: vars.colors.label,
-  transition: "width 0.2s, height 0.2s",
+	color: vars.colors.label,
+	transition: "width 0.2s, height 0.2s",
 });
 
 export const imageVariant = styleVariants({
-  hover: {
-    height: vars.space.smallCoverHover,
-    width: vars.space.smallCoverHover,
-  },
-  outside: {
-    height: vars.space.smallCover,
-    width: vars.space.smallCover,
-  },
+	hover: {
+		height: vars.space.smallCoverHover,
+		width: vars.space.smallCoverHover,
+	},
+	outside: {
+		height: vars.space.smallCover,
+		width: vars.space.smallCover,
+	},
 });
 
 const button = style({
-  ":hover": {
-    opacity: 0.8,
-  },
-  all: "unset",
-  backgroundColor: vars.colors.backgroundElevated,
-  cursor: "pointer",
-  height: "100%",
-  opacity: 0.5,
-  position: "absolute",
-  width: vars.space[6],
+	":hover": {
+		opacity: 0.8,
+	},
+	all: "unset",
+	backgroundColor: vars.colors.backgroundElevated,
+	cursor: "pointer",
+	height: "100%",
+	opacity: 0.5,
+	position: "absolute",
+	width: vars.space[6],
 });
 
 export const previous = style([button, { left: 0 }]);

@@ -1,11 +1,11 @@
 /* eslint-disable sort-keys-fix/sort-keys-fix */
 import {
-  createGlobalTheme,
-  createGlobalThemeContract,
+	createGlobalTheme,
+	createGlobalThemeContract,
 } from "@vanilla-extract/css";
 import deepmerge from "deepmerge";
-import { Mode, tokens } from "./tokens";
-import { Theme } from "./types";
+import { type Mode, tokens } from "./tokens";
+import type { Theme } from "./types";
 
 const getVarName = (_value: string | null, path: string[]) => path.join("-");
 
@@ -14,7 +14,7 @@ const baseVars = createGlobalThemeContract(baseTokens, getVarName);
 createGlobalTheme(":root", baseVars, baseTokens);
 
 const makeColorScheme = (mode: Mode) => {
-  return { colors: tokens.colors[mode] };
+	return { colors: tokens.colors[mode] };
 };
 
 const modeTokens = makeColorScheme("light");

@@ -1,23 +1,28 @@
 {
-  "name": "vite-template-solid",
-  "license": "MIT",
-  "type": "module",
-  "version": "0.0.0",
-  "description": "",
-  "scripts": {
-    "dev": "vinxi dev",
-    "build": "vinxi build",
-    "start": "vinxi start"
-  },
-  "dependencies": {
-    "@solidjs/start": "^1.0.6",
-    "@solid-primitives/i18n": "^2.1.1",
-    "@solid-primitives/scheduled": "^1.4.3",
-    "clsx": "^2.1.1",
-    "solid-js": "^1.8.22",
-    "vinxi": "^0.4.3"
-  },
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "vite-template-solid",
+	"license": "MIT",
+	"type": "module",
+	"version": "0.0.0",
+	"description": "",
+	"scripts": {
+		"dev": "vinxi dev",
+		"build": "vinxi build",
+		"start": "vinxi start",
+		"format-and-lint": "biome check .",
+		"format-and-lint:fix": "biome check . --write"
+	},
+	"dependencies": {
+		"@solidjs/start": "^1.0.6",
+		"@solid-primitives/i18n": "^2.1.1",
+		"@solid-primitives/scheduled": "^1.4.3",
+		"clsx": "^2.1.1",
+		"solid-js": "^1.8.22",
+		"vinxi": "^0.4.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.1"
+	},
+	"engines": {
+		"node": ">=18"
+	}
 }

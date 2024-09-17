@@ -1,91 +1,91 @@
 fragment Review on review {
-  id
-  rate
-  text
-  createdAt
+	id
+	rate
+	text
+	createdAt
 }
 
 fragment ReviewWithAlbumAndArtist on review {
-  ...Review
-  albumByAlbum {
-    ...AlbumWithArtist
-  }
+	...Review
+	albumByAlbum {
+		...AlbumWithArtist
+	}
 }
 
 fragment ReviewWithAlbum on review {
-  ...Review
-  albumByAlbum {
-    ...Album
-  }
+	...Review
+	albumByAlbum {
+		...Album
+	}
 }
 
 query SelectReviews($limit: Int, $offset: Int, $where: review_bool_exp) {
-  review(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: { createdAt: desc }
-  ) {
-    ...Review
-  }
-  reviewAggregate: review_aggregate(where: $where) {
-    aggregate {
-      count
-    }
-  }
+	review(
+		limit: $limit
+		offset: $offset
+		where: $where
+		order_by: { createdAt: desc }
+	) {
+		...Review
+	}
+	reviewAggregate: review_aggregate(where: $where) {
+		aggregate {
+			count
+		}
+	}
 }
 
 query SelectReviewsWithAlbumAndArtist(
-  $limit: Int
-  $offset: Int
-  $where: review_bool_exp
+	$limit: Int
+	$offset: Int
+	$where: review_bool_exp
 ) {
-  review(
-    limit: $limit
-    offset: $offset
-    where: $where
-    order_by: { createdAt: desc }
-  ) {
-    ...ReviewWithAlbumAndArtist
-  }
-  reviewAggregate: review_aggregate(where: $where) {
-    aggregate {
-      count
-    }
-  }
+	review(
+		limit: $limit
+		offset: $offset
+		where: $where
+		order_by: { createdAt: desc }
+	) {
+		...ReviewWithAlbumAndArtist
+	}
+	reviewAggregate: review_aggregate(where: $where) {
+		aggregate {
+			count
+		}
+	}
 }
 
 mutation InsertReview($review: review_insert_input!) {
-  insertReviewOne: insert_review_one(object: $review) {
-    id
-  }
+	insertReviewOne: insert_review_one(object: $review) {
+		id
+	}
 }
 
 mutation UpdateReview($id: Int, $input: review_set_input) {
-  updateReview: update_review(where: { id: { _eq: $id } }, _set: $input) {
-    returning {
-      id
-    }
-  }
+	updateReview: update_review(where: { id: { _eq: $id } }, _set: $input) {
+		returning {
+			id
+		}
+	}
 }
 
 mutation DeleteReview($id: Int) {
-  deleteReview: delete_review(where: { id: { _eq: $id } }) {
-    returning {
-      album
-    }
-  }
+	deleteReview: delete_review(where: { id: { _eq: $id } }) {
+		returning {
+			album
+		}
+	}
 }
 
 query SelectReviewsGrid($limit: Int, $start: timestamptz) {
-  __typename
-  review_grid(
-    limit: $limit
-    order_by: [{ day: desc }]
-    where: { day: { _gte: $start } }
-  ) {
-    count
-    day
-    avg
-  }
+	__typename
+	review_grid(
+		limit: $limit
+		order_by: [{ day: desc }]
+		where: { day: { _gte: $start } }
+	) {
+		count
+		day
+		avg
+	}
 }

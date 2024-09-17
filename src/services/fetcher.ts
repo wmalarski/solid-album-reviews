@@ -1,40 +1,40 @@
-import { DocumentNode } from "graphql";
+import type { DocumentNode } from "graphql";
 import { nhost } from "./nhost";
-import { getSdk, Requester } from "./types";
+import { type Requester, getSdk } from "./types";
 
 export type FetcherError = {
-  message: string;
-  extensions?: unknown;
+	message: string;
+	extensions?: unknown;
 };
 
 export type FetcherActionData = {
-  fetcherErrors?: FetcherError[];
+	fetcherErrors?: FetcherError[];
 };
 
 export type FetcherPayload<Data> = {
-  data?: Data;
-  errors?: FetcherError[];
+	data?: Data;
+	errors?: FetcherError[];
 };
 
 export const jsonFetcher: Requester = async <Data, Variables>(
-  documentNode: DocumentNode,
-  variables?: Variables
+	documentNode: DocumentNode,
+	variables?: Variables,
 ) => {
-  const response = await nhost.graphql.request<Data, Variables>(
-    documentNode,
-    variables
-  );
+	const response = await nhost.graphql.request<Data, Variables>(
+		documentNode,
+		variables,
+	);
 
-  if (response.error) {
-    const data = { definitions: documentNode.definitions, response };
-    // eslint-disable-next-line no-console
-    console.error(JSON.stringify(data, null, 2));
-  }
+	if (response.error) {
+		const data = { definitions: documentNode.definitions, response };
+		// eslint-disable-next-line no-console
+		console.error(JSON.stringify(data, null, 2));
+	}
 
-  return {
-    data: response.data ?? undefined,
-    errors: response.error ? (response.error as FetcherError[]) : undefined,
-  };
+	return {
+		data: response.data ?? undefined,
+		errors: response.error ? (response.error as FetcherError[]) : undefined,
+	};
 };
 
 export const graphqlSdk = getSdk(jsonFetcher);
