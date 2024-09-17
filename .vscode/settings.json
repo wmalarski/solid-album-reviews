@@ -1,5 +1,15 @@
 {
-	"cSpell.words": ["biomejs", "clsx", "nhost", "solidjs", "tinybase", "vinxi"],
+	"cSpell.words": [
+		"biomejs",
+		"clsx",
+		"codegen",
+		"nhost",
+		"outdir",
+		"pandacss",
+		"solidjs",
+		"tinybase",
+		"vinxi"
+	],
 	"editor.defaultFormatter": "biomejs.biome",
 	"editor.codeActionsOnSave": {
 		"quickfix.biome": "always",
