@@ -1,14 +1,14 @@
-import { useSearchParams } from "@solidjs/router";
-import { useRouteData } from "solid-app-router";
+import { createAsync, useParams, useSearchParams } from "@solidjs/router";
 import { type Component, For } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
-import type { ReviewsDataLoaderReturn } from "../Reviews.data";
+import { selectReviewIdsLoader } from "~/services/review";
 import * as classes from "./ReviewsList.css";
 import { ReviewsListItem } from "./ReviewsListItem/ReviewsListItem";
 
 export const ReviewsList: Component = () => {
-	const { reviews, refetch, args, maxPage } =
-		useRouteData<ReviewsDataLoaderReturn>();
+	const params = useParams();
+
+	const reviews = createAsync(() => selectReviewIdsLoader(+params.page));
 
 	const [, setSearchParams] = useSearchParams();
 
@@ -22,7 +22,7 @@ export const ReviewsList: Component = () => {
 
 	return (
 		<div class={classes.container}>
-			<For each={reviews()?.data?.review}>
+			<For each={reviews()}>
 				{(review) => (
 					<ReviewsListItem
 						review={review}

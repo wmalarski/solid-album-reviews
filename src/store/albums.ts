@@ -27,6 +27,23 @@ export const selectAlbums = (
 		.slice(page * limit, (page + 1) * limit);
 };
 
+export type SelectRandomArgs = {
+	limit?: number;
+};
+
+export const selectRandom = (
+	context: StoreContext,
+	{ limit = SELECT_ALBUMS_LIMIT }: SelectRandomArgs = {},
+) => {
+	const length = context.store.getRowCount(ALBUMS_TABLE_ID);
+	const ids = context.store.getRowIds(ALBUMS_TABLE_ID);
+
+	return Array.from(
+		{ length: limit },
+		() => ids[Math.floor(Math.random() * length)],
+	);
+};
+
 export type UpdateAlbumArgs = {
 	year?: number | undefined;
 	title?: string | undefined;

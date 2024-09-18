@@ -12,6 +12,22 @@ export const selectReview = (
 	return context.store.getRow(REVIEWS_TABLE_ID, reviewId);
 };
 
+export const SELECT_REVIEWS_LIMIT = 20;
+
+export type SelectReviewsArgs = {
+	page: number;
+	limit?: number;
+};
+
+export const selectReviews = (
+	context: StoreContext,
+	{ page, limit = SELECT_REVIEWS_LIMIT }: SelectReviewsArgs,
+) => {
+	return context.store
+		.getRowIds(REVIEWS_TABLE_ID)
+		.slice(page * limit, (page + 1) * limit);
+};
+
 export type CreateReviewArgs = {
 	rate: number;
 	text: string;

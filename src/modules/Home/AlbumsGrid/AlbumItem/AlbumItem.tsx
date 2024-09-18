@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
-import type { Album, Artist } from "~/store/types";
+import type {} from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import { AlbumCoversCarousel } from "./AlbumCoversCarousel/AlbumCoversCarousel";
@@ -11,8 +11,6 @@ import * as classes from "./AlbumItem.css";
 
 type AlbumItemProps = {
 	albumId: string;
-	album: Album;
-	artist: Artist;
 };
 
 export const AlbumItem: Component<AlbumItemProps> = (props) => {

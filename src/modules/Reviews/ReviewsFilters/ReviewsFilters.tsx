@@ -5,16 +5,11 @@ import { Button } from "~/components/Button/Button";
 import { FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
-import type {
-	ReviewsDataLoaderReturn,
-	ReviewsLoaderArgs,
-} from "../Reviews.data";
+import type { ReviewsLoaderArgs } from "../Reviews.data";
 import * as classes from "./ReviewsFilters.css";
 
 export const ReviewsFilters: Component = () => {
 	const [, setSearchParams] = useSearchParams();
-
-	const { args } = useRouteData<ReviewsDataLoaderReturn>();
 
 	const { t } = useI18n();
 
