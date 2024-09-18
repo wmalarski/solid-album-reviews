@@ -1,6 +1,11 @@
 import { action, cache } from "@solidjs/router";
 
-import { deleteAlbum, selectAlbum, updateAlbum } from "~/store/albums";
+import {
+	deleteAlbum,
+	selectAlbum,
+	selectAlbums,
+	updateAlbum,
+} from "~/store/albums";
 import { getStoreContext } from "~/store/store";
 import { invalidDataError } from "./errors";
 
@@ -16,6 +21,13 @@ export const selectAlbumLoader = cache(async (albumId: string) => {
 
 	return album;
 }, SELECT_ALBUM_LOADER_CACHE_KEY);
+
+export const SELECT_ALBUM_IDS_LOADER_CACHE_KEY = "selectAlbumIdsLoader";
+
+export const selectAlbumIdsLoader = cache(async (page: number) => {
+	const storeContext = getStoreContext();
+	return selectAlbums(storeContext, { page });
+}, SELECT_ALBUM_IDS_LOADER_CACHE_KEY);
 
 export const updateAlbumAction = action(updateAlbum);
 

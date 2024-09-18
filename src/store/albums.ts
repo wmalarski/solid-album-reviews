@@ -11,6 +11,22 @@ export const selectAlbum = (
 	return context.store.getRow(ALBUMS_TABLE_ID, albumId);
 };
 
+export const SELECT_ALBUMS_LIMIT = 20;
+
+export type SelectAlbumsArgs = {
+	page: number;
+	limit?: number;
+};
+
+export const selectAlbums = (
+	context: StoreContext,
+	{ page, limit = SELECT_ALBUMS_LIMIT }: SelectAlbumsArgs,
+) => {
+	return context.store
+		.getRowIds(ALBUMS_TABLE_ID)
+		.slice(page * limit, (page + 1) * limit);
+};
+
 export type UpdateAlbumArgs = {
 	year?: number | undefined;
 	title?: string | undefined;
