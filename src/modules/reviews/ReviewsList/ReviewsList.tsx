@@ -1,6 +1,6 @@
 import { createAsync, useParams, useSearchParams } from "@solidjs/router";
 import { type Component, For, createMemo } from "solid-js";
-import { Pagination } from "~/components/Pagination/Pagination";
+import { Pagination } from "~/components/pagination";
 import { selectReviewIdsLoader } from "~/services/review";
 import { ReviewsListItem } from "../ReviewsListItem/ReviewsListItem";
 import * as classes from "./ReviewsList.css";

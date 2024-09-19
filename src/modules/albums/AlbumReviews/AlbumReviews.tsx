@@ -1,7 +1,7 @@
 import { createAsync, useParams, useSearchParams } from "@solidjs/router";
 import { useRouteData } from "solid-app-router";
 import { type Component, For } from "solid-js";
-import { Pagination } from "~/components/Pagination/Pagination";
+import { Pagination } from "~/components/pagination";
 import { selectAlbumLoader } from "~/services/album";
 import * as classes from "./AlbumReviews.css";
 import type { AlbumReviewDataLoaderResult } from "./AlbumReviews.data";
