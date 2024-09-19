@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
-import { BsGoogle } from "solid-icons/bs";
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
+import { SearchIcon } from "~/components/icons/search-icon";
 import { useI18n } from "~/contexts/I18nContext";
 import { selectArtistLoader } from "~/services/artist";
 import { redirectToGoogle } from "~/services/redirects";
@@ -28,7 +28,7 @@ export const GoogleRedirectButton: Component<GoogleRedirectButtonProps> = (
 			aria-label={t("GoogleRedirectButton.text")}
 			onClick={handleRedirectClick}
 		>
-			{props.isIcon ? <BsGoogle size={20} /> : t("GoogleRedirectButton.text")}
+			<SearchIcon />
 		</Button>
 	);
 };

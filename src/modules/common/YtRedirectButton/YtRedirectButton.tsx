@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
-import { BsYoutube } from "solid-icons/bs";
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
+import { YoutubeIcon } from "~/components/icons/youtube-icon";
 import { useI18n } from "~/contexts/I18nContext";
 import { selectArtistLoader } from "~/services/artist";
 import { redirectToYt } from "~/services/redirects";
@@ -26,7 +26,7 @@ export const YtRedirectButton: Component<YtRedirectButtonProps> = (props) => {
 			aria-label={t("YtRedirectButton.text")}
 			onClick={handleRedirectClick}
 		>
-			{props.isIcon ? <BsYoutube size={20} /> : t("YtRedirectButton.text")}
+			<YoutubeIcon />
 		</Button>
 	);
 };
