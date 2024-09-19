@@ -5,7 +5,7 @@ import { useI18n } from "~/contexts/I18nContext";
 import { updateAlbumAction } from "~/services/album";
 import type { Album } from "~/store/types";
 import { Stack } from "~/styled-system/jsx";
-import { AlbumFields } from "../AlbumFields/AlbumFields";
+import { AlbumFields } from "../../AlbumFields/AlbumFields";
 
 type UpdateAlbumDialogProps = {
 	albumId: string;

@@ -2,8 +2,8 @@ import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { useI18n } from "~/contexts/I18nContext";
+import { deleteReviewAction } from "~/services/review";
 import { Stack } from "~/styled-system/jsx";
-import { DeleteReviewForm } from "../DeleteReviewForm/DeleteReviewForm";
 
 type DeleteReviewDialogProps = {
 	reviewId: string;
@@ -26,12 +26,14 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 				<Dialog.Content>
 					<Stack gap="8" p="6">
 						<Stack gap="1">
-							<Dialog.Title>Dialog Title</Dialog.Title>
-							<Dialog.Description>Dialog Description</Dialog.Description>
+							<Dialog.Title>{t("DeleteReviewDialog.title")}</Dialog.Title>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
 							<Dialog.CancelTrigger />
-							<DeleteReviewForm reviewId={props.reviewId} />
+							<form action={deleteReviewAction} method="post">
+								<input type="hidden" name="reviewId" value={props.reviewId} />
+								<Button type="submit">{t("DeleteReviewForm.remove")}</Button>
+							</form>
 						</Stack>
 					</Stack>
 					<Dialog.CloseXTrigger />

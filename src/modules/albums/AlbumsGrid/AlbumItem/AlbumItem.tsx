@@ -54,7 +54,7 @@ const AlbumItemView: Component<AlbumItemViewProps> = (props) => {
 						<Link class={classes.heading} href={paths.album(props.albumId)}>
 							{label()}
 						</Link>
-						<AlbumActions albumId={props.albumId} asIcons />
+						<AlbumActions albumId={props.albumId} />
 					</div>
 				</Show>
 			</div>

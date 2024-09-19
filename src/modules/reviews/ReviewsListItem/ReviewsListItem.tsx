@@ -3,14 +3,13 @@ import { Link } from "~/components/link";
 import { useI18n } from "~/contexts/I18nContext";
 import { AlbumCover } from "~/modules/albums/AlbumCover/AlbumCover";
 import { ReviewActions } from "~/modules/reviews/ReviewActions/ReviewActions";
-import type { Album, Artist, Review } from "~/store/types";
+import type { Album, Review } from "~/store/types";
 import { formatAlbum, formatDate } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ReviewsListItem.css";
 
 type ReviewsListItemProps = {
 	album: Album;
-	artist: Artist;
 	reviewId: string;
 	review: Review;
 };
@@ -40,7 +39,6 @@ export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
 				<ReviewActions
 					review={props.review}
 					album={props.album}
-					artist={props.artist}
 					reviewId={props.reviewId}
 				/>
 			</div>

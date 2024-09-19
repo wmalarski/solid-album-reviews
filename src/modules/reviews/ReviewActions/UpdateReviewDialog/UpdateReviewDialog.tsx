@@ -31,8 +31,7 @@ export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
 				<Dialog.Content>
 					<Stack gap="8" p="6">
 						<Stack gap="1">
-							<Dialog.Title>Dialog Title</Dialog.Title>
-							<Dialog.Description>Dialog Description</Dialog.Description>
+							<Dialog.Title>{t("UpdateReviewDialog.title")}</Dialog.Title>
 							<form id={formId} method="post" action={updateReviewAction}>
 								<input type="hidden" name="reviewId" value={props.reviewId} />
 								<ReviewFields initialReview={props.review} />

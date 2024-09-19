@@ -2,8 +2,8 @@ import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { useI18n } from "~/contexts/I18nContext";
+import { deleteAlbumAction } from "~/services/album";
 import { Stack } from "~/styled-system/jsx";
-import { DeleteAlbumForm } from "../DeleteAlbumForm/DeleteAlbumForm";
 
 type DeleteAlbumDialogProps = {
 	albumId: string;
@@ -28,7 +28,10 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
 							<Dialog.CancelTrigger />
-							<DeleteAlbumForm albumId={props.albumId} />
+							<form action={deleteAlbumAction} method="post">
+								<input type="hidden" name="albumId" value={props.albumId} />
+								<Button type="submit">{t("common.submit")}</Button>
+							</form>
 						</Stack>
 					</Stack>
 					<Dialog.CloseXTrigger />
