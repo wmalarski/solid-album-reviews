@@ -49,7 +49,13 @@ export const selectRandomIdsLoader = cache(async () => {
 	return selectRandom(storeContext);
 }, SELECT_RANDOM_IDS_LOADER_CACHE_KEY);
 
-export const updateAlbumAction = action(updateAlbum);
+export const updateAlbumAction = action(async (formData: FormData) => {
+	return updateAlbum(getStoreContext(), {
+		albumId: formData.get("albumId") as string,
+		title: formData.get("title") as string,
+		year: Number(formData.get("year")),
+	});
+});
 
 export const deleteAlbumAction = action(async (formData: FormData) => {
 	return deleteAlbum(getStoreContext(), {

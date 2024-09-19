@@ -77,8 +77,7 @@ const en_dict = {
 		title: "Update album",
 		trigger: "Update",
 	},
-	UpdateAlbumForm: {
-		submit: "Submit",
+	AlbumFields: {
 		titleLabel: "Title",
 		yearLabel: "Year",
 	},

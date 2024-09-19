@@ -3,30 +3,30 @@ import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { NumberInput } from "~/components/number-input";
 import { useI18n } from "~/contexts/I18nContext";
-import type { Review } from "~/store/types";
+import type { Album } from "~/store/types";
 import { Flex } from "~/styled-system/jsx";
 
-type ReviewFieldsProps = {
-	initialReview?: Review;
+type AlbumFieldsProps = {
+	initialAlbum?: Album;
 };
 
-export const ReviewFields: Component<ReviewFieldsProps> = (props) => {
+export const AlbumFields: Component<AlbumFieldsProps> = (props) => {
 	const { t } = useI18n();
 
 	return (
 		<Flex flexDirection="column" padding="4">
 			<FormLabel>
-				{t("ReviewForm.textLabel")}
-				<Input name="text" value={props.initialReview?.text ?? ""} />
+				{t("AlbumFields.titleLabel")}
+				<Input name="title" value={props.initialAlbum?.title ?? ""} />
 			</FormLabel>
 			<FormLabel>
-				{t("ReviewForm.rateLabel")}
+				{t("AlbumFields.yearLabel")}
 				<NumberInput
-					name="rate"
+					name="year"
 					min={0}
-					max={10}
-					step={0.1}
-					value={String(props.initialReview?.rate ?? 5)}
+					max={2100}
+					step={1}
+					value={String(props.initialAlbum?.year ?? 1980)}
 				/>
 			</FormLabel>
 		</Flex>

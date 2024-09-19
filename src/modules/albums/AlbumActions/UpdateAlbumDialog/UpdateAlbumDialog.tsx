@@ -1,27 +1,21 @@
-import { useAction } from "@solidjs/router";
-import type { Component } from "solid-js";
+import { type Component, createUniqueId } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { useI18n } from "~/contexts/I18nContext";
 import { updateAlbumAction } from "~/services/album";
-import type { UpdateAlbumArgs } from "~/store/albums";
-import { getStoreContext } from "~/store/store";
+import type { Album } from "~/store/types";
 import { Stack } from "~/styled-system/jsx";
-import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
+import { AlbumFields } from "../AlbumFields/AlbumFields";
 
 type UpdateAlbumDialogProps = {
 	albumId: string;
-	isIcon?: boolean;
+	album: Album;
 };
 
 export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 	const { t } = useI18n();
 
-	const action = useAction(updateAlbumAction);
-
-	const handleSubmit = async (input: UpdateAlbumArgs) => {
-		await action(getStoreContext(), input);
-	};
+	const formId = createUniqueId();
 
 	return (
 		<Dialog.Root {...props}>
@@ -35,16 +29,17 @@ export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 				<Dialog.Content>
 					<Stack gap="8" p="6">
 						<Stack gap="1">
-							<Dialog.Title>t("UpdateAlbumDialog.title")</Dialog.Title>
-							<Dialog.Description>Dialog Description</Dialog.Description>
-							<UpdateAlbumForm
-								albumId={props.albumId}
-								onSubmit={handleSubmit}
-							/>
+							<Dialog.Title>{t("UpdateAlbumDialog.title")}</Dialog.Title>
+							<form id={formId} method="post" action={updateAlbumAction}>
+								<input type="hidden" name="albumId" value={props.albumId} />
+								<AlbumFields initialAlbum={props.album} />
+							</form>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
 							<Dialog.CancelTrigger />
-							<Button width="full">Confirm</Button>
+							<Button form={formId} type="submit" width="full">
+								{t("common.submit")}
+							</Button>
 						</Stack>
 					</Stack>
 					<Dialog.CloseXTrigger />

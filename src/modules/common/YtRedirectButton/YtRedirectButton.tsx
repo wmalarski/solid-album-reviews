@@ -9,7 +9,6 @@ import type { Album } from "~/store/types";
 
 type YtRedirectButtonProps = {
 	album: Album;
-	isIcon?: boolean;
 };
 
 export const YtRedirectButton: Component<YtRedirectButtonProps> = (props) => {

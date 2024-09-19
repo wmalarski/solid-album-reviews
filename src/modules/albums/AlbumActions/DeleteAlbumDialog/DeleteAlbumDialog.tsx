@@ -7,7 +7,6 @@ import { DeleteAlbumForm } from "../DeleteAlbumForm/DeleteAlbumForm";
 
 type DeleteAlbumDialogProps = {
 	albumId: string;
-	isIcon?: boolean;
 };
 
 export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {

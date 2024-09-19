@@ -9,7 +9,6 @@ import type { Album } from "~/store/types";
 
 type GoogleRedirectButtonProps = {
 	album: Album;
-	isIcon?: boolean;
 };
 
 export const GoogleRedirectButton: Component<GoogleRedirectButtonProps> = (
