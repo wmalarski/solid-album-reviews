@@ -1,10 +1,11 @@
 import { createAsync, useParams } from "@solidjs/router";
 import { type ParentProps, Show, Suspense } from "solid-js";
-import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
 import { selectAlbumLoader } from "~/services/album";
 import { css } from "~/styled-system/css";
 import { formatAlbum } from "~/utils/formatters";
+import { AlbumActions } from ~/modules/albums / AlbumCover / AlbumCover / AlbumActions;
+";
 
 export default function AlbumPage(props: ParentProps) {
 	const params = useParams();

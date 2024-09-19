@@ -1,7 +1,7 @@
 import { Route, Routes } from "solid-app-router";
 import { type Component, lazy } from "solid-js";
-import { albumReviewsDataLoader } from "./AlbumReviews/AlbumReviews.data";
-import { searchDataLoader } from "./Search/Search.data";
+import { albumReviewsDataLoader } from "./albums/AlbumReviews/AlbumReviews.data";
+import { searchDataLoader } from "./albums/Search/Search.data";
 
 export const AppRouter: Component = () => {
 	return (
@@ -10,12 +10,12 @@ export const AppRouter: Component = () => {
 				<Route path="/" component={lazy(() => import("./Protected/Protected"))}>
 					<Route
 						path="/search"
-						component={lazy(() => import("./Search/Search"))}
+						component={lazy(() => import("./albums/Search/Search"))}
 						data={searchDataLoader}
 					/>
 					<Route
 						path="/reviews"
-						component={lazy(() => import("./Reviews/Reviews"))}
+						component={lazy(() => import("./reviews/Reviews"))}
 					/>
 					<Route
 						path="/album/:albumId"
@@ -23,7 +23,9 @@ export const AppRouter: Component = () => {
 					>
 						<Route
 							path="/"
-							component={lazy(() => import("./AlbumReviews/AlbumReviews"))}
+							component={lazy(
+								() => import("./albums/AlbumReviews/AlbumReviews"),
+							)}
 							data={albumReviewsDataLoader}
 						/>
 					</Route>

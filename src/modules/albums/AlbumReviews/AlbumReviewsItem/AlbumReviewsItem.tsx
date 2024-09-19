@@ -1,14 +1,15 @@
-import {} from "@solidjs/router";
+import { } from "@solidjs/router";
 import { type Component, For, Show } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";
-import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
 import type { Album, Review } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
+import { AlbumActions } from ~/modules/albums / AlbumCover / AlbumCover / AlbumActions;
+";
 
 type AlbumReviewsItemProps = {
 	isCurrent: boolean;

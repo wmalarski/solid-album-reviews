@@ -2,7 +2,7 @@ import { createAsync } from "@solidjs/router";
 import clsx from "clsx";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
-import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
+import { AlbumActions } from "~/modules/albums/AlbumActions/AlbumActions";
 import { selectAlbumLoader } from "~/services/album";
 import type { Album } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";

@@ -1,6 +1,6 @@
 import type { Component } from "solid-js";
 import { useI18n } from "~/contexts/I18nContext";
-import { ReviewActions } from "~/modules/ReviewActions/ReviewActions";
+import { ReviewActions } from "~/modules/reviews/ReviewActions/ReviewActions";
 import type { Album, Review } from "~/store/types";
 import { formatDate } from "~/utils/formatters";
 import * as classes from "./ReviewItem.css";

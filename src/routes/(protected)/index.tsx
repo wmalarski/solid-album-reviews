@@ -1,4 +1,4 @@
-import { AlbumsGrid } from "~/modules/AlbumsGrid/AlbumsGrid";
+import { AlbumsGrid } from "~/modules/albums/AlbumsGrid/AlbumsGrid";
 import { Head } from "~/modules/common/Head";
 
 // export const route = {

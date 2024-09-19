@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import { type Component, Show } from "solid-js";
-import { InsertReviewDialog } from "~/modules/AlbumActions/InsertReviewDialog/InsertReviewDialog";
 import { GoogleRedirectButton } from "~/modules/GoogleRedirectButton/GoogleRedirectButton";
+import { InsertReviewDialog } from "~/modules/albums/AlbumActions/InsertReviewDialog/InsertReviewDialog";
 import { YtRedirectButton } from "~/modules/common/YtRedirectButton/YtRedirectButton";
 import { selectAlbumLoader } from "~/services/album";
 import * as classes from "./AlbumActions.css";

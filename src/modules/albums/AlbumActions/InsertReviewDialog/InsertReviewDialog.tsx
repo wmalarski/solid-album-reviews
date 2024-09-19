@@ -4,47 +4,56 @@ import {
 	createOverlayTriggerState,
 } from "@solid-aria/overlays";
 import { useAction } from "@solidjs/router";
+import { BsChatLeftText } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { ReviewForm } from "~/modules/ReviewForm/ReviewForm";
-import { updateReviewAction } from "~/services/review";
-import type { UpdateReviewArgs } from "~/store/reviews";
+import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
+import { createReviewAction } from "~/services/review";
+import type { CreateReviewArgs } from "~/store/reviews";
 import { getStoreContext } from "~/store/store";
-import type { Review } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 
-type UpdateReviewDialogProps = {
-	reviewId: string;
-	review: Review;
+type InsertReviewDialogProps = {
+	albumId: string;
+	isIcon?: boolean;
 };
 
-export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
+export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 	props,
 ) => {
 	const { t } = useI18n();
 
 	let openButtonRef: HTMLButtonElement | undefined;
 
-	const state = createOverlayTriggerState({});
+	const action = useAction(createReviewAction);
 
-	const action = useAction(updateReviewAction);
+	const state = createOverlayTriggerState({});
 
 	const { buttonProps: openButtonProps } = createButton(
 		{ onPress: () => state.open() },
 		() => openButtonRef,
 	);
 
-	const handleSubmit = async (input: UpdateReviewArgs) => {
-		await action(getStoreContext(), input);
+	const handleSubmit = async (input: CreateReviewArgs) => {
+		const review = { ...input, album: props.albumId };
+		await action(getStoreContext(), review);
 		state.close();
 	};
 
 	return (
 		<>
-			<Button {...openButtonProps} ref={openButtonRef}>
-				{t("UpdateReviewDialog.trigger")}
+			<Button
+				{...openButtonProps}
+				ref={openButtonRef}
+				aria-label={t("InsertReviewDialog.trigger")}
+			>
+				{props.isIcon ? (
+					<BsChatLeftText size={20} />
+				) : (
+					t("InsertReviewDialog.trigger")
+				)}
 			</Button>
 			<Show when={state.isOpen()}>
 				<OverlayContainer portalContainer={getPortalContainer()}>
@@ -52,13 +61,9 @@ export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
 						isDismissable
 						isOpen
 						onClose={state.close}
-						title={t("UpdateReviewDialog.title")}
+						title={t("InsertReviewDialog.title")}
 					>
-						<ReviewForm
-							initialReview={props.review}
-							onClose={state.close}
-							onSubmit={handleSubmit}
-						/>
+						<ReviewForm onClose={state.close} onSubmit={handleSubmit} />
 					</Dialog>
 				</OverlayContainer>
 			</Show>

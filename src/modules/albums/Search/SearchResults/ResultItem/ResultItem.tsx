@@ -1,11 +1,12 @@
 import type { Component } from "solid-js";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
-import { AlbumActions } from "~/modules/AlbumActions/AlbumActions";
 import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
 import type { Album, Artist } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ResultItem.css";
+import { AlbumActions } from ~/modules/albums / AlbumCover / AlbumCover / AlbumActions;
+";
 
 type ResultItemProps = {
 	albumId: string;
