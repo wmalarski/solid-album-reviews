@@ -1,12 +1,12 @@
 import type { ErrorPayload } from "@nhost/core";
 import type { SignUpParams } from "@nhost/hasura-auth-js";
 import { useNavigate } from "@solidjs/router";
-import { type Component, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
+import { SignUpForm } from "~/modules/auth/SignUp/SignUpForm/SignUpForm";
 import { nhost } from "~/services/nhost";
 import { paths } from "~/utils/paths";
-import { SignUpForm } from "./SignUpForm/SignUpForm";
 
-const SignUp: Component = () => {
+export default function SignUp() {
 	const navigate = useNavigate();
 
 	const [error, setError] = createSignal<ErrorPayload | null>(null);
@@ -25,6 +25,4 @@ const SignUp: Component = () => {
 	};
 
 	return <SignUpForm error={error()} onSubmit={handleSubmit} />;
-};
-
-export default SignUp;
+}

@@ -7,15 +7,6 @@ export const AppRouter: Component = () => {
 	return (
 		<Routes>
 			<Route path="/" component={lazy(() => import("./Root/Root"))}>
-				<Route path="/auth" component={lazy(() => import("./Public/Public"))}>
-					<Route path="/" component={lazy(() => import("./Auth/Auth"))}>
-						<Route path="/" component={lazy(() => import("./SignIn/SignIn"))} />
-						<Route
-							path="/signUp"
-							component={lazy(() => import("./SignUp/SignUp"))}
-						/>
-					</Route>
-				</Route>
 				<Route path="/" component={lazy(() => import("./Protected/Protected"))}>
 					<Route
 						path="/search"
@@ -38,7 +29,10 @@ export const AppRouter: Component = () => {
 					</Route>
 				</Route>
 			</Route>
-			<Route path="*" component={lazy(() => import("./NotFound/NotFound"))} />
+			<Route
+				path="*"
+				component={lazy(() => import("./common/NotFound/NotFound"))}
+			/>
 		</Routes>
 	);
 };

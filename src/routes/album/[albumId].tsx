@@ -35,7 +35,7 @@ export default function AlbumPage(props: ParentProps) {
 								sid={album().sid}
 								kind="large"
 							/>
-							<AlbumActions albumId={params.albumId} album={album()} />
+							<AlbumActions albumId={params.albumId} />
 						</div>
 					)}
 				</Show>

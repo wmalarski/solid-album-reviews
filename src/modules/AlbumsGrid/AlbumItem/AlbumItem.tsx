@@ -57,7 +57,7 @@ const AlbumItemView: Component<AlbumItemViewProps> = (props) => {
 						>
 							{label()}
 						</StyledLink>
-						<AlbumActions album={props.album} albumId={props.albumId} asIcons />
+						<AlbumActions albumId={props.albumId} asIcons />
 					</div>
 				</Show>
 			</div>

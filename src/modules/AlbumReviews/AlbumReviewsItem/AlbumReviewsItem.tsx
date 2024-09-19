@@ -43,7 +43,7 @@ export const AlbumReviewsItem: Component<AlbumReviewsItemProps> = (props) => {
 						/>
 					)}
 				</For>
-				<AlbumActions albumId={props.albumId} album={props.album} />
+				<AlbumActions albumId={props.albumId} />
 			</div>
 		</div>
 	);

@@ -6,8 +6,8 @@ import { Form, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { useI18n } from "~/contexts/I18nContext";
+import { css } from "~/styled-system/css";
 import { paths } from "~/utils/paths";
-import * as classes from "./SignInForm.css";
 
 type SignInFormProps = {
 	error: ErrorPayload | null;
@@ -26,8 +26,8 @@ export const SignInForm: Component<SignInFormProps> = (props) => {
 	};
 
 	return (
-		<Form class={classes.container} onSubmit={handleSubmit}>
-			<h1 class={classes.heading}>{t("SignIn.header")}</h1>
+		<Form class={css({ padding: "4" })} onSubmit={handleSubmit}>
+			<h1 class={css({ marginTop: "0" })}>{t("SignIn.header")}</h1>
 			<FormLabel for="email">{t("SignIn.email")}</FormLabel>
 			<Input
 				id="email"

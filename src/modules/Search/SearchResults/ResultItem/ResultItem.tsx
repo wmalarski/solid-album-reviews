@@ -25,11 +25,7 @@ export const ResultItem: Component<ResultItemProps> = (props) => {
 				<StyledLink href={paths.album(props.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
 				</StyledLink>
-				<AlbumActions
-					album={props.album}
-					artist={props.artist}
-					albumId={props.albumId}
-				/>
+				<AlbumActions albumId={props.albumId} />
 			</div>
 		</div>
 	);
