@@ -1,16 +1,14 @@
 import type { Component } from "solid-js";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewActions } from "~/modules/ReviewActions/ReviewActions";
-import type { Album, Artist, Review } from "~/store/types";
+import type { Album, Review } from "~/store/types";
 import { formatDate } from "~/utils/formatters";
 import * as classes from "./ReviewItem.css";
 
 type ReviewItemProps = {
 	reviewId: string;
 	album: Album;
-	artist: Artist;
 	review: Review;
-	onReviewChange: () => void;
 };
 
 export const ReviewItem: Component<ReviewItemProps> = (props) => {
@@ -28,10 +26,7 @@ export const ReviewItem: Component<ReviewItemProps> = (props) => {
 			</div>
 			<ReviewActions
 				album={props.album}
-				artist={props.artist}
 				reviewId={props.reviewId}
-				onReviewDelete={() => props.onReviewChange()}
-				onReviewUpdate={() => props.onReviewChange()}
 				review={props.review}
 			/>
 		</div>

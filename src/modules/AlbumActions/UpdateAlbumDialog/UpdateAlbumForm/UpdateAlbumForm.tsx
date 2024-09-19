@@ -1,13 +1,13 @@
+import { createAsync } from "@solidjs/router";
 import { type Component, createSignal } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { useI18n } from "~/contexts/I18nContext";
+import { selectAlbumLoader } from "~/services/album";
 import type { UpdateAlbumArgs } from "~/store/albums";
-import type { Album } from "~/store/types";
 
 type UpdateAlbumFormProps = {
-	initialAlbum: Album;
 	albumId: string;
 	onClose: () => void;
 	onSubmit: (args: UpdateAlbumArgs) => void;
@@ -16,8 +16,10 @@ type UpdateAlbumFormProps = {
 export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
 	const { t } = useI18n();
 
-	const [title, setTitle] = createSignal(props.initialAlbum.title || "");
-	const [year, setYear] = createSignal(props.initialAlbum.year || 0);
+	const album = createAsync(() => selectAlbumLoader(props.albumId));
+
+	const [title, setTitle] = createSignal(album()?.title || "");
+	const [year, setYear] = createSignal(album()?.year || 0);
 
 	const handleSubmit = (event: Event) => {
 		event.preventDefault();

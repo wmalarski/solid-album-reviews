@@ -12,13 +12,11 @@ import { useI18n } from "~/contexts/I18nContext";
 import { updateAlbumAction } from "~/services/album";
 import type { UpdateAlbumArgs } from "~/store/albums";
 import { getStoreContext } from "~/store/store";
-import type { Album } from "~/store/types";
 import { getPortalContainer } from "~/utils/getPortalContainer";
 import { UpdateAlbumForm } from "./UpdateAlbumForm/UpdateAlbumForm";
 
 type UpdateAlbumDialogProps = {
 	albumId: string;
-	album: Album;
 	isIcon?: boolean;
 };
 
@@ -63,7 +61,7 @@ export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 						title={t("UpdateAlbumDialog.title")}
 					>
 						<UpdateAlbumForm
-							initialAlbum={props.album}
+							albumId={props.albumId}
 							onClose={state.close}
 							onSubmit={handleSubmit}
 						/>
