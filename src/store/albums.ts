@@ -1,4 +1,9 @@
-import { ALBUMS_TABLE_ID, type StoreContext } from "./store";
+import {
+	ALBUMS_TABLE_ID,
+	ARTIST_ALBUM_RELATIONSHIPS_ID,
+	type StoreContext,
+} from "./store";
+import { getPage } from "./utils";
 
 export type SelectAlbumArgs = {
 	albumId: string;
@@ -22,9 +27,25 @@ export const selectAlbums = (
 	context: StoreContext,
 	{ page, limit = SELECT_ALBUMS_LIMIT }: SelectAlbumsArgs,
 ) => {
-	return context.store
-		.getRowIds(ALBUMS_TABLE_ID)
-		.slice(page * limit, (page + 1) * limit);
+	const ids = context.store.getRowIds(ALBUMS_TABLE_ID);
+	return getPage({ data: ids, limit, page });
+};
+
+export type SelectArtistAlbumsArgs = {
+	artistId: string;
+	page: number;
+	limit?: number;
+};
+
+export const selectArtistAlbums = (
+	context: StoreContext,
+	{ artistId, page, limit = SELECT_ALBUMS_LIMIT }: SelectArtistAlbumsArgs,
+) => {
+	const ids = context.relationships.getLocalRowIds(
+		ARTIST_ALBUM_RELATIONSHIPS_ID,
+		artistId,
+	);
+	return getPage({ data: ids, limit, page });
 };
 
 export type SelectRandomArgs = {

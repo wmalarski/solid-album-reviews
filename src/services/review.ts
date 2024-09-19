@@ -2,6 +2,7 @@ import { action, cache } from "@solidjs/router";
 import {
 	createReview,
 	deleteReview,
+	selectAlbumReviews,
 	selectReview,
 	selectReviews,
 	updateReview,
@@ -28,6 +29,17 @@ export const selectReviewIdsLoader = cache(async (page: number) => {
 	const storeContext = getStoreContext();
 	return selectReviews(storeContext, { page });
 }, SELECT_REVIEW_IDS_LOADER_CACHE_KEY);
+
+export const SELECT_ALBUM_REVIEW_IDS_LOADER_CACHE_KEY =
+	"selectAlbumReviewIdsLoader";
+
+export const selectAlbumReviewIdsLoader = cache(
+	async (albumId: string, page: number) => {
+		const storeContext = getStoreContext();
+		return selectAlbumReviews(storeContext, { albumId, page });
+	},
+	SELECT_ALBUM_REVIEW_IDS_LOADER_CACHE_KEY,
+);
 
 export const createReviewAction = action(createReview);
 

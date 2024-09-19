@@ -4,6 +4,7 @@ import {
 	deleteAlbum,
 	selectAlbum,
 	selectAlbums,
+	selectArtistAlbums,
 	selectRandom,
 	updateAlbum,
 } from "~/store/albums";
@@ -29,6 +30,17 @@ export const selectAlbumIdsLoader = cache(async (page: number) => {
 	const storeContext = getStoreContext();
 	return selectAlbums(storeContext, { page });
 }, SELECT_ALBUM_IDS_LOADER_CACHE_KEY);
+
+export const SELECT_ARTIST_ALBUM_IDS_LOADER_CACHE_KEY =
+	"selectArtistAlbumIdsLoader";
+
+export const selectArtistAlbumIdsLoader = cache(
+	async (artistId: string, page: number) => {
+		const storeContext = getStoreContext();
+		return selectArtistAlbums(storeContext, { page, artistId });
+	},
+	SELECT_ARTIST_ALBUM_IDS_LOADER_CACHE_KEY,
+);
 
 export const SELECT_RANDOM_IDS_LOADER_CACHE_KEY = "selectRandomIdsLoader";
 

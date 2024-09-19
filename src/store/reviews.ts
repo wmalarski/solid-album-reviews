@@ -1,5 +1,9 @@
-import { REVIEWS_TABLE_ID, type StoreContext } from "./store";
-import { getCreatedAt } from "./utils";
+import {
+	ALBUM_REVIEW_RELATIONSHIPS_ID,
+	REVIEWS_TABLE_ID,
+	type StoreContext,
+} from "./store";
+import { getCreatedAt, getPage } from "./utils";
 
 export type SelectReviewArgs = {
 	reviewId: string;
@@ -23,9 +27,25 @@ export const selectReviews = (
 	context: StoreContext,
 	{ page, limit = SELECT_REVIEWS_LIMIT }: SelectReviewsArgs,
 ) => {
-	return context.store
-		.getRowIds(REVIEWS_TABLE_ID)
-		.slice(page * limit, (page + 1) * limit);
+	const ids = context.store.getRowIds(REVIEWS_TABLE_ID);
+	return getPage({ data: ids, limit, page });
+};
+
+export type SelectAlbumReviewsArgs = {
+	albumId: string;
+	page: number;
+	limit?: number;
+};
+
+export const selectAlbumReviews = (
+	context: StoreContext,
+	{ albumId, page, limit = SELECT_REVIEWS_LIMIT }: SelectAlbumReviewsArgs,
+) => {
+	const ids = context.relationships.getLocalRowIds(
+		ALBUM_REVIEW_RELATIONSHIPS_ID,
+		albumId,
+	);
+	return getPage({ data: ids, limit, page });
 };
 
 export type CreateReviewArgs = {

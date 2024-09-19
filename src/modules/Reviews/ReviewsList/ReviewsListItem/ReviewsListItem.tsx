@@ -13,7 +13,6 @@ type ReviewsListItemProps = {
 	artist: Artist;
 	reviewId: string;
 	review: Review;
-	onReviewChange: () => void;
 };
 
 export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
@@ -46,8 +45,6 @@ export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
 					album={props.album}
 					artist={props.artist}
 					reviewId={props.reviewId}
-					onReviewDelete={() => props.onReviewChange()}
-					onReviewUpdate={() => props.onReviewChange()}
 				/>
 			</div>
 		</div>

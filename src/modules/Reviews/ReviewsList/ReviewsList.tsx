@@ -1,5 +1,5 @@
 import { createAsync, useParams, useSearchParams } from "@solidjs/router";
-import { type Component, For } from "solid-js";
+import { type Component, For, createMemo } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
 import { selectReviewIdsLoader } from "~/services/review";
 import * as classes from "./ReviewsList.css";
@@ -8,13 +8,11 @@ import { ReviewsListItem } from "./ReviewsListItem/ReviewsListItem";
 export const ReviewsList: Component = () => {
 	const params = useParams();
 
-	const reviews = createAsync(() => selectReviewIdsLoader(+params.page));
+	const page = createMemo(() => +params.page);
+
+	const reviews = createAsync(() => selectReviewIdsLoader(page()));
 
 	const [, setSearchParams] = useSearchParams();
-
-	const handleReviewChange = () => {
-		refetch();
-	};
 
 	const handlePageChange = (update: number) => {
 		setSearchParams({ page: update });
@@ -22,17 +20,12 @@ export const ReviewsList: Component = () => {
 
 	return (
 		<div class={classes.container}>
-			<For each={reviews()}>
-				{(review) => (
-					<ReviewsListItem
-						review={review}
-						onReviewChange={handleReviewChange}
-					/>
-				)}
+			<For each={reviews()?.data}>
+				{(review) => <ReviewsListItem review={review} />}
 			</For>
 			<Pagination
-				current={args().page}
-				maxPage={maxPage()}
+				current={page()}
+				maxPage={reviews()?.maxPage ?? 0}
 				onChange={handlePageChange}
 			/>
 		</div>
