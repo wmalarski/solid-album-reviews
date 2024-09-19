@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import clsx from "clsx";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
-import { StyledLink } from "~/components/StyledLink/StyledLink";
+import { Link } from "~/components/link";
 import { AlbumActions } from "~/modules/albums/AlbumActions/AlbumActions";
 import { selectAlbumLoader } from "~/services/album";
 import type { Album } from "~/store/types";
@@ -51,12 +51,9 @@ const AlbumItemView: Component<AlbumItemViewProps> = (props) => {
 				</Show>
 				<Show when={isHovering()}>
 					<div class={classes.footer}>
-						<StyledLink
-							class={classes.heading}
-							href={paths.album(props.albumId)}
-						>
+						<Link class={classes.heading} href={paths.album(props.albumId)}>
 							{label()}
-						</StyledLink>
+						</Link>
 						<AlbumActions albumId={props.albumId} asIcons />
 					</div>
 				</Show>

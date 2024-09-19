@@ -1,5 +1,5 @@
 import type { Component } from "solid-js";
-import { StyledLink } from "~/components/StyledLink/StyledLink";
+import { Link } from "~/components/link";
 import { useI18n } from "~/contexts/I18nContext";
 import { AlbumCover } from "~/modules/albums/AlbumCover/AlbumCover";
 import { ReviewActions } from "~/modules/reviews/ReviewActions/ReviewActions";
@@ -26,12 +26,9 @@ export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
 				kind="small"
 			/>
 			<div class={classes.right}>
-				<StyledLink
-					href={paths.album(props.review.albumId)}
-					class={classes.heading}
-				>
+				<Link href={paths.album(props.review.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
-				</StyledLink>
+				</Link>
 				<div class={classes.data}>
 					<span>{t("ReviewItem.rate")}</span>
 					<span>{props.review.text}</span>

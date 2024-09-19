@@ -1,15 +1,14 @@
-import { } from "@solidjs/router";
+import {} from "@solidjs/router";
 import { type Component, For, Show } from "solid-js";
-import { StyledLink } from "~/components/StyledLink/StyledLink";
+import { Link } from "~/components/link";
 import { useI18n } from "~/contexts/I18nContext";
-import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
+import { AlbumActions } from "~/modules/albums/AlbumActions/AlbumActions";
+import { AlbumCover } from "~/modules/albums/AlbumCover/AlbumCover";
 import type { Album, Review } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./AlbumReviewsItem.css";
 import { ReviewItem } from "./ReviewItem/ReviewItem";
-import { AlbumActions } from ~/modules/albums / AlbumCover / AlbumCover / AlbumActions;
-";
 
 type AlbumReviewsItemProps = {
 	isCurrent: boolean;
@@ -29,9 +28,9 @@ export const AlbumReviewsItem: Component<AlbumReviewsItemProps> = (props) => {
 				kind="small"
 			/>
 			<div class={classes.right}>
-				<StyledLink href={paths.album(props.albumId)} class={classes.heading}>
+				<Link href={paths.album(props.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
-				</StyledLink>
+				</Link>
 				<Show when={props.reviews.length > 0}>
 					<span class={classes.subheading}>{t("ReviewItem.reviews")}</span>
 				</Show>

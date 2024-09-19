@@ -3,8 +3,8 @@ import type { SignUpParams } from "@nhost/hasura-auth-js";
 import { type Component, createSignal } from "solid-js";
 import { Form, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
-import { StyledLink } from "~/components/StyledLink/StyledLink";
 import { Button } from "~/components/button";
+import { Link } from "~/components/link";
 import { useI18n } from "~/contexts/I18nContext";
 import { css } from "~/styled-system/css";
 import { paths } from "~/utils/paths";
@@ -43,7 +43,7 @@ export const SignUpForm: Component<SignUpFormProps> = (props) => {
 			/>
 			<Button type="submit">{t("SignUp.button")}</Button>
 			{props.error && <span>{props.error.message}</span>}
-			<StyledLink href={paths.signIn}>{t("SignUp.signIn")}</StyledLink>
+			<Link href={paths.signIn}>{t("SignUp.signIn")}</Link>
 		</Form>
 	);
 };

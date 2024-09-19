@@ -1,12 +1,11 @@
 import type { Component } from "solid-js";
-import { StyledLink } from "~/components/StyledLink/StyledLink";
-import { AlbumCover } from "~/modules/AlbumCover/AlbumCover";
+import { Link } from "~/components/link";
+import { AlbumActions } from "~/modules/albums/AlbumActions/AlbumActions";
+import { AlbumCover } from "~/modules/albums/AlbumCover/AlbumCover";
 import type { Album, Artist } from "~/store/types";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
 import * as classes from "./ResultItem.css";
-import { AlbumActions } from ~/modules/albums / AlbumCover / AlbumCover / AlbumActions;
-";
 
 type ResultItemProps = {
 	albumId: string;
@@ -23,9 +22,9 @@ export const ResultItem: Component<ResultItemProps> = (props) => {
 				kind="small"
 			/>
 			<div class={classes.right}>
-				<StyledLink href={paths.album(props.albumId)} class={classes.heading}>
+				<Link href={paths.album(props.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
-				</StyledLink>
+				</Link>
 				<AlbumActions albumId={props.albumId} />
 			</div>
 		</div>
