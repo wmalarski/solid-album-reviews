@@ -1,13 +1,11 @@
 import { createAsync, useParams, useSearchParams } from "@solidjs/router";
-import { useRouteData } from "solid-app-router";
 import { type Component, For } from "solid-js";
 import { Pagination } from "~/components/pagination";
-import { selectAlbumLoader } from "~/services/album";
-import * as classes from "./AlbumReviews.css";
-import type { AlbumReviewDataLoaderResult } from "./AlbumReviews.data";
+import { selectArtistAlbumIdsLoader } from "~/services/album";
+import { Flex } from "~/styled-system/jsx";
 import { AlbumReviewsItem } from "./AlbumReviewsItem/AlbumReviewsItem";
 
-const AlbumReviews: Component = () => {
+export const AlbumReviews: Component = () => {
 	const params = useParams();
 
 	const [, setSearchParams] = useSearchParams();
@@ -16,30 +14,20 @@ const AlbumReviews: Component = () => {
 		setSearchParams({ page: update });
 	};
 
-	const album = createAsync(() => selectAlbumLoader(params.albumId));
-
-	const { albums, maxPage, page, albumId } =
-		useRouteData<AlbumReviewDataLoaderResult>();
+	const albums = createAsync(() =>
+		selectArtistAlbumIdsLoader(params.albumId, 0),
+	);
 
 	return (
-		<div class={classes.container}>
-			<For each={albums()?.data?.album}>
-				{(album) => (
-					<AlbumReviewsItem
-						albumId={albumId}
-						album={album}
-						reviews={reviews}
-						isCurrent={album.id === albumId()}
-					/>
-				)}
+		<Flex flexDirection="column" gap="4">
+			<For each={albums()?.data}>
+				{(albumId) => <AlbumReviewsItem albumId={albumId} />}
 			</For>
 			<Pagination
-				current={page()}
-				maxPage={maxPage()}
-				onChange={handlePageChange}
+				page={+params.page}
+				count={albums()?.maxPage ?? 0}
+				onPageChange={({ page }) => handlePageChange(page)}
 			/>
-		</div>
+		</Flex>
 	);
 };
-
-export default AlbumReviews;

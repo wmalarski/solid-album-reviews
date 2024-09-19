@@ -3,7 +3,6 @@ import {
 	ARTIST_ALBUM_RELATIONSHIPS_ID,
 	type StoreContext,
 } from "./store";
-import type { Album } from "./types";
 import { getPage } from "./utils";
 
 export type SelectAlbumArgs = {
@@ -14,7 +13,7 @@ export const selectAlbum = (
 	context: StoreContext,
 	{ albumId }: SelectAlbumArgs,
 ) => {
-	return context.store.getRow(ALBUMS_TABLE_ID, albumId) as Album;
+	return context.store.getRow(ALBUMS_TABLE_ID, albumId);
 };
 
 export const SELECT_ALBUMS_LIMIT = 20;

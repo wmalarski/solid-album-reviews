@@ -1,11 +1,11 @@
 import type { Component } from "solid-js";
 import { Link } from "~/components/link";
-import { useI18n } from "~/contexts/I18nContext";
 import { AlbumCover } from "~/modules/albums/AlbumCover/AlbumCover";
 import { ReviewActions } from "~/modules/reviews/ReviewActions/ReviewActions";
 import type { Album, Review } from "~/store/types";
-import { formatAlbum, formatDate } from "~/utils/formatters";
+import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
+import { ReviewInfo } from "../ReviewInfo/ReviewInfo";
 import * as classes from "./ReviewsListItem.css";
 
 type ReviewsListItemProps = {
@@ -15,8 +15,6 @@ type ReviewsListItemProps = {
 };
 
 export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
-	const { t, locale } = useI18n();
-
 	return (
 		<div class={classes.container}>
 			<AlbumCover
@@ -28,14 +26,7 @@ export const ReviewsListItem: Component<ReviewsListItemProps> = (props) => {
 				<Link href={paths.album(props.review.albumId)} class={classes.heading}>
 					{formatAlbum(props.album)}
 				</Link>
-				<div class={classes.data}>
-					<span>{t("ReviewItem.rate")}</span>
-					<span>{props.review.text}</span>
-					<span>{t("ReviewItem.text")}</span>
-					<span>{props.review.rate}</span>
-					<span>{t("ReviewItem.date")}</span>
-					<span>{formatDate(locale(), props.review.createdAt)}</span>
-				</div>
+				<ReviewInfo review={props.review} />
 				<ReviewActions
 					review={props.review}
 					album={props.album}

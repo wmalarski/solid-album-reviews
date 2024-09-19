@@ -9,6 +9,7 @@ import {
 	updateAlbum,
 } from "~/store/albums";
 import { getStoreContext } from "~/store/store";
+import type { Album } from "~/store/types";
 import { invalidDataError } from "./errors";
 
 export const SELECT_ALBUM_LOADER_CACHE_KEY = "selectAlbumLoader";
@@ -21,7 +22,7 @@ export const selectAlbumLoader = cache(async (albumId: string) => {
 		throw invalidDataError();
 	}
 
-	return album;
+	return album as Album;
 }, SELECT_ALBUM_LOADER_CACHE_KEY);
 
 export const SELECT_ALBUM_IDS_LOADER_CACHE_KEY = "selectAlbumIdsLoader";
@@ -35,9 +36,15 @@ export const SELECT_ARTIST_ALBUM_IDS_LOADER_CACHE_KEY =
 	"selectArtistAlbumIdsLoader";
 
 export const selectArtistAlbumIdsLoader = cache(
-	async (artistId: string, page: number) => {
+	async (artistAlbumId: string, page: number) => {
 		const storeContext = getStoreContext();
-		return selectArtistAlbums(storeContext, { page, artistId });
+		const album = selectAlbum(storeContext, { albumId: artistAlbumId });
+
+		if (!album.artistId) {
+			throw invalidDataError();
+		}
+
+		return selectArtistAlbums(storeContext, { page, artistId: album.artistId });
 	},
 	SELECT_ARTIST_ALBUM_IDS_LOADER_CACHE_KEY,
 );

@@ -1,34 +1,31 @@
-import type { Component } from "solid-js";
-import { useI18n } from "~/contexts/I18nContext";
+import { createAsync } from "@solidjs/router";
+import { type Component, Show } from "solid-js";
 import { ReviewActions } from "~/modules/reviews/ReviewActions/ReviewActions";
-import type { Album, Review } from "~/store/types";
-import { formatDate } from "~/utils/formatters";
-import * as classes from "./ReviewItem.css";
+import { ReviewInfo } from "~/modules/reviews/ReviewInfo/ReviewInfo";
+import { selectReviewLoader } from "~/services/review";
+import type { Album } from "~/store/types";
+import { Flex } from "~/styled-system/jsx";
 
 type ReviewItemProps = {
 	reviewId: string;
 	album: Album;
-	review: Review;
 };
 
 export const ReviewItem: Component<ReviewItemProps> = (props) => {
-	const { t, locale } = useI18n();
+	const review = createAsync(() => selectReviewLoader(props.reviewId));
 
 	return (
-		<div class={classes.container}>
-			<div class={classes.data}>
-				<span>{t("ReviewItem.rate")}</span>
-				<span>{props.review.rate}</span>
-				<span>{t("ReviewItem.text")}</span>
-				<span>{props.review.text}</span>
-				<span>{t("ReviewItem.date")}</span>
-				<span>{formatDate(locale(), props.review.createdAt)}</span>
-			</div>
-			<ReviewActions
-				album={props.album}
-				reviewId={props.reviewId}
-				review={props.review}
-			/>
-		</div>
+		<Show when={review()}>
+			{(review) => (
+				<Flex padding="4">
+					<ReviewInfo review={review()} />
+					<ReviewActions
+						album={props.album}
+						reviewId={props.reviewId}
+						review={review()}
+					/>
+				</Flex>
+			)}
+		</Show>
 	);
 };

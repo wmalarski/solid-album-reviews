@@ -8,6 +8,7 @@ import {
 	updateReview,
 } from "~/store/reviews";
 import { getStoreContext } from "~/store/store";
+import type { Review } from "~/store/types";
 import { invalidDataError } from "./errors";
 
 export const SELECT_REVIEW_LOADER_CACHE_KEY = "selectReviewLoader";
@@ -20,7 +21,7 @@ export const selectReviewLoader = cache(async (reviewId: string) => {
 		throw invalidDataError();
 	}
 
-	return review;
+	return review as Review;
 }, SELECT_REVIEW_LOADER_CACHE_KEY);
 
 export const SELECT_REVIEW_IDS_LOADER_CACHE_KEY = "selectReviewIdsLoader";
