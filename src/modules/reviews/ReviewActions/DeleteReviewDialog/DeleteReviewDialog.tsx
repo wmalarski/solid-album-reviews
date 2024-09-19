@@ -1,13 +1,10 @@
-import { useAction } from "@solidjs/router";
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
-import { deleteReviewAction } from "~/services/review";
-import { getStoreContext } from "~/store/store";
 import { Stack } from "~/styled-system/jsx";
-import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
+import { DeleteReviewForm } from "../DeleteReviewForm/DeleteReviewForm";
 
 type DeleteReviewDialogProps = {
 	reviewId: string;
@@ -17,12 +14,6 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 	props,
 ) => {
 	const { t } = useI18n();
-
-	const action = useAction(deleteReviewAction);
-
-	const handleSubmit = async () => {
-		await action(getStoreContext(), { reviewId: props.reviewId });
-	};
 
 	return (
 		<Dialog.Root {...props}>
@@ -38,7 +29,6 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 						<Stack gap="1">
 							<Dialog.Title>Dialog Title</Dialog.Title>
 							<Dialog.Description>Dialog Description</Dialog.Description>
-							<DeleteReviewForm onDelete={handleSubmit} />
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
 							<Dialog.CloseTrigger
@@ -52,7 +42,7 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 									</Button>
 								)}
 							/>
-							<Button width="full">Confirm</Button>
+							<DeleteReviewForm reviewId={props.reviewId} />
 						</Stack>
 					</Stack>
 					<Dialog.CloseTrigger

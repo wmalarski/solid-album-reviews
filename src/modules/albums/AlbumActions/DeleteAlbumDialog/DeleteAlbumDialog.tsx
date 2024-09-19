@@ -1,13 +1,10 @@
-import { useAction } from "@solidjs/router";
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
-import { deleteAlbumAction } from "~/services/album";
-import { getStoreContext } from "~/store/store";
 import { Stack } from "~/styled-system/jsx";
-import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
+import { DeleteAlbumForm } from "../DeleteAlbumForm/DeleteAlbumForm";
 
 type DeleteAlbumDialogProps = {
 	albumId: string;
@@ -16,12 +13,6 @@ type DeleteAlbumDialogProps = {
 
 export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 	const { t } = useI18n();
-
-	const action = useAction(deleteAlbumAction);
-
-	const handleSubmit = async () => {
-		await action(getStoreContext(), { albumId: props.albumId });
-	};
 
 	return (
 		<Dialog.Root {...props}>
@@ -36,8 +27,6 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 					<Stack gap="8" p="6">
 						<Stack gap="1">
 							<Dialog.Title>{t("DeleteAlbumDialog.title")}</Dialog.Title>
-							<Dialog.Description>Dialog Description</Dialog.Description>
-							<DeleteAlbumForm onDelete={handleSubmit} />
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
 							<Dialog.CloseTrigger
@@ -51,7 +40,7 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 									</Button>
 								)}
 							/>
-							<Button width="full">Confirm</Button>
+							<DeleteAlbumForm albumId={props.albumId} />
 						</Stack>
 					</Stack>
 					<Dialog.CloseTrigger

@@ -35,8 +35,7 @@ export const SELECT_ALBUM_REVIEW_IDS_LOADER_CACHE_KEY =
 
 export const selectAlbumReviewIdsLoader = cache(
 	async (albumId: string, page: number) => {
-		const storeContext = getStoreContext();
-		return selectAlbumReviews(storeContext, { albumId, page });
+		return selectAlbumReviews(getStoreContext(), { albumId, page });
 	},
 	SELECT_ALBUM_REVIEW_IDS_LOADER_CACHE_KEY,
 );
@@ -45,4 +44,8 @@ export const createReviewAction = action(createReview);
 
 export const updateReviewAction = action(updateReview);
 
-export const deleteReviewAction = action(deleteReview);
+export const deleteReviewAction = action(async (formData: FormData) => {
+	return deleteReview(getStoreContext(), {
+		reviewId: formData.get("reviewId") as string,
+	});
+});
