@@ -13,7 +13,7 @@ export const DeleteAlbumForm: Component<DeleteAlbumFormProps> = (props) => {
 	return (
 		<form action={deleteAlbumAction} method="post">
 			<input type="hidden" name="albumId" value={props.albumId} />
-			<Button type="submit">{t("DeleteAlbumForm.remove")}</Button>
+			<Button type="submit">{t("common.submit")}</Button>
 		</form>
 	);
 };

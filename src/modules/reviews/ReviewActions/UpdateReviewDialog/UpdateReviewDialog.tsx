@@ -1,14 +1,11 @@
-import { useAction } from "@solidjs/router";
-import type { Component } from "solid-js";
+import { type Component, createUniqueId } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
 import { updateReviewAction } from "~/services/review";
-import type { UpdateReviewArgs } from "~/store/reviews";
-import { getStoreContext } from "~/store/store";
 import type { Review } from "~/store/types";
 import { Stack } from "~/styled-system/jsx";
+import { ReviewFields } from "../../ReviewFields/ReviewFields";
 
 type UpdateReviewDialogProps = {
 	reviewId: string;
@@ -20,11 +17,7 @@ export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
 ) => {
 	const { t } = useI18n();
 
-	const action = useAction(updateReviewAction);
-
-	const handleSubmit = async (input: UpdateReviewArgs) => {
-		await action(getStoreContext(), input);
-	};
+	const formId = createUniqueId();
 
 	return (
 		<Dialog.Root {...props}>
@@ -40,24 +33,16 @@ export const UpdateReviewDialog: Component<UpdateReviewDialogProps> = (
 						<Stack gap="1">
 							<Dialog.Title>Dialog Title</Dialog.Title>
 							<Dialog.Description>Dialog Description</Dialog.Description>
-							<ReviewForm
-								initialReview={props.review}
-								onSubmit={handleSubmit}
-							/>
+							<form id={formId} method="post" action={updateReviewAction}>
+								<input type="hidden" name="reviewId" value={props.reviewId} />
+								<ReviewFields initialReview={props.review} />
+							</form>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
-							<Dialog.CloseTrigger
-								asChild={(closeTriggerProps) => (
-									<Button
-										{...closeTriggerProps()}
-										variant="outline"
-										width="full"
-									>
-										Cancel
-									</Button>
-								)}
-							/>
-							<Button width="full">Confirm</Button>
+							<Dialog.CancelTrigger />
+							<Button form={formId} type="submit" width="full">
+								{t("common.submit")}
+							</Button>
 						</Stack>
 					</Stack>
 					<Dialog.CloseXTrigger />

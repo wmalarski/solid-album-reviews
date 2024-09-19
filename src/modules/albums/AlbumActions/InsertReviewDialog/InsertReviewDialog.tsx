@@ -1,17 +1,13 @@
-import { useAction } from "@solidjs/router";
-import type { Component } from "solid-js";
+import { type Component, createUniqueId } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { useI18n } from "~/contexts/I18nContext";
-import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
+import { ReviewFields } from "~/modules/reviews/ReviewFields/ReviewFields";
 import { createReviewAction } from "~/services/review";
-import type { CreateReviewArgs } from "~/store/reviews";
-import { getStoreContext } from "~/store/store";
 import { Stack } from "~/styled-system/jsx";
 
 type InsertReviewDialogProps = {
 	albumId: string;
-	isIcon?: boolean;
 };
 
 export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
@@ -19,12 +15,7 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 ) => {
 	const { t } = useI18n();
 
-	const action = useAction(createReviewAction);
-
-	const handleSubmit = async (input: CreateReviewArgs) => {
-		const review = { ...input, album: props.albumId };
-		await action(getStoreContext(), review);
-	};
+	const formId = createUniqueId();
 
 	return (
 		<Dialog.Root {...props}>
@@ -39,22 +30,16 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 					<Stack gap="8" p="6">
 						<Stack gap="1">
 							<Dialog.Title>{t("InsertReviewDialog.title")}</Dialog.Title>
-							<Dialog.Description>Dialog Description</Dialog.Description>
-							<ReviewForm onSubmit={handleSubmit} />
+							<form id={formId} method="post" action={createReviewAction}>
+								<input type="hidden" name="albumId" value={props.albumId} />
+								<ReviewFields />
+							</form>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
-							<Dialog.CloseTrigger
-								asChild={(closeTriggerProps) => (
-									<Button
-										{...closeTriggerProps()}
-										variant="outline"
-										width="full"
-									>
-										Cancel
-									</Button>
-								)}
-							/>
-							<Button width="full">Confirm</Button>
+							<Dialog.CancelTrigger />
+							<Button form={formId} type="submit" width="full">
+								{t("common.submit")}
+							</Button>
 						</Stack>
 					</Stack>
 					<Dialog.CloseXTrigger />

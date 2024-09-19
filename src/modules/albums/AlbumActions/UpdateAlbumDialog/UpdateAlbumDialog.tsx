@@ -43,17 +43,7 @@ export const UpdateAlbumDialog: Component<UpdateAlbumDialogProps> = (props) => {
 							/>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
-							<Dialog.CloseTrigger
-								asChild={(closeTriggerProps) => (
-									<Button
-										{...closeTriggerProps()}
-										variant="outline"
-										width="full"
-									>
-										Cancel
-									</Button>
-								)}
-							/>
+							<Dialog.CancelTrigger />
 							<Button width="full">Confirm</Button>
 						</Stack>
 					</Stack>

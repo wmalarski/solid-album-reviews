@@ -17,7 +17,7 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 		<Dialog.Root {...props}>
 			<Dialog.Trigger
 				asChild={(triggerProps) => (
-					<Button {...triggerProps()}>{t("DeleteAlbumDialog.trigger")}</Button>
+					<Button {...triggerProps()}>{t("DeleteAlbum.trigger")}</Button>
 				)}
 			/>
 			<Dialog.Backdrop />
@@ -25,20 +25,10 @@ export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 				<Dialog.Content>
 					<Stack gap="8" p="6">
 						<Stack gap="1">
-							<Dialog.Title>{t("DeleteAlbumDialog.title")}</Dialog.Title>
+							<Dialog.Title>{t("DeleteAlbum.delete")}</Dialog.Title>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
-							<Dialog.CloseTrigger
-								asChild={(closeTriggerProps) => (
-									<Button
-										{...closeTriggerProps()}
-										variant="outline"
-										width="full"
-									>
-										Cancel
-									</Button>
-								)}
-							/>
+							<Dialog.CancelTrigger />
 							<DeleteAlbumForm albumId={props.albumId} />
 						</Stack>
 					</Stack>

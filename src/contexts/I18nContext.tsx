@@ -9,13 +9,9 @@ import {
 } from "solid-js";
 
 const en_dict = {
-	DeleteAlbumDialog: {
-		title: "Delete album",
+	DeleteAlbum: {
+		delete: "Delete Album",
 		trigger: "Delete",
-	},
-	DeleteAlbumForm: {
-		cancel: "Cancel",
-		remove: "Remove",
 	},
 	DeleteReviewDialog: {
 		title: "Delete review",
@@ -26,7 +22,8 @@ const en_dict = {
 		remove: "Remove",
 	},
 	Dialog: {
-		close: "Close",
+		close: "Close Dialog",
+		cancel: "Cancel",
 	},
 	GoogleRedirectButton: {
 		text: "Google",
@@ -106,6 +103,9 @@ const en_dict = {
 	},
 	loading: {
 		text: "Loading...",
+	},
+	common: {
+		submit: "Submit",
 	},
 };
 

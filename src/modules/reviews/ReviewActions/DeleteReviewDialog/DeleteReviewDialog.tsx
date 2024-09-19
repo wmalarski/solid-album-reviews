@@ -30,17 +30,7 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 							<Dialog.Description>Dialog Description</Dialog.Description>
 						</Stack>
 						<Stack gap="3" direction="row" width="full">
-							<Dialog.CloseTrigger
-								asChild={(closeTriggerProps) => (
-									<Button
-										{...closeTriggerProps()}
-										variant="outline"
-										width="full"
-									>
-										Cancel
-									</Button>
-								)}
-							/>
+							<Dialog.CancelTrigger />
 							<DeleteReviewForm reviewId={props.reviewId} />
 						</Stack>
 					</Stack>

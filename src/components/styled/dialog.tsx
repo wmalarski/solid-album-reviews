@@ -1,8 +1,10 @@
 import { type Assign, Dialog } from "@ark-ui/solid";
 import type { Component, ComponentProps } from "solid-js";
+import { useI18n } from "~/contexts/I18nContext";
 import { type DialogVariantProps, dialog } from "~/styled-system/recipes";
 import type { HTMLStyledProps } from "~/styled-system/types";
 import { XIcon } from "../icons/x-icon";
+import { Button, type ButtonProps } from "./button";
 import { IconButton, type IconButtonProps } from "./icon-button";
 import { createStyleContext } from "./utils/create-style-context";
 
@@ -47,12 +49,14 @@ export const Trigger = withContext<
 >(Dialog.Trigger, "trigger");
 
 export const CloseXTrigger: Component<IconButtonProps> = (props) => {
+	const { t } = useI18n();
+
 	return (
 		<Dialog.CloseTrigger
 			asChild={(closeTriggerProps) => (
 				<IconButton
 					{...closeTriggerProps()}
-					aria-label="Close Dialog"
+					aria-label={t("Dialog.close")}
 					variant="ghost"
 					size="sm"
 					position="absolute"
@@ -62,6 +66,25 @@ export const CloseXTrigger: Component<IconButtonProps> = (props) => {
 				>
 					<XIcon />
 				</IconButton>
+			)}
+		/>
+	);
+};
+
+export const CancelTrigger: Component<ButtonProps> = (props) => {
+	const { t } = useI18n();
+
+	return (
+		<Dialog.CloseTrigger
+			asChild={(closeTriggerProps) => (
+				<Button
+					{...closeTriggerProps()}
+					variant="outline"
+					width="full"
+					{...props}
+				>
+					{t("Dialog.cancel")}
+				</Button>
 			)}
 		/>
 	);
