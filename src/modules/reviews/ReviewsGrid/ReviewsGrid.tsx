@@ -1,9 +1,9 @@
 import { type Component, For, createResource } from "solid-js";
 import { useI18n } from "~/contexts/I18nContext";
+import { ReviewsGridItem } from "../ReviewsGridItem/ReviewsGridItem";
 import * as classes from "./ReviewsGrid.css";
 import { gridLimit, loader } from "./ReviewsGrid.data";
 import { fillGrid, getMonths } from "./ReviewsGrid.utils";
-import { ReviewsGridItem } from "./ReviewsGridItem/ReviewsGridItem";
 
 type ReviewsGridProps = {
 	data?: string;

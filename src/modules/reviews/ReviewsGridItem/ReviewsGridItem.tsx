@@ -1,7 +1,7 @@
 import { useSearchParams } from "@solidjs/router";
 import clsx from "clsx";
 import type { Component } from "solid-js";
-import type { GridData } from "../ReviewsGrid.utils";
+import type { GridData } from "../ReviewsGrid/ReviewsGrid.utils";
 import * as classes from "./ReviewsGridItem.css";
 
 type ReviewsGridItemProps = {

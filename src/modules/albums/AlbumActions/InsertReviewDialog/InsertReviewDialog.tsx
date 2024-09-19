@@ -1,5 +1,5 @@
 import { useAction } from "@solidjs/router";
-import { type Component } from "solid-js";
+import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
 import { IconButton } from "~/components/icon-button";

@@ -2,8 +2,8 @@ import { createAsync, useParams, useSearchParams } from "@solidjs/router";
 import { type Component, For, createMemo } from "solid-js";
 import { Pagination } from "~/components/Pagination/Pagination";
 import { selectReviewIdsLoader } from "~/services/review";
+import { ReviewsListItem } from "../ReviewsListItem/ReviewsListItem";
 import * as classes from "./ReviewsList.css";
-import { ReviewsListItem } from "./ReviewsListItem/ReviewsListItem";
 
 export const ReviewsList: Component = () => {
 	const params = useParams();
