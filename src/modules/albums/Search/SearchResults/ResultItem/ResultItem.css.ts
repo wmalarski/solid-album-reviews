@@ -1,18 +1,18 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const container = sprinkles({
+export const container = css({
 	backgroundColor: "background",
 	display: "flex",
 	padding: "4",
 });
 
-export const right = sprinkles({
+export const right = css({
 	alignItems: "flex-start",
 	display: "flex",
 	flexDirection: "column",
 });
 
-export const heading = sprinkles({
+export const heading = css({
 	fontSize: "4",
 	padding: "4",
 });

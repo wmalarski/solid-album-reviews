@@ -1,11 +1,11 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const container = sprinkles({
+export const container = css({
 	display: "flex",
 	flexDirection: "column",
 	padding: "4",
 });
 
-export const submit = sprinkles({
+export const submit = css({
 	marginTop: "4",
 });

@@ -1,6 +1,6 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const form = sprinkles({
+export const form = css({
 	display: "flex",
 	flexDirection: "column",
 	gap: "4",
@@ -8,14 +8,14 @@ export const form = sprinkles({
 	paddingTop: "4",
 });
 
-export const label = sprinkles({
+export const label = css({
 	alignItems: "center",
 	display: "flex",
 	gap: "4",
 	padding: "2",
 });
 
-export const actions = sprinkles({
+export const actions = css({
 	alignItems: "center",
 	display: "flex",
 	gap: "4",

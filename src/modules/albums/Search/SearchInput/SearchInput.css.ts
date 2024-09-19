@@ -1,6 +1,6 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const container = sprinkles({
+export const container = css({
 	alignItems: "center",
 	backgroundColor: "background",
 	display: "flex",
@@ -8,10 +8,10 @@ export const container = sprinkles({
 	padding: "4",
 });
 
-export const label = sprinkles({
+export const label = css({
 	flexGrow: 1,
 });
 
-export const input = sprinkles({
+export const input = css({
 	width: "full",
 });

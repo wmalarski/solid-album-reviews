@@ -1,25 +1,19 @@
-import { sprinkles } from "@styles/sprinkles.css";
-import { style } from "@vanilla-extract/css";
+import { css } from "~/styled-system/css";
 
-export const base = style([
-	sprinkles({
-		textTransform: "uppercase",
-	}),
-	{
-		textDecoration: "none",
-	},
-]);
+export const base = css({
+	textTransform: "uppercase",
+});
 
-export const inactive = sprinkles({
+export const inactive = css({
 	color: {
 		base: "label",
-		hover: "labelSecondary",
+		// hover: "labelSecondary",
 	},
 });
 
-export const active = sprinkles({
+export const active = css({
 	color: {
 		base: "labelSecondary",
-		hover: "labelTertiary",
+		// hover: "labelTertiary",
 	},
 });

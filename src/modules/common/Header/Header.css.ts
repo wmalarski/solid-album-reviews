@@ -1,7 +1,6 @@
-import { sprinkles } from "@styles/sprinkles.css";
-import { style } from "@vanilla-extract/css";
+import { css } from "~/styled-system/css";
 
-export const container = sprinkles({
+export const container = css({
 	alignItems: "center",
 	backgroundColor: "background",
 	display: "flex",
@@ -10,19 +9,15 @@ export const container = sprinkles({
 	padding: "6",
 });
 
-export const navigation = sprinkles({
+export const navigation = css({
 	alignItems: "center",
 	display: "flex",
 	gap: "4",
 });
 
-export const logo = style([
-	{
-		textDecoration: "none",
-	},
-	sprinkles({
-		color: "label",
-		fontSize: "4",
-		textTransform: "uppercase",
-	}),
-]);
+export const logo = css({
+	textDecoration: "none",
+	color: "label",
+	fontSize: "4",
+	textTransform: "uppercase",
+});

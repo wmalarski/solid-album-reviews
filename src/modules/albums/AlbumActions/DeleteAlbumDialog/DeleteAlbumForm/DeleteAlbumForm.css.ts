@@ -1,5 +1,5 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const submit = sprinkles({
+export const submit = css({
 	marginTop: "4",
 });

@@ -1,7 +1,6 @@
-import { vars } from "@styles/theme.css";
-import { style } from "@vanilla-extract/css";
+import { css } from "~/styled-system/css";
 
-export const container = style({
-	color: vars.colors.label,
+export const container = css({
+	// color: vars.colors.label,
 	textDecoration: "none",
 });

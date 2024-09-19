@@ -1,5 +1,5 @@
-import { sprinkles } from "@styles/sprinkles.css";
+import { css } from "~/styled-system/css";
 
-export const input = sprinkles({
+export const input = css({
 	padding: "4",
 });
