@@ -1,8 +1,8 @@
 import type { ErrorPayload } from "@nhost/core";
 import type { SignUpParams } from "@nhost/hasura-auth-js";
 import { type Component, createSignal } from "solid-js";
-import { Form, FormLabel } from "~/components/Form/Form";
 import { Button } from "~/components/button";
+import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { Link } from "~/components/link";
 import { useI18n } from "~/contexts/I18nContext";
@@ -26,7 +26,7 @@ export const SignUpForm: Component<SignUpFormProps> = (props) => {
 	};
 
 	return (
-		<Form class={css({ padding: "4" })} onSubmit={handleSubmit}>
+		<form class={css({ padding: "4" })} onSubmit={handleSubmit}>
 			<h1 class={css({ marginTop: "0" })}>{t("SignUp.header")}</h1>
 			<FormLabel for="email">{t("SignUp.email")}</FormLabel>
 			<Input
@@ -44,6 +44,6 @@ export const SignUpForm: Component<SignUpFormProps> = (props) => {
 			<Button type="submit">{t("SignUp.button")}</Button>
 			{props.error && <span>{props.error.message}</span>}
 			<Link href={paths.signIn}>{t("SignUp.signIn")}</Link>
-		</Form>
+		</form>
 	);
 };

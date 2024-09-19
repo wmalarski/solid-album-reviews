@@ -1,6 +1,6 @@
 import { type Component, createSignal } from "solid-js";
-import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Button } from "~/components/button";
+import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { useI18n } from "~/contexts/I18nContext";
 import type { Review } from "~/store/types";
@@ -28,7 +28,7 @@ export const ReviewForm: Component<ReviewFormProps> = (props) => {
 	};
 
 	return (
-		<Form class={classes.container} onSubmit={handleSubmit}>
+		<form class={classes.container} onSubmit={handleSubmit}>
 			<FormLabel>
 				{t("ReviewForm.textLabel")}
 				<Input
@@ -47,11 +47,11 @@ export const ReviewForm: Component<ReviewFormProps> = (props) => {
 					onChange={(event) => setRate(Number(event.currentTarget.value))}
 				/>
 			</FormLabel>
-			<FormActions>
+			<div>
 				<Button type="submit" class={classes.submit}>
 					{t("ReviewForm.submit")}
 				</Button>
-			</FormActions>
-		</Form>
+			</div>
+		</form>
 	);
 };

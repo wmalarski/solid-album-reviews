@@ -1,8 +1,8 @@
 import { debounce } from "@solid-primitives/scheduled";
 import { useSearchParams } from "@solidjs/router";
 import { type Component, createSignal } from "solid-js";
-import { FormLabel } from "~/components/Form/Form";
 import { Button } from "~/components/button";
+import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./SearchInput.css";

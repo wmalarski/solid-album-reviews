@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import { type Component, createSignal } from "solid-js";
-import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Button } from "~/components/button";
+import { FormLabel } from "~/components/form-label";
 import { Input } from "~/components/input";
 import { useI18n } from "~/contexts/I18nContext";
 import { selectAlbumLoader } from "~/services/album";
@@ -26,7 +26,7 @@ export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<FormLabel>
 				{t("UpdateAlbumForm.titleLabel")}
 				<Input
@@ -43,9 +43,9 @@ export const UpdateAlbumForm: Component<UpdateAlbumFormProps> = (props) => {
 					onChange={(event) => setYear(Number(event.currentTarget.value))}
 				/>
 			</FormLabel>
-			<FormActions>
+			<div>
 				<Button type="submit">{t("UpdateAlbumForm.submit")}</Button>
-			</FormActions>
-		</Form>
+			</div>
+		</form>
 	);
 };
