@@ -1,5 +1,5 @@
 import { createAsync, revalidate } from "@solidjs/router";
-import { type Component, For } from "solid-js";
+import { type Component, For, Suspense } from "solid-js";
 import { Button } from "~/components/Button/Button";
 import { useI18n } from "~/contexts/I18nContext";
 import {
@@ -19,13 +19,15 @@ export const AlbumsGrid: Component = () => {
 	};
 
 	return (
-		<div class={classes.container}>
-			<div class={classes.grid}>
-				<For each={randomAlbums()}>
-					{(albumId) => <AlbumItem albumId={albumId} />}
-				</For>
+		<Suspense>
+			<div class={classes.container}>
+				<div class={classes.grid}>
+					<For each={randomAlbums()}>
+						{(albumId) => <AlbumItem albumId={albumId} />}
+					</For>
+				</div>
+				<Button onClick={handleRefetchClick}>{t("home.refetch")}</Button>
 			</div>
-			<Button onClick={handleRefetchClick}>{t("home.refetch")}</Button>
-		</div>
+		</Suspense>
 	);
 };
