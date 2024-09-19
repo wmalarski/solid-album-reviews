@@ -1,7 +1,9 @@
 import { type Assign, Dialog } from "@ark-ui/solid";
-import type { ComponentProps } from "solid-js";
+import type { Component, ComponentProps } from "solid-js";
 import { type DialogVariantProps, dialog } from "~/styled-system/recipes";
 import type { HTMLStyledProps } from "~/styled-system/types";
+import { XIcon } from "../icons/x-icon";
+import { IconButton, type IconButtonProps } from "./icon-button";
 import { createStyleContext } from "./utils/create-style-context";
 
 const { withRootProvider, withContext } = createStyleContext(dialog);
@@ -43,5 +45,26 @@ export const Title = withContext<
 export const Trigger = withContext<
 	Assign<HTMLStyledProps<"button">, Dialog.TriggerBaseProps>
 >(Dialog.Trigger, "trigger");
+
+export const CloseXTrigger: Component<IconButtonProps> = (props) => {
+	return (
+		<Dialog.CloseTrigger
+			asChild={(closeTriggerProps) => (
+				<IconButton
+					{...closeTriggerProps()}
+					aria-label="Close Dialog"
+					variant="ghost"
+					size="sm"
+					position="absolute"
+					top="2"
+					right="2"
+					{...props}
+				>
+					<XIcon />
+				</IconButton>
+			)}
+		/>
+	);
+};
 
 export { DialogContext as Context } from "@ark-ui/solid";

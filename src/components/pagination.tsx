@@ -1,6 +1,8 @@
 import { For } from "solid-js";
 import { Button } from "./button";
 import { IconButton } from "./icon-button";
+import { ChevronLeftIcon } from "./icons/chevron-left-icon";
+import { ChevronRightIcon } from "./icons/chevron-right-icon";
 import * as StyledPagination from "./styled/pagination";
 
 export interface PaginationProps extends StyledPagination.RootProps {}
@@ -45,31 +47,3 @@ export const Pagination = (props: PaginationProps) => {
 		</StyledPagination.Root>
 	);
 };
-
-const ChevronLeftIcon = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-		<title>Chevron Left Icon</title>
-		<path
-			fill="none"
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="m15 18l-6-6l6-6"
-		/>
-	</svg>
-);
-
-const ChevronRightIcon = () => (
-	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-		<title>Chevron Right Icon</title>
-		<path
-			fill="none"
-			stroke="currentColor"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="m9 18l6-6l-6-6"
-		/>
-	</svg>
-);

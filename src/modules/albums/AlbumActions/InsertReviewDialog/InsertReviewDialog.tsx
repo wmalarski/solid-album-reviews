@@ -2,7 +2,6 @@ import { useAction } from "@solidjs/router";
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
-import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
 import { createReviewAction } from "~/services/review";
@@ -58,21 +57,7 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 							<Button width="full">Confirm</Button>
 						</Stack>
 					</Stack>
-					<Dialog.CloseTrigger
-						asChild={(closeTriggerProps) => (
-							<IconButton
-								{...closeTriggerProps()}
-								aria-label="Close Dialog"
-								variant="ghost"
-								size="sm"
-								position="absolute"
-								top="2"
-								right="2"
-							>
-								X
-							</IconButton>
-						)}
-					/>
+					<Dialog.CloseXTrigger />
 				</Dialog.Content>
 			</Dialog.Positioner>
 		</Dialog.Root>

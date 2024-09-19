@@ -1,7 +1,6 @@
 import type { Component } from "solid-js";
 import { Button } from "~/components/button";
 import { Dialog } from "~/components/dialog";
-import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
 import { Stack } from "~/styled-system/jsx";
 import { DeleteReviewForm } from "../DeleteReviewForm/DeleteReviewForm";
@@ -45,21 +44,7 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 							<DeleteReviewForm reviewId={props.reviewId} />
 						</Stack>
 					</Stack>
-					<Dialog.CloseTrigger
-						asChild={(closeTriggerProps) => (
-							<IconButton
-								{...closeTriggerProps()}
-								aria-label="Close Dialog"
-								variant="ghost"
-								size="sm"
-								position="absolute"
-								top="2"
-								right="2"
-							>
-								X
-							</IconButton>
-						)}
-					/>
+					<Dialog.CloseXTrigger />
 				</Dialog.Content>
 			</Dialog.Positioner>
 		</Dialog.Root>
