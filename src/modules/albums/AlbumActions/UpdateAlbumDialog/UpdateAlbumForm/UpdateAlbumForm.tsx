@@ -1,8 +1,8 @@
 import { createAsync } from "@solidjs/router";
 import { type Component, createSignal } from "solid-js";
 import { Form, FormActions, FormLabel } from "~/components/Form/Form";
-import { Input } from "~/components/Input/Input";
 import { Button } from "~/components/button";
+import { Input } from "~/components/input";
 import { useI18n } from "~/contexts/I18nContext";
 import { selectAlbumLoader } from "~/services/album";
 import type { UpdateAlbumArgs } from "~/store/albums";
