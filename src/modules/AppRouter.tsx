@@ -17,7 +17,6 @@ export const AppRouter: Component = () => {
 					</Route>
 				</Route>
 				<Route path="/" component={lazy(() => import("./Protected/Protected"))}>
-					<Route path="/" component={lazy(() => import("./Home/Home"))} />
 					<Route
 						path="/search"
 						component={lazy(() => import("./Search/Search"))}
