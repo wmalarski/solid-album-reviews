@@ -5,7 +5,6 @@ import { useI18n } from "~/contexts/I18nContext";
 import * as classes from "./DeleteReviewForm.css";
 
 type DeleteReviewFormProps = {
-	onCancel: () => void;
 	onDelete: () => void;
 };
 
@@ -14,9 +13,9 @@ export const DeleteReviewForm: Component<DeleteReviewFormProps> = (props) => {
 
 	return (
 		<FormActions>
-			<Button class={classes.submit} onClick={() => props.onCancel()}>
+			{/* <Button class={classes.submit} onClick={() => props.onCancel()}>
 				{t("DeleteReviewForm.cancel")}
-			</Button>
+			</Button> */}
 			<Button class={classes.submit} onClick={() => props.onDelete()}>
 				{t("DeleteReviewForm.remove")}
 			</Button>

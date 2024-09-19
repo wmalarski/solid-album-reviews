@@ -9,7 +9,6 @@ import type { UpdateAlbumArgs } from "~/store/albums";
 
 type UpdateAlbumFormProps = {
 	albumId: string;
-	onClose: () => void;
 	onSubmit: (args: UpdateAlbumArgs) => void;
 };
 

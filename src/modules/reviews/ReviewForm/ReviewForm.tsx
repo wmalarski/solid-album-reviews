@@ -13,7 +13,6 @@ type ReviewFormData = {
 
 type ReviewFormProps = {
 	initialReview?: Review;
-	onClose: () => void;
 	onSubmit: (input: ReviewFormData) => void;
 };
 

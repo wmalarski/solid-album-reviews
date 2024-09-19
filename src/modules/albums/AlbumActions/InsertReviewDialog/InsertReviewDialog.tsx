@@ -1,19 +1,14 @@
-import { createButton } from "@solid-aria/button";
-import {
-	OverlayContainer,
-	createOverlayTriggerState,
-} from "@solid-aria/overlays";
 import { useAction } from "@solidjs/router";
-import { BsChatLeftText } from "solid-icons/bs";
-import { type Component, Show } from "solid-js";
-import { Dialog } from "~/components/Dialog/Dialog";
+import { type Component } from "solid-js";
 import { Button } from "~/components/button";
+import { Dialog } from "~/components/dialog";
+import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
 import { createReviewAction } from "~/services/review";
 import type { CreateReviewArgs } from "~/store/reviews";
 import { getStoreContext } from "~/store/store";
-import { getPortalContainer } from "~/utils/getPortalContainer";
+import { Stack } from "~/styled-system/jsx";
 
 type InsertReviewDialogProps = {
 	albumId: string;
@@ -25,48 +20,61 @@ export const InsertReviewDialog: Component<InsertReviewDialogProps> = (
 ) => {
 	const { t } = useI18n();
 
-	let openButtonRef: HTMLButtonElement | undefined;
-
 	const action = useAction(createReviewAction);
-
-	const state = createOverlayTriggerState({});
-
-	const { buttonProps: openButtonProps } = createButton(
-		{ onPress: () => state.open() },
-		() => openButtonRef,
-	);
 
 	const handleSubmit = async (input: CreateReviewArgs) => {
 		const review = { ...input, album: props.albumId };
 		await action(getStoreContext(), review);
-		state.close();
 	};
 
 	return (
-		<>
-			<Button
-				{...openButtonProps}
-				ref={openButtonRef}
-				aria-label={t("InsertReviewDialog.trigger")}
-			>
-				{props.isIcon ? (
-					<BsChatLeftText size={20} />
-				) : (
-					t("InsertReviewDialog.trigger")
+		<Dialog.Root {...props}>
+			<Dialog.Trigger
+				asChild={(triggerProps) => (
+					<Button {...triggerProps()}>{t("InsertReviewDialog.trigger")}</Button>
 				)}
-			</Button>
-			<Show when={state.isOpen()}>
-				<OverlayContainer portalContainer={getPortalContainer()}>
-					<Dialog
-						isDismissable
-						isOpen
-						onClose={state.close}
-						title={t("InsertReviewDialog.title")}
-					>
-						<ReviewForm onClose={state.close} onSubmit={handleSubmit} />
-					</Dialog>
-				</OverlayContainer>
-			</Show>
-		</>
+			/>
+			<Dialog.Backdrop />
+			<Dialog.Positioner>
+				<Dialog.Content>
+					<Stack gap="8" p="6">
+						<Stack gap="1">
+							<Dialog.Title>{t("InsertReviewDialog.title")}</Dialog.Title>
+							<Dialog.Description>Dialog Description</Dialog.Description>
+							<ReviewForm onSubmit={handleSubmit} />
+						</Stack>
+						<Stack gap="3" direction="row" width="full">
+							<Dialog.CloseTrigger
+								asChild={(closeTriggerProps) => (
+									<Button
+										{...closeTriggerProps()}
+										variant="outline"
+										width="full"
+									>
+										Cancel
+									</Button>
+								)}
+							/>
+							<Button width="full">Confirm</Button>
+						</Stack>
+					</Stack>
+					<Dialog.CloseTrigger
+						asChild={(closeTriggerProps) => (
+							<IconButton
+								{...closeTriggerProps()}
+								aria-label="Close Dialog"
+								variant="ghost"
+								size="sm"
+								position="absolute"
+								top="2"
+								right="2"
+							>
+								X
+							</IconButton>
+						)}
+					/>
+				</Dialog.Content>
+			</Dialog.Positioner>
+		</Dialog.Root>
 	);
 };

@@ -1,17 +1,12 @@
-import { createButton } from "@solid-aria/button";
-import {
-	OverlayContainer,
-	createOverlayTriggerState,
-} from "@solid-aria/overlays";
 import { useAction } from "@solidjs/router";
-import { BsTrash } from "solid-icons/bs";
-import { type Component, Show } from "solid-js";
-import { Dialog } from "~/components/Dialog/Dialog";
+import type { Component } from "solid-js";
 import { Button } from "~/components/button";
+import { Dialog } from "~/components/dialog";
+import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
 import { deleteAlbumAction } from "~/services/album";
 import { getStoreContext } from "~/store/store";
-import { getPortalContainer } from "~/utils/getPortalContainer";
+import { Stack } from "~/styled-system/jsx";
 import { DeleteAlbumForm } from "./DeleteAlbumForm/DeleteAlbumForm";
 
 type DeleteAlbumDialogProps = {
@@ -22,43 +17,60 @@ type DeleteAlbumDialogProps = {
 export const DeleteAlbumDialog: Component<DeleteAlbumDialogProps> = (props) => {
 	const { t } = useI18n();
 
-	let openButtonRef: HTMLButtonElement | undefined;
-
-	const state = createOverlayTriggerState({});
-
 	const action = useAction(deleteAlbumAction);
-
-	const { buttonProps: openButtonProps } = createButton(
-		{ onPress: () => state.open() },
-		() => openButtonRef,
-	);
 
 	const handleSubmit = async () => {
 		await action(getStoreContext(), { albumId: props.albumId });
-		state.close();
 	};
 
 	return (
-		<>
-			<Button
-				{...openButtonProps}
-				ref={openButtonRef}
-				aria-label={t("DeleteAlbumDialog.trigger")}
-			>
-				{props.isIcon ? <BsTrash size={20} /> : t("DeleteAlbumDialog.trigger")}
-			</Button>
-			<Show when={state.isOpen()}>
-				<OverlayContainer portalContainer={getPortalContainer()}>
-					<Dialog
-						isDismissable
-						isOpen
-						onClose={state.close}
-						title={t("DeleteAlbumDialog.title")}
-					>
-						<DeleteAlbumForm onCancel={state.close} onDelete={handleSubmit} />
-					</Dialog>
-				</OverlayContainer>
-			</Show>
-		</>
+		<Dialog.Root {...props}>
+			<Dialog.Trigger
+				asChild={(triggerProps) => (
+					<Button {...triggerProps()}>{t("DeleteAlbumDialog.trigger")}</Button>
+				)}
+			/>
+			<Dialog.Backdrop />
+			<Dialog.Positioner>
+				<Dialog.Content>
+					<Stack gap="8" p="6">
+						<Stack gap="1">
+							<Dialog.Title>{t("DeleteAlbumDialog.title")}</Dialog.Title>
+							<Dialog.Description>Dialog Description</Dialog.Description>
+							<DeleteAlbumForm onDelete={handleSubmit} />
+						</Stack>
+						<Stack gap="3" direction="row" width="full">
+							<Dialog.CloseTrigger
+								asChild={(closeTriggerProps) => (
+									<Button
+										{...closeTriggerProps()}
+										variant="outline"
+										width="full"
+									>
+										Cancel
+									</Button>
+								)}
+							/>
+							<Button width="full">Confirm</Button>
+						</Stack>
+					</Stack>
+					<Dialog.CloseTrigger
+						asChild={(closeTriggerProps) => (
+							<IconButton
+								{...closeTriggerProps()}
+								aria-label="Close Dialog"
+								variant="ghost"
+								size="sm"
+								position="absolute"
+								top="2"
+								right="2"
+							>
+								X
+							</IconButton>
+						)}
+					/>
+				</Dialog.Content>
+			</Dialog.Positioner>
+		</Dialog.Root>
 	);
 };

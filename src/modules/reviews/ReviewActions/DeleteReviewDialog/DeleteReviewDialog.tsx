@@ -1,16 +1,12 @@
-import { createButton } from "@solid-aria/button";
-import {
-	OverlayContainer,
-	createOverlayTriggerState,
-} from "@solid-aria/overlays";
 import { useAction } from "@solidjs/router";
-import { type Component, Show } from "solid-js";
-import { Dialog } from "~/components/Dialog/Dialog";
+import type { Component } from "solid-js";
 import { Button } from "~/components/button";
+import { Dialog } from "~/components/dialog";
+import { IconButton } from "~/components/icon-button";
 import { useI18n } from "~/contexts/I18nContext";
 import { deleteReviewAction } from "~/services/review";
 import { getStoreContext } from "~/store/store";
-import { getPortalContainer } from "~/utils/getPortalContainer";
+import { Stack } from "~/styled-system/jsx";
 import { DeleteReviewForm } from "./DeleteReviewForm/DeleteReviewForm";
 
 type DeleteReviewDialogProps = {
@@ -22,39 +18,60 @@ export const DeleteReviewDialog: Component<DeleteReviewDialogProps> = (
 ) => {
 	const { t } = useI18n();
 
-	let openButtonRef: HTMLButtonElement | undefined;
-
-	const state = createOverlayTriggerState({});
-
 	const action = useAction(deleteReviewAction);
-
-	const { buttonProps: openButtonProps } = createButton(
-		{ onPress: () => state.open() },
-		() => openButtonRef,
-	);
 
 	const handleSubmit = async () => {
 		await action(getStoreContext(), { reviewId: props.reviewId });
-		state.close();
 	};
 
 	return (
-		<>
-			<Button {...openButtonProps} ref={openButtonRef}>
-				{t("DeleteReviewDialog.trigger")}
-			</Button>
-			<Show when={state.isOpen()}>
-				<OverlayContainer portalContainer={getPortalContainer()}>
-					<Dialog
-						isDismissable
-						isOpen
-						onClose={state.close}
-						title={t("DeleteReviewDialog.title")}
-					>
-						<DeleteReviewForm onCancel={state.close} onDelete={handleSubmit} />
-					</Dialog>
-				</OverlayContainer>
-			</Show>
-		</>
+		<Dialog.Root {...props}>
+			<Dialog.Trigger
+				asChild={(triggerProps) => (
+					<Button {...triggerProps()}>{t("DeleteReviewDialog.trigger")}</Button>
+				)}
+			/>
+			<Dialog.Backdrop />
+			<Dialog.Positioner>
+				<Dialog.Content>
+					<Stack gap="8" p="6">
+						<Stack gap="1">
+							<Dialog.Title>Dialog Title</Dialog.Title>
+							<Dialog.Description>Dialog Description</Dialog.Description>
+							<DeleteReviewForm onDelete={handleSubmit} />
+						</Stack>
+						<Stack gap="3" direction="row" width="full">
+							<Dialog.CloseTrigger
+								asChild={(closeTriggerProps) => (
+									<Button
+										{...closeTriggerProps()}
+										variant="outline"
+										width="full"
+									>
+										Cancel
+									</Button>
+								)}
+							/>
+							<Button width="full">Confirm</Button>
+						</Stack>
+					</Stack>
+					<Dialog.CloseTrigger
+						asChild={(closeTriggerProps) => (
+							<IconButton
+								{...closeTriggerProps()}
+								aria-label="Close Dialog"
+								variant="ghost"
+								size="sm"
+								position="absolute"
+								top="2"
+								right="2"
+							>
+								X
+							</IconButton>
+						)}
+					/>
+				</Dialog.Content>
+			</Dialog.Positioner>
+		</Dialog.Root>
 	);
 };
