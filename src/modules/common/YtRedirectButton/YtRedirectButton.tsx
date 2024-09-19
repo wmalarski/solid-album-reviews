@@ -1,7 +1,7 @@
 import { createAsync } from "@solidjs/router";
 import { BsYoutube } from "solid-icons/bs";
 import type { Component } from "solid-js";
-import { Button } from "~/components/Button/Button";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import { selectArtistLoader } from "~/services/artist";
 import { redirectToYt } from "~/services/redirects";

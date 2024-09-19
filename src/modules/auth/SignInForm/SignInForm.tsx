@@ -1,10 +1,10 @@
 import type { ErrorPayload } from "@nhost/core";
 import type { SignInParams } from "@nhost/hasura-auth-js";
 import { type Component, createSignal } from "solid-js";
-import { Button } from "~/components/Button/Button";
 import { Form, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
 import { StyledLink } from "~/components/StyledLink/StyledLink";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import { css } from "~/styled-system/css";
 import { paths } from "~/utils/paths";

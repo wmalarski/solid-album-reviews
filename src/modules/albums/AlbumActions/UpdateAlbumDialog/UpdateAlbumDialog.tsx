@@ -6,8 +6,8 @@ import {
 import { useAction } from "@solidjs/router";
 import { BsPencilSquare } from "solid-icons/bs";
 import { type Component, Show } from "solid-js";
-import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import { updateAlbumAction } from "~/services/album";
 import type { UpdateAlbumArgs } from "~/store/albums";

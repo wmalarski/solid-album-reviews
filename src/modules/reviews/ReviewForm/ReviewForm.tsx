@@ -1,7 +1,7 @@
 import { type Component, createSignal } from "solid-js";
-import { Button } from "~/components/Button/Button";
 import { Form, FormActions, FormLabel } from "~/components/Form/Form";
 import { Input } from "~/components/Input/Input";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import type { Review } from "~/store/types";
 import * as classes from "./ReviewForm.css";

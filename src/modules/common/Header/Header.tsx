@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import type { Component } from "solid-js";
-import { Button } from "~/components/Button/Button";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import { nhost } from "~/services/nhost";
 import { paths } from "~/utils/paths";

@@ -10,7 +10,7 @@ import {
 import * as classes from "./Dialog.css";
 
 import type { Component, JSX } from "solid-js";
-import { Button } from "~/components/Button/Button";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 
 type DialogProps = AriaDialogProps &

@@ -5,8 +5,8 @@ import {
 } from "@solid-aria/overlays";
 import { useAction } from "@solidjs/router";
 import { type Component, Show } from "solid-js";
-import { Button } from "~/components/Button/Button";
 import { Dialog } from "~/components/Dialog/Dialog";
+import { Button } from "~/components/button";
 import { useI18n } from "~/contexts/I18nContext";
 import { ReviewForm } from "~/modules/reviews/ReviewForm/ReviewForm";
 import { updateReviewAction } from "~/services/review";
