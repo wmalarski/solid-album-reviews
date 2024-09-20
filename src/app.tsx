@@ -6,6 +6,7 @@ import "./app.css";
 import { I18nContextProvider } from "./contexts/I18nContext";
 import { Head } from "./modules/common/Head";
 
+
 export default function App() {
 	return (
 		<Router
