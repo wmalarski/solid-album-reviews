@@ -6,8 +6,8 @@ import {
 	SELECT_RANDOM_IDS_LOADER_CACHE_KEY,
 	selectRandomIdsLoader,
 } from "~/services/album";
+import { css } from "~/styled-system/css";
 import { AlbumItem } from "./AlbumItem/AlbumItem";
-import * as classes from "./AlbumsGrid.css";
 
 export const AlbumsGrid: Component = () => {
 	const { t } = useI18n();
@@ -20,8 +20,26 @@ export const AlbumsGrid: Component = () => {
 
 	return (
 		<Suspense>
-			<div class={classes.container}>
-				<div class={classes.grid}>
+			<div
+				class={css({
+					display: "flex",
+					flexDirection: "column",
+					gap: "4",
+					paddingBottom: "8",
+					width: "full",
+				})}
+			>
+				<div
+					class={css({
+						display: "grid",
+						justifyContent: "center",
+						paddingBottom: "8",
+						paddingTop: "8",
+						width: "full",
+						gridTemplateColumns: "repeat(auto-fit, 200px)",
+						margin: "0 auto",
+					})}
+				>
 					<For each={randomAlbums()}>
 						{(albumId) => <AlbumItem albumId={albumId} />}
 					</For>

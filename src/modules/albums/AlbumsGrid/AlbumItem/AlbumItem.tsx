@@ -1,14 +1,13 @@
 import { createAsync } from "@solidjs/router";
-import clsx from "clsx";
 import { type Component, Show, createMemo, createSignal } from "solid-js";
 import { Link } from "~/components/link";
 import { AlbumActions } from "~/modules/albums/AlbumActions/AlbumActions";
 import { selectAlbumLoader } from "~/services/album";
 import type { Album } from "~/store/types";
+import { css } from "~/styled-system/css";
 import { formatAlbum } from "~/utils/formatters";
 import { paths } from "~/utils/paths";
-import { AlbumCoversCarousel } from "./AlbumCoversCarousel/AlbumCoversCarousel";
-import * as classes from "./AlbumItem.css";
+import { AlbumCover } from "../../AlbumCover/AlbumCover";
 
 type AlbumItemViewProps = {
 	albumId: string;
@@ -30,31 +29,40 @@ const AlbumItemView: Component<AlbumItemViewProps> = (props) => {
 
 	return (
 		<div
-			class={classes.container}
+			class={css({
+				backgroundColor: "background",
+				height: "smallCover",
+				position: "relative",
+				width: "smallCover",
+			})}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 		>
 			<div
-				class={clsx(
-					classes.wrapper,
-					// classes.wrapperVariants[isHovering() ? "hover" : "no"],
-				)}
+				class={css({
+					backgroundColor: "background",
+					overflow: "hidden",
+					position: "absolute",
+					transition: "top 0.2s, left 0.2s",
+				})}
 			>
-				<Show when={props.album.sid}>
-					{(mBid) => (
-						<AlbumCoversCarousel
-							isHovering={isHovering()}
-							label={label()}
-							sid={mBid()}
-						/>
-					)}
-				</Show>
+				<AlbumCover kind="large" label={label()} sid={props.album.sid} />
 				<Show when={isHovering()}>
-					<div class={classes.footer}>
-						<Link class={classes.heading} href={paths.album(props.albumId)}>
+					<div class={css({ backgroundColor: "background" })}>
+						<Link
+							href={paths.album(props.albumId)}
+							class={css({
+								display: "inline-block",
+								maxWidth: "smallCoverHover",
+								overflow: "hidden",
+								paddingX: "4",
+								whiteSpace: "nowrap",
+								textOverflow: "ellipsis",
+							})}
+						>
 							{label()}
 						</Link>
-						<AlbumActions albumId={props.albumId} />
+						<AlbumActions album={props.album} albumId={props.albumId} />
 					</div>
 				</Show>
 			</div>
@@ -68,6 +76,7 @@ type AlbumItemProps = {
 
 export const AlbumItem: Component<AlbumItemProps> = (props) => {
 	const album = createAsync(() => selectAlbumLoader(props.albumId));
+
 	return (
 		<Show when={album()}>
 			{(album) => <AlbumItemView albumId={props.albumId} album={album()} />}

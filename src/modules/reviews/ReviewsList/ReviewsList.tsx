@@ -21,12 +21,12 @@ export const ReviewsList: Component = () => {
 	return (
 		<div class={classes.container}>
 			<For each={reviews()?.data}>
-				{(review) => <ReviewsListItem review={review} />}
+				{(reviewId) => <ReviewsListItem reviewId={reviewId} />}
 			</For>
 			<Pagination
-				current={page()}
-				maxPage={reviews()?.maxPage ?? 0}
-				onChange={handlePageChange}
+				page={+params.page}
+				count={reviews()?.maxPage ?? 0}
+				onPageChange={({ page }) => handlePageChange(page)}
 			/>
 		</div>
 	);
